@@ -1,0 +1,12 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package common;
+option go_package = "common";
+
+message Success {
+    string request_id = 1;
+}

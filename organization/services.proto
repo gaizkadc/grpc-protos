@@ -1,0 +1,24 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package organization;
+option go_package = "organization";
+
+import "organization/entities.proto";
+import "common/entities.proto";
+
+
+service Organizations {
+    // GetOrganization retrieves the profile information of a given organization.
+    rpc GetOrganization(OrganizationId) returns (Organization) {}
+
+    // AddUser adds a new user to a given organization.
+    rpc AddUser(AddUserRequest) returns (User) {}
+    // GetUsers retrieves the list of users of a given organization.
+    rpc GetUsers(OrganizationId) returns (OrganizationUsers) {}
+    // RemoveUser removes a given user from an organization.
+    rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
+}

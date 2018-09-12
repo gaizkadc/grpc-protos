@@ -1,0 +1,54 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package organization;
+option go_package = "organization";
+
+// Role defines a role for users of an organization with the associated capabilities
+message Role {
+    string organization_id = 1;
+    string name = 2;
+}
+
+// User model the information available regarding a User of an organization
+message User {
+    string organization_id = 1;
+    string email = 2;
+    string password = 3;
+    string photo_url = 4;
+    int64 member_since = 5;
+    Role role = 6;
+}
+
+message AddUserRequest {
+    string request_id = 1;
+    string email = 2;
+    string password = 3;
+    string photo_url = 4;
+    Role role = 5;
+}
+
+message RemoveUserRequest {
+    string request_id = 1;
+    string email = 2;
+}
+
+// Organization model with the information related to a given organization
+message Organization {
+    string id = 1;
+    string name = 2;
+    string logo_url = 3;
+    int64 created = 4;
+}
+
+message OrganizationId {
+    string organization_id = 1;
+}
+
+message OrganizationUsers {
+    repeated User users = 1;
+}
+
