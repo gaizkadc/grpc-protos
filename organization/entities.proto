@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package organization;
-option go_package = "organization";
+option go_package = "github.com/nalej/grpc-organization-go";
 
 // Role defines a role for users of an organization with the associated capabilities
 message Role {

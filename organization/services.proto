@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package organization;
-option go_package = "organization";
+option go_package = "github.com/nalej/grpc-organization-go";
 
 import "organization/entities.proto";
 import "common/entities.proto";

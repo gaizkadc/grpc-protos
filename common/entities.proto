@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package common;
-option go_package = "common";
+option go_package = "github.com/nalej/grpc-common-go";
 
 message Success {
     string request_id = 1;
