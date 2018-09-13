@@ -63,7 +63,7 @@ function buildProtoForTypes {
 
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
-      cp -R pb-$lang/${target}/* $REPOPATH/$reponame/
+      cp -R pb-$lang/github.com/nalej/grpc-${target}-${lang}/* $REPOPATH/$reponame/
       cp -R pb-$lang/doc $REPOPATH/$reponame/
 
       ls $REPOPATH/$reponame

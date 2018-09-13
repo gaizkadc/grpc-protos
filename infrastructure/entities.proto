@@ -1,0 +1,60 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package common;
+option go_package = "github.com/nalej/grpc-infrastructure-go";
+
+// ClusterType enumeration with the types of clusters supported to manage application deployments.
+enum ClusterType {
+    KUBERNETES = 0;
+    DOCKER = 1;
+}
+
+// MultinenantSupport enumeration defining the types of multitenancy supported by the system. Notice that even
+// if it is modeled as a boolean now, we leave the definition as an enumeration to support other types of multitenancy
+// like restrictions to parts of an organization, or priority based options.
+enum MultitenantSupport {
+    NO = 0;
+    YES = 1;
+}
+
+// InfraStatus enumeration defining the status of an element of the infrastructure.
+enum InfraStatus {
+    // Installing state represents an infrastructure element that is being installed at the momment.
+    INSTALLING = 0;
+    // Running state represents an infrastucture element that has been installed as is up and running.
+    RUNNING = 1;
+    // Error state represents an infrastructure element that cannot be used as any of the processes failed.
+    ERROR = 2;
+}
+
+// NodeState enumeration defining the states of a node from when it is declared to when it has been installed and
+// assigned to a given cluster.
+enum NodeState {
+    // Unregistered nodes are those whose details are in the platform but we have not perform any action.
+    UNREGISTERED = 0;
+    // Unassigned nodes are those that have been prepared but are not assigned to a given cluster.
+    UNASSIGNED = 1;
+    // Assigned nodes are those that have been installed and are part of a cluster.
+    ASSIGNED = 2;
+}
+
+message Cluster {
+    string id = 1;
+    string organization_id = 2;
+    string name = 3;
+    string description = 4;
+    ClusterType cluster_type = 5;
+    MultitenantSupport multitenant = 6;
+    InfraStatus status = 7;
+    map <string, string> labels = 8;
+}
+
+message Node {
+    string id = 1;
+    string organization_id = 2;
+}
+

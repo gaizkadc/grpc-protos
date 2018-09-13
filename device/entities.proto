@@ -1,0 +1,32 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package common;
+option go_package = "github.com/nalej/grpc-device-go";
+
+// DeviceGroup message defining the concept of a device group. A device group represents a collection
+// of individual devices in order to facilitate the connectivity with other elements of the system.
+message DeviceGroup {
+    string id = 1;
+    string organization_id = 2;
+    string name = 3;
+    string group_api_key = 4;
+    bool enabled = 5;
+    map<string, string> labels = 6;
+}
+
+// Device message representing a remote device (e.g., IoT sensor, mobile app, etc.) that will send data
+// to an application running in the platform.
+message Device {
+    string id = 1;
+    string organization_id = 2;
+    string group_id = 3;
+    string serial_number = 4;
+    int64 register_since = 5;
+    bool enabled = 6;
+    string device_api_key = 7;
+    map<string, string> labels = 8;
+}
