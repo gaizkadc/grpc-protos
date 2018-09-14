@@ -16,7 +16,7 @@
 
 syntax = "proto3";
 
-package common;
+package device;
 option go_package = "github.com/nalej/grpc-device-go";
 
 // DeviceGroup message defining the concept of a device group. A device group represents a collection
@@ -56,3 +56,19 @@ message Device {
     // Labels defined by the user.
     map<string, string> labels = 8;
 }
+
+message DeviceGroupList {
+    repeated DeviceGroup groups = 1;
+}
+
+message AddDeviceGroupRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Name of the device group.
+    string name = 3;
+    // Labels defined by the user.
+    map<string, string> labels = 6;
+}
+
+

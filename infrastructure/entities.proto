@@ -16,7 +16,7 @@
 
 syntax = "proto3";
 
-package common;
+package infrastructure;
 option go_package = "github.com/nalej/grpc-infrastructure-go";
 
 // ClusterType enumeration with the types of clusters supported to manage application deployments.
@@ -59,7 +59,7 @@ enum NodeState {
 message Cluster {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // Id with the cluster identifier.
+    // ClusterId with the cluster identifier.
     string cluster_id = 2;
     // Name of the cluster.
     string name = 3;
@@ -73,6 +73,53 @@ message Cluster {
     InfraStatus status = 7;
     // Labels for the cluster.
     map <string, string> labels = 8;
+    // Cordon flags to signal conductor not to schedule apps in the cluster.
+    bool cordon = 9;
+}
+
+message ClusterId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+}
+
+message AddClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 3;
+    // Name of the cluster.
+    string name = 4;
+    // Description of the cluster.
+    string description = 5;
+    // Labels for the cluster.
+    map <string, string> labels = 6;
+}
+
+message RemoveClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 3;
+}
+
+message CordonClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Id with the cluster identifier.
+    string cluster_id = 3;
+    oneof cordon {
+        bool activate = 4;
+        bool deactivate = 5;
+    }
+}
+
+message ClusterList {
+    repeated Cluster clusters = 1;
 }
 
 // Node entity representing a single node of the architecture that executes application instances.
@@ -93,3 +140,29 @@ message Node {
     NodeState state = 8;
 }
 
+message AddNodeRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Id with the node identifier.
+    string node_id = 3;
+    // Ip with the node IP.
+    string ip = 4;
+    // Labels for the node.
+    map<string, string> labels = 5;
+}
+
+message AttachNodeRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the associated cluster identifier the node is assigned to.
+    string cluster_id = 3;
+    // Id with the node identifier.
+    string node_id = 4;
+}
+
+
+message NodeList {
+    repeated Node nodes = 1;
+}

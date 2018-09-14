@@ -15,6 +15,8 @@ echo "Repopath: ${REPOPATH}"
 CURRENT_BRANCH=${CURRENT_BRANCH-"branch-not-available"}
 echo "CurrentBranch: ${CURRENT_BRANCH}"
 
+DRY_RUN=${DRY_RUN-"false"}
+
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
   echo "Entering $1"
@@ -67,7 +69,12 @@ function buildProtoForTypes {
       cp -R pb-$lang/doc $REPOPATH/$reponame/
 
       ls $REPOPATH/$reponame
-      commitAndPush $REPOPATH/$reponame
+      if [ "${DRY_RUN}" == "true" ]; then
+          echo "Commit and push has been omitted"
+      else
+          commitAndPush $REPOPATH/$reponame
+      fi
+
     done < .protolangs
   fi
 }

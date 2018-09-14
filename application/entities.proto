@@ -16,11 +16,11 @@
 
 syntax = "proto3";
 
-package common;
+package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
-// ApplicationDescriptor structure defines the top level abstraction for an application and all the associated services.
-message ApplicationDescriptor {
+// AppDescriptor structure defines the top level abstraction for an application and all the associated services.
+message AppDescriptor {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppDescriptorId with the application descriptor identifier.
@@ -122,6 +122,7 @@ message ImageCredentials {
     string email = 3;
 }
 
+// Service structure that represents a microservice of a given application and that can be deployed on its own.
 message Service {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -129,28 +130,38 @@ message Service {
     string app_descriptor_id = 2;
     // ServiceId with the service identifier.
     string service_id = 3;
+    // Name of the service.
     string name = 4;
+    // Description of the service.
     string description = 5;
+    // ServiceType represents the underlying technology of the service to be launched.
     ServiceType type = 6;
+    // Image contains the URL/name of the image to be executed.
     string image = 7;
+    // ImageCredentials with the data required to access the repository the image is available at.
     ImageCredentials credentials = 8;
+    // DeploySpecs with the resource specs required by the service.
     DeploySpecs specs = 9;
-    Storage storage = 10;
+    // Storage restrictions
+    repeated Storage storage = 10;
+    // ExposedPorts contains the list of ports exposed by the current service.
     repeated Port exposed_ports = 11;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
     map<string, string> environment_variables = 12;
+    // Configs contains the configuration files required by the service.
     repeated ConfigFile configs = 13;
+    // Labels with the user defined labels.
     map<string, string> labels = 14;
+    // DeployAfter contains the list of services that must be running before launching a service.
     repeated string deploy_after = 15;
 }
 
 message Port {
-    string port_id = 1;
-    string name = 2;
-    int32 internal_port = 3;
-    int32 exposed_port = 4;
-    repeated Endpoint endpoints = 5;
+    string name = 1;
+    int32 internal_port = 2;
+    int32 exposed_port = 3;
+    repeated Endpoint endpoints = 4;
 }
 
 enum EndpointType {
@@ -167,7 +178,8 @@ message Endpoint {
 
 message Storage {
     int64 size = 1;
-    StorageType type = 2;
+    string mount_path = 2;
+    StorageType type = 3;
 }
 
 enum StorageType {
@@ -182,5 +194,14 @@ message DeploySpecs {
     int64 memory = 2;
     int32 replicas = 3;
 }
+
+
+message AppDescriptorId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+}
+
 
 

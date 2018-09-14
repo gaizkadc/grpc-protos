@@ -15,6 +15,14 @@ To clean the generated files, use:
 $ make clean
 ```
 
+## Local tests
+
+The dry-generate target triggers the code generation without committing or pushing code.
+
+```
+$ make dry-generate
+```
+
 # Structure
 
 All the services and messages definitions for the Nalej components interacting through gRPC are defined in this repository. The organization of the repository matches the following example:

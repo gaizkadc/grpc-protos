@@ -19,8 +19,8 @@ syntax = "proto3";
 package organization;
 option go_package = "github.com/nalej/grpc-organization-go";
 
-import "organization/entities.proto";
 import "common/entities.proto";
+import "organization/entities.proto";
 
 // Organization service exposing organization level functionality related to users.
 service Organizations {
