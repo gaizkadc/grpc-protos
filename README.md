@@ -1,6 +1,20 @@
 # grpc-protos
 Common repository to store all entities and service definitions for Nalej components using gRPC
 
+# Building
+
+A Makefile is provided, use:
+
+```
+$ make generate
+```
+
+To clean the generated files, use:
+
+```
+$ make clean
+```
+
 # Structure
 
 All the services and messages definitions for the Nalej components interacting through gRPC are defined in this repository. The organization of the repository matches the following example:
@@ -46,7 +60,7 @@ The following steps are required to add a new service. For example, assuming we 
 You can check the code style rules with the following command:
 
 ```
-protoc --lint_out=. */*.proto
+$ make lint
 ```
 
 # Autogenerating client/server stubs
@@ -59,5 +73,5 @@ The repository contains a Bash script `publishProto.sh` that automatically gener
 For local manual pushes use:
 
 ```
-$ CURRENT_BRANCH=master REPOPATH=~/go/src/github.com/nalej/grpc-protos ./publishProto.sh
+$ CURRENT_BRANCH=master REPOPATH=~/go/src/github.com/nalej/grpc-protos make generate
 ```

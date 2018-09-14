@@ -1,0 +1,186 @@
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package common;
+option go_package = "github.com/nalej/grpc-application-go";
+
+// ApplicationDescriptor structure defines the top level abstraction for an application and all the associated services.
+message ApplicationDescriptor {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // Name of the application.
+    string name = 3;
+    // Description of the application.
+    string description = 4;
+    // ConfigurationOptions defines a key-value map of configuration options.
+    map<string, string> configuration_options = 5;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 6;
+    // Labels defined by the user.
+    map<string, string> labels = 7;
+}
+
+// SecurityRule structure defining which element can access a given application service.
+message SecurityRule {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // RuleId with the security rule identifier.
+    string rule_id = 3;
+    // Name of the security rule.
+    string name = 4;
+    // SourceServiceId defining the service onto which the security rule is defined.
+    string source_service_id = 5;
+    // SourcePort defining the port that is affected by the current rule.
+    int32 source_port = 6;
+    // Access level to that port defining who can access the port.
+    PortAccess access = 7;
+    // AuthServices defining a list of services that can access the port.
+    repeated string auth_services = 8;
+    // DeviceGroups defining a list of device groups that can access the port.
+    repeated string device_groups = 9;
+}
+
+// PortAccess enumeration defining the actor with access to a given port.
+enum PortAccess {
+    // AllAppServices to indicate that all services of an application can access a given port.
+    ALL_APP_SERVICES = 0;
+    // AppServices to indicate that a set of services are authorized to access the port.
+    APP_SERVICES = 1;
+    // Public to indicate that the port should be publicly available on the Internet.
+    PUBLIC = 2;
+    // DeviceGroup to indicate that the port will be accessed by a set of device groups.
+    DEVICE_GROUP = 3;
+}
+
+// ServiceGroup structure to represent a collection of services that must be deployed following a given collocation
+// policy.
+message ServiceGroup {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 3;
+    // Name of the service group.
+    string name = 4;
+    // Description of the service group.
+    string description = 5;
+    // Services defining a list of service identifiers that belong to the group.
+    repeated string services = 6;
+    // Policy indicating the deployment collocation policy.
+    CollocationPolicy policy = 7;
+}
+
+// CollocationPolicy defines how the services of a service group must be deployed.
+enum CollocationPolicy {
+    SAME_CLUSTER = 0;
+    SEPARATE_CLUSTERS = 1;
+}
+
+// ServiceType defines the types of services supported in the system.
+enum ServiceType {
+    DOCKER = 0;
+}
+
+// Configuration structure defining the service configuration.
+message ConfigFile {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // ConfigFileId with the config file identifier.
+    string config_file_id = 3;
+    // Content of the configuration file.
+    bytes content = 4;
+    // MountPath of the configuration file in the service instance.
+    string mount_path = 5;
+}
+
+message ImageCredentials {
+    string username = 1;
+    string password = 2;
+    string email = 3;
+}
+
+message Service {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // ServiceId with the service identifier.
+    string service_id = 3;
+    string name = 4;
+    string description = 5;
+    ServiceType type = 6;
+    string image = 7;
+    ImageCredentials credentials = 8;
+    DeploySpecs specs = 9;
+    Storage storage = 10;
+    repeated Port exposed_ports = 11;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 12;
+    repeated ConfigFile configs = 13;
+    map<string, string> labels = 14;
+    repeated string deploy_after = 15;
+}
+
+message Port {
+    string port_id = 1;
+    string name = 2;
+    int32 internal_port = 3;
+    int32 exposed_port = 4;
+    repeated Endpoint endpoints = 5;
+}
+
+enum EndpointType {
+    IS_ALIVE = 0;
+    REST = 1;
+    WEB = 2;
+    PROMETHEUS = 3;
+}
+
+message Endpoint {
+    EndpointType type = 1;
+    string path = 2;
+}
+
+message Storage {
+    int64 size = 1;
+    StorageType type = 2;
+}
+
+enum StorageType {
+    EPHEMERAL = 0;
+    CLUSTER_LOCAL = 1;
+    CLUSTER_REPLICA = 2;
+    CLOUD_PERSISTENT = 3;
+}
+
+message DeploySpecs {
+    int64 cpu = 1;
+    int64 memory = 2;
+    int32 replicas = 3;
+}
+
+

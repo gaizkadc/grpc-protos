@@ -16,21 +16,6 @@
 
 syntax = "proto3";
 
-package ping;
-option go_package = "github.com/nalej/grpc-ping-go";
-
-service Ping {
-    // Ping the server a return a msg containing the request number.
-    rpc Ping(PingRequest) returns (PingResponse) {}
-}
-
-// PingRequest defines the message sent by the client with a request number.
-message PingRequest {
-    int32 request_number = 1;
-}
-
-// PingResponse defines the message sent by the server with a response message.
-message PingResponse {
-    int32 request_number = 2;
-}
+package organization;
+option go_package = "github.com/nalej/grpc-application-go";
 

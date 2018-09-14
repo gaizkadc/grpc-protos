@@ -1,6 +1,18 @@
-//
-// Copyright (C) 2018 Daisho Group - All Rights Reserved
-//
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 syntax = "proto3";
 
@@ -10,7 +22,7 @@ option go_package = "github.com/nalej/grpc-infrastructure-go";
 // ClusterType enumeration with the types of clusters supported to manage application deployments.
 enum ClusterType {
     KUBERNETES = 0;
-    DOCKER = 1;
+    DOCKER_NODE = 1;
 }
 
 // MultinenantSupport enumeration defining the types of multitenancy supported by the system. Notice that even
@@ -42,19 +54,42 @@ enum NodeState {
     ASSIGNED = 2;
 }
 
+// Cluster entity representing a collection of nodes that supports applicaiton orchestration. This
+// abstraction is used for monitoring and orchestration purposes.
 message Cluster {
-    string id = 1;
-    string organization_id = 2;
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Id with the cluster identifier.
+    string cluster_id = 2;
+    // Name of the cluster.
     string name = 3;
+    // Description of the cluster.
     string description = 4;
+    // Type of cluster.
     ClusterType cluster_type = 5;
+    // Multitenant support definition.
     MultitenantSupport multitenant = 6;
+    // Status of the cluster based on monitoring information.
     InfraStatus status = 7;
+    // Labels for the cluster.
     map <string, string> labels = 8;
 }
 
+// Node entity representing a single node of the architecture that executes application instances.
 message Node {
-    string id = 1;
-    string organization_id = 2;
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the associated cluster identifier the node is assigned to.
+    string cluster_id = 2;
+    // Id with the node identifier.
+    string node_id = 3;
+    // Ip with the node IP.
+    string ip = 4;
+    // Labels for the node.
+    map<string, string> labels = 6;
+    // Status of the node based on monitoring information.
+    InfraStatus status = 7;
+    // State of assignation of the node.
+    NodeState state = 8;
 }
 
