@@ -22,14 +22,23 @@ option go_package = "github.com/nalej/grpc-organization-go";
 import "common/entities.proto";
 import "organization/entities.proto";
 
-// Organization service exposing organization level functionality related to users.
+// Organization service exposing organization level functionality related to organization.
 service Organizations {
+    rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
     // GetOrganization retrieves the profile information of a given organization.
     rpc GetOrganization(OrganizationId) returns (Organization) {}
+    // UpdateOrganization updates the public information of an organization.
+    rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+}
+
+// Users service exposing user related functionality.
+service Users {
     // AddUser adds a new user to a given organization.
     rpc AddUser(AddUserRequest) returns (User) {}
+    // GetUser returns an existing user.
+    rpc GetUser(UserId) returns (User) {}
     // GetUsers retrieves the list of users of a given organization.
-    rpc GetUsers(OrganizationId) returns (OrganizationUsers) {}
+    rpc GetUsers(OrganizationId) returns (UserList) {}
     // RemoveUser removes a given user from an organization.
     rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
 }

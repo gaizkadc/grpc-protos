@@ -35,17 +35,26 @@ message User {
     Role role = 6;
 }
 
-message AddUserRequest {
-    string request_id = 1;
-    string email = 2;
-    string password = 3;
-    string photo_url = 4;
-    Role role = 5;
+// UserId with the email identifying a user.
+message UserId {
+    string email=1;
 }
 
+// AddUserRequest message with the information required to add a user to the platform.
+message AddUserRequest {
+    string request_id = 1;
+    string organization_id = 2;
+    string email = 3;
+    string password = 4;
+    string photo_url = 5;
+    Role role = 6;
+}
+
+// RemoveUserRequest message with the information required to remove a user from the platform.
 message RemoveUserRequest {
     string request_id = 1;
-    string email = 2;
+    string organization_id = 2;
+    string email = 3;
 }
 
 // Organization model with the information related to a given organization
@@ -56,11 +65,24 @@ message Organization {
     int64 created = 4;
 }
 
+message AddOrganizationRequest {
+    string request_id = 1;
+    string name = 2;
+}
+
+message UpdateOrganizationRequest {
+    string request_id = 1;
+    string organization_id = 2;
+    bytes photo = 3;
+}
+
+// OrganizationId message with the organization identifier.
 message OrganizationId {
     string organization_id = 1;
 }
 
-message OrganizationUsers {
+// UserList message with a list of users.
+message UserList {
     repeated User users = 1;
 }
 

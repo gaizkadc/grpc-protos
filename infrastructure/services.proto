@@ -44,4 +44,6 @@ service Nodes {
     rpc AttachNode(AttachNodeRequest) returns (common.Success) {}
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(ClusterId) returns (NodeList) {}
+    // RemoveNodes removes a set of nodes from the system.
+    rpc RemoveNodes(RemoveNodeRequest) returns (common.Success) {}
 }

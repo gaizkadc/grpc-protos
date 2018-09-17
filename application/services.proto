@@ -16,6 +16,17 @@
 
 syntax = "proto3";
 
-package organization;
+package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
+import "application/entities.proto";
+import "organization/entities.proto";
+
+service Applications {
+    // AddAppDescriptor adds a new application descriptor to a given organization.
+    rpc AddAppDescriptor(AddAppDescriptorRequest) returns (AppDescriptor){}
+    // GetAppDescriptors retrieves a list of application descriptors.
+    rpc GetAppDescriptors(organization.OrganizationId) returns (AppDescriptorList){}
+    // GetAppDescriptor retrieves a given application descriptor.
+    rpc GetAppDescriptor(AppDescriptorId) returns (AppDescriptor) {}
+}
