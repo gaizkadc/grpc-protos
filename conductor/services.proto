@@ -1,0 +1,20 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package conductor;
+option go_package = "github.com/nalej/grpc-conductor-go";
+
+import "conductor/entities.proto";
+
+service Conductor {
+    // Request an application deployment to be done on top of Nalej.
+    rpc Deploy(DeploymentRequest) returns (DeploymentResponse) {}
+}
+
+service Musician {
+    // Request to score an application
+    rpc Score(ClusterScoreRequest) returns (ClusterScoreResponse) {}
+}

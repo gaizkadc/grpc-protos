@@ -1,0 +1,30 @@
+//
+// Copyright (C) 2018 Daisho Group - All Rights Reserved
+//
+
+syntax = "proto3";
+
+package conductor;
+option go_package = "github.com/nalej/grpc-conductor-go";
+
+// DeploymentRequest contains all the information required by conductor to start a deployment.
+message DeploymentRequest {
+    string request_id = 1;
+}
+
+// Deployment response has the resulting execution of a deployment process.
+message DeploymentResponse {
+    string request_id = 1;
+    string other=2;
+}
+
+// Request for a cluster to evaluate a set of requirements
+message ClusterScoreRequest {
+    string request_id = 1;
+    string requirements = 2;
+}
+
+message ClusterScoreResponse {
+    string request_id = 1;
+    float score = 2;
+}

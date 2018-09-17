@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package ping;
-option go_package = "ping";
+option go_package = "github.com/nalej/grpc-ping-go";
 
 service Ping {
     // Ping the server a return a msg containing the request number.
