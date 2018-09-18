@@ -21,10 +21,14 @@ message DeploymentResponse {
 // Request for a cluster to evaluate a set of requirements
 message ClusterScoreRequest {
     string request_id = 1;
-    string requirements = 2;
+    float   cpu = 2;
+    float   memory = 3;
+    float   disk = 4;
+
 }
 
 message ClusterScoreResponse {
     string request_id = 1;
-    float score = 2;
+    string cluster_id = 2;
+    float score = 3;
 }
