@@ -16,21 +16,16 @@
 
 syntax = "proto3";
 
-package ping;
-option go_package = "github.com/nalej/grpc-ping-go";
+package device;
+option go_package = "github.com/nalej/grpc-device-go";
 
-service Ping {
-    // Ping the server a return a msg containing the request number.
-    rpc Ping(PingRequest) returns (PingResponse) {}
-}
+import "device/entities.proto";
+import "organization/entities.proto";
 
-// PingRequest defines the message sent by the client with a request number.
-message PingRequest {
-    int32 request_number = 1;
-}
-
-// PingResponse defines the message sent by the server with a response message.
-message PingResponse {
-    int32 request_number = 2;
+service Devices {
+    // AddDeviceGroup adds a new device group to the system.
+    rpc AddDeviceGroup(AddDeviceGroupRequest) returns (DeviceGroup) {}
+    // ListDeviceGroups obtains a list of device groups in an organization.
+    rpc ListDeviceGroups(organization.OrganizationId) returns (DeviceGroupList) {}
 }
 

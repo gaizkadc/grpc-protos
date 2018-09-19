@@ -15,6 +15,8 @@ echo "Repopath: ${REPOPATH}"
 CURRENT_BRANCH=${CURRENT_BRANCH-"branch-not-available"}
 echo "CurrentBranch: ${CURRENT_BRANCH}"
 
+DRY_RUN=${DRY_RUN-"false"}
+
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
   echo "Entering $1"
@@ -58,13 +60,21 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
-      docker run -v `pwd`:/defs namely/protoc-$lang
+      #docker run -v `pwd`:/defs namely/protoc-$lang
+      docker run -v ${REPOPATH}:/defs namely/protoc-all -d ${target} -i . -o ${target}/pb-$lang -l $lang --with-docs
 
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
-      cp -R pb-$lang/* $REPOPATH/$reponame/
+      cp -R pb-$lang/github.com/nalej/grpc-${target}-${lang}/* $REPOPATH/$reponame/
+      cp -R pb-$lang/doc $REPOPATH/$reponame/
 
-      commitAndPush $REPOPATH/$reponame
+      ls $REPOPATH/$reponame
+      if [ "${DRY_RUN}" == "true" ]; then
+          echo "Commit and push has been omitted"
+      else
+          commitAndPush $REPOPATH/$reponame
+      fi
+
     done < .protolangs
   fi
 }
@@ -72,7 +82,7 @@ function buildProtoForTypes {
 # Finds all directories in the repository and iterates through them calling the
 # compile process for each one
 function buildAll {
-  echo "Buidling service's protocol buffers"
+  echo "Building service's protocol buffers"
   mkdir -p $REPOPATH
   for d in */; do
     buildDir $d

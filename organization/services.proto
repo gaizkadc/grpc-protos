@@ -1,0 +1,44 @@
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package organization;
+option go_package = "github.com/nalej/grpc-organization-go";
+
+import "common/entities.proto";
+import "organization/entities.proto";
+
+// Organization service exposing organization level functionality related to organization.
+service Organizations {
+    rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
+    // GetOrganization retrieves the profile information of a given organization.
+    rpc GetOrganization(OrganizationId) returns (Organization) {}
+    // UpdateOrganization updates the public information of an organization.
+    rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+}
+
+// Users service exposing user related functionality.
+service Users {
+    // AddUser adds a new user to a given organization.
+    rpc AddUser(AddUserRequest) returns (User) {}
+    // GetUser returns an existing user.
+    rpc GetUser(UserId) returns (User) {}
+    // GetUsers retrieves the list of users of a given organization.
+    rpc GetUsers(OrganizationId) returns (UserList) {}
+    // RemoveUser removes a given user from an organization.
+    rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
+}
