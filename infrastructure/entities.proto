@@ -1,0 +1,173 @@
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package infrastructure;
+option go_package = "github.com/nalej/grpc-infrastructure-go";
+
+// ClusterType enumeration with the types of clusters supported to manage application deployments.
+enum ClusterType {
+    KUBERNETES = 0;
+    DOCKER_NODE = 1;
+}
+
+// MultinenantSupport enumeration defining the types of multitenancy supported by the system. Notice that even
+// if it is modeled as a boolean now, we leave the definition as an enumeration to support other types of multitenancy
+// like restrictions to parts of an organization, or priority based options.
+enum MultitenantSupport {
+    NO = 0;
+    YES = 1;
+}
+
+// InfraStatus enumeration defining the status of an element of the infrastructure.
+enum InfraStatus {
+    // Installing state represents an infrastructure element that is being installed at the momment.
+    INSTALLING = 0;
+    // Running state represents an infrastucture element that has been installed as is up and running.
+    RUNNING = 1;
+    // Error state represents an infrastructure element that cannot be used as any of the processes failed.
+    ERROR = 2;
+}
+
+// NodeState enumeration defining the states of a node from when it is declared to when it has been installed and
+// assigned to a given cluster.
+enum NodeState {
+    // Unregistered nodes are those whose details are in the platform but we have not perform any action.
+    UNREGISTERED = 0;
+    // Unassigned nodes are those that have been prepared but are not assigned to a given cluster.
+    UNASSIGNED = 1;
+    // Assigned nodes are those that have been installed and are part of a cluster.
+    ASSIGNED = 2;
+}
+
+// Cluster entity representing a collection of nodes that supports applicaiton orchestration. This
+// abstraction is used for monitoring and orchestration purposes.
+message Cluster {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Name of the cluster.
+    string name = 3;
+    // Description of the cluster.
+    string description = 4;
+    // Type of cluster.
+    ClusterType cluster_type = 5;
+    // Multitenant support definition.
+    MultitenantSupport multitenant = 6;
+    // Status of the cluster based on monitoring information.
+    InfraStatus status = 7;
+    // Labels for the cluster.
+    map <string, string> labels = 8;
+    // Cordon flags to signal conductor not to schedule apps in the cluster.
+    bool cordon = 9;
+}
+
+message ClusterId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+}
+
+message AddClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 3;
+    // Name of the cluster.
+    string name = 4;
+    // Description of the cluster.
+    string description = 5;
+    // Labels for the cluster.
+    map <string, string> labels = 6;
+}
+
+message RemoveClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 3;
+}
+
+message CordonClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Id with the cluster identifier.
+    string cluster_id = 3;
+    oneof cordon {
+        bool activate = 4;
+        bool deactivate = 5;
+    }
+}
+
+message ClusterList {
+    repeated Cluster clusters = 1;
+}
+
+// Node entity representing a single node of the architecture that executes application instances.
+message Node {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the associated cluster identifier the node is assigned to.
+    string cluster_id = 2;
+    // Id with the node identifier.
+    string node_id = 3;
+    // Ip with the node IP.
+    string ip = 4;
+    // Labels for the node.
+    map<string, string> labels = 6;
+    // Status of the node based on monitoring information.
+    InfraStatus status = 7;
+    // State of assignation of the node.
+    NodeState state = 8;
+}
+
+message AddNodeRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Id with the node identifier.
+    string node_id = 3;
+    // Ip with the node IP.
+    string ip = 4;
+    // Labels for the node.
+    map<string, string> labels = 5;
+}
+
+message AttachNodeRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the associated cluster identifier the node is assigned to.
+    string cluster_id = 3;
+    // Id with the node identifier.
+    string node_id = 4;
+}
+
+message RemoveNodeRequest {
+    string request_id = 1;
+    string organization_id = 2;
+    repeated string nodes = 3;
+}
+
+message NodeList {
+    repeated Node nodes = 1;
+}
