@@ -16,18 +16,25 @@
 
 syntax = "proto3";
 
-package organization;
-option go_package = "github.com/nalej/grpc-organization-go";
+package authx;
+option go_package = "github.com/nalej/grpc-authx-go";
 
 import "common/entities.proto";
-import "organization/entities.proto";
+import "authx/entities.proto";
+import "user/entities.proto";
 
 // Organization service exposing organization level functionality related to organization.
-service Organizations {
-    rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
-    // GetOrganization retrieves the profile information of a given organization.
-    rpc GetOrganization(OrganizationId) returns (Organization) {}
-    // UpdateOrganization updates the public information of an organization.
-    rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+service Authx {
+
+    rpc DeleteCredentials (user.UserId) returns (common.Success){}
+
+    rpc AddBasicCredentials(AddBasicCredentialRequest) returns (common.Success) {}
+
+    rpc LoginWithBasicCredentials(LoginRequest) returns (common.Success) {}
+
+    rpc AddRole(Role) returns (common.Success) {}
+
+    rpc EditUserRole (EditUserRoleRequest) returns (common.Success){}
+
 }
 
