@@ -23,17 +23,21 @@ import "common/entities.proto";
 import "authx/entities.proto";
 import "user/entities.proto";
 
-// Organization service exposing organization level functionality related to organization.
+// Atuthx service exposing credential information.
 service Authx {
-
+    // DeleteCredentials removes all the credential associated to the user.
     rpc DeleteCredentials (user.UserId) returns (common.Success){}
 
+    // AddBasicCredentials adds a user/password credential.
     rpc AddBasicCredentials(AddBasicCredentialRequest) returns (common.Success) {}
 
-    rpc LoginWithBasicCredentials(LoginRequest) returns (common.Success) {}
+    // LoginWithBasicCredentials checks if the credentials are valid, and returns a token.
+    rpc LoginWithBasicCredentials(LoginWithBasicCredentialsRequest) returns (LoginResponse) {}
 
+    // AddRole add a new role in the system.
     rpc AddRole(Role) returns (common.Success) {}
 
+    // EditUserRole edit the role to a specific user.
     rpc EditUserRole (EditUserRoleRequest) returns (common.Success){}
 
 }
