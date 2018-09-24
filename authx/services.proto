@@ -26,19 +26,28 @@ import "user/entities.proto";
 // Atuthx service exposing credential information.
 service Authx {
     // DeleteCredentials removes all the credential associated to the user.
-    rpc DeleteCredentials (user.UserId) returns (common.Success){}
+    rpc DeleteCredentials (user.UserId) returns (common.Success) {
+    }
 
     // AddBasicCredentials adds a user/password credential.
-    rpc AddBasicCredentials(AddBasicCredentialRequest) returns (common.Success) {}
+    rpc AddBasicCredentials (AddBasicCredentialRequest) returns (common.Success) {
+    }
 
     // LoginWithBasicCredentials checks if the credentials are valid, and returns a token.
-    rpc LoginWithBasicCredentials(LoginWithBasicCredentialsRequest) returns (LoginResponse) {}
+    rpc LoginWithBasicCredentials (LoginWithBasicCredentialsRequest) returns (LoginResponse) {
+    }
+
+    // RefreshToken return a new token with a new expiration date.
+    rpc RefreshToken (RefreshTokenRequest) returns (LoginResponse) {
+    }
 
     // AddRole add a new role in the system.
-    rpc AddRole(Role) returns (common.Success) {}
+    rpc AddRole (Role) returns (common.Success) {
+    }
 
     // EditUserRole edit the role to a specific user.
-    rpc EditUserRole (EditUserRoleRequest) returns (common.Success){}
+    rpc EditUserRole (EditUserRoleRequest) returns (common.Success) {
+    }
 
 }
 
