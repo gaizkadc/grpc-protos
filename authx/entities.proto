@@ -47,10 +47,10 @@ message RoleId {
 
 // AddBasicCredentialRequest is the message that add new credential using login and password.
 message AddBasicCredentialRequest {
-    string organization_id = 2;
-    string username = 3;
-    string password = 4;
-    string role_id = 5;
+    string organization_id = 1;
+    string username = 2;
+    string password = 3;
+    string role_id = 4;
 }
 
 // LoginWithBasicCredentialsRequest is the request for login with basic credentials.
@@ -73,9 +73,9 @@ message RefreshTokenRequest {
 
 // Message for editing a user role.
 message EditUserRoleRequest {
-    string organization_id = 2;
-    string email = 3;
-    string new_role_id = 5;
+    string organization_id = 1;
+    string email = 2;
+    string new_role_id = 3;
 }
 
 
