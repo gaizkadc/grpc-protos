@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
+
 syntax = "proto3";
 
-package conductor;
-option go_package = "github.com/nalej/grpc-conductor-go";
+package deployment_manager;
+option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
 import "conductor/entities.proto";
+import "deployment-manager/entities.proto";
 
-service Conductor {
-    // Request an application deployment to be done on top of Nalej.
-    rpc Deploy(DeploymentRequest) returns (DeploymentResponse) {}
-}
-
-service Musician {
-    // Request to score an application
-    rpc Score(ClusterScoreRequest) returns (ClusterScoreResponse) {}
+service DeploymentManager {
+    // Request a deployment plan to be executed.
+    rpc Execute(DeployPlanRequest) returns (conductor.DeploymentResponse) {}
 }

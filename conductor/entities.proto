@@ -1,11 +1,25 @@
-//
-// Copyright (C) 2018 Daisho Group - All Rights Reserved
-//
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 syntax = "proto3";
 
 package conductor;
 option go_package = "github.com/nalej/grpc-conductor-go";
+
+import public "application/entities.proto";
 
 // DeploymentRequest contains all the information required by conductor to start a deployment.
 message DeploymentRequest {
@@ -18,21 +32,11 @@ message DeploymentRequest {
 // Deployment response has the resulting execution of a deployment process.
 message DeploymentResponse {
     string request_id = 1;
-    enum DeploymentStatus {
-        QUEUED = 0;
-        PLANNING = 1;
-        SCHEDULED = 2;
-        DEPLOYING = 3;
-        RUNNING = 4;
-        INCOMPLETE = 5;
-        PLANNING_ERROR = 6;
-        DEPLOYMENT_ERROR = 7;
-        ERROR = 8;
-    }
-    DeploymentStatus status = 2;
+    // Status for this application. The first request will probably return a QUEUED status.
+    application.ApplicationStatus status = 2;
 }
 
-// Request for a cluster to evaluate a set of requirements
+// Request for a cluster to evaluate a set of requirements.
 message ClusterScoreRequest {
     string request_id = 1;
     float   cpu = 2;
@@ -40,9 +44,30 @@ message ClusterScoreRequest {
     float   disk = 4;
 
 }
-
+// Response when clusters are queried for their corresponding scores.
 message ClusterScoreResponse {
     string request_id = 1;
     string cluster_id = 2;
     float score = 3;
 }
+
+// Data structure defining a deployment plan for Nalej applications.
+message DeploymentPlan {
+    // Id for this plan
+    string deployment_id = 1;
+    // Stages to be followed in the deployment
+    repeated DeploymentStage stages = 2;
+}
+
+// A stage represents a collection of services and related components that can be deployed
+// without any dependency.
+message DeploymentStage {
+    // Id for the plan containing this stage
+    string deployment_id = 1;
+    // Id for this stage
+    string stage_id = 2;
+    // Collection of applications that can be simultaneously deployed
+    repeated application.Service services = 3;
+}
+
+

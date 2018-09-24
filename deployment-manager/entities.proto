@@ -16,17 +16,13 @@
 
 syntax = "proto3";
 
-package conductor;
-option go_package = "github.com/nalej/grpc-conductor-go";
+package deployment_manager;
+option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
 import "conductor/entities.proto";
 
-service Conductor {
-    // Request an application deployment to be done on top of Nalej.
-    rpc Deploy(DeploymentRequest) returns (DeploymentResponse) {}
-}
-
-service Musician {
-    // Request to score an application
-    rpc Score(ClusterScoreRequest) returns (ClusterScoreResponse) {}
+message DeployPlanRequest {
+    string request_id = 1;
+    // Plan to be deployed
+    conductor.DeploymentPlan plan = 2;
 }
