@@ -1,0 +1,81 @@
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package authx;
+option go_package = "github.com/nalej/grpc-authx-go";
+
+// AccessPrimitives define a set of capabilities a role may access.
+enum AccessPrimitive {
+    // Access to all organization related functionality.
+    ORG = 0;
+    // Access to all applications related functionality.
+    APPS = 1;
+    // Access to all resources related functionality.
+    RESOURCES = 2;
+    // Access to the profile information.
+    PROFILE = 3;
+}
+
+// Role defines a role for users of an organization with the associated capabilities
+message Role {
+    string organization_id = 1;
+    string role_id = 2;
+    string name = 3;
+    repeated AccessPrimitive primitives = 4;
+}
+
+// RoleId is the identificator of the role.
+message RoleId {
+    string organization_id = 1;
+    string role_id = 2;
+}
+
+// AddBasicCredentialRequest is the message that add new credential using login and password.
+message AddBasicCredentialRequest {
+    string organization_id = 1;
+    string username = 2;
+    string password = 3;
+    string role_id = 4;
+}
+
+// LoginWithBasicCredentialsRequest is the request for login with basic credentials.
+message LoginWithBasicCredentialsRequest {
+    string username = 1;
+    string password = 2;
+}
+
+// LoginResponse is the message that contains the generated token and the refresh token.
+message LoginResponse {
+    string token = 1;
+    string refresh_token = 2;
+}
+
+// RefreshTokenRequest is the request for refreshing the generated token.
+message RefreshTokenRequest {
+    string username = 1;
+    string refresh_token = 2;
+}
+
+// Message for editing a user role.
+message EditUserRoleRequest {
+    string organization_id = 1;
+    string email = 2;
+    string new_role_id = 3;
+}
+
+

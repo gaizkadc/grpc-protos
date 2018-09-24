@@ -65,6 +65,12 @@ The following steps are required to add a new service. For example, assuming we 
 
 ## Checking correctness
 
+This functionality requires to install protoc-gen-lint. You can install it using the following command:
+
+```
+$ go get github.com/ckaznocha/protoc-gen-lint
+```
+
 You can check the code style rules with the following command:
 
 ```
