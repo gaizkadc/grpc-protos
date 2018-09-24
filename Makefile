@@ -10,10 +10,10 @@ lint:
 
 generate:
 	chmod +x publishProto.sh
-	./publishProto.sh
+	./publishProto.sh $(service)
 
 dry-generate:
-	DRY_RUN=true ./publishProto.sh
+	DRY_RUN=true ./publishProto.sh $(service)
 
 clean:
 	rm -rf grpc-*-go && rm -rf */pb-go

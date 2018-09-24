@@ -89,3 +89,13 @@ For local manual pushes use:
 ```
 $ CURRENT_BRANCH=master REPOPATH=~/go/src/github.com/nalej/grpc-protos make generate
 ```
+
+# Compiling a single service
+
+To generate a single service use:
+
+```
+$ make generate service=serviceName
+```
+
+You can also use any other make targets

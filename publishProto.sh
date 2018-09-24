@@ -89,6 +89,12 @@ function buildAll {
   done
 }
 
+function buildSingle {
+    echo "Building single service"
+    mkdir -p $REPOPATH
+    buildDir $1
+}
+
 function setupBranch {
   enterDir $1
 
@@ -139,4 +145,11 @@ function commitAndPush {
   leaveDir
 }
 
-buildAll
+TARGET_SERVICE=$1
+
+if [[ "${TARGET_SERVICE}" == "" ]]; then
+    buildAll
+else
+    buildSingle ${TARGET_SERVICE}
+fi
+
