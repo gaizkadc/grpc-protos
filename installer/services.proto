@@ -16,18 +16,20 @@
 
 syntax = "proto3";
 
-package organization;
-option go_package = "github.com/nalej/grpc-organization-go";
+package installer;
+option go_package = "github.com/nalej/grpc-installer-go";
 
+import "installer/entities.proto";
 import "common/entities.proto";
-import "organization/entities.proto";
 
-// Organization service exposing organization level functionality related to organization.
-service Organizations {
-    rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
-    // GetOrganization retrieves the profile information of a given organization.
-    rpc GetOrganization(OrganizationId) returns (Organization) {}
-    // UpdateOrganization updates the public information of an organization.
-    rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+// Installer service definition.
+service Installer {
+    // InstallCluster triggers the installation of a new application cluster.
+    rpc InstallCluster(InstallRequest) returns(InstallResponse){}
+
+    // CheckProgress gets an updated state of an install request.
+    rpc CheckProgress(InstallId) returns(InstallResponse){}
+
+    // RemoveInstall cancels and ongoing install or removes the information of an already processed install.
+    rpc RemoveInstall(RemoveInstallRequest) returns(common.Success){}
 }
-

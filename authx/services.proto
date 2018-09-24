@@ -1,0 +1,53 @@
+/*
+ * Copyright 2018 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package authx;
+option go_package = "github.com/nalej/grpc-authx-go";
+
+import "common/entities.proto";
+import "authx/entities.proto";
+import "user/entities.proto";
+
+// Atuthx service exposing credential information.
+service Authx {
+    // DeleteCredentials removes all the credential associated to the user.
+    rpc DeleteCredentials (user.UserId) returns (common.Success) {
+    }
+
+    // AddBasicCredentials adds a user/password credential.
+    rpc AddBasicCredentials (AddBasicCredentialRequest) returns (common.Success) {
+    }
+
+    // LoginWithBasicCredentials checks if the credentials are valid, and returns a token.
+    rpc LoginWithBasicCredentials (LoginWithBasicCredentialsRequest) returns (LoginResponse) {
+    }
+
+    // RefreshToken return a new token with a new expiration date.
+    rpc RefreshToken (RefreshTokenRequest) returns (LoginResponse) {
+    }
+
+    // AddRole add a new role in the system.
+    rpc AddRole (Role) returns (common.Success) {
+    }
+
+    // EditUserRole edit the role to a specific user.
+    rpc EditUserRole (EditUserRoleRequest) returns (common.Success) {
+    }
+
+}
+
