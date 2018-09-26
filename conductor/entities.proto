@@ -20,13 +20,49 @@ package conductor;
 option go_package = "github.com/nalej/grpc-conductor-go";
 
 import public "application/entities.proto";
+import public "infrastructure/entities.proto";
+
+
+
+// Data structure defining a deployment plan for Nalej applications.
+message DeploymentPlan {
+    // Id for this plan
+    string deployment_id = 1;
+    // Organization id
+    string organization_id = 2;
+    // Application descriptor this app is connected with.
+    application.AppDescriptorId app_id = 3;
+    // Stages to be followed in the deployment
+    repeated DeploymentFragment fragments = 4;
+}
+
+// Fragment of a data plan to be deployed in a cluster.
+message DeploymentFragment {
+    // Id of the plan this fragment belongs to
+    string deployment_id = 1;
+    // Id of this fragment
+    string fragment_id = 2;
+    // Cluster id where this fragment must be executed
+    repeated DeploymentStage stages = 4;
+}
+
+// A stage represents a collection of services and related components that can be deployed
+// without any dependency.
+message DeploymentStage {
+    // Fragment id this stage belongs to
+    string fragment_id = 1;
+    // Id for this stage
+    string stage_id = 2;
+    // Collection of applications that can be simultaneously deployed
+    repeated application.Service services = 3;
+}
+
 
 // DeploymentRequest contains all the information required by conductor to start a deployment.
 message DeploymentRequest {
     string request_id = 1;
-    float cpu = 2;
-    float memory = 3;
-    float disk = 4;
+    // ID of the application to deploy
+    application.AppDescriptorId app_id = 2;
 }
 
 // Deployment response has the resulting execution of a deployment process.
@@ -50,24 +86,3 @@ message ClusterScoreResponse {
     string cluster_id = 2;
     float score = 3;
 }
-
-// Data structure defining a deployment plan for Nalej applications.
-message DeploymentPlan {
-    // Id for this plan
-    string deployment_id = 1;
-    // Stages to be followed in the deployment
-    repeated DeploymentStage stages = 2;
-}
-
-// A stage represents a collection of services and related components that can be deployed
-// without any dependency.
-message DeploymentStage {
-    // Id for the plan containing this stage
-    string deployment_id = 1;
-    // Id for this stage
-    string stage_id = 2;
-    // Collection of applications that can be simultaneously deployed
-    repeated application.Service services = 3;
-}
-
-
