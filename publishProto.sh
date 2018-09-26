@@ -75,6 +75,7 @@ function buildProtoForTypes {
           commitAndPush $REPOPATH/$reponame
       fi
 
+
     done < .protolangs
   fi
 }

@@ -195,6 +195,17 @@ message DeploySpecs {
     int32 replicas = 3;
 }
 
+enum ApplicationStatus {
+    QUEUED = 0;
+    PLANNING = 1;
+    SCHEDULED = 2;
+    DEPLOYING = 3;
+    RUNNING = 4;
+    INCOMPLETE = 5;
+    PLANNING_ERROR = 6;
+    DEPLOYMENT_ERROR = 7;
+    ERROR = 8;
+}
 
 message AppDescriptorId {
     // OrganizationId with the organization identifier.
