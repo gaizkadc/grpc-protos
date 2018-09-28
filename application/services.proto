@@ -21,6 +21,7 @@ option go_package = "github.com/nalej/grpc-application-go";
 
 import "application/entities.proto";
 import "organization/entities.proto";
+import "common/entities.proto";
 
 service Applications {
     // AddAppDescriptor adds a new application descriptor to a given organization.
@@ -29,4 +30,15 @@ service Applications {
     rpc GetAppDescriptors(organization.OrganizationId) returns (AppDescriptorList){}
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppDescriptor(AppDescriptorId) returns (AppDescriptor) {}
+
+    // AddAppInstance adds a new application instance to a given organization.
+    rpc AddAppInstance(AddAppInstanceRequest) returns (AppInstance){}
+    // GetAppInstances retieves a list of application instances.
+    rpc GetAppInstances(organization.OrganizationId) returns (AppInstanceList){}
+    // GetAppInstance retrieves a given application instance.
+    rpc GetAppInstance(AppInstanceId) returns (AppInstance) {}
+    // UpdateAppStatus updates the status of an application instance.
+    rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
+    // UpdateServiceStatus updates the status of an application instance service.
+    rpc UpdateServiceStatus(UpdateServiceStatusRequest) returns(common.Success){}
 }

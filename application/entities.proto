@@ -36,6 +36,12 @@ message AppDescriptor {
     map<string, string> environment_variables = 6;
     // Labels defined by the user.
     map<string, string> labels = 7;
+    // Rules that define the connectivity between the elements of an application.
+    repeated SecurityRule rules = 8;
+    // Groups with the Service collocation strategies.
+    repeated ServiceGroup groups = 9;
+    // Services of the applicaiton.
+    repeated Service services = 10;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -157,6 +163,14 @@ message Service {
     repeated string deploy_after = 15;
 }
 
+enum ServiceStatus {
+    SERVICE_SCHEDULED = 0;
+    SERVICE_WAITING = 1;
+    SERVICE_DEPLOYING = 2;
+    SERVICE_RUNNING = 3;
+    SERVICE_ERROR = 4;
+}
+
 message Port {
     string name = 1;
     int32 internal_port = 2;
@@ -241,5 +255,142 @@ message AddAppDescriptorRequest {
 
 message AppDescriptorList {
     repeated AppDescriptor descriptors = 1;
+}
+
+// AppInstance represents an instance of the application in the system.
+message AppInstance {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Name of the application.
+    string name = 4;
+    // Description of the application.
+    string description = 5;
+    // ConfigurationOptions defines a key-value map of configuration options.
+    map<string, string> configuration_options = 6;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 7;
+    // Labels defined by the user.
+    map<string, string> labels = 8;
+    // Rules that define the connectivity between the elements of an application.
+    repeated SecurityRule rules = 9;
+    // Groups with the Service collocation strategies.
+    repeated ServiceGroup groups = 10;
+    // Services of the applicaiton.
+    repeated Service services = 11;
+    // Status of the deployed instance.
+    ApplicationStatus status = 12;
+}
+
+// ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
+// policy.
+message ServiceGroupInstance {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 4;
+    // Name of the service group.
+    string name = 5;
+    // Description of the service group.
+    string description = 6;
+    // ServicesInstances defining a list of service identifiers that belong to the group.
+    repeated string service_instances = 7;
+    // Policy indicating the deployment collocation policy.
+    CollocationPolicy policy = 8;
+}
+
+message ServiceInstance {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // ServiceId with the service identifier.
+    string service_id = 4;
+    // Name of the service.
+    string name = 5;
+    // Description of the service.
+    string description = 6;
+    // ServiceType represents the underlying technology of the service to be launched.
+    ServiceType type = 7;
+    // Image contains the URL/name of the image to be executed.
+    string image = 8;
+    // ImageCredentials with the data required to access the repository the image is available at.
+    ImageCredentials credentials = 9;
+    // DeploySpecs with the resource specs required by the service.
+    DeploySpecs specs = 10;
+    // Storage restrictions
+    repeated Storage storage = 11;
+    // ExposedPorts contains the list of ports exposed by the current service.
+    repeated Port exposed_ports = 12;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 13;
+    // Configs contains the configuration files required by the service.
+    repeated ConfigFile configs = 14;
+    // Labels with the user defined labels.
+    map<string, string> labels = 15;
+    // DeployAfter contains the list of services that must be running before launching a service.
+    repeated string deploy_after = 16;
+    // Status of the deployed service
+    ServiceStatus status = 17;
+}
+
+// AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
+// associated descriptor. This will change in future releases to allow per instance customization.
+message AddAppInstanceRequest {
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // Name of the application instance.
+    string name = 3;
+    // Description of the application the application instance.
+    string description = 4;
+}
+
+message AppInstanceId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+}
+
+message AppInstanceList {
+    repeated AppInstance instances = 1;
+}
+
+message UpdateAppStatusRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Status with the new transition.
+    ApplicationStatus status = 4;
+}
+
+message UpdateServiceStatusRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // ServiceId with the service identifier.
+    string service_id = 4;
+    // Status with the new transition.
+    ServiceStatus status = 5;
 }
 
