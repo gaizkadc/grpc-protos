@@ -40,7 +40,7 @@ message AppDescriptor {
     repeated SecurityRule rules = 8;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 9;
-    // Services of the applicaiton.
+    // Services of the application.
     repeated Service services = 10;
 }
 
@@ -232,25 +232,23 @@ message AddAppDescriptorRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
     string organization_id = 2;
-    // AppDescriptorId with the application descriptor identifier.
-    string app_descriptor_id = 3;
     // Name of the application.
-    string name = 4;
+    string name = 3;
     // Description of the application.
-    string description = 5;
+    string description = 4;
     // ConfigurationOptions defines a key-value map of configuration options.
-    map<string, string> configuration_options = 6;
+    map<string, string> configuration_options = 5;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 7;
+    map<string, string> environment_variables = 6;
     // Labels defined by the user.
-    map<string, string> labels = 8;
+    map<string, string> labels = 7;
     // Rules that define the connectivity between the elements of an application.
-    repeated SecurityRule rules = 9;
+    repeated SecurityRule rules = 8;
     // Groups with the Service collocation strategies.
-    repeated ServiceGroup groups = 10;
-    // Services of the applicaiton.
-    repeated Service services = 11;
+    repeated ServiceGroup groups = 9;
+    // Services of the application.
+    repeated Service services = 10;
 }
 
 message AppDescriptorList {
@@ -279,9 +277,9 @@ message AppInstance {
     // Rules that define the connectivity between the elements of an application.
     repeated SecurityRule rules = 9;
     // Groups with the Service collocation strategies.
-    repeated ServiceGroup groups = 10;
+    repeated ServiceGroupInstance groups = 10;
     // Services of the applicaiton.
-    repeated Service services = 11;
+    repeated ServiceInstance services = 11;
     // Status of the deployed instance.
     ApplicationStatus status = 12;
 }
@@ -360,10 +358,8 @@ message AddAppInstanceRequest {
 message AppInstanceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AppDescriptorId with the application descriptor identifier.
-    string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
-    string app_instance_id = 3;
+    string app_instance_id = 2;
 }
 
 message AppInstanceList {
