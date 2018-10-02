@@ -21,12 +21,11 @@ option go_package = "github.com/nalej/grpc-authx-go";
 
 import "common/entities.proto";
 import "authx/entities.proto";
-import "user/entities.proto";
 
 // Atuthx service exposing credential information.
 service Authx {
     // DeleteCredentials removes all the credential associated to the user.
-    rpc DeleteCredentials (user.UserId) returns (common.Success) {
+    rpc DeleteCredentials (DeleteCredentialsRequest) returns (common.Success) {
     }
 
     // AddBasicCredentials adds a user/password credential.
