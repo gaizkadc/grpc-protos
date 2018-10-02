@@ -369,8 +369,6 @@ message AppInstanceList {
 message UpdateAppStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AppDescriptorId with the application descriptor identifier.
-    string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
     // Status with the new transition.
@@ -380,8 +378,6 @@ message UpdateAppStatusRequest {
 message UpdateServiceStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AppDescriptorId with the application descriptor identifier.
-    string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
     // ServiceId with the service identifier.
