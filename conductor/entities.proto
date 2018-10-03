@@ -1,18 +1,7 @@
 /*
- * Copyright 2018 Nalej
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (C) 2018 Nalej Group - All Rights Reserved
+*/
+
 
 syntax = "proto3";
 
@@ -26,63 +15,65 @@ import public "infrastructure/entities.proto";
 
 // Data structure defining a deployment plan for Nalej applications.
 message DeploymentPlan {
-    // Id for this plan
-    string deployment_id = 1;
-    // Organization id
-    string organization_id = 2;
-    // Application descriptor this app is connected with.
-    application.AppDescriptorId app_id = 3;
-    // Stages to be followed in the deployment
-    repeated DeploymentFragment fragments = 4;
+   // Id for this plan
+   string deployment_id = 1;
+   // Organization id
+   string organization_id = 2;
+   // Application descriptor this app is connected with.
+   application.AppDescriptorId app_id = 3;
+   // Stages to be followed in the deployment
+   repeated DeploymentFragment fragments = 4;
 }
 
 // Fragment of a data plan to be deployed in a cluster.
 message DeploymentFragment {
-    // Id of the plan this fragment belongs to
-    string deployment_id = 1;
-    // Id of this fragment
-    string fragment_id = 2;
-    // Cluster id where this fragment must be executed
-    repeated DeploymentStage stages = 4;
+   // Id of the application this fragment belongs to
+   application.AppDescriptorId app_id = 1;
+   // Id of the plan this fragment belongs to
+   string deployment_id = 2;
+   // Id of this fragment
+   string fragment_id = 3;
+   // Cluster id where this fragment must be executed
+   repeated DeploymentStage stages = 4;
 }
 
 // A stage represents a collection of services and related components that can be deployed
 // without any dependency.
 message DeploymentStage {
-    // Fragment id this stage belongs to
-    string fragment_id = 1;
-    // Id for this stage
-    string stage_id = 2;
-    // Collection of applications that can be simultaneously deployed
-    repeated application.Service services = 3;
+   // Fragment id this stage belongs to
+   string fragment_id = 1;
+   // Id for this stage
+   string stage_id = 2;
+   // Collection of applications that can be simultaneously deployed
+   repeated application.Service services = 3;
 }
 
 
 // DeploymentRequest contains all the information required by conductor to start a deployment.
 message DeploymentRequest {
-    string request_id = 1;
-    // ID of the application to deploy
-    application.AppDescriptorId app_id = 2;
+   string request_id = 1;
+   // ID of the application to deploy
+   application.AppDescriptorId app_id = 2;
 }
 
 // Deployment response has the resulting execution of a deployment process.
 message DeploymentResponse {
-    string request_id = 1;
-    // Status for this application. The first request will probably return a QUEUED status.
-    application.ApplicationStatus status = 2;
+   string request_id = 1;
+   // Status for this application. The first request will probably return a QUEUED status.
+   application.ApplicationStatus status = 2;
 }
 
 // Request for a cluster to evaluate a set of requirements.
 message ClusterScoreRequest {
-    string request_id = 1;
-    float   cpu = 2;
-    float   memory = 3;
-    float   disk = 4;
+   string request_id = 1;
+   float   cpu = 2;
+   float   memory = 3;
+   float   disk = 4;
 
 }
 // Response when clusters are queried for their corresponding scores.
 message ClusterScoreResponse {
-    string request_id = 1;
-    string cluster_id = 2;
-    float score = 3;
+   string request_id = 1;
+   string cluster_id = 2;
+   float score = 3;
 }
