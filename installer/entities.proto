@@ -45,12 +45,16 @@ message InstallRequest {
     string cluster_id = 3;
     // Type of cluster.
     infrastructure.ClusterType cluster_type = 4;
-    // KubeConfig contains the required data to connect to a Kubernetes cluster in case it is already installed.
-    string kube_config = 5;
-    // PrivateKey contains the SSH private key required for the install.
-    string private_key = 6;
+    // InstallBaseSystem flag to indicate tha the base system must be installed on the nodes.
+    bool install_base_system = 5;
+    // KubeConfigRaw contains the required data to connect to a Kubernetes cluster in case it is already installed.
+    string kube_config_raw = 6;
+    // Username to connect to the remote machines when the base system needs to be installed.
+    string username = 7;
+    // PrivateKey contains the SSH private key required when the base system needs to be installed.
+    string private_key = 8;
     // Nodes contains the list of IP addresses to be installed.
-    repeated string nodes = 7;
+    repeated string nodes = 9;
 }
 
 message InstallId {
