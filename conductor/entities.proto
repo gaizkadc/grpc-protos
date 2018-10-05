@@ -54,13 +54,19 @@ message DeploymentRequest {
    string request_id = 1;
    // ID of the application to deploy
    application.AppDescriptorId app_id = 2;
+   // Name for the deployment
+   string name = 3;
+   // Description for this deployment
+   string description = 4;
 }
 
 // Deployment response has the resulting execution of a deployment process.
 message DeploymentResponse {
    string request_id = 1;
+   // ID of the deployed instance
+   string instance_id = 2;
    // Status for this application. The first request will probably return a QUEUED status.
-   application.ApplicationStatus status = 2;
+   application.ApplicationStatus status = 3;
 }
 
 // Request for a cluster to evaluate a set of requirements.
