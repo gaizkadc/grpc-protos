@@ -19,22 +19,24 @@ message DeploymentPlan {
    string deployment_id = 1;
    // Organization id
    string organization_id = 2;
-   // Application descriptor this app is connected with.
-   application.AppDescriptorId app_id = 3;
+   // Application instanceId
+   string app_instance_id = 3;
    // Stages to be followed in the deployment
    repeated DeploymentFragment fragments = 4;
 }
 
 // Fragment of a data plan to be deployed in a cluster.
 message DeploymentFragment {
-   // Id of the application this fragment belongs to
-   application.AppDescriptorId app_id = 1;
+   // organization id
+   string organization_id = 1;
+   // Application instance
+   string app_instance_id = 2;
    // Id of the plan this fragment belongs to
-   string deployment_id = 2;
+   string deployment_id = 4;
    // Id of this fragment
-   string fragment_id = 3;
+   string fragment_id = 5;
    // Cluster id where this fragment must be executed
-   repeated DeploymentStage stages = 4;
+   repeated DeploymentStage stages = 6;
 }
 
 // A stage represents a collection of services and related components that can be deployed
@@ -64,9 +66,15 @@ message DeploymentRequest {
 message DeploymentResponse {
    string request_id = 1;
    // ID of the deployed instance
-   string instance_id = 2;
+   string app_instance_id = 2;
    // Status for this application. The first request will probably return a QUEUED status.
    application.ApplicationStatus status = 3;
+}
+
+// Request to undeploy an already deployed application
+message UndeployRequest {
+   // Id of for the deployment
+   string instace_id = 1;
 }
 
 // Request for a cluster to evaluate a set of requirements.
@@ -83,3 +91,41 @@ message ClusterScoreResponse {
    string cluster_id = 2;
    float score = 3;
 }
+
+message DeploymentFragmentUpdateRequest {
+   string fragment_id = 1;
+   // cluster id
+   string cluster_id = 2;
+   // Status of the fragment operation
+   DeploymentFragmentStatus status = 3;
+}
+
+// Set of possible statuses for a deployment fragment
+enum DeploymentFragmentStatus {
+   WAITING = 0;
+   DEPLOYING = 1;
+   DONE = 2;
+   ERROR = 3;
+   RETRYING = 4;
+}
+
+// Status of a service to update
+message ServiceUpdate {
+   string app_instance_id = 1;
+   application.ServiceStatus status = 2;
+}
+
+// Indicate the status of a set of services
+message DeploymentServiceUpdateRequest {
+   // fragment we are working with
+   string fragment_id = 1;
+   // cluster id
+   string cluster_id = 2;
+   // status
+   repeated ServiceUpdate list = 3;
+}
+
+
+
+
+

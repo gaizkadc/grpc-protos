@@ -11,14 +11,15 @@ option go_package = "github.com/nalej/grpc-deployment-manager-go";
 import "conductor/entities.proto";
 import "application/entities.proto";
 
-message DeployFragmentRequest {
+message DeploymentFragmentRequest {
     string request_id = 1;
     // Plan to be deployed
     conductor.DeploymentFragment fragment = 2;
 }
 
-message DeployFragmentResponse {
+message DeploymentFragmentResponse {
     string request_id = 1;
     //status summary
     application.ApplicationStatus status = 2;
 }
+
