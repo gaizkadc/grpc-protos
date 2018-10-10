@@ -1,0 +1,21 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package ping;
+option go_package = "github.com/nalej/grpc-ping-go";
+
+import "google/api/annotations.proto";
+import "ping/entities.proto";
+
+service Ping {
+    // Ping the server a return a msg containing the request number.
+    rpc Ping(PingRequest) returns (PingResponse) {
+        option (google.api.http) = {
+            post: "/ping"
+            body: "*"
+        };
+    }
+}

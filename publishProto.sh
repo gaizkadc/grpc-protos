@@ -60,13 +60,13 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       # Use the docker container for the language we care about and compile
-      #docker run -v `pwd`:/defs namely/protoc-$lang
-      docker run -v ${REPOPATH}:/defs namely/protoc-all -d ${target} -i . -o ${target}/pb-$lang -l $lang --with-docs
-
+      # TODO Check for the language to run this only for go
+      docker run -v ${REPOPATH}:/defs namely/protoc-all -d ${target} -i . -i /usr/local/include/google -o ${target}/pb-$lang -l $lang --with-docs --with-gateway
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
       cp -R pb-$lang/github.com/nalej/grpc-${target}-${lang}/* $REPOPATH/$reponame/
       cp -R pb-$lang/doc $REPOPATH/$reponame/
+      cp -R pb-$lang/${target}/*.swagger.json $REPOPATH/$reponame/doc/.
 
       ls $REPOPATH/$reponame
       if [ "${DRY_RUN}" == "true" ]; then
