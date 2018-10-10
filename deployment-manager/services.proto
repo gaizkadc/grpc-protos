@@ -11,8 +11,9 @@ option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
 import "conductor/entities.proto";
 import "deployment-manager/entities.proto";
+import "common/entities.proto";
 
 service DeploymentManager {
     // Request a deployment plan to be executed.
-    rpc Execute(DeployFragmentRequest) returns (DeployFragmentResponse) {}
+    rpc Execute(DeploymentFragmentRequest) returns (DeploymentFragmentResponse) {}
 }

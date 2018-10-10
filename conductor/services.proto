@@ -9,13 +9,27 @@ package conductor;
 option go_package = "github.com/nalej/grpc-conductor-go";
 
 import "conductor/entities.proto";
+import "common/entities.proto";
 
+// Service in charge of orchestrating deployment operations.
 service Conductor {
     // Request an application deployment to be done on top of Nalej.
     rpc Deploy(DeploymentRequest) returns (DeploymentResponse) {}
+
+    // Request an already deployed application to be undeployed.
+    rpc Undeploy(UndeployRequest) returns (common.Success) {}
 }
 
+// Service deployed in local clusters to score locally available resources.
 service Musician {
     // Request to score an application
     rpc Score(ClusterScoreRequest) returns (ClusterScoreResponse) {}
+}
+
+// Monitor service in conductor updating current deployments status.
+service ConductorMonitor {
+    // Request to update a fragment plan status with all the corresponding services
+    rpc UpdateDeploymentFragmentStatus(DeploymentFragmentUpdateRequest) returns(common.Success) {}
+    // Update the status of a set of services during a given fragment deployment
+    rpc UpdateServiceStatus(DeploymentServiceUpdateRequest) returns (common.Success) {}
 }
