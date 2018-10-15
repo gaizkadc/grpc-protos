@@ -150,7 +150,7 @@ message AttachNodeRequest {
     string node_id = 4;
 }
 
-message RemoveNodeRequest {
+message RemoveNodesRequest {
     string request_id = 1;
     string organization_id = 2;
     repeated string nodes = 3;
