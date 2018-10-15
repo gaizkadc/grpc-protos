@@ -1,0 +1,61 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package public_api;
+option go_package = "github.com/nalej/grpc-public-api-go";
+
+import "public-api/entities.proto";
+import "organization/entities.proto";
+import "user/entities.proto";
+import "authx/entities.proto";
+import "common/entities.proto";
+import "infrastructure/entities.proto";
+
+// Organization related information.
+service Organizations {
+    // Info returns the information about a given organization.
+    rpc Info(organization.OrganizationId) returns(OrganizationInfo){}
+}
+
+// Cluster related information.
+service Clusters {
+    // List all the clusters in an organization.
+    rpc List(organization.OrganizationId) returns(ClusterList){}
+    // Update the cluster information.
+    rpc Update(UpdateClusterRequest) returns (common.Success){}
+}
+
+// Node related information.
+service Nodes {
+    // ClusterNodes retrieves information about the nodes of a cluster.
+    rpc ClusterNodes(infrastructure.ClusterId) returns(infrastructure.NodeList){}
+}
+
+// Resource level related information.
+service Resources {
+    // Summary provides an overview of the resources inside an organization.
+    rpc Summary(organization.OrganizationId) returns(ResourceSummary){}
+}
+
+// User level related information.
+service Users {
+    // Info returns information about a given user.
+    rpc Info(user.UserId) returns (User){}
+    // List returns the users inside an organization.
+    rpc List(organization.OrganizationId) returns (UserList){}
+    // Delete removes a user from an organization.
+    rpc Delete(user.UserId) returns (common.Success){}
+    // ResetPassoword resets a user password.
+    rpc ResetPassword(user.UserId) returns (PasswordResetResponse){}
+    // Update the user information.
+    rpc Update(user.UpdateUserRequest) returns (common.Success){}
+}
+
+// next iteration
+service Roles {
+    // List the roles inside an organization.
+    rpc List(organization.OrganizationId) returns (authx.RoleList){}
+}

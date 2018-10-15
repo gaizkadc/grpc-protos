@@ -11,6 +11,7 @@ option go_package = "github.com/nalej/grpc-user-go";
 message User {
     string organization_id = 1;
     string email = 2;
+    string name = 3;
     string photo_url = 4;
     int64 member_since = 5;
     string role_id = 6;
@@ -27,8 +28,9 @@ message AddUserRequest {
     string organization_id = 1;
     string email = 2;
     string password = 3;
-    string photo_url = 4;
-    string role_id = 5;
+    string name = 4;
+    string photo_url = 5;
+    string role_id = 6;
 }
 
 // RemoveUserRequest message with the information required to remove a user from the platform.
@@ -42,3 +44,9 @@ message UserList {
     repeated User users = 1;
 }
 
+message UpdateUserRequest {
+    string organization_id = 1;
+    string email = 2;
+    string name = 3;
+    string role = 4;
+}

@@ -1,0 +1,84 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package public_api;
+option go_package = "github.com/nalej/grpc-public-api-go";
+
+import "infrastructure/entities.proto";
+
+// OrganizationInfo contains public organization information.
+message OrganizationInfo {
+    string organization_id = 1;
+    string name = 2;
+}
+
+// User model the information available regarding a User of an organization
+message User {
+    string organization_id = 1;
+    string email = 2;
+    string name = 3;
+    string role_name = 4;
+}
+
+message UserList {
+    repeated User users = 1;
+}
+
+// PasswordResetResponse contains an automatically generated password set for the user.
+// In future versions, the password reset will be sent as a link in an email for the user to reset
+// the password.
+message PasswordResetResponse {
+    string organization_id = 1;
+    string email = 2;
+    string new_password = 3;
+}
+
+message Cluster {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Name of the cluster.
+    string name = 3;
+    // Description of the cluster.
+    string description = 4;
+    // Type of cluster.
+    infrastructure.ClusterType cluster_type = 5;
+    // Multitenant support definition.
+    infrastructure.MultitenantSupport multitenant = 6;
+    // Status of the cluster based on monitoring information.
+    infrastructure.InfraStatus status = 7;
+    // Labels for the cluster.
+    map <string, string> labels = 8;
+    // TotalNodes contains the total number of nodes in the cluster.
+    int64 total_nodes = 9;
+    // RunningNodes contains the number of nodes in the system that are currently working.
+    int64 running_nodes = 10;
+}
+
+message ClusterList {
+    repeated Cluster clusters = 1;
+}
+
+message UpdateClusterRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Name of the cluster.
+    string name = 3;
+    // Description of the cluster.
+    string description = 4;
+    // Labels for the cluster.
+    map <string, string> labels = 5;
+}
+
+message ResourceSummary {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    int64 total_clusters = 2;
+    int64 total_nodes = 3;
+}
