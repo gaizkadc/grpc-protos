@@ -33,5 +33,5 @@ service InfrastructureManager {
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(infrastructure.ClusterId) returns (infrastructure.NodeList) {}
     // RemoveNodes removes a set of nodes from the system.
-    rpc RemoveNodes(infrastructure.RemoveNodeRequest) returns (common.Success) {}
+    rpc RemoveNodes(infrastructure.RemoveNodesRequest) returns (common.Success) {}
 }
