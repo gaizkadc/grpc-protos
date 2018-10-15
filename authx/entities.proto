@@ -27,6 +27,10 @@ message Role {
     repeated AccessPrimitive primitives = 4;
 }
 
+message RoleList {
+    repeated Role roles = 1;
+}
+
 // RoleId is the identificator of the role.
 message RoleId {
     string organization_id = 1;
