@@ -111,8 +111,14 @@ enum DeploymentFragmentStatus {
 
 // Status of a service to update
 message ServiceUpdate {
-   string app_instance_id = 1;
-   application.ServiceStatus status = 2;
+   // Organization this service belongs to
+   string organization_id = 1;
+   // Application instance
+   string application_instance_id = 2;
+   // Instance of this service
+   string service_instance_id = 3;
+   // The current status of the service
+   application.ServiceStatus status = 4;
 }
 
 // Indicate the status of a set of services
