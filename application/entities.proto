@@ -358,9 +358,9 @@ message UpdateAppStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
-    string app_instance_id = 3;
+    string app_instance_id = 2;
     // Status with the new transition.
-    ApplicationStatus status = 4;
+    ApplicationStatus status = 3;
 }
 
 message UpdateServiceStatusRequest {
@@ -373,4 +373,3 @@ message UpdateServiceStatusRequest {
     // Status with the new transition.
     ServiceStatus status = 5;
 }
-

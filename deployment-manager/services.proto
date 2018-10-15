@@ -9,9 +9,7 @@ syntax = "proto3";
 package deployment_manager;
 option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
-import "conductor/entities.proto";
 import "deployment-manager/entities.proto";
-import "common/entities.proto";
 
 service DeploymentManager {
     // Request a deployment plan to be executed.
