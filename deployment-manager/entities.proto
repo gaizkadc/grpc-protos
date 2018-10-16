@@ -11,10 +11,23 @@ option go_package = "github.com/nalej/grpc-deployment-manager-go";
 import "conductor/entities.proto";
 import "application/entities.proto";
 
+enum RollbackPolicy {
+    // No rollback executed
+    NONE = 0;
+    // Constant retrial
+    ALWAYS_RETRY = 1;
+    // Limited retries
+    LIMITED_RETRY = 2;
+}
+
+
 message DeploymentFragmentRequest {
     string request_id = 1;
     // Plan to be deployed
     conductor.DeploymentFragment fragment = 2;
+    // Rollback policy
+    RollbackPolicy rollback_policy = 3;
+
 }
 
 message DeploymentFragmentResponse {
