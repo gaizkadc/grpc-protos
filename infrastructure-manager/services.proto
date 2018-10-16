@@ -10,11 +10,12 @@ option go_package = "github.com/nalej/grpc-infrastructure-manager-go";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
 import "organization/entities.proto";
+import "installer/entities.proto";
 
 // Infrastructure Manager service
 service InfrastructureManager {
-    // AddCluster adds a new cluster to the system.
-    rpc AddCluster(infrastructure.AddClusterRequest) returns (infrastructure.Cluster) {}
+    // Install a new cluster adding it to the system.
+    rpc InstallCluster(installer.InstallRequest) returns (installer.InstallResponse){}
     // GetCluster retrieves the cluster information.
     rpc GetCluster(infrastructure.ClusterId) returns (infrastructure.Cluster) {}
     // ListClusters obtains a list of the clusters in the organization.
@@ -26,12 +27,6 @@ service InfrastructureManager {
     // RemoveCluster removes a cluster from an organization. Notice that removing a cluster implies draining the cluster
     // of running applications.
     rpc RemoveCluster(infrastructure.RemoveClusterRequest) returns (common.Success) {}
-    // AddNode adds a new node to the system.
-    rpc AddNode(infrastructure.AddNodeRequest) returns (infrastructure.Node) {}
-    // AttachNode links a node with a given cluster.
-    rpc AttachNode(infrastructure.AttachNodeRequest) returns (common.Success) {}
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(infrastructure.ClusterId) returns (infrastructure.NodeList) {}
-    // RemoveNodes removes a set of nodes from the system.
-    rpc RemoveNodes(infrastructure.RemoveNodesRequest) returns (common.Success) {}
 }
