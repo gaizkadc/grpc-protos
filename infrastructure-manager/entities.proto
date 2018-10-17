@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package infrastructure_manager;
+option go_package = "github.com/nalej/grpc-infrastructure-manager-go";
+
+import "installer/entities.proto";
+
+// InstallResponse message with the progress of the install.
+message InstallResponse {
+    // InstallId associated with the information.
+    string install_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the identifier of the cluster being installed.
+    string cluster_id = 3;
+    // State of the install.
+    installer.InstallProgress state = 4;
+    // Error message in case the install failed.
+    string error = 5;
+}
