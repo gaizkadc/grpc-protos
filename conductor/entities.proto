@@ -95,16 +95,16 @@ message ClusterScoreResponse {
 message DeploymentFragmentUpdateRequest {
    // organization id
    string organization_id = 1;
-   // deployment id
-   string deployment_id = 2;
+   // plan deployment id
+   string deployment_id = 3;
    // fragment id
-   string fragment_id = 3;
+   string fragment_id = 4;
    // app instance id
-   string app_instance_id = 4;
+   string app_instance_id = 5;
    // cluster id
-   string cluster_id = 5;
+   string cluster_id = 6;
    // Status of the fragment operation
-   DeploymentFragmentStatus status = 6;
+   DeploymentFragmentStatus status = 7;
 }
 
 // Set of possible statuses for a deployment fragment
