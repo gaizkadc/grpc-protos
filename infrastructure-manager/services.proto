@@ -11,11 +11,12 @@ import "common/entities.proto";
 import "infrastructure/entities.proto";
 import "organization/entities.proto";
 import "installer/entities.proto";
+import "infrastructure-manager/entities.proto";
 
 // Infrastructure Manager service
 service InfrastructureManager {
     // Install a new cluster adding it to the system.
-    rpc InstallCluster(installer.InstallRequest) returns (installer.InstallResponse){}
+    rpc InstallCluster(installer.InstallRequest) returns (infrastructure_manager.InstallResponse){}
     // GetCluster retrieves the cluster information.
     rpc GetCluster(infrastructure.ClusterId) returns (infrastructure.Cluster) {}
     // ListClusters obtains a list of the clusters in the organization.
