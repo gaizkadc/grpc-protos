@@ -32,11 +32,11 @@ message DeploymentFragment {
    // Application instance
    string app_instance_id = 2;
    // Id of the plan this fragment belongs to
-   string deployment_id = 4;
+   string deployment_id = 3;
    // Id of this fragment
-   string fragment_id = 5;
+   string fragment_id = 4;
    // Cluster id where this fragment must be executed
-   repeated DeploymentStage stages = 6;
+   repeated DeploymentStage stages = 5;
 }
 
 // A stage represents a collection of services and related components that can be deployed
@@ -93,11 +93,18 @@ message ClusterScoreResponse {
 }
 
 message DeploymentFragmentUpdateRequest {
-   string fragment_id = 1;
+   // organization id
+   string organization_id = 1;
+   // plan deployment id
+   string deployment_id = 3;
+   // fragment id
+   string fragment_id = 4;
+   // app instance id
+   string app_instance_id = 5;
    // cluster id
-   string cluster_id = 2;
+   string cluster_id = 6;
    // Status of the fragment operation
-   DeploymentFragmentStatus status = 3;
+   DeploymentFragmentStatus status = 7;
 }
 
 // Set of possible statuses for a deployment fragment
@@ -123,12 +130,14 @@ message ServiceUpdate {
 
 // Indicate the status of a set of services
 message DeploymentServiceUpdateRequest {
+   // Organization this service belongs to
+   string organization_id = 1;
    // fragment we are working with
-   string fragment_id = 1;
+   string fragment_id = 2;
    // cluster id
-   string cluster_id = 2;
+   string cluster_id = 3;
    // status
-   repeated ServiceUpdate list = 3;
+   repeated ServiceUpdate list = 4;
 }
 
 
