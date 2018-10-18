@@ -55,8 +55,8 @@ message Cluster {
     string description = 4;
     // Type of cluster.
     ClusterType cluster_type = 5;
-    // Ip with the cluster master IP.
-    string ip = 6;
+    // Hostname of the cluster master.
+    string hostname = 6;
     // Multitenant support definition.
     MultitenantSupport multitenant = 7;
     // Status of the cluster based on monitoring information.
@@ -84,8 +84,8 @@ message AddClusterRequest {
     string name = 4;
     // Description of the cluster.
     string description = 5;
-    // Ip with the cluster master IP.
-    string ip = 6;
+    // Hostname of the cluster master.
+    string hostname = 6;
     // Labels for the cluster.
     map <string, string> labels = 7;
 }
