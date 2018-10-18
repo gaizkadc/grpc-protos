@@ -110,6 +110,34 @@ message CordonClusterRequest {
     }
 }
 
+// UpdateClusterRequest to update different fields of the Cluster.
+message UpdateClusterRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // UpdateName flag to determine if the name needs to be changed.
+    bool updateName = 3;
+    // Name of the cluster.
+    string name = 4;
+    // UpdateDescription flag to determine if the description needs to be changed.
+    bool updateDescription = 5;
+    // Description of the cluster.
+    string description = 6;
+    // UpdateHostname flag to determine if the hostname needs to be updated.
+    bool updateHostname = 7;
+    // Hostname of the cluster master.
+    string hostname = 8;
+    // UpdateLabels flag to determine if the labels needs to be updated.
+    bool updateLabels = 9;
+    // Labels for the cluster.
+    map <string, string> labels = 10;
+    // UpdateStatus flag to determine if the status needs to be updated.
+    bool updateStatus = 11;
+    // Status of the cluster based on monitoring information.
+    InfraStatus status = 12;
+}
+
 message ClusterList {
     repeated Cluster clusters = 1;
 }
@@ -162,4 +190,20 @@ message RemoveNodesRequest {
 
 message NodeList {
     repeated Node nodes = 1;
+}
+
+// UpdateNodeRequest to update different fields of the Node.
+message UpdateNodeRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Id with the node identifier.
+    string node_id = 2;
+    // UpdateLabels flag to determine if the labels needs to be updated.
+    bool updateLabels = 3;
+    // Labels for the cluster.
+    map <string, string> labels = 4;
+    // UpdateStatus flag to determine if the status needs to be updated.
+    bool updateStatus = 5;
+    // Status of the cluster based on monitoring information.
+    InfraStatus status = 6;
 }
