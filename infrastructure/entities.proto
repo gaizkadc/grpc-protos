@@ -55,14 +55,16 @@ message Cluster {
     string description = 4;
     // Type of cluster.
     ClusterType cluster_type = 5;
+    // Hostname of the cluster master.
+    string hostname = 6;
     // Multitenant support definition.
-    MultitenantSupport multitenant = 6;
+    MultitenantSupport multitenant = 7;
     // Status of the cluster based on monitoring information.
-    InfraStatus status = 7;
+    InfraStatus status = 8;
     // Labels for the cluster.
-    map <string, string> labels = 8;
+    map <string, string> labels = 9;
     // Cordon flags to signal conductor not to schedule apps in the cluster.
-    bool cordon = 9;
+    bool cordon = 10;
 }
 
 message ClusterId {
@@ -82,8 +84,10 @@ message AddClusterRequest {
     string name = 4;
     // Description of the cluster.
     string description = 5;
+    // Hostname of the cluster master.
+    string hostname = 6;
     // Labels for the cluster.
-    map <string, string> labels = 6;
+    map <string, string> labels = 7;
 }
 
 message RemoveClusterRequest {
