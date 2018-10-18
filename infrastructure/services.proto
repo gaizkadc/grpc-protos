@@ -17,6 +17,8 @@ service Clusters {
     rpc AddCluster(AddClusterRequest) returns (Cluster) {}
     // GetCluster retrieves the cluster information.
     rpc GetCluster(ClusterId) returns (Cluster) {}
+    // UpdateCluster updates the information of a cluster.
+    rpc UpdateCluster(UpdateClusterRequest) returns (Cluster) {}
     // ListClusters obtains a list of the clusters in the organization.
     rpc ListClusters(organization.OrganizationId) returns (ClusterList) {}
     // RemoveCluster removes a cluster from an organization. Notice that removing a cluster implies draining the cluster
@@ -30,6 +32,8 @@ service Nodes {
     rpc AddNode(AddNodeRequest) returns (Node) {}
     // AttachNode links a node with a given cluster.
     rpc AttachNode(AttachNodeRequest) returns (common.Success) {}
+    // UpdateNode updates the information of a node.
+    rpc UpdateNode(UpdateNodeRequest) returns (Node){}
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(ClusterId) returns (NodeList) {}
     // RemoveNodes removes a set of nodes from the system.
