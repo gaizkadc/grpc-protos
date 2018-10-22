@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package network;
+option go_package = "github.com/nalej/grpc-network-go";
+
+import "common/entities.proto";
+import "organization/entities.proto";
+
+// Network service definition
+service Network {
+    rpc AddNetwork(AddNetworkRequest) returns(Network){}
+    rpc GetNetwork(NetworkId) returns(Network){}
+    rpc DeleteNetwork(DeleteNetworkRequest) returns(common.Success){}
+    rpc JoinNetwork(NetworkId) returns(common.Success){}
+    rpc ListNetworks(organization.organizationId) returns(NetworkList){}
+}
+
+// DNS service definition
+service DNS {
+    rpc ListEntries(NetworkId) returns (DNSEntryList){}
+}
