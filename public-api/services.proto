@@ -13,49 +13,98 @@ import "user/entities.proto";
 import "authx/entities.proto";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
+import "google/api/annotations.proto";
 
 // Organization related information.
 service Organizations {
     // Info returns the information about a given organization.
-    rpc Info(organization.OrganizationId) returns(OrganizationInfo){}
+    rpc Info(organization.OrganizationId) returns(OrganizationInfo){
+        option (google.api.http) = {
+            get: "/v1/organization/{organization_id}"
+        };
+    }
 }
 
 // Cluster related information.
 service Clusters {
     // List all the clusters in an organization.
-    rpc List(organization.OrganizationId) returns(ClusterList){}
+    rpc List(organization.OrganizationId) returns(ClusterList){
+        option (google.api.http) = {
+            get: "/v1/clusters/{organization_id}/list"
+        };
+    }
     // Update the cluster information.
-    rpc Update(UpdateClusterRequest) returns (common.Success){}
+    rpc Update(UpdateClusterRequest) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/{cluster_id}/update"
+            body: "*"
+        };
+    }
 }
 
 // Node related information.
 service Nodes {
     // ClusterNodes retrieves information about the nodes of a cluster.
-    rpc ClusterNodes(infrastructure.ClusterId) returns(infrastructure.NodeList){}
+    rpc ClusterNodes(infrastructure.ClusterId) returns(infrastructure.NodeList){
+        option (google.api.http) = {
+            get: "/v1/nodes/{organization_id}/{cluster_id}/list"
+        };
+    }
 }
 
 // Resource level related information.
 service Resources {
     // Summary provides an overview of the resources inside an organization.
-    rpc Summary(organization.OrganizationId) returns(ResourceSummary){}
+    rpc Summary(organization.OrganizationId) returns(ResourceSummary){
+        option (google.api.http) = {
+            get: "/v1/resources/{organization_id}/summary"
+        };
+    }
 }
 
 // User level related information.
 service Users {
     // Info returns information about a given user.
-    rpc Info(user.UserId) returns (User){}
+    rpc Info(user.UserId) returns (User){
+        option (google.api.http) = {
+            get: "/v1/users/{organization_id}/{email}/info"
+        };
+    }
     // List returns the users inside an organization.
-    rpc List(organization.OrganizationId) returns (UserList){}
+    rpc List(organization.OrganizationId) returns (UserList){
+        option (google.api.http) = {
+            get: "/v1/users/{organization_id}/list"
+        };
+    }
     // Delete removes a user from an organization.
-    rpc Delete(user.UserId) returns (common.Success){}
+    rpc Delete(user.UserId) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/users/{organization_id}/delete"
+            body: "*"
+        };
+    }
     // ResetPassoword resets a user password.
-    rpc ResetPassword(user.UserId) returns (PasswordResetResponse){}
+    rpc ResetPassword(user.UserId) returns (PasswordResetResponse){
+        option (google.api.http) = {
+            post: "/v1/users/{organization_id}/reset"
+            body: "*"
+        };
+    }
     // Update the user information.
-    rpc Update(user.UpdateUserRequest) returns (common.Success){}
+    rpc Update(user.UpdateUserRequest) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/users/{organization_id}/update"
+            body: "*"
+        };
+    }
 }
 
 // next iteration
 service Roles {
     // List the roles inside an organization.
-    rpc List(organization.OrganizationId) returns (authx.RoleList){}
+    rpc List(organization.OrganizationId) returns (authx.RoleList){
+        option (google.api.http) = {
+            get: "/v1/roles/{organization_id}/list"
+        };
+    }
 }
