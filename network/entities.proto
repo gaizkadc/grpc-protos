@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2018 Nalej Group - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package network;
+option go_package = "github.com/nalej/grpc-network-go";
+
+import "common/entities.proto";
+import "organization/entities.proto";
+
+message Network {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // NetworkId with the cluster identifier.
+    string network_id = 2;
+    // Name of the network.
+    string name = 3;
+    // Timestamp of the network creation
+    int64 creation_timestamp = 4;
+}
+
+message NetworkId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // NetworkId with the network identifier.
+    string network_id = 2;
+}
+
+message AddNetworkRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // NetworkId with the network identifier.
+    string network_id = 3;
+    // Name of the network.
+    string name = 4;
+}
+
+message DeleteNetworkRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // NetworkId with the network identifier.
+    string network_id = 3;
+}
+
+message NetworkList {
+    repeated Network networks = 1;
+}
+
+message DNSEntry {
+    // NetworkId with the network identifier.
+    string network_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+    // IP of that FQDN.
+    string ip = 3;
+}
+
+message DNSEntryList {
+    repeated DNSEntry dns_entries = 1;
+}
