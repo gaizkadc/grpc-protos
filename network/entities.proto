@@ -17,11 +17,10 @@ message Network {
     string network_id = 2;
     // Name of the network.
     string name = 3;
-    // Description of the network.
-    string description = 4;
     // Timestamp of the network creation
-    double creation_timestamp = 5;
+    int64 creation_timestamp = 4;
 }
+
 message NetworkId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -37,8 +36,6 @@ message AddNetworkRequest {
     string network_id = 3;
     // Name of the network.
     string name = 4;
-    // Description of the network.
-    string description = 5;
 }
 
 message DeleteNetworkRequest {

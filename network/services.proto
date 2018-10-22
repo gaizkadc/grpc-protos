@@ -8,18 +8,25 @@ package network;
 option go_package = "github.com/nalej/grpc-network-go";
 
 import "common/entities.proto";
+import "network/entities.proto";
 import "organization/entities.proto";
 
 // Network service definition
-service Network {
-    rpc AddNetwork(AddNetworkRequest) returns(Network){}
-    rpc GetNetwork(NetworkId) returns(Network){}
-    rpc DeleteNetwork(DeleteNetworkRequest) returns(common.Success){}
-    rpc JoinNetwork(NetworkId) returns(common.Success){}
-    rpc ListNetworks(organization.organizationId) returns(NetworkList){}
+service Networks {
+    // AddNetwork adds a new network to the system.
+    rpc AddNetwork(AddNetworkRequest) returns (Network){}
+    // GetNetwork retrieves the network info of a specified network.
+    rpc GetNetwork(NetworkId) returns (Network){}
+    // DeleteNetwork deletes a specified network from the system.
+    rpc DeleteNetwork(DeleteNetworkRequest) returns (common.Success){}
+    // JoinNetwork makes a host join the specified network.
+    rpc JoinNetwork(NetworkId) returns (common.Success){}
+    // ListNetworks lists all the networks from an organization.
+    rpc ListNetworks(organization.OrganizationId) returns (NetworkList){}
 }
 
 // DNS service definition
 service DNS {
+    // ListEntries lists all the DNS entries from a network.
     rpc ListEntries(NetworkId) returns (DNSEntryList){}
 }
