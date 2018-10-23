@@ -1,0 +1,30 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package user_manager;
+option go_package = "github.com/nalej/grpc-user-manager-go";
+
+import "common/entities.proto";
+import "user/entities.proto";
+import "authx/entities.proto";
+import "user-manager/entities.proto";
+import "organization/entities.proto";
+
+// Users service with operations related to user and role creation.
+service Users {
+    // AddUser adds a new user to an organization.
+    rpc AddUser(user.AddUserRequest) returns (user.User){}
+    // RemoveUser removes a given user from the system.
+    rpc RemoveUser(user.UserId) returns (common.Success){}
+    // AddRole adds a new role to an organization.
+    rpc AddRole(AddRoleRequest) returns (authx.Role){}
+    // RemoveRole removes a role from an organization.
+    rpc RemoveRole(authx.RoleId) returns (common.Success){}
+    // AssignRole assigns a role to an existing user.
+    rpc AssignRole(AssignRoleRequest) returns (user.User){}
+    // ListRoles obtains a list of roles in an organization.
+    rpc ListRoles(organization.OrganizationId) returns (authx.RoleList){}
+}
