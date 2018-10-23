@@ -70,6 +70,13 @@ message EditUserRoleRequest {
     string new_role_id = 2;
 }
 
+// Message for change the user password.
+message ChangePasswordRequest {
+    string username = 1;
+    string password = 2;
+    string newPassword = 3;
+}
+
 message DeleteCredentialsRequest {
     string username = 1;
 }
