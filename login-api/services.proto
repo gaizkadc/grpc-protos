@@ -1,0 +1,23 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package login_api;
+option go_package = "github.com/nalej/grpc-login-api-go";
+
+import "authx/entities.proto";
+import "google/api/annotations.proto";
+
+// Login operations.
+service Login {
+    // LoginWithBasicCredentials performs the login of a user with a set of basic credentials. If the login
+    // is successful, it will return a JWT token.
+    rpc LoginWithBasicCredentials(authx.LoginWithBasicCredentialsRequest) returns(authx.LoginResponse){
+        option (google.api.http) = {
+            post: "/v1/login"
+            body: "*"
+        };
+    }
+}
