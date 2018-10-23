@@ -19,6 +19,8 @@ service Users {
     rpc AddUser(user.AddUserRequest) returns (user.User){}
     // RemoveUser removes a given user from the system.
     rpc RemoveUser(user.UserId) returns (common.Success){}
+    // ChangePassword updates the password of a user.
+    rpc ChangePassword (authx.ChangePasswordRequest) returns (common.Success) {}
     // AddRole adds a new role to an organization.
     rpc AddRole(AddRoleRequest) returns (authx.Role){}
     // RemoveRole removes a role from an organization.
