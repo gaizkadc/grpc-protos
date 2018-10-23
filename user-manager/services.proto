@@ -14,7 +14,7 @@ import "user-manager/entities.proto";
 import "organization/entities.proto";
 
 // Users service with operations related to user and role creation.
-service Users {
+service UserManager {
     // AddUser adds a new user to an organization.
     rpc AddUser(user.AddUserRequest) returns (user.User){}
     // RemoveUser removes a given user from the system.
