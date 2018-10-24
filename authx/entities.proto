@@ -59,9 +59,8 @@ message LoginResponse {
 
 // RefreshTokenRequest is the request for refreshing the generated token.
 message RefreshTokenRequest {
-    string username = 1;
-    string token_id = 2;
-    string refresh_token = 3;
+    string token = 1;
+    string refresh_token = 2;
 }
 
 // Message for editing a user role.
