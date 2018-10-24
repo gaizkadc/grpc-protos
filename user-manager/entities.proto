@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package user_manager;
+option go_package = "github.com/nalej/grpc-user-manager-go";
+
+import "authx/entities.proto";
+
+// AddRoleRequest message with the information required to create a new role in an organization.
+message AddRoleRequest{
+    string organization_id = 1;
+    string name = 2;
+    repeated authx.AccessPrimitive primitives = 3;
+}
+
+// AssignRoleRequest message with the information required to assign an existing role to an existing user.
+message AssignRoleRequest{
+    string organization_id = 1;
+    string email = 2;
+    string role_id = 3;
+}
