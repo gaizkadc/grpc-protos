@@ -23,8 +23,8 @@ service UserManager {
     rpc ChangePassword (authx.ChangePasswordRequest) returns (common.Success) {}
     // AddRole adds a new role to an organization.
     rpc AddRole(AddRoleRequest) returns (authx.Role){}
-    // RemoveRole removes a role from an organization.
-    rpc RemoveRole(authx.RoleId) returns (common.Success){}
+    // TODO RemoveRole removes a role from an organization.
+    // rpc RemoveRole(authx.RoleId) returns (common.Success){}
     // AssignRole assigns a role to an existing user.
     rpc AssignRole(AssignRoleRequest) returns (user.User){}
     // ListRoles obtains a list of roles in an organization.
