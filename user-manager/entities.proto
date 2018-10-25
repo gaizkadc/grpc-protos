@@ -13,7 +13,8 @@ import "authx/entities.proto";
 message AddRoleRequest{
     string organization_id = 1;
     string name = 2;
-    repeated authx.AccessPrimitive primitives = 3;
+    string description = 3;
+    repeated authx.AccessPrimitive primitives = 4;
 }
 
 // AssignRoleRequest message with the information required to assign an existing role to an existing user.

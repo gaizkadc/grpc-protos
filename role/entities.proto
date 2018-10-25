@@ -1,0 +1,34 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package role;
+option go_package = "github.com/nalej/grpc-role-go";
+
+// AddRoleRequest with the information required to create a new role in the system model.
+message AddRoleRequest {
+    string organization_id = 1;
+    string name = 2;
+}
+
+// Role represents a role in the system. The primitives associated to it are managed by Authx.
+message Role {
+    string organization_id = 1;
+    string role_id = 2;
+    string name = 3;
+    string description = 4;
+    int64 created = 5;
+}
+
+// RoleList contains a list of roles.
+message RoleList {
+    repeated Role roles = 1;
+}
+
+// RemoveRoleRequest with the information required to remove a role.
+message RemoveRoleRequest {
+    string organization_id = 1;
+    string role_id = 2;
+}
