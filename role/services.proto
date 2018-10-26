@@ -8,7 +8,6 @@ package role;
 option go_package = "github.com/nalej/grpc-role-go";
 
 import "role/entities.proto";
-import "user/entities.proto";
 import "organization/entities.proto";
 import "common/entities.proto";
 
@@ -16,7 +15,7 @@ service Roles {
     // AddRole adds a new role to a given organization.
     rpc AddRole(role.AddRoleRequest) returns (role.Role) {}
     // GetRole returns an existing role.
-    rpc GetRole(user.UserId) returns (role.Role) {}
+    rpc GetRole(role.RoleId) returns (role.Role) {}
     // ListRoles retrieves the list of roles of a given organization.
     rpc ListRoles(organization.OrganizationId) returns (role.RoleList) {}
     // RemoveRole removes a given role from an organization.
