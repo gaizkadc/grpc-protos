@@ -14,7 +14,6 @@ message User {
     string name = 3;
     string photo_url = 4;
     int64 member_since = 5;
-    string role_id = 6;
 }
 
 // UserId with the email identifying a user.
@@ -30,7 +29,6 @@ message AddUserRequest {
     string password = 3;
     string name = 4;
     string photo_url = 5;
-    string role_id = 6;
 }
 
 // RemoveUserRequest message with the information required to remove a user from the platform.

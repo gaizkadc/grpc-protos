@@ -10,6 +10,7 @@ option go_package = "github.com/nalej/grpc-authx-go";
 import "common/entities.proto";
 import "authx/entities.proto";
 import "organization/entities.proto";
+import "user/entities.proto";
 
 // Authx service exposing credential information.
 service Authx {
@@ -44,4 +45,6 @@ service Authx {
     // ListRoles returns a list of roles inside an organization.
     rpc ListRoles (organization.OrganizationId) returns (RoleList){}
 
+    // Retrieve the role associated with a user.
+    rpc GetUserRole(user.UserId) returns (Role){}
 }

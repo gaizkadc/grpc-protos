@@ -16,7 +16,9 @@ import "organization/entities.proto";
 // Users service with operations related to user and role creation.
 service UserManager {
     // AddUser adds a new user to an organization.
-    rpc AddUser(user.AddUserRequest) returns (user.User){}
+    rpc AddUser(user_manager.AddUserRequest) returns (user_manager.User){}
+    // GetUser retrieves the information of a user including role information.
+    rpc GetUser(user.UserId) returns (user_manager.User){}
     // RemoveUser removes a given user from the system.
     rpc RemoveUser(user.UserId) returns (common.Success){}
     // ChangePassword updates the password of a user.
@@ -26,7 +28,7 @@ service UserManager {
     // TODO RemoveRole removes a role from an organization.
     // rpc RemoveRole(authx.RoleId) returns (common.Success){}
     // AssignRole assigns a role to an existing user.
-    rpc AssignRole(AssignRoleRequest) returns (user.User){}
+    rpc AssignRole(AssignRoleRequest) returns (user_manager.User){}
     // ListRoles obtains a list of roles in an organization.
     rpc ListRoles(organization.OrganizationId) returns (authx.RoleList){}
 }
