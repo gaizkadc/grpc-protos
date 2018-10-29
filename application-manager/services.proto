@@ -1,0 +1,35 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package application_manager;
+option go_package = "github.com/nalej/grpc-application-manager-go";
+
+import "application/entities.proto";
+import "organization/entities.proto";
+import "application-manager/entities.proto";
+import "conductor/entities.proto";
+import "common/entities.proto";
+
+service ApplicationManager {
+
+    // AddAppDescriptor adds a new application descriptor to a given organization.
+    rpc AddAppDescriptor(application.AddAppDescriptorRequest) returns (application.AppDescriptor){}
+    // ListAppDescriptors retrieves a list of application descriptors.
+    rpc ListAppDescriptors(organization.OrganizationId) returns (application.AppDescriptorList){}
+    // GetAppDescriptor retrieves a given application descriptor.
+    rpc GetAppDescriptor(application.AppDescriptorId) returns (application.AppDescriptor) {}
+
+    // Deploy an application descriptor.
+    rpc Deploy(application_manager.DeployRequest) returns (conductor.DeploymentResponse){}
+    // Undeploy a running application instance.
+    rpc Undeploy(application.AppInstanceId) returns (common.Success){}
+
+    // ListAppInstances retrieves a list of application descriptors.
+    rpc ListAppInstances(organization.OrganizationId) returns (application.AppInstanceList){}
+    // GetAppDescriptor retrieves a given application descriptor.
+    rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {}
+
+}
