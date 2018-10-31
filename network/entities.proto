@@ -29,13 +29,10 @@ message NetworkId {
 }
 
 message AddNetworkRequest {
-    string request_id = 1;
     // OrganizationId with the organization identifier.
-    string organization_id = 2;
-    // NetworkId with the network identifier.
-    string network_id = 3;
+    string organization_id = 1;
     // Name of the network.
-    string name = 4;
+    string name = 2;
 }
 
 message DeleteNetworkRequest {
