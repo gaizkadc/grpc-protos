@@ -28,11 +28,6 @@ message NetworkId {
     string network_id = 2;
 }
 
-message OrganizationId {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-}
-
 message AddNetworkRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
