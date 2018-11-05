@@ -31,4 +31,6 @@ service DNS {
     rpc ListEntries(NetworkId) returns (DNSEntryList){}
     // AddDNSEntry creates a new DNSEntry on the system.
     rpc AddDNSEntry(DNSEntry) returns (common.Success){}
+    // DeleteDNSEntry deletes a DNSEntry from the system.
+    rpc DeleteDNSEntry(DNSEntry) returns (common.Success){}
 }
