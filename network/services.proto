@@ -29,4 +29,8 @@ service Networks {
 service DNS {
     // ListEntries lists all the DNS entries from a network.
     rpc ListEntries(NetworkId) returns (DNSEntryList){}
+    // AddDNSEntry creates a new DNSEntry on the system.
+    rpc AddDNSEntry(DNSEntry) returns (common.Success){}
+    // DeleteDNSEntry deletes a DNSEntry from the system.
+    rpc DeleteDNSEntry(DNSEntry) returns (common.Success){}
 }
