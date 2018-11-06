@@ -1,0 +1,18 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package signup;
+option go_package = "github.com/nalej/grpc-signup-go";
+
+import "signup/entities.proto";
+
+// Signup service exposing organization creation functionality.
+service Signup {
+    // SignupOrganization register a new organization in the system with a new
+    // user as the owner.
+    rpc SignupOrganization (SignupOrganizationRequest) returns (SignupOrganizationResponse) {}
+
+}
