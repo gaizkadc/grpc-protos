@@ -48,12 +48,14 @@ message NetworkList {
 }
 
 message DNSEntry {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
     // NetworkId with the network identifier.
-    string network_id = 1;
+    string network_id = 2;
     // FQDN from the DNS entry.
-    string fqdn = 2;
+    string fqdn = 3;
     // IP of that FQDN.
-    string ip = 3;
+    string ip = 4;
 }
 
 message DNSEntryList {
