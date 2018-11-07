@@ -47,6 +47,32 @@ message NetworkList {
     repeated Network networks = 1;
 }
 
+message AddDNSEntryRequest {
+    // Request ID of the operation
+    string request_id = 1;
+    // OrganizationId with the organization identifier
+    string organization_id = 2;
+    // NetworkId with the network identifier.
+    string network_id = 3;
+    // FQDN from the DNS entry.
+    string fqdn = 4;
+    // IP of that FQDN.
+    string ip = 5;
+}
+
+message DeleteDNSEntryRequest {
+    // Request ID of the operation
+    string request_id = 1;
+    // OrganizationId with the organization identifier
+    string organization_id = 2;
+    // NetworkId with the network identifier.
+    string network_id = 3;
+    // FQDN from the DNS entry.
+    string fqdn = 4;
+    // IP of that FQDN.
+    string ip = 5;
+}
+
 message DNSEntry {
     // OrganizationId with the organization identifier
     string organization_id = 1;
