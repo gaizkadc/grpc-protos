@@ -36,6 +36,7 @@ message AddNetworkRequest {
 }
 
 message DeleteNetworkRequest {
+    // Request ID
     string request_id = 1;
     // OrganizationId with the organization identifier.
     string organization_id = 2;
@@ -45,6 +46,15 @@ message DeleteNetworkRequest {
 
 message NetworkList {
     repeated Network networks = 1;
+}
+
+message AuthorizeMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Network ID
+    string network_id = 2;
+    // Member ID to join the network
+    string member_id = 3;
 }
 
 message AddDNSEntryRequest {

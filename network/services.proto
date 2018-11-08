@@ -23,6 +23,8 @@ service Networks {
     rpc JoinNetwork(NetworkId) returns (common.Success){}
     // ListNetworks lists all the networks from an organization.
     rpc ListNetworks(organization.OrganizationId) returns (NetworkList){}
+    // Authorize member
+    rpc AuthorizeMember(AuthorizeMemberRequest) returns (common.Success){}
 }
 
 // DNS service definition
