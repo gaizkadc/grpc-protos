@@ -11,7 +11,8 @@ option go_package = "github.com/nalej/grpc-conductor-go";
 import public "application/entities.proto";
 import public "infrastructure/entities.proto";
 
-
+// --------------------------
+// Conductor services
 
 // Data structure defining a deployment plan for Nalej applications.
 message DeploymentPlan {
@@ -112,6 +113,8 @@ message ClusterScoreResponse {
    float score = 3;
 }
 
+// --------------------------
+// Conductor Monitor services
 
 message DeploymentFragmentUpdateRequest {
    // organization id
@@ -162,6 +165,35 @@ message DeploymentServiceUpdateRequest {
 }
 
 
+// --------------------------
+// Conductor Network services
 
+// Message to authorize a member in an existing network
+message AuthorizeNetworkMembershipRequest {
+   // organization id
+   string organization_id = 1;
+   // Application instance
+   string app_instance_id = 2;
+   // Id of the plan this fragment belongs to
+   string deployment_id = 3;
+   // Id of this fragment
+   string fragment_id = 4;
+   // Network to join
+   string network_id = 5;
+   // Member id
+   string member_id = 6;
+}
 
-
+// Message to register a new network entry
+message RegisterNetworkEntryRequest {
+   // Organization id
+   string organization_id = 1;
+   // Application instance
+   string app_instance_id = 2;
+   // Instance hostname
+   string hostname = 3;
+   // Service name
+   string service_name = 4;
+   // Service IP
+   string service_ip = 5;
+}
