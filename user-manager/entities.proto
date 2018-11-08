@@ -20,6 +20,11 @@ message User {
     string role_name = 7;
 }
 
+// UserList with a list of users.
+message UserList {
+    repeated User users = 1;
+}
+
 // AddUserRequest message with the information required to add a user to the platform.
 message AddUserRequest {
     string organization_id = 1;
