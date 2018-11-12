@@ -13,6 +13,9 @@ import "user/entities.proto";
 import "authx/entities.proto";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
+import "application/entities.proto";
+import "application-manager/entities.proto";
+import "conductor/entities.proto";
 import "google/api/annotations.proto";
 
 // Organization related information.
@@ -99,12 +102,63 @@ service Users {
     }
 }
 
-// next iteration
+// Roles
 service Roles {
     // List the roles inside an organization.
     rpc List(organization.OrganizationId) returns (authx.RoleList){
         option (google.api.http) = {
             get: "/v1/roles/{organization_id}/list"
+        };
+    }
+}
+
+service Applications {
+    // AddAppDescriptor adds a new application descriptor to a given organization.
+    rpc AddAppDescriptor(application.AddAppDescriptorRequest) returns (application.AppDescriptor){
+        option (google.api.http) = {
+            post: "/v1/apps/desc/{organization_id}/add"
+            body: "*"
+        };
+    }
+    // ListAppDescriptors retrieves a list of application descriptors.
+    rpc ListAppDescriptors(organization.OrganizationId) returns (application.AppDescriptorList){
+        option (google.api.http) = {
+            get: "/v1/apps/desc/{organization_id}/list"
+        };
+    }
+    // GetAppDescriptor retrieves a given application descriptor.
+    rpc GetAppDescriptor(application.AppDescriptorId) returns (application.AppDescriptor) {
+        option (google.api.http) = {
+            get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/get"
+        };
+    }
+
+    // Deploy an application descriptor.
+    rpc Deploy(application_manager.DeployRequest) returns (conductor.DeploymentResponse){
+        option (google.api.http) = {
+            post: "/v1/apps/inst/{organization_id}/{app_descriptor_id}/deploy"
+            body: "*"
+        };
+    }
+    // Undeploy a running application instance.
+    rpc Undeploy(application.AppInstanceId) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/apps/inst/{organization_id}/{app_instance_id}/undeploy"
+            body: "*"
+        };
+    }
+
+    // ListAppInstances retrieves a list of application descriptors.
+    rpc ListAppInstances(organization.OrganizationId) returns (application.AppInstanceList){
+        option (google.api.http) = {
+            get: "/v1/apps/inst/{organization_id}/list"
+        };
+    }
+
+    // GetAppDescriptor retrieves a given application descriptor.
+    rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {
+        option (google.api.http) = {
+            get: "/v1/apps/inst/{organization_id}/{app_instance_id}/get"
         };
     }
 }
