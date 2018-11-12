@@ -196,4 +196,6 @@ message RegisterNetworkEntryRequest {
    string service_name = 4;
    // Service IP
    string service_ip = 5;
+   // Network id
+   string network_id = 6;
 }
