@@ -19,8 +19,6 @@ service Networks {
     rpc GetNetwork(NetworkId) returns (Network){}
     // DeleteNetwork deletes a specified network from the system.
     rpc DeleteNetwork(DeleteNetworkRequest) returns (common.Success){}
-    // JoinNetwork makes a host join the specified network.
-    rpc JoinNetwork(NetworkId) returns (common.Success){}
     // ListNetworks lists all the networks from an organization.
     rpc ListNetworks(organization.OrganizationId) returns (NetworkList){}
     // Authorize member
