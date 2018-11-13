@@ -15,6 +15,7 @@ import "common/entities.proto";
 import "infrastructure/entities.proto";
 import "application/entities.proto";
 import "application-manager/entities.proto";
+import "infrastructure-manager/entities.proto";
 import "conductor/entities.proto";
 import "google/api/annotations.proto";
 
@@ -30,6 +31,13 @@ service Organizations {
 
 // Cluster related information.
 service Clusters {
+    // Install a new cluster adding it to the system.
+    rpc Install(InstallRequest) returns (infrastructure_manager.InstallResponse){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/install"
+            body: "*"
+        };
+    }
     // List all the clusters in an organization.
     rpc List(organization.OrganizationId) returns(ClusterList){
         option (google.api.http) = {
