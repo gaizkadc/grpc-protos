@@ -82,3 +82,23 @@ message ResourceSummary {
     int64 total_clusters = 2;
     int64 total_nodes = 3;
 }
+
+// InstallRequest message used to specify the cluster to be installed.
+message InstallRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Type of cluster.
+    infrastructure.ClusterType cluster_type = 3;
+    // InstallBaseSystem flag to indicate that the base system must be installed on the nodes.
+    bool install_base_system = 4;
+    // KubeConfigRaw contains the required data to connect to a Kubernetes cluster in case it is already installed.
+    string kube_config_raw = 5;
+    // Username to connect to the remote machines when the base system needs to be installed.
+    string username = 6;
+    // PrivateKey contains the SSH private key required when the base system needs to be installed.
+    string private_key = 7;
+    // Nodes contains the list of IP addresses to be installed.
+    repeated string nodes = 8;
+}
