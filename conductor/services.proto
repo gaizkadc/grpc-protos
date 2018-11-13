@@ -33,12 +33,3 @@ service ConductorMonitor {
     // Update the status of a set of services during a given fragment deployment
     rpc UpdateServiceStatus(DeploymentServiceUpdateRequest) returns (common.Success) {}
 }
-
-// Set of services managing networking tasks somehow related with conductor.
-service ConductorNetwork {
-    // A pod requests authorization to join a ZT Network
-    rpc AuthorizeNetworkMembership(AuthorizeNetworkMembershipRequest) returns(common.Success) {}
-    // Request the creation of a new network entry
-    rpc RegisterNetworkEntry(RegisterNetworkEntryRequest) returns(common.Success) {}
-}
-
