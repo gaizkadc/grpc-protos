@@ -10,8 +10,21 @@ package deployment_manager;
 option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
 import "deployment-manager/entities.proto";
+import "common/entities.proto";
 
 service DeploymentManager {
     // Request a deployment plan to be executed.
     rpc Execute(DeploymentFragmentRequest) returns (DeploymentFragmentResponse) {}
+
 }
+
+// Services regarding network management on the pods side. In particular, these services are designed to be
+// invoked by zt-agents.
+service DeploymentManagerNetwork {
+    // A pod requests authorization to join a ZT Network
+    rpc AuthorizeNetworkMembership(AuthorizeNetworkMembershipRequest) returns(common.Success) {}
+    // Request the creation of a new network entry
+    rpc RegisterNetworkEntry(RegisterNetworkEntryRequest) returns(common.Success) {}
+}
+
+
