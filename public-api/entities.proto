@@ -21,6 +21,7 @@ message AddUserRequest {
     string email = 2;
     string password = 3;
     string name = 4;
+    string role_name = 5;
 }
 
 // User model the information available regarding a User of an organization
