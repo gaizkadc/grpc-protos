@@ -15,6 +15,14 @@ message OrganizationInfo {
     string name = 2;
 }
 
+// AddUserRequest message with the information required to add a user to the platform.
+message AddUserRequest {
+    string organization_id = 1;
+    string email = 2;
+    string password = 3;
+    string name = 4;
+}
+
 // User model the information available regarding a User of an organization
 message User {
     string organization_id = 1;

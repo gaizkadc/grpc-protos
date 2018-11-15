@@ -75,6 +75,12 @@ service Resources {
 
 // User level related information.
 service Users {
+    rpc Add(AddUserRequest) returns (User){
+        option (google.api.http) = {
+            post: "/v1/users/{organization_id}/add"
+            body: "*"
+        };
+    }
     // Info returns information about a given user.
     rpc Info(user.UserId) returns (User){
         option (google.api.http) = {
