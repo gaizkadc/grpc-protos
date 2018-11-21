@@ -30,6 +30,7 @@ service Organizations {
 }
 
 // Cluster related information.
+// TODO Migrate InstallResponse response to user friendly enums for the front.
 service Clusters {
     // Install a new cluster adding it to the system.
     rpc Install(InstallRequest) returns (infrastructure_manager.InstallResponse){
@@ -38,6 +39,14 @@ service Clusters {
             body: "*"
         };
     }
+
+    // Info retrieves the cluster information.
+    rpc Info(infrastructure.ClusterId) returns (Cluster) {
+        option (google.api.http) = {
+            get: "/v1/clusters/{organization_id}/{cluster_id}/info"
+        };
+    }
+
     // List all the clusters in an organization.
     rpc List(organization.OrganizationId) returns(ClusterList){
         option (google.api.http) = {
@@ -55,8 +64,8 @@ service Clusters {
 
 // Node related information.
 service Nodes {
-    // ClusterNodes retrieves information about the nodes of a cluster.
-    rpc ClusterNodes(infrastructure.ClusterId) returns(infrastructure.NodeList){
+    // List retrieves information about the nodes of a cluster.
+    rpc List(infrastructure.ClusterId) returns(NodeList){
         option (google.api.http) = {
             get: "/v1/nodes/{organization_id}/{cluster_id}/list"
         };
@@ -163,14 +172,14 @@ service Applications {
     }
 
     // ListAppInstances retrieves a list of application descriptors.
-    rpc ListAppInstances(organization.OrganizationId) returns (application.AppInstanceList){
+    rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){
         option (google.api.http) = {
             get: "/v1/apps/inst/{organization_id}/list"
         };
     }
 
     // GetAppDescriptor retrieves a given application descriptor.
-    rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {
+    rpc GetAppInstance(application.AppInstanceId) returns (AppInstance) {
         option (google.api.http) = {
             get: "/v1/apps/inst/{organization_id}/{app_instance_id}/get"
         };

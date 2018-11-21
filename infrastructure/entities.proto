@@ -153,11 +153,11 @@ message Node {
     // Ip with the node IP.
     string ip = 4;
     // Labels for the node.
-    map<string, string> labels = 6;
+    map<string, string> labels = 5;
     // Status of the node based on monitoring information.
-    InfraStatus status = 7;
+    InfraStatus status = 6;
     // State of assignation of the node.
-    NodeState state = 8;
+    NodeState state = 7;
 }
 
 message AddNodeRequest {
