@@ -99,11 +99,11 @@ message Node {
     // Ip with the node IP.
     string ip = 4;
     // Labels for the node.
-    map<string, string> labels = 6;
+    map<string, string> labels = 5;
     // StatusName of the node based on monitoring information.
-    string status_name = 7;
+    string status_name = 6;
     // StateName of assignation of the node.
-    string state_name = 8;
+    string state_name = 7;
 }
 
 message NodeList {
