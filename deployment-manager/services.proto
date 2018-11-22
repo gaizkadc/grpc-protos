@@ -15,7 +15,8 @@ import "common/entities.proto";
 service DeploymentManager {
     // Request a deployment plan to be executed.
     rpc Execute(DeploymentFragmentRequest) returns (DeploymentFragmentResponse) {}
-
+    // Request to undeploy an application
+    rpc Undeploy(UndeployRequest) returns (common.Success) {}
 }
 
 // Services regarding network management on the pods side. In particular, these services are designed to be
@@ -26,5 +27,3 @@ service DeploymentManagerNetwork {
     // Request the creation of a new network entry
     rpc RegisterNetworkEntry(RegisterNetworkEntryRequest) returns(common.Success) {}
 }
-
-

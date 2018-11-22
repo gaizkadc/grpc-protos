@@ -40,6 +40,13 @@ message DeploymentFragmentResponse {
 // --------------------------
 // DeploymentManager Network services
 
+message UndeployRequest {
+    // organization
+    string organization_id = 1;
+    // application
+    string app_instance_id = 2;
+}
+
 // Message to authorize a member in an existing network
 message AuthorizeNetworkMembershipRequest {
     // organization id
