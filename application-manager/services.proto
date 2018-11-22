@@ -21,10 +21,12 @@ service ApplicationManager {
     rpc ListAppDescriptors(organization.OrganizationId) returns (application.AppDescriptorList){}
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppDescriptor(application.AppDescriptorId) returns (application.AppDescriptor) {}
+    // RemoveAppDescriptor removes an application descriptor from the system.
+    rpc RemoveAppDescriptor(application.AppDescriptorId) returns (common.Success){}
 
     // Deploy an application descriptor.
     rpc Deploy(application_manager.DeployRequest) returns (conductor.DeploymentResponse){}
-    // Undeploy a running application instance.
+    // Undeploy a running application instance, removing the instance.
     rpc Undeploy(application.AppInstanceId) returns (common.Success){}
 
     // ListAppInstances retrieves a list of application descriptors.
