@@ -14,19 +14,23 @@ import "common/entities.proto";
 service Applications {
     // AddAppDescriptor adds a new application descriptor to a given organization.
     rpc AddAppDescriptor(AddAppDescriptorRequest) returns (AppDescriptor){}
-    // GetAppDescriptors retrieves a list of application descriptors.
-    rpc GetAppDescriptors(organization.OrganizationId) returns (AppDescriptorList){}
+    // ListAppDescriptors retrieves a list of application descriptors.
+    rpc ListAppDescriptors(organization.OrganizationId) returns (AppDescriptorList){}
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppDescriptor(AppDescriptorId) returns (AppDescriptor) {}
+    // RemoveAppDescriptor removes an application descriptor.
+    rpc RemoveAppDescriptor(AppDescriptorId) returns (common.Success){}
 
     // AddAppInstance adds a new application instance to a given organization.
     rpc AddAppInstance(AddAppInstanceRequest) returns (AppInstance){}
-    // GetAppInstances retieves a list of application instances.
-    rpc GetAppInstances(organization.OrganizationId) returns (AppInstanceList){}
+    // ListAppInstances retieves a list of application instances.
+    rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}
     // GetAppInstance retrieves a given application instance.
     rpc GetAppInstance(AppInstanceId) returns (AppInstance) {}
     // UpdateAppStatus updates the status of an application instance.
     rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
     // UpdateServiceStatus updates the status of an application instance service.
     rpc UpdateServiceStatus(UpdateServiceStatusRequest) returns(common.Success){}
+    // RemoveAppInstance removes an application instance
+    rpc RemoveAppInstance(AppInstanceId) returns (common.Success){}
 }
