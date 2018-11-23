@@ -159,6 +159,18 @@ message PasswordResetResponse {
 // Roles
 // --------------------------------
 
+// Role defines a role for users of an organization with the associated capabilities
+message Role {
+    string organization_id = 1;
+    string role_id = 2;
+    string name = 3;
+    repeated string primitives = 4;
+}
+
+message RoleList {
+    repeated Role roles = 1;
+}
+
 // --------------------------------
 // Applications
 // --------------------------------
