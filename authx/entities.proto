@@ -17,6 +17,8 @@ enum AccessPrimitive {
     RESOURCES = 2;
     // Access to the profile information.
     PROFILE = 3;
+    // Access to operations performed by application clusters.
+    APPCLUSTEROPS = 4;
 }
 
 // Role defines a role for users of an organization with the associated capabilities
@@ -24,7 +26,8 @@ message Role {
     string organization_id = 1;
     string role_id = 2;
     string name = 3;
-    repeated AccessPrimitive primitives = 4;
+    bool internal = 4;
+    repeated AccessPrimitive primitives = 5;
 }
 
 message RoleList {
