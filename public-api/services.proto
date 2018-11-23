@@ -10,7 +10,6 @@ option go_package = "github.com/nalej/grpc-public-api-go";
 import "public-api/entities.proto";
 import "organization/entities.proto";
 import "user/entities.proto";
-import "authx/entities.proto";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
 import "application/entities.proto";
@@ -128,9 +127,16 @@ service Users {
 // Roles
 service Roles {
     // List the roles inside an organization.
-    rpc List(organization.OrganizationId) returns (authx.RoleList){
+    rpc List(organization.OrganizationId) returns (RoleList){
         option (google.api.http) = {
             get: "/v1/roles/{organization_id}/list"
+        };
+    }
+
+    // ListInternal retrieves the list of internal roles inside an organization.
+    rpc ListInternal(organization.OrganizationId) returns (RoleList){
+        option (google.api.http) = {
+            get: "/v1/roles/{organization_id}/internal/list"
         };
     }
 }
