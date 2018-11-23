@@ -28,16 +28,18 @@ message DeploymentPlan {
 
 // Fragment of a data plan to be deployed in a cluster.
 message DeploymentFragment {
-   // organization id
+   // Organization id
    string organization_id = 1;
+   // Organization name, particularly useful when creating human-readable naming
+   string organization_name = 2;
    // Application instance
-   string app_instance_id = 2;
+   string app_instance_id = 3;
    // Id of the plan this fragment belongs to
-   string deployment_id = 3;
+   string deployment_id = 4;
    // Id of this fragment
-   string fragment_id = 4;
+   string fragment_id = 5;
    // Cluster id where this fragment must be executed
-   repeated DeploymentStage stages = 5;
+   repeated DeploymentStage stages = 6;
 }
 
 // A stage represents a collection of services and related components that can be deployed
