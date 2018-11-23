@@ -40,7 +40,8 @@ message AddRoleRequest{
     string organization_id = 1;
     string name = 2;
     string description = 3;
-    repeated authx.AccessPrimitive primitives = 4;
+    bool internal = 4;
+    repeated authx.AccessPrimitive primitives = 5;
 }
 
 // AssignRoleRequest message with the information required to assign an existing role to an existing user.

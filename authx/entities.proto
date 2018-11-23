@@ -26,7 +26,8 @@ message Role {
     string organization_id = 1;
     string role_id = 2;
     string name = 3;
-    repeated AccessPrimitive primitives = 4;
+    bool internal = 4;
+    repeated AccessPrimitive primitives = 5;
 }
 
 message RoleList {

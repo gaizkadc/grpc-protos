@@ -12,6 +12,7 @@ message AddRoleRequest {
     string organization_id = 1;
     string name = 2;
     string description = 3;
+    bool internal = 4;
 }
 
 // Role represents a role in the system. The primitives associated to it are managed by Authx.
@@ -20,7 +21,8 @@ message Role {
     string role_id = 2;
     string name = 3;
     string description = 4;
-    int64 created = 5;
+    bool internal = 5;
+    int64 created = 6;
 }
 
 message RoleId {
