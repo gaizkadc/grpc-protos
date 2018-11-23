@@ -34,12 +34,14 @@ message DeploymentFragment {
    string organization_name = 2;
    // Application instance
    string app_instance_id = 3;
+   // Application name for human-readable instances
+   string app_name = 4;
    // Id of the plan this fragment belongs to
-   string deployment_id = 4;
+   string deployment_id = 5;
    // Id of this fragment
-   string fragment_id = 5;
+   string fragment_id = 6;
    // Cluster id where this fragment must be executed
-   repeated DeploymentStage stages = 6;
+   repeated DeploymentStage stages = 7;
 }
 
 // A stage represents a collection of services and related components that can be deployed
