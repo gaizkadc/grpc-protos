@@ -1,0 +1,27 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package cluster_api;
+option go_package = "github.com/nalej/grpc-cluster-api-go";
+
+import "common/entities.proto";
+import "conductor/entities.proto";
+import "network/entities.proto";
+
+
+service Conductor{
+    // Request to update a fragment plan status with all the corresponding services
+    rpc UpdateDeploymentFragmentStatus(conductor.DeploymentFragmentUpdateRequest) returns(common.Success) {}
+    // Update the status of a set of services during a given fragment deployment
+    rpc UpdateServiceStatus(conductor.DeploymentServiceUpdateRequest) returns (common.Success) {}
+}
+
+service NetworkManager {
+    // Authorize member
+    rpc AuthorizeMember(network.AuthorizeMemberRequest) returns (common.Success){}
+    // AddDNSEntry creates a new DNSEntry on the system.
+    rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
+}
