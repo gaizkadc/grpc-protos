@@ -78,8 +78,10 @@ message DeploymentResponse {
 
 // Request to undeploy an already deployed application
 message UndeployRequest {
-   // Id of for the deployment
-   string instace_id = 1;
+   // Organization ID
+   string organization_id = 1;
+   // App Instance ID
+   string app_instace_id = 2;
 }
 
 // Request for a cluster to evaluate a set of requirements.
