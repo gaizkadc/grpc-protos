@@ -161,6 +161,13 @@ service Applications {
             get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/get"
         };
     }
+    // DeleteAppDescriptor deletes a given application descriptor.
+    rpc DeleteAppDescriptor(application.AppDescriptorId) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/delete"
+            body: "*"
+        };
+    }
 
     // Deploy an application descriptor.
     rpc Deploy(application_manager.DeployRequest) returns (conductor.DeploymentResponse){
