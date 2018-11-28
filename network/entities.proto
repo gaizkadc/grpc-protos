@@ -36,12 +36,10 @@ message AddNetworkRequest {
 }
 
 message DeleteNetworkRequest {
-    // Request ID
-    string request_id = 1;
     // OrganizationId with the organization identifier.
-    string organization_id = 2;
+    string organization_id = 1;
     // NetworkId with the network identifier.
-    string network_id = 3;
+    string network_id = 2;
 }
 
 message NetworkList {
@@ -60,19 +58,23 @@ message AuthorizeMemberRequest {
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 2;
     // NetworkId with the network identifier.
-    string network_id = 2;
+    string network_id = 3;
     // FQDN from the DNS entry.
-    string fqdn = 3;
+    string fqdn = 4;
     // IP of that FQDN.
-    string ip = 4;
+    string ip = 5;
 }
 
 message DeleteDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 2;
     // FQDN from the DNS entry.
-    string fqdn = 2;
+    string fqdn = 3;
 }
 
 message DNSEntry {
