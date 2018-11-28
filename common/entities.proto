@@ -10,3 +10,7 @@ option go_package = "github.com/nalej/grpc-common-go";
 // Success message to acknowledge the execution of an operation.
 message Success {
 }
+
+// Empty message to be reused for rpc calls without parameters.
+message Empty{
+}

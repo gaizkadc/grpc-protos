@@ -17,3 +17,18 @@ message SignupOrganizationRequest{
 message SignupOrganizationResponse{
     string organization_id = 1;
 }
+
+message OrganizationInfo{
+    string organization_id = 1;
+    string name = 2;
+    int64 created = 3;
+    int32 number_users = 4;
+    int32 number_clusters = 5;
+    int32 number_descriptors = 6;
+    int32 number_instances = 7;
+}
+
+message OrganizationsList{
+    repeated OrganizationInfo organizations = 1;
+}
+
