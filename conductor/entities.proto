@@ -81,7 +81,7 @@ message UndeployRequest {
    // Organization ID
    string organization_id = 1;
    // App Instance ID
-   string app_instace_id = 2;
+   string app_instance_id = 2;
 }
 
 // Request for a cluster to evaluate a set of requirements.
