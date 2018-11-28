@@ -61,11 +61,11 @@ message AddDNSEntryRequest {
     // Application instance id
     string app_instance_id = 2;
     // NetworkId with the network identifier.
-    string network_id = 4;
+    string network_id = 3;
     // FQDN from the DNS entry.
-    string fqdn = 5;
+    string fqdn = 4;
     // IP of that FQDN.
-    string ip = 6;
+    string ip = 5;
 }
 
 message DeleteDNSEntryRequest {
