@@ -58,14 +58,16 @@ message AuthorizeMemberRequest {
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
+    // Organization name
+    string organization_name = 2;
     // Application instance id
-    string app_instance_id = 2;
+    string app_instance_id = 3;
     // NetworkId with the network identifier.
-    string network_id = 3;
+    string network_id = 4;
     // FQDN from the DNS entry.
-    string fqdn = 4;
+    string fqdn = 5;
     // IP of that FQDN.
-    string ip = 5;
+    string ip = 6;
 }
 
 message DeleteDNSEntryRequest {
