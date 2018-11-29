@@ -67,14 +67,16 @@ message AuthorizeNetworkMembershipRequest {
 message RegisterNetworkEntryRequest {
     // Organization id
     string organization_id = 1;
+    // Organization name
+    string organization_name = 2;
     // Application instance
-    string app_instance_id = 2;
+    string app_instance_id = 3;
     // Instance hostname
-    string hostname = 3;
+    string hostname = 4;
     // Service name
-    string service_name = 4;
+    string service_name = 5;
     // Service IP
-    string service_ip = 5;
+    string service_ip = 6;
     // Network id
-    string network_id = 6;
+    string network_id = 7;
 }
