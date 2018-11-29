@@ -73,8 +73,6 @@ message DeleteDNSEntryRequest {
     string organization_id = 1;
     // Application instance id
     string app_instance_id = 2;
-    // FQDN from the DNS entry.
-    string fqdn = 3;
 }
 
 message DNSEntry {
