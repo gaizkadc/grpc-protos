@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package app_cluster_api;
+option go_package = "github.com/nalej/grpc-app-cluster-api-go";
+
+import "common/entities.proto";
+import "conductor/entities.proto";
+import "deployment-manager/entities.proto";
+
+// Service deployed in local clusters to score locally available resources.
+service Musician {
+    // Request to score an application
+    rpc Score(conductor.ClusterScoreRequest) returns (conductor.ClusterScoreResponse) {}
+}
+
+service DeploymentManager {
+    // Request a deployment plan to be executed.
+    rpc Execute(deployment_manager.DeploymentFragmentRequest) returns (deployment_manager.DeploymentFragmentResponse) {}
+    // Request to undeploy an application
+    rpc Undeploy(deployment_manager.UndeployRequest) returns (common.Success) {}
+}
