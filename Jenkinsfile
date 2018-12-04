@@ -4,7 +4,7 @@ def packageName = "grpc-protos"
 def packagePath = "src/github.com/nalej/${packageName}"
 
 pipeline {
-    agent { node { label 'golang' } }
+    agent { node { label 'grpc' } }
     options {
         checkoutToSubdirectory("${packagePath}")
     }
