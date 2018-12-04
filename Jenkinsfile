@@ -53,7 +53,7 @@ pipeline {
                 container("docker") {
                     dir("${packagePath}") {
                         script {
-                            slackSend channel: "#madridteam", message: "Generando protos!", botUser: false
+                            slackSend channel: "#madridteam", message: "Probando si ${env.authorName} ha hecho los protos bien...", botUser: false
                             sh "REPOPATH=${packagePath} CURRENT_BRANCH=${env.BRANCH_NAME} DRY_RUN=true make generate"
                         }
                     }
