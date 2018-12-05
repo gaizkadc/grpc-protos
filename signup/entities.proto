@@ -12,10 +12,16 @@ message SignupOrganizationRequest{
     string owner_email = 2;
     string owner_name = 3;
     string owner_password = 4;
+    string preshared_secret = 5;
 }
 
 message SignupOrganizationResponse{
     string organization_id = 1;
+}
+
+message SignupInfoRequest{
+    string organization_id = 1;
+    string preshared_secret = 2;
 }
 
 message OrganizationInfo{
