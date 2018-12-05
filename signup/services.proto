@@ -18,11 +18,11 @@ service Signup {
     rpc SignupOrganization (SignupOrganizationRequest) returns (SignupOrganizationResponse) {}
 
     // ListOrganizations returns the list of organizations in the system.
-    rpc ListOrganizations (common.Empty) returns (OrganizationsList) {}
+    rpc ListOrganizations (SignupInfoRequest) returns (OrganizationsList) {}
 
     // GetOrganizationInfo retrieves the information about an organization.
-    rpc GetOrganizationInfo (organization.OrganizationId) returns (OrganizationInfo) {}
+    rpc GetOrganizationInfo (SignupInfoRequest) returns (OrganizationInfo) {}
 
     // DeleteOrganization removes an organization from the system.
-    rpc RemoveOrganization(organization.OrganizationId) returns (common.Success){}
+    rpc RemoveOrganization(SignupInfoRequest) returns (common.Success){}
 }
