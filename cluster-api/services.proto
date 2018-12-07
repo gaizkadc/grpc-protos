@@ -27,11 +27,3 @@ service NetworkManager {
     // AddDNSEntry creates a new DNSEntry on the system.
     rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
 }
-
-// Login operations.
-service Login {
-    // LoginWithBasicCredentials performs the login of a user with a set of basic credentials. If the login
-    // is successful, it will return a JWT token.
-    rpc LoginWithBasicCredentials(authx.LoginWithBasicCredentialsRequest) returns(authx.LoginResponse){}
-
-}
