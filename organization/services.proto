@@ -15,6 +15,8 @@ service Organizations {
     rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
     // GetOrganization retrieves the profile information of a given organization.
     rpc GetOrganization(OrganizationId) returns (Organization) {}
+    // ListOrganizations returns the list of organizations in the system.
+    rpc ListOrganizations (common.Empty) returns (OrganizationList) {}
     // UpdateOrganization updates the public information of an organization.
     rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
 }

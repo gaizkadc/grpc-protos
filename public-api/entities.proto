@@ -76,12 +76,14 @@ message InstallRequest {
     bool install_base_system = 4;
     // KubeConfigRaw contains the required data to connect to a Kubernetes cluster in case it is already installed.
     string kube_config_raw = 5;
+    // Hostname of the cluster master. This value is used to connect to the app cluster ingress.
+    string hostname = 6;
     // Username to connect to the remote machines when the base system needs to be installed.
-    string username = 6;
+    string username = 7;
     // PrivateKey contains the SSH private key required when the base system needs to be installed.
-    string private_key = 7;
+    string private_key = 8;
     // Nodes contains the list of IP addresses to be installed.
-    repeated string nodes = 8;
+    repeated string nodes = 9;
 }
 
 // --------------------------------
