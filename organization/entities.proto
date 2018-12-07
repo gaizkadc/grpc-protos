@@ -28,3 +28,6 @@ message OrganizationId {
     string organization_id = 1;
 }
 
+message OrganizationList {
+    repeated Organization organizations = 1;
+}
