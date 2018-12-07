@@ -10,8 +10,9 @@ option go_package = "github.com/nalej/grpc-cluster-api-go";
 import "common/entities.proto";
 import "conductor/entities.proto";
 import "network/entities.proto";
+import "authx/entities.proto";
 
-
+// Conductor operations.
 service Conductor{
     // Request to update a fragment plan status with all the corresponding services
     rpc UpdateDeploymentFragmentStatus(conductor.DeploymentFragmentUpdateRequest) returns(common.Success) {}
@@ -19,9 +20,18 @@ service Conductor{
     rpc UpdateServiceStatus(conductor.DeploymentServiceUpdateRequest) returns (common.Success) {}
 }
 
+// Network manager operations.
 service NetworkManager {
     // Authorize member
     rpc AuthorizeMember(network.AuthorizeMemberRequest) returns (common.Success){}
     // AddDNSEntry creates a new DNSEntry on the system.
     rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
+}
+
+// Login operations.
+service Login {
+    // LoginWithBasicCredentials performs the login of a user with a set of basic credentials. If the login
+    // is successful, it will return a JWT token.
+    rpc LoginWithBasicCredentials(authx.LoginWithBasicCredentialsRequest) returns(authx.LoginResponse){}
+
 }
