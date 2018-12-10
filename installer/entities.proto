@@ -45,6 +45,10 @@ message InstallRequest {
     string private_key = 9;
     // Nodes contains the list of IP addresses to be installed.
     repeated string nodes = 10;
+    // Use Kube DNS configuration
+    bool use_kube_dns = 11;
+    // Use CoreDNS configuration
+    bool use_core_dns = 12;
 }
 
 message InstallId {
