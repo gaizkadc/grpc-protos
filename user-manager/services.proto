@@ -23,8 +23,10 @@ service UserManager {
     rpc RemoveUser(user.UserId) returns (common.Success){}
     // ListUsers retrieves a list of users associated with an organization.
     rpc ListUsers (organization.OrganizationId) returns (user_manager.UserList){}
+    // Update the user information.
+    rpc Update(user.UpdateUserRequest) returns (common.Success) {}
     // ChangePassword updates the password of a user.
-    rpc ChangePassword (authx.ChangePasswordRequest) returns (common.Success) {}
+    rpc ChangePassword (user.ChangePasswordRequest) returns (common.Success) {}
     // AddRole adds a new role to an organization.
     rpc AddRole(AddRoleRequest) returns (authx.Role){}
     // TODO RemoveRole removes a role from an organization.
