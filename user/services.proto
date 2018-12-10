@@ -24,6 +24,4 @@ service Users {
     rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
     // Update the user information.
     rpc Update(UpdateUserRequest) returns (common.Success) {}
-    // ChangePassword update an existing password.
-    rpc ChangePassword (ChangePasswordRequest) returns (common.Success) {}
 }
