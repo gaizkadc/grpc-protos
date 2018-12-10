@@ -48,3 +48,11 @@ message UpdateUserRequest {
     string name = 3;
     string role = 4;
 }
+
+// Message for change the user password.
+message ChangePasswordRequest {
+    string organization_id = 1;
+    string email = 2;
+    string password = 3;
+    string newPassword = 4;
+}
