@@ -50,3 +50,11 @@ message AssignRoleRequest{
     string email = 2;
     string role_id = 3;
 }
+
+// Message for change the user password.
+message ChangePasswordRequest {
+    string organization_id = 1;
+    string email = 2;
+    string password = 3;
+    string newPassword = 4;
+}

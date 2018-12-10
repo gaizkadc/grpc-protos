@@ -15,6 +15,7 @@ import "infrastructure/entities.proto";
 import "application/entities.proto";
 import "application-manager/entities.proto";
 import "infrastructure-manager/entities.proto";
+import "user-manager/entities.proto";
 import "conductor/entities.proto";
 import "google/api/annotations.proto";
 
@@ -110,7 +111,7 @@ service Users {
     }
 
     // ChangePassword update an existing password.
-    rpc ChangePassword (user.ChangePasswordRequest) returns (common.Success) {
+    rpc ChangePassword (user_manager.ChangePasswordRequest) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/users/{organization_id}/change"
             body: "*"
