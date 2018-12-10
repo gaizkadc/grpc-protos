@@ -56,5 +56,5 @@ message ChangePasswordRequest {
     string organization_id = 1;
     string email = 2;
     string password = 3;
-    string newPassword = 4;
+    string new_password = 4;
 }
