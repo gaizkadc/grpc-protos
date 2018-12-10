@@ -108,13 +108,15 @@ service Users {
             body: "*"
         };
     }
-    // ResetPassoword resets a user password.
-    rpc ResetPassword(user.UserId) returns (PasswordResetResponse){
+
+    // ChangePassword update an existing password.
+    rpc ChangePassword (user.ChangePasswordRequest) returns (common.Success) {
         option (google.api.http) = {
-            post: "/v1/users/{organization_id}/reset"
+            post: "/v1/users/{organization_id}/change"
             body: "*"
         };
     }
+
     // Update the user information.
     rpc Update(user.UpdateUserRequest) returns (common.Success){
         option (google.api.http) = {

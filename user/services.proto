@@ -22,4 +22,8 @@ service Users {
     rpc GetUsers(organization.OrganizationId) returns (UserList) {}
     // RemoveUser removes a given user from an organization.
     rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
+    // Update the user information.
+    rpc Update(UpdateUserRequest) returns (common.Success) {}
+    // ChangePassword update an existing password.
+    rpc ChangePassword (ChangePasswordRequest) returns (common.Success) {}
 }
