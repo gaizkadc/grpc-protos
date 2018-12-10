@@ -64,6 +64,14 @@ message UpdateClusterRequest {
     map <string, string> labels = 5;
 }
 
+// Type of platform targetting this install request
+enum Platform {
+    // Minikube for local deployments
+    MINIKUBE = 0;
+    // Azure for cloud-based deployments
+    AZURE = 1;
+}
+
 // InstallRequest message used to specify the cluster to be installed.
 message InstallRequest {
     // OrganizationId with the organization identifier.
@@ -88,6 +96,8 @@ message InstallRequest {
     bool use_kube_dns = 10;
     // Use CoreDNS configuration
     bool use_core_dns = 11;
+    // Target platform
+    Platform target_platform = 12;
 }
 
 // --------------------------------

@@ -23,6 +23,14 @@ enum InstallProgress {
     FINISHED = 4;
 }
 
+// Type of platform targetting this install request
+enum Platform {
+    // Minikube for local deployments
+    MINIKUBE = 0;
+    // Azure for cloud-based deployments
+    AZURE = 1;
+}
+
 // InstallRequest message used to specify the cluster to be installed.
 message InstallRequest {
     // InstallId for tracking the progress of the install.
@@ -49,6 +57,8 @@ message InstallRequest {
     bool use_kube_dns = 11;
     // Use CoreDNS configuration
     bool use_core_dns = 12;
+    // Target platform
+    Platform target_platform = 13;
 }
 
 message InstallId {
