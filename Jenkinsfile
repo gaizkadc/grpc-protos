@@ -47,6 +47,7 @@ pipeline {
     post {
         always {
             dir("${packagePath}") {
+                sh "sudo chown -R jenkins:jenkins *"
                 deleteDir()
             }
         }
