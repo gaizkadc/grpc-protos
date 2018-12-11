@@ -42,10 +42,11 @@ message UserList {
     repeated User users = 1;
 }
 
+// UpdateUserRequest message with the information required for updating an user.
 message UpdateUserRequest {
     string organization_id = 1;
     string email = 2;
     string name = 3;
-    string role = 4;
+    string photo_url = 4;
 }
 
