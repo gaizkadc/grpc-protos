@@ -46,7 +46,9 @@ pipeline {
     }
     post {
         always {
-            deleteDir("${packagePath}")
+            dir("${packagePath}") {
+                deleteDir()
+            }
         }
     }
 }
