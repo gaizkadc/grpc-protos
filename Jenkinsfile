@@ -26,8 +26,22 @@ pipeline {
             steps {
                 dir("${packagePath}") {
                     script {
-                        slackSend channel: "#madridteam", message: "Probando si ${env.authorName} ha hecho los protos bien...", botUser: false
+                        if (env.CHANGE_ID) {
+                            slackSend channel: "#madridteam", message: "Probando si ${env.authorName} ha hecho los protos bien...", botUser: false
+                        }
                         sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) DRY_RUN=true make generate"
+                    }
+                }
+            }
+            post {
+                success {
+                    if (env.CHANGE_ID) {
+                        slackSend channel: "#madridteam", message: "La prueba de protos de ${env.authorName} salió bien", botUser: false
+                    }
+                }
+                failure {
+                    if (env.CHANGE_ID) {
+                        slackSend channel: "#madridteam", message: "Ha fallado al probar los protos de ${env.authorName}", botUser: false
                     }
                 }
             }
@@ -42,6 +56,14 @@ pipeline {
                     }
                 }
             }
+            post {
+                success {
+                    slackSend channel: "#madridteam", message: "Protos generados OK", botUser: false
+                }
+                failure {
+                    slackSend channel: "#madridteam", message: "Ha fallado la generación de protos", botUser: false
+                }
+            }
         }
     }
     post {
@@ -51,5 +73,4 @@ pipeline {
                 deleteDir()
             }
         }
-    }
 }
