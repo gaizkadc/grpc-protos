@@ -18,6 +18,7 @@ message User {
     int64 member_since = 5;
     string role_id = 6;
     string role_name = 7;
+    bool internal = 8;
 }
 
 // UserList with a list of users.
