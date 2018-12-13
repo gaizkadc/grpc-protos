@@ -114,6 +114,7 @@ message ImageCredentials {
     string username = 1;
     string password = 2;
     string email = 3;
+    string dockerRepository = 4;
 }
 
 // Service structure that represents a microservice of a given application and that can be deployed on its own.
@@ -329,6 +330,10 @@ message ServiceInstance {
     repeated string deploy_after = 16;
     // Status of the deployed service
     ServiceStatus status = 17;
+    // Endpoints exposed to the users by the service.
+    repeated string endpoints = 18;
+    // DeployedOnClusterId specifies which is the cluster where the service is running.
+    string deployed_on_cluster_id = 19;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
@@ -372,4 +377,8 @@ message UpdateServiceStatusRequest {
     string service_id = 4;
     // Status with the new transition.
     ServiceStatus status = 5;
+    // Endpoints exposed to the users by the service.
+    repeated string endpoints = 6;
+    // DeployedOnClusterId specifies which is the cluster where the service is running.
+    string deployed_on_cluster_id = 7;
 }
