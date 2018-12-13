@@ -114,7 +114,7 @@ message ImageCredentials {
     string username = 1;
     string password = 2;
     string email = 3;
-    string dockerRepository = 4;
+    string docker_repository = 4;
 }
 
 // Service structure that represents a microservice of a given application and that can be deployed on its own.
