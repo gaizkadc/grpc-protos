@@ -35,13 +35,17 @@ pipeline {
             }
             post {
                 success {
-                    if (env.CHANGE_ID) {
-                        slackSend channel: "#madridteam", message: "La prueba de protos de ${env.authorName} salió bien", botUser: false
+                    step {
+                        if (env.CHANGE_ID) {
+                            slackSend channel: "#madridteam", message: "La prueba de protos de ${env.authorName} salió bien", botUser: false
+                        }
                     }
                 }
                 failure {
-                    if (env.CHANGE_ID) {
-                        slackSend channel: "#madridteam", message: "Ha fallado al probar los protos de ${env.authorName}", botUser: false
+                    step {
+                        if (env.CHANGE_ID) {
+                            slackSend channel: "#madridteam", message: "Ha fallado al probar los protos de ${env.authorName}", botUser: false
+                        }
                     }
                 }
             }
