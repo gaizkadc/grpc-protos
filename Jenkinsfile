@@ -35,14 +35,14 @@ pipeline {
             }
             post {
                 success {
-                    step {
+                    script {
                         if (env.CHANGE_ID) {
                             slackSend channel: "#madridteam", message: "La prueba de protos de ${env.authorName} salió bien", botUser: false
                         }
                     }
                 }
                 failure {
-                    step {
+                    script {
                         if (env.CHANGE_ID) {
                             slackSend channel: "#madridteam", message: "Ha fallado al probar los protos de ${env.authorName}", botUser: false
                         }
