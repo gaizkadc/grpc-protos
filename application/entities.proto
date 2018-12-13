@@ -333,7 +333,7 @@ message ServiceInstance {
     // Endpoints exposed to the users by the service.
     repeated string endpoints = 18;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
-    string deployedOnClusterId = 19;
+    string deployed_on_cluster_id = 19;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
@@ -380,5 +380,5 @@ message UpdateServiceStatusRequest {
     // Endpoints exposed to the users by the service.
     repeated string endpoints = 6;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
-    string deployedOnClusterId = 7;
+    string deployed_on_cluster_id = 7;
 }
