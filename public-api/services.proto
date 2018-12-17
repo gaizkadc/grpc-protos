@@ -147,6 +147,7 @@ service Roles {
     rpc AssignRole(user_manager.AssignRoleRequest) returns (user_manager.User){
         option (google.api.http) = {
             post: "/v1/roles/{organization_id}/assign"
+            body: "*"
         };
     }
 }
