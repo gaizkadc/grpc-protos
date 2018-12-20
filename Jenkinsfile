@@ -29,7 +29,7 @@ pipeline {
                         if (env.CHANGE_ID) {
                             slackSend channel: "#madridteam", message: "Probando si ${env.authorName} ha hecho los protos bien...", botUser: false
                         }
-                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) DRY_RUN=true make generate"
+                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) DRY_RUN=true make generate service=diff"
                     }
                 }
             }
@@ -56,7 +56,7 @@ pipeline {
                 dir("${packagePath}") {
                     script {
                         slackSend channel: "#madridteam", message: "Generando protos", botUser: false
-                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) make generate"
+                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) make generate service=diff"
                     }
                 }
             }
