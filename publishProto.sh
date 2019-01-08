@@ -83,9 +83,35 @@ function buildProtoForTypes {
 # Finds all directories in the repository and iterates through them calling the
 # compile process for each one
 function buildAll {
-  echo "Building service's protocol buffers"
+  echo "Building services' protocol buffers"
   mkdir -p $REPOPATH
   for d in */; do
+    buildDir $d
+  done
+}
+
+function getLastMergeCommit {
+  GITLASTCOMMIT=$(git rev-parse HEAD)
+  GITLASTMERGECOMMIT=$(git log --merges -n 1 --pretty=format:"%H")
+  if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
+    GITLASTMERGECOMMIT=$(git log --merges -n 2 --pretty=format:"%H" | awk '{if (NR==2) print $0 }')
+  fi
+}
+
+function getModifiedDirs {
+  getLastMergeCommit
+  MODIFIEDDIRS=$(git diff --name-only $GITLASTCOMMIT $GITLASTMERGECOMMIT | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
+}
+
+function buildFromLastMerge {
+  echo "Building modified protocol buffers since last merge"
+  getModifiedDirs
+  mkdir -p $REPOPATH
+  if [ "$MODIFIEDDIRS" == "" ]; then
+    echo "No protocol buffer was modified since last merge"
+    exit 0
+  fi
+  for d in $MODIFIEDDIRS; do
     buildDir $d
   done
 }
@@ -148,9 +174,10 @@ function commitAndPush {
 
 TARGET_SERVICE=$1
 
-if [[ "${TARGET_SERVICE}" == "" ]]; then
+if [ "${TARGET_SERVICE}" == "" ]; then
     buildAll
+elif [ "${TARGET_SERVICE}" == "diff" ]; then
+    buildFromLastMerge
 else
     buildSingle ${TARGET_SERVICE}
 fi
-
