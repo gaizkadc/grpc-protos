@@ -30,6 +30,8 @@ message AppDescriptor {
     repeated ServiceGroup groups = 9;
     // Services of the application.
     repeated Service services = 10;
+    // Run arguments
+    repeated string run_arguments = 11;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -238,6 +240,8 @@ message AddAppDescriptorRequest {
     repeated ServiceGroup groups = 9;
     // Services of the application.
     repeated Service services = 10;
+    // Run arguments
+    repeated string run_arguments = 11;
 }
 
 message AppDescriptorList {
@@ -271,6 +275,8 @@ message AppInstance {
     repeated ServiceInstance services = 11;
     // Status of the deployed instance.
     ApplicationStatus status = 12;
+    // Run arguments
+    repeated string run_arguments = 13;
 }
 
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
