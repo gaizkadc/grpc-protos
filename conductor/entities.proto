@@ -10,6 +10,8 @@ option go_package = "github.com/nalej/grpc-conductor-go";
 
 import public "application/entities.proto";
 import public "infrastructure/entities.proto";
+import "google/protobuf/timestamp.proto";
+
 
 // --------------------------
 // Conductor services
@@ -65,6 +67,13 @@ message DeploymentRequest {
    string name = 3;
    // Description for this deployment
    string description = 4;
+   // Number of retries.
+   // Internal field. Only conductor modifies this value.
+   int32 num_retries = 5;
+   // Time last retry
+   // Internal field. Only conductor modifies this value.
+   google.protobuf.Timestamp time_retry = 6;
+
 }
 
 // Deployment response has the resulting execution of a deployment process.
