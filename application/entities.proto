@@ -150,6 +150,8 @@ message Service {
     map<string, string> labels = 14;
     // DeployAfter contains the list of services that must be running before launching a service.
     repeated string deploy_after = 15;
+    // Run arguments
+    repeated string run_arguments = 16;
 }
 
 enum ServiceStatus {
@@ -334,6 +336,8 @@ message ServiceInstance {
     repeated string endpoints = 18;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
     string deployed_on_cluster_id = 19;
+    // Run arguments
+    repeated string run_arguments = 20;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
