@@ -30,8 +30,6 @@ message AppDescriptor {
     repeated ServiceGroup groups = 9;
     // Services of the application.
     repeated Service services = 10;
-    // Run arguments
-    repeated string run_arguments = 11;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -152,6 +150,8 @@ message Service {
     map<string, string> labels = 14;
     // DeployAfter contains the list of services that must be running before launching a service.
     repeated string deploy_after = 15;
+    // Run arguments
+    repeated string run_arguments = 16;
 }
 
 enum ServiceStatus {
@@ -240,8 +240,6 @@ message AddAppDescriptorRequest {
     repeated ServiceGroup groups = 9;
     // Services of the application.
     repeated Service services = 10;
-    // Run arguments
-    repeated string run_arguments = 11;
 }
 
 message AppDescriptorList {
@@ -275,8 +273,6 @@ message AppInstance {
     repeated ServiceInstance services = 11;
     // Status of the deployed instance.
     ApplicationStatus status = 12;
-    // Run arguments
-    repeated string run_arguments = 13;
 }
 
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
@@ -340,6 +336,8 @@ message ServiceInstance {
     repeated string endpoints = 18;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
     string deployed_on_cluster_id = 19;
+    // Run arguments
+    repeated string run_arguments = 20;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
