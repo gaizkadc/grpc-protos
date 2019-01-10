@@ -42,8 +42,10 @@ message DeploymentFragment {
    string deployment_id = 5;
    // Id of this fragment
    string fragment_id = 6;
+   // Nalej variables for this deployment
+   map<string,string> nalej_variables = 7;
    // Cluster id where this fragment must be executed
-   repeated DeploymentStage stages = 7;
+   repeated DeploymentStage stages = 8;
 }
 
 // A stage represents a collection of services and related components that can be deployed
