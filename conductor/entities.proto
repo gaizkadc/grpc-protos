@@ -173,6 +173,8 @@ message ServiceUpdate {
    application.ServiceStatus status = 5;
    // Endpoints exposed through ingresses.
    repeated string endpoints = 6;
+   // Textual information important to understand this status update
+   string info = 7;
 }
 
 // Indicate the status of a set of services
@@ -185,7 +187,5 @@ message DeploymentServiceUpdateRequest {
    string cluster_id = 3;
    // status
    repeated ServiceUpdate list = 4;
-   // Textual information important to understand this status update
-   string info = 5;
 }
 
