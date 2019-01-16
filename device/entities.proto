@@ -105,6 +105,17 @@ message GetDeviceRequest {
     string device_id = 3;
 }
 
+message ListDeviceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+}
+
+message DeviceList {
+    repeated Device devices = 1;
+}
+
 message UpdateDeviceRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;

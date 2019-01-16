@@ -25,13 +25,14 @@ service Devices {
 
     // AddDevice adds a new group to the system
     rpc AddDevice (device.AddDeviceRequest) returns (device.Device) {}
+    // ListDevice obtains a list of devices in a device_group
+    rpc ListDevices (device.ListDeviceRequest) returns (device.DeviceList) {}
     //GetDevice retrieves a given device in an organization.
     rpc GetDevice (device.GetDeviceRequest) returns (device.Device) {}
     // UpdateDevice updates the flag that determines if the device can interact with the running applications
     rpc UpdateDevice(device.UpdateDeviceRequest) returns (common.Success) {}
     // RemoveDevice removes a given device
     rpc RemoveDevice(device.RemoveDeviceRequest) returns (common.Success) {}
-
 
 
 }
