@@ -146,6 +146,8 @@ message DeploymentFragmentUpdateRequest {
    string cluster_id = 6;
    // Status of the fragment operation
    DeploymentFragmentStatus status = 7;
+   // Textual information important to understand this status update
+   string info = 8;
 }
 
 // Set of possible statuses for a deployment fragment
@@ -183,5 +185,7 @@ message DeploymentServiceUpdateRequest {
    string cluster_id = 3;
    // status
    repeated ServiceUpdate list = 4;
+   // Textual information important to understand this status update
+   string info = 5;
 }
 
