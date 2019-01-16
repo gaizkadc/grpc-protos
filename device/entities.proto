@@ -33,20 +33,39 @@ message Device {
     string device_group_id = 2;
     // DeviceId with the device identifier.
     string device_id = 3;
-    // SerialNumber of the current device for identification purposes.
-    string serial_number = 4;
     // RegisterSince is the timestamp when the device joined the group.
-    int64 register_since = 5;
+    int64 register_since = 4;
     // Enabled determines if the device can interact with the running applications.
-    bool enabled = 6;
+    bool enabled = 5;
     // DeviceApiKey contains the API KEY used by the device to send data.
-    string device_api_key = 7;
+    string device_api_key = 6;
     // Labels defined by the user.
-    map<string, string> labels = 8;
+    map<string, string> labels = 7;
 }
 
 message DeviceGroupList {
     repeated DeviceGroup groups = 1;
+}
+
+message GetDeviceGroupRequest {
+     // OrganizationId with the organization identifier.
+     string organization_id = 1;
+     // DeviceGroupId with the device group identifier.
+     string device_group = 2;
+}
+
+message GetDeviceGroupResponse {
+    // DeviceGroup with the device info
+    DeviceGroup device_group = 1;
+    // Devices with the devices in the group
+    repeated Device devices = 2;
+}
+
+message RemoveDeviceGroupRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group = 2;
 }
 
 message AddDeviceGroupRequest {
@@ -59,4 +78,49 @@ message AddDeviceGroupRequest {
     map<string, string> labels = 6;
 }
 
+message UpdateDeviceGroupRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier
+    string device_group = 2;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 3;
+}
 
+message AddDeviceRequest {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // DeviceGroupID with the device group identifier
+    string device_group_id = 2;
+    // Labels defined by the user
+    map<string, string> labels = 3;
+}
+
+message GetDeviceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+}
+
+message UpdateDeviceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 4;
+}
+
+message RemoveDeviceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+}
