@@ -83,4 +83,67 @@ message DeleteCredentialsRequest {
     string username = 1;
 }
 
+// Messages for device credentials
+message DeviceCredentials {
+    string organization_id = 1;
+    string device_group_id = 2;
+    string device_id = 3;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 4;
+    // DeviceApiKey contains the API KEY used by the device to send data.
+    string device_api_key = 5;
+}
 
+message DeviceCredentialsId {
+    string organization_id = 1;
+    string device_group_id = 2;
+    string device_id = 3;
+}
+
+// AddDeviceCredentialsRequest is the request for add a new device credential
+message AddDeviceCredentialsRequest {
+    string organization_id = 1;
+    string device_group_id = 2;
+    string device_id = 3;
+    string device_api_key = 4;
+}
+
+// UpdateDeviceCredentialsRequest is the message to Enable/disable the device
+message UpdateDeviceCredentialsRequest {
+    string organization_id = 1;
+    string device_group_id = 2;
+    string device_id = 3;
+    bool enabled = 4;
+}
+
+// Messages for device Group
+message DeviceGroupCredentials {
+    string organization_id = 1;
+    string device_group_id = 2;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 3;
+    // DeviceApiKey contains the API KEY used by the device to send data.
+    string device_api_key = 4;
+}
+
+message DeviceGroupId {
+    string organization_id = 1;
+    string device_group_id = 2;
+}
+
+// AddDeviceGroupCredentialsRequest, message for add a new device group credential
+message AddDeviceGroupCredentialsRequest {
+    string organization_id = 1;
+    string device_group_id = 2;
+    // GroupApiKey with the API used by the devices associated to this group for registration purposes.
+    string group_api_key = 3;
+    // Enabled determines if this group is able to interact with the running applications.
+    bool enabled = 4;
+}
+
+// UpdateDeviceGroupCredentialsRequest, message to enable/disable the device group
+message UpdateDeviceGroupCredentialsRequest {
+    string organization_id = 1;
+    string device_group_id = 2;
+    bool enabled = 3;
+}

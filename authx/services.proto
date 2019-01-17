@@ -47,4 +47,17 @@ service Authx {
 
     // Retrieve the role associated with a user.
     rpc GetUserRole(user.UserId) returns (Role){}
+
+    // AddDeviceCredentials adds a device in the system
+    rpc AddDeviceCredentials (AddDeviceCredentialsRequest) returns (common.Success) {}
+
+    // UpdateDeviceCredentials enable /disable the device
+    rpc UpdateDeviceCredentials (UpdateDeviceCredentialsRequest) returns (common.Success) {}
+
+    // AddDeviceGroupCredentials adds a device in the system
+    rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (common.Success) {}
+
+    // UpdateDeviceGroupsCredentials enable /disable the device
+    rpc UpdateDeviceGroupsCredentials (UpdateDeviceGroupCredentialsRequest) returns (common.Success) {}
+
 }
