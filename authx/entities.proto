@@ -105,7 +105,6 @@ message AddDeviceCredentialsRequest {
     string organization_id = 1;
     string device_group_id = 2;
     string device_id = 3;
-    string device_api_key = 4;
 }
 
 // UpdateDeviceCredentialsRequest is the message to Enable/disable the device
@@ -122,8 +121,10 @@ message DeviceGroupCredentials {
     string device_group_id = 2;
     // Enabled determines if the device can interact with the running applications.
     bool enabled = 3;
-    // DeviceApiKey contains the API KEY used by the device to send data.
-    string device_api_key = 4;
+    // DefaultDeviceConnectivity determines if the devices are enable or disable by default
+    bool default_device_connectivity = 4;
+    // DeviceGroupApiKey with the API used by the devices associated to this group for registration purposes.
+    string device_group_api_key = 5;
 }
 
 message DeviceGroupId {
@@ -135,15 +136,21 @@ message DeviceGroupId {
 message AddDeviceGroupCredentialsRequest {
     string organization_id = 1;
     string device_group_id = 2;
-    // GroupApiKey with the API used by the devices associated to this group for registration purposes.
-    string group_api_key = 3;
     // Enabled determines if this group is able to interact with the running applications.
-    bool enabled = 4;
+    bool enabled = 3;
+    bool default_device_connectivity = 4;
 }
 
-// UpdateDeviceGroupCredentialsRequest, message to enable/disable the device group
-message UpdateDeviceGroupCredentialsRequest {
+// UpdateDeviceGroupEnableCredentialsRequest, message to enable/disable the device group
+message UpdateDeviceGroupEnableCredentialsRequest {
     string organization_id = 1;
     string device_group_id = 2;
     bool enabled = 3;
+}
+
+// UpdateDeviceGroupConnectivityCredentialsRequest, message to enable/disable the device group
+message UpdateDeviceGroupConnectivityCredentialsRequest {
+    string organization_id = 1;
+    string device_group_id = 2;
+    bool default_device_connectivity = 3;
 }

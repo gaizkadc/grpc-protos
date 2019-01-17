@@ -57,7 +57,10 @@ service Authx {
     // AddDeviceGroupCredentials adds a device in the system
     rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (common.Success) {}
 
-    // UpdateDeviceGroupsCredentials enable /disable the device
-    rpc UpdateDeviceGroupsCredentials (UpdateDeviceGroupCredentialsRequest) returns (common.Success) {}
+    // UpdateDeviceGroupCredentials enable /disable the device
+    rpc UpdateDeviceGroupEnableCredentials (UpdateDeviceGroupEnableCredentialsRequest) returns (common.Success) {}
+
+    // UpdateDeviceGroupCredentials enable /disable the device
+    rpc UpdateDeviceGroupConnectivityCredentials (UpdateDeviceGroupConnectivityCredentialsRequest) returns (common.Success) {}
 
 }
