@@ -9,11 +9,31 @@ option go_package = "github.com/nalej/grpc-device-go";
 
 import "device/entities.proto";
 import "organization/entities.proto";
+import "common/entities.proto";
 
 service Devices {
     // AddDeviceGroup adds a new device group to the system.
-    rpc AddDeviceGroup(AddDeviceGroupRequest) returns (DeviceGroup) {}
+    rpc AddDeviceGroup(device.AddDeviceGroupRequest) returns (device.DeviceGroup) {}
     // ListDeviceGroups obtains a list of device groups in an organization.
-    rpc ListDeviceGroups(organization.OrganizationId) returns (DeviceGroupList) {}
+    rpc ListDeviceGroups(organization.OrganizationId) returns (device.DeviceGroupList) {}
+    // GetDeviceGroup retrieves a given device group in an organization.
+    rpc GetDeviceGroup (device.GetDeviceGroupRequest) returns (device.GetDeviceGroupResponse) {}
+    // RemoveDeviceGroup removes a device group
+    rpc RemoveServiceGroup (device.RemoveDeviceGroupRequest) returns (common.Success){}
+    // UpdateDeviceGroup updates the flag that determines if the device group is enable or not
+    rpc UpdateDeviceGroup (device.UpdateDeviceGroupRequest) returns (common.Success){}
+
+    // AddDevice adds a new group to the system
+    rpc AddDevice (device.AddDeviceRequest) returns (device.Device) {}
+    // ListDevice obtains a list of devices in a device_group
+    rpc ListDevices (device.DeviceGroupId) returns (device.DeviceList) {}
+    //GetDevice retrieves a given device in an organization.
+    rpc GetDevice (device.GetDeviceRequest) returns (device.Device) {}
+    // UpdateDevice updates the flag that determines if the device can interact with the running applications
+    rpc UpdateDevice(device.UpdateDeviceRequest) returns (common.Success) {}
+    // RemoveDevice removes a given device
+    rpc RemoveDevice(device.RemoveDeviceRequest) returns (common.Success) {}
+
+
 }
 
