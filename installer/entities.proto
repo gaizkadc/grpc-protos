@@ -59,6 +59,8 @@ message InstallRequest {
     bool use_core_dns = 12;
     // Target platform
     Platform target_platform = 13;
+    // Static IP addresses
+    StaticIPAddresses static_ip_addresses = 14; 
 }
 
 message InstallId {
@@ -82,4 +84,14 @@ message InstallResponse {
     int64 elapsed_time = 3;
     // Error message in case the install failed.
     string error = 4;
+}
+
+// StaticIPAddresses message with the static IP configuration
+message StaticIPAddresses {
+    // Use static IP addresses or not
+    bool use_static_ip = 1;
+    // Public ingress static IP address
+    string ingress = 2;
+    // Public DNS static IP address
+    string dns = 3;
 }
