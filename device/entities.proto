@@ -70,7 +70,7 @@ message AddDeviceRequest {
     string organization_id = 1;
     // DeviceGroupID with the device group identifier
     string device_group_id = 2;
-    // DeviceId with the device identifier
+    //DeviceId with the device identifier provided by the IoT SDK
     string device_id = 3;
     // Labels defined by the user
     map<string, string> labels = 4;
