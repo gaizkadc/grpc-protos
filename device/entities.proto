@@ -48,13 +48,6 @@ message DeviceGroupList {
     repeated DeviceGroup groups = 1;
 }
 
-message GetDeviceGroupResponse {
-    // DeviceGroup with the device info
-    DeviceGroup device_group_id = 1;
-    // Devices with the devices in the group
-    repeated Device devices = 2;
-}
-
 message RemoveDeviceGroupRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
