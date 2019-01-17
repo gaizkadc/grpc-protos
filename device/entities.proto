@@ -70,8 +70,10 @@ message AddDeviceRequest {
     string organization_id = 1;
     // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // DeviceId with the device identifier
+    string device_id = 3;
     // Labels defined by the user
-    map<string, string> labels = 3;
+    map<string, string> labels = 4;
 }
 
 message DeviceId {
