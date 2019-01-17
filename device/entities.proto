@@ -16,12 +16,10 @@ message DeviceGroup {
     string device_group_id = 2;
     // Name of the device group.
     string name = 3;
-    // GroupApiKey with the API used by the devices associated to this group for registration purposes.
-    string group_api_key = 4;
-    // Enabled determines if this group is able to interact with the running applications.
-    bool enabled = 5;
+    // Created time
+    int64 created = 4;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 5;
 }
 
 // Device message representing a remote device (e.g., IoT sensor, mobile app, etc.) that will send data
@@ -35,12 +33,8 @@ message Device {
     string device_id = 3;
     // RegisterSince is the timestamp when the device joined the group.
     int64 register_since = 4;
-    // Enabled determines if the device can interact with the running applications.
-    bool enabled = 5;
-    // DeviceApiKey contains the API KEY used by the device to send data.
-    string device_api_key = 6;
     // Labels defined by the user.
-    map<string, string> labels = 7;
+    map<string, string> labels = 5;
 }
 
 message DeviceGroupId {
@@ -54,16 +48,9 @@ message DeviceGroupList {
     repeated DeviceGroup groups = 1;
 }
 
-message GetDeviceGroupRequest {
-     // OrganizationId with the organization identifier.
-     string organization_id = 1;
-     // DeviceGroupId with the device group identifier.
-     string device_group = 2;
-}
-
 message GetDeviceGroupResponse {
     // DeviceGroup with the device info
-    DeviceGroup device_group = 1;
+    DeviceGroup device_group_id = 1;
     // Devices with the devices in the group
     repeated Device devices = 2;
 }
@@ -72,7 +59,7 @@ message RemoveDeviceGroupRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // DeviceGroupId with the device group identifier.
-    string device_group = 2;
+    string device_group_id = 2;
 }
 
 message AddDeviceGroupRequest {
@@ -85,15 +72,6 @@ message AddDeviceGroupRequest {
     map<string, string> labels = 6;
 }
 
-message UpdateDeviceGroupRequest {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // DeviceGroupId with the device group identifier
-    string device_group = 2;
-    // Enabled determines if the device can interact with the running applications.
-    bool enabled = 3;
-}
-
 message AddDeviceRequest {
     // OrganizationID with the organization identifier
     string organization_id = 1;
@@ -103,7 +81,7 @@ message AddDeviceRequest {
     map<string, string> labels = 3;
 }
 
-message GetDeviceRequest {
+message DeviceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // DeviceGroupId with the device group identifier.
@@ -111,21 +89,9 @@ message GetDeviceRequest {
     // DeviceId with the device identifier.
     string device_id = 3;
 }
-
 
 message DeviceList {
     repeated Device devices = 1;
-}
-
-message UpdateDeviceRequest {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // DeviceGroupId with the device group identifier.
-    string device_group_id = 2;
-    // DeviceId with the device identifier.
-    string device_id = 3;
-    // Enabled determines if the device can interact with the running applications.
-    bool enabled = 4;
 }
 
 message RemoveDeviceRequest {
