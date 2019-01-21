@@ -94,11 +94,6 @@ message DeviceCredentials {
     string device_api_key = 5;
 }
 
-message DeviceCredentialsId {
-    string organization_id = 1;
-    string device_group_id = 2;
-    string device_id = 3;
-}
 
 // AddDeviceCredentialsRequest is the request for add a new device credential
 message AddDeviceCredentialsRequest {
@@ -127,10 +122,6 @@ message DeviceGroupCredentials {
     string device_group_api_key = 5;
 }
 
-message DeviceGroupId {
-    string organization_id = 1;
-    string device_group_id = 2;
-}
 
 // AddDeviceGroupCredentialsRequest, message for add a new device group credential
 message AddDeviceGroupCredentialsRequest {
@@ -141,16 +132,26 @@ message AddDeviceGroupCredentialsRequest {
     bool default_device_connectivity = 4;
 }
 
-// UpdateDeviceGroupEnableCredentialsRequest, message to enable/disable the device group
-message UpdateDeviceGroupEnableCredentialsRequest {
+// UpdateDeviceGroupCredentialsRequest, message to enable/disable the device group
+message UpdateDeviceGroupCredentialsRequest {
     string organization_id = 1;
     string device_group_id = 2;
-    bool enabled = 3;
+    bool update_enabled = 3;
+    bool enabled = 4;
+    bool update_device_connectivity = 5;
+    bool default_device_connectivity = 6;
 }
 
-// UpdateDeviceGroupConnectivityCredentialsRequest, message to enable/disable the device group
-message UpdateDeviceGroupConnectivityCredentialsRequest {
+// DeviceGroupLoginRequest, message to login a group
+message DeviceGroupLoginRequest {
     string organization_id = 1;
-    string device_group_id = 2;
-    bool default_device_connectivity = 3;
+    string device_group_api_key = 2;
+
+}
+
+// DeviceLoginRequest, message to login a device
+message DeviceLoginRequest {
+    string organization_id = 1;
+    string device_api_key = 2;
+
 }
