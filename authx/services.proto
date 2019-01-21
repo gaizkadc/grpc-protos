@@ -48,19 +48,29 @@ service Authx {
     // Retrieve the role associated with a user.
     rpc GetUserRole(user.UserId) returns (Role){}
 
+
     // AddDeviceCredentials adds a device in the system
-    rpc AddDeviceCredentials (AddDeviceCredentialsRequest) returns (common.Success) {}
+    rpc AddDeviceCredentials (AddDeviceCredentialsRequest) returns (DeviceCredentials) {}
 
     // UpdateDeviceCredentials enable /disable the device
     rpc UpdateDeviceCredentials (UpdateDeviceCredentialsRequest) returns (common.Success) {}
 
+    // RemoveDeviceCredentials removes a credential
+    rpc RemoveDeviceCredentials (DeviceCredentialsId) returns (common.Success)
+
     // AddDeviceGroupCredentials adds a device in the system
-    rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (common.Success) {}
+    rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (DeviceGroupCredentials) {}
 
     // UpdateDeviceGroupCredentials enable /disable the device
-    rpc UpdateDeviceGroupEnableCredentials (UpdateDeviceGroupEnableCredentialsRequest) returns (common.Success) {}
+    rpc UpdateDeviceGroupCredentials (UpdateDeviceGroupCredentialsRequest) returns (common.Success) {}
 
-    // UpdateDeviceGroupCredentials enable /disable the device
-    rpc UpdateDeviceGroupConnectivityCredentials (UpdateDeviceGroupConnectivityCredentialsRequest) returns (common.Success) {}
+    // RemoveDeviceGroupCredentials removes a group credentials
+    rpc RemoveDeviceGroupCredentials (DeviceGroupCredentialsId) returns (common.Success)
+
+    // DeviceGroupLogin checks if the device group credentials are valid
+    rpc DeviceGroupLogin(DeviceGroupLoginRequest) returns (common.Success) {}
+
+    // DeviceLogin checks if the device credentials are valid and returns a token
+    rpc DeviceLogin(DeviceLoginRequest) returns (LoginResponse) {}
 
 }
