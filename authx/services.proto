@@ -11,6 +11,7 @@ import "common/entities.proto";
 import "authx/entities.proto";
 import "organization/entities.proto";
 import "user/entities.proto";
+import "device/entities.proto";
 
 // Authx service exposing credential information.
 service Authx {
@@ -56,7 +57,7 @@ service Authx {
     rpc UpdateDeviceCredentials (UpdateDeviceCredentialsRequest) returns (common.Success) {}
 
     // RemoveDeviceCredentials removes a credential
-    rpc RemoveDeviceCredentials (DeviceCredentialsId) returns (common.Success){}
+    rpc RemoveDeviceCredentials (device.DeviceId) returns (common.Success){}
 
     // AddDeviceGroupCredentials adds a device in the system
     rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (DeviceGroupCredentials) {}
@@ -65,7 +66,7 @@ service Authx {
     rpc UpdateDeviceGroupCredentials (UpdateDeviceGroupCredentialsRequest) returns (common.Success) {}
 
     // RemoveDeviceGroupCredentials removes a group credentials
-    rpc RemoveDeviceGroupCredentials (DeviceGroupCredentialsId) returns (common.Success) {}
+    rpc RemoveDeviceGroupCredentials (device.DeviceGroupId) returns (common.Success) {}
 
     // DeviceGroupLogin checks if the device group credentials are valid
     rpc DeviceGroupLogin(DeviceGroupLoginRequest) returns (common.Success) {}

@@ -94,11 +94,6 @@ message DeviceCredentials {
     string device_api_key = 5;
 }
 
-message DeviceCredentialsId {
-    string organization_id = 1;
-    string device_group_id = 2;
-    string device_id = 3;
-}
 
 // AddDeviceCredentialsRequest is the request for add a new device credential
 message AddDeviceCredentialsRequest {
@@ -127,10 +122,6 @@ message DeviceGroupCredentials {
     string device_group_api_key = 5;
 }
 
-message DeviceGroupCredentialsId {
-    string organization_id = 1;
-    string device_group_id = 2;
-}
 
 // AddDeviceGroupCredentialsRequest, message for add a new device group credential
 message AddDeviceGroupCredentialsRequest {
