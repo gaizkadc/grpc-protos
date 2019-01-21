@@ -56,7 +56,7 @@ service Authx {
     rpc UpdateDeviceCredentials (UpdateDeviceCredentialsRequest) returns (common.Success) {}
 
     // RemoveDeviceCredentials removes a credential
-    rpc RemoveDeviceCredentials (DeviceCredentialsId) returns (common.Success)
+    rpc RemoveDeviceCredentials (DeviceCredentialsId) returns (common.Success){}
 
     // AddDeviceGroupCredentials adds a device in the system
     rpc AddDeviceGroupCredentials (AddDeviceGroupCredentialsRequest) returns (DeviceGroupCredentials) {}
@@ -65,7 +65,7 @@ service Authx {
     rpc UpdateDeviceGroupCredentials (UpdateDeviceGroupCredentialsRequest) returns (common.Success) {}
 
     // RemoveDeviceGroupCredentials removes a group credentials
-    rpc RemoveDeviceGroupCredentials (DeviceGroupCredentialsId) returns (common.Success)
+    rpc RemoveDeviceGroupCredentials (DeviceGroupCredentialsId) returns (common.Success) {}
 
     // DeviceGroupLogin checks if the device group credentials are valid
     rpc DeviceGroupLogin(DeviceGroupLoginRequest) returns (common.Success) {}
