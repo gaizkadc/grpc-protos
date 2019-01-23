@@ -19,6 +19,8 @@ enum AccessPrimitive {
     PROFILE = 3;
     // Access to operations performed by application clusters.
     APPCLUSTEROPS = 4;
+    // Device access
+    DEVICE = 5;
 }
 
 // Role defines a role for users of an organization with the associated capabilities
