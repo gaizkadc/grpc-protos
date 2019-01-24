@@ -21,7 +21,7 @@ service Devices {
     rpc ListDeviceGroups(organization.OrganizationId) returns (device_manager.DeviceGroupList){}
 
     rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){}
-    rpc GetDevice(device.DeviceId) returns (device_manager.Device)
+    rpc GetDevice(device.DeviceId) returns (device_manager.Device){}
     rpc ListDevices(device.DeviceGroupId) returns (device_manager.DeviceList){}
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
     rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
