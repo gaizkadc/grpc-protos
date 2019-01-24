@@ -74,4 +74,8 @@ service Authx {
     // DeviceLogin checks if the device credentials are valid and returns a token
     rpc DeviceLogin(DeviceLoginRequest) returns (LoginResponse) {}
 
+    // RefreshDeviceToken return a new token with a new expiration date.
+    rpc RefreshDeviceToken (RefreshTokenRequest) returns (LoginResponse) {
+    }
+
 }
