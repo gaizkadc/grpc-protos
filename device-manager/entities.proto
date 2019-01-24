@@ -98,3 +98,12 @@ message RegisterResponse {
     string device_api_key = 2;
 }
 
+message DeviceLabelRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    map<string, string> labels = 4;
+}

@@ -22,8 +22,8 @@ service Devices {
 
     rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){}
     rpc ListDevices(device.DeviceGroupId) returns (device_manager.DeviceList){}
-    rpc AddLabelToDevice(common.Labels) returns (common.Success){}
-    rpc RemoveLabelFromDevice(common.Labels) returns (common.Success){}
+    rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
+    rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
 }
 

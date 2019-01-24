@@ -104,13 +104,13 @@ service Devices {
             get: "/v1/device/{organization_id}/list"
         };
     }
-    rpc AddLabelToDevice(common.Labels) returns (common.Success){
+    rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/label/add"
             body: "*"
         };
     }
-    rpc RemoveLabelFromDevice(common.Labels) returns (common.Success){
+    rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/label/remove"
             body: "*"
