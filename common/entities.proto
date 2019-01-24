@@ -14,3 +14,8 @@ message Success {
 // Empty message to be reused for rpc calls without parameters.
 message Empty{
 }
+
+// Message to be used on add/remove operations on labels.
+message Labels{
+    map <string, string> labels = 1;
+}

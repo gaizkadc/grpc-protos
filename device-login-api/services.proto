@@ -1,0 +1,34 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package device_login_api;
+option go_package = "github.com/nalej/grpc-device-login-api-go";
+
+import "authx/entities.proto";
+import "device-manager/entities.proto";
+import "google/api/annotations.proto";
+
+// Login operations.
+service Login {
+    // DeviceLogin checks the device API Key and whether the device is enabled to create a JWT token.
+    rpc DeviceLogin(authx.DeviceLoginRequest) returns(authx.LoginResponse){
+        option (google.api.http) = {
+            post: "/v1/login"
+            body: "*"
+        };
+    }
+}
+
+service Register {
+    // RegisterDevice registers a new device in a given device group.
+    rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){
+        option (google.api.http) = {
+            post: "/v1/register/device"
+            body: "*"
+        };
+    }
+}
+

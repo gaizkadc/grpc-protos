@@ -19,7 +19,7 @@ service Devices {
     // GetDeviceGroup retrieves a given device group in an organization.
     rpc GetDeviceGroup (device.DeviceGroupId) returns (device.DeviceGroup) {}
     // RemoveDeviceGroup removes a device group
-    rpc RemoveServiceGroup (device.RemoveDeviceGroupRequest) returns (common.Success){}
+    rpc RemoveDeviceGroup (device.RemoveDeviceGroupRequest) returns (common.Success){}
 
     // AddDevice adds a new group to the system
     rpc AddDevice (device.AddDeviceRequest) returns (device.Device) {}

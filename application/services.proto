@@ -33,4 +33,5 @@ service Applications {
     rpc UpdateServiceStatus(UpdateServiceStatusRequest) returns(common.Success){}
     // RemoveAppInstance removes an application instance
     rpc RemoveAppInstance(AppInstanceId) returns (common.Success){}
+
 }

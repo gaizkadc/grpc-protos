@@ -1,0 +1,29 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package device_manager;
+option go_package = "github.com/nalej/grpc-device-manager-go";
+
+import "authx/entities.proto";
+import "device-manager/entities.proto";
+import "device/entities.proto";
+import "common/entities.proto";
+import "organization/entities.proto";
+import "google/api/annotations.proto";
+
+service Devices {
+    rpc AddDeviceGroup(AddDeviceGroupRequest) returns (DeviceGroup){}
+    rpc UpdateDeviceGroup(UpdateDeviceGroupRequest) returns (DeviceGroup){}
+    rpc RemoveDeviceGroup(device.DeviceGroupId) returns (common.Success){}
+    rpc ListDeviceGroups(organization.OrganizationId) returns (device_manager.DeviceGroupList){}
+
+    rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){}
+    rpc ListDevices(device.DeviceGroupId) returns (device_manager.DeviceList){}
+    rpc AddLabelToDevice(common.Labels) returns (common.Success){}
+    rpc RemoveLabelFromDevice(common.Labels) returns (common.Success){}
+    rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
+}
+

@@ -1,0 +1,9 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package device_login_api;
+option go_package = "github.com/nalej/grpc-device-login-api-go";
+
