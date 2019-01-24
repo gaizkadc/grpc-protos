@@ -13,3 +13,45 @@ message DeployRequest{
     string name = 3;
     string description = 4;
 }
+
+// ApplicationFilter allows the device to request the set of available application setting filters.
+message ApplicationFilter{
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // DeviceGroupId with the identifier of the target device group
+    string device_group_id = 2;
+    // Match labels contains the set of labels that should be matched against available applications.
+    map<string, string> match_labels = 3;
+}
+
+// ApplicationLabels retrieves the list of labels in a given application instance. This is provided as to
+// give the device extra options for local filtering.
+message ApplicationLabels{
+    string app_instance_id = 1;
+    map<string, string> labels = 2;
+}
+
+// TargetApplications contains the applications the device should send information to.
+message TargetApplications{
+    // Applications with a map of application instance identifiers assocaited with the set of labels.
+    map<string, ApplicationLabels> applications = 1;
+}
+
+message RetrieveEndpointsRequest{
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // AppInstanceId with the target application instance.
+    string app_instance_id = 2;
+}
+
+message ApplicationClusterEndpoints{
+    // DeviceControllerURL with the URL the device controller is exposed on the target application cluster.
+    string device_controller_url = 1;
+    // Endpoints available on the given application cluster.
+    repeated string endpoints = 2;
+}
+
+message ApplicationEndpoints{
+    // ClusterEndpoints with the list of cluster and associated endpoints an application instance is available.
+    repeated ApplicationClusterEndpoints cluster_endpoints = 2;
+}
