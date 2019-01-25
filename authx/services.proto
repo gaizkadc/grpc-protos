@@ -53,6 +53,9 @@ service Authx {
     // AddDeviceCredentials adds a device in the system
     rpc AddDeviceCredentials (AddDeviceCredentialsRequest) returns (DeviceCredentials) {}
 
+    // GetDeviceCredentials retrieves the credentials associated with a device.
+    rpc GetDeviceCredentials(device.DeviceId) returns (DeviceCredentials){}
+
     // UpdateDeviceCredentials enable /disable the device
     rpc UpdateDeviceCredentials (UpdateDeviceCredentialsRequest) returns (common.Success) {}
 
