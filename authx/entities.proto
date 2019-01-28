@@ -19,8 +19,10 @@ enum AccessPrimitive {
     PROFILE = 3;
     // Access to operations performed by application clusters.
     APPCLUSTEROPS = 4;
-    // Device access
+    // Device accessing the system
     DEVICE = 5;
+    // DevMngr is a user capable of managing device groups and devices
+    DEVMNGR = 6;
 }
 
 // Role defines a role for users of an organization with the associated capabilities
