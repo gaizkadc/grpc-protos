@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-public-api-go";
 
 import "infrastructure/entities.proto";
 import "application/entities.proto";
+import "installer/entities.proto";
 
 // --------------------------------
 // Organization related entities.
@@ -98,6 +99,8 @@ message InstallRequest {
     bool use_core_dns = 11;
     // Target platform
     Platform target_platform = 12;
+    // Static IP addresses
+    installer.StaticIPAddresses static_ip_addresses = 13; 
 }
 
 // --------------------------------
