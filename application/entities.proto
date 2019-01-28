@@ -198,6 +198,7 @@ message DeploySpecs {
     int64 cpu = 1;
     int64 memory = 2;
     int32 replicas = 3;
+    bool  multi_cluster_replica_set = 4;
 }
 
 enum ApplicationStatus {
