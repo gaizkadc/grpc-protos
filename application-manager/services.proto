@@ -35,7 +35,7 @@ service ApplicationManager {
     rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {}
 
 
-    rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplications){}
+    rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList){}
     rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints){}
 
 }
