@@ -24,17 +24,17 @@ message ApplicationFilter{
     map<string, string> match_labels = 3;
 }
 
-// ApplicationLabels retrieves the list of labels in a given application instance. This is provided as to
+// TargetApplication retrieves the list of labels in a given application instance. This is provided as to
 // give the device extra options for local filtering.
-message ApplicationLabels{
+message TargetApplication {
     string app_instance_id = 1;
     map<string, string> labels = 2;
 }
 
-// TargetApplications contains the applications the device should send information to.
-message TargetApplications{
-    // Applications with a map of application instance identifiers assocaited with the set of labels.
-    map<string, ApplicationLabels> applications = 1;
+// TargetApplicationList contains the applications the device should send information to.
+message TargetApplicationList{
+    // List of application instance identifiers assocaited with the set of labels.
+    repeated TargetApplication applications = 1;
 }
 
 message RetrieveEndpointsRequest{
