@@ -354,6 +354,8 @@ message ServiceGroupInstance {
     ServiceStatus status = 10;
     // Metadata for this service group
     InstanceMetadata metadata = 11;
+    // Particular deployment specs for this service
+    ServiceGroupDeploymentSpecs specs = 12;
 }
 
 message ServiceInstance {
