@@ -292,7 +292,7 @@ message AppInstance {
     // Status of the deployed instance.
     ApplicationStatus status = 12;
     // Metadata descriptor for the instances triggered by this app
-    InstanceMetadata metadata = 13;
+    repeated InstanceMetadata metadata = 13;
 }
 
 // This is a common metadata entity that collects information for a deployed instance. This instance can be a
