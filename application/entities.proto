@@ -291,25 +291,35 @@ message AppInstance {
     repeated ServiceInstance services = 11;
     // Status of the deployed instance.
     ApplicationStatus status = 12;
+    // Metadata descriptor for the instances triggered by this app
+    InstanceMetadata metadata = 13;
 }
 
 // This is a common metadata entity that collects information for a deployed instance. This instance can be a
 // service instance or a service group instance.
 message InstanceMetadata {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Identifier of the monitored entity
+    string monitored_instance_id = 4;
     // Type of instance this metadata refers to
-    InstanceType type = 1;
+    InstanceType type = 5;
     // List of instances supervised byu this metadata structure
-    repeated string instances_id = 2;
+    repeated string instances_id = 6;
     // Number of desired replicas specified in the descriptor
-    int32 desired_replicas = 3;
+    int32 desired_replicas = 7;
     // Number of available replicas for this instance
-    int32 available_replicas = 4;
+    int32 available_replicas = 8;
     // Number of unavaiable replicas for this descriptor
-    int32 unavailable_replicas = 5;
+    int32 unavailable_replicas = 9;
     // Status of every item monitored by this metadata entry
-    map<string,ServiceStatus> status = 6;
+    map<string,ServiceStatus> status = 10;
     // Relevant information for every monitored instance
-    map<string, string> info = 7;
+    map<string, string> info = 11;
 }
 
 // Enumerate with the type of instances we can deploy in the system.
