@@ -287,12 +287,10 @@ message AppInstance {
     repeated SecurityRule rules = 9;
     // Groups with the Service collocation strategies.
     repeated ServiceGroupInstance groups = 10;
-    // Services of the applicaiton.
-    repeated ServiceInstance services = 11;
     // Status of the deployed instance.
-    ApplicationStatus status = 12;
+    ApplicationStatus status = 11;
     // Metadata descriptor for the instances triggered by this app
-    repeated InstanceMetadata metadata = 13;
+    repeated InstanceMetadata metadata = 12;
 }
 
 // This is a common metadata entity that collects information for a deployed instance. This instance can be a
@@ -363,45 +361,47 @@ message ServiceInstance {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
+    // ServiceGroupInstanceId with the service group instance identifier.
+    string service_group_instance_id = 4;
     // ServiceId with the service identifier.
-    string service_id = 4;
+    string service_id = 5;
     // Unique identifier for this instance
-    string service_instance_id = 5;
+    string service_instance_id = 6;
     // Name of the service.
-    string name = 6;
+    string name = 7;
     // Description of the service.
-    string description = 7;
+    string description = 8;
     // ServiceType represents the underlying technology of the service to be launched.
-    ServiceType type = 8;
+    ServiceType type = 9;
     // Image contains the URL/name of the image to be executed.
-    string image = 9;
+    string image = 10;
     // ImageCredentials with the data required to access the repository the image is available at.
-    ImageCredentials credentials = 10;
+    ImageCredentials credentials = 11;
     // DeploySpecs with the resource specs required by the service.
-    DeploySpecs specs = 11;
+    DeploySpecs specs = 12;
     // Storage restrictions
-    repeated Storage storage = 12;
+    repeated Storage storage = 13;
     // ExposedPorts contains the list of ports exposed by the current service.
-    repeated Port exposed_ports = 13;
+    repeated Port exposed_ports = 14;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 14;
+    map<string, string> environment_variables = 15;
     // Configs contains the configuration files required by the service.
-    repeated ConfigFile configs = 15;
+    repeated ConfigFile configs = 16;
     // Labels with the user defined labels.
-    map<string, string> labels = 16;
+    map<string, string> labels = 17;
     // DeployAfter contains the list of services that must be running before launching a service.
-    repeated string deploy_after = 17;
+    repeated string deploy_after = 18;
     // Status of the deployed service
-    ServiceStatus status = 18;
+    ServiceStatus status = 19;
     // Endpoints exposed to the users by the service.
-    repeated string endpoints = 19;
+    repeated string endpoints = 20;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
-    string deployed_on_cluster_id = 20;
+    string deployed_on_cluster_id = 21;
     // Run arguments
-    repeated string run_arguments = 21;
+    repeated string run_arguments = 22;
     // Relevant information about this instance
-    string info = 22;
+    string info = 23;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
