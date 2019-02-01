@@ -66,6 +66,7 @@ enum PortAccess {
     DEVICE_GROUP = 3;
 }
 
+
 // ServiceGroup structure to represent a collection of services that must be deployed following a given collocation
 // policy.
 message ServiceGroup {
@@ -83,12 +84,25 @@ message ServiceGroup {
     repeated string services = 6;
     // Policy indicating the deployment collocation policy.
     CollocationPolicy policy = 7;
+    // Particular deployment specs for this service
+    ServiceGroupDeploymentSpecs specs = 8;
 }
 
 // CollocationPolicy defines how the services of a service group must be deployed.
 enum CollocationPolicy {
+    // Force services in a group to be deployed into the same cluster
     SAME_CLUSTER = 0;
+    // Force services in a group to be deployed into separate clusters
     SEPARATE_CLUSTERS = 1;
+}
+
+// It specifies how to proceed deploying a service group. Some specs here may invalidate specific service deployment
+// specs.
+message ServiceGroupDeploymentSpecs {
+    // How many times this service group must be replicated
+    int32 num_replicas = 1;
+    // Indicate if this service group must be replicated in every cluster
+    bool multi_cluster_replica = 2;
 }
 
 // ServiceType defines the types of services supported in the system.
@@ -111,9 +125,13 @@ message ConfigFile {
 }
 
 message ImageCredentials {
+    // Name of the user in the platform
     string username = 1;
+    // Password
     string password = 2;
+    // User email
     string email = 3;
+    // Docker repository url
     string docker_repository = 4;
 }
 
@@ -198,7 +216,6 @@ message DeploySpecs {
     int64 cpu = 1;
     int64 memory = 2;
     int32 replicas = 3;
-    bool  multi_cluster_replica_set = 4;
 }
 
 enum ApplicationStatus {
@@ -270,11 +287,47 @@ message AppInstance {
     repeated SecurityRule rules = 9;
     // Groups with the Service collocation strategies.
     repeated ServiceGroupInstance groups = 10;
-    // Services of the applicaiton.
-    repeated ServiceInstance services = 11;
     // Status of the deployed instance.
-    ApplicationStatus status = 12;
+    ApplicationStatus status = 11;
+    // Metadata descriptor for the instances triggered by this app
+    repeated InstanceMetadata metadata = 12;
 }
+
+// This is a common metadata entity that collects information for a deployed instance. This instance can be a
+// service instance or a service group instance.
+message InstanceMetadata {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Identifier of the monitored entity
+    string monitored_instance_id = 4;
+    // Type of instance this metadata refers to
+    InstanceType type = 5;
+    // List of instances supervised byu this metadata structure
+    repeated string instances_id = 6;
+    // Number of desired replicas specified in the descriptor
+    int32 desired_replicas = 7;
+    // Number of available replicas for this instance
+    int32 available_replicas = 8;
+    // Number of unavaiable replicas for this descriptor
+    int32 unavailable_replicas = 9;
+    // Status of every item monitored by this metadata entry
+    map<string,ServiceStatus> status = 10;
+    // Relevant information for every monitored instance
+    map<string, string> info = 11;
+}
+
+// Enumerate with the type of instances we can deploy in the system.
+enum InstanceType {
+    // A service
+    SERVICE_INSTANCE = 0;
+    // A service group that contains several running service instances
+    SERVICE_GROUP_INSTANCE = 1;
+}
+
 
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
 // policy.
@@ -287,14 +340,22 @@ message ServiceGroupInstance {
     string app_instance_id = 3;
     // ServiceGroupId with the group identifier.
     string service_group_id = 4;
+    // Unique identifier for this instance
+    string service_group_instance_id = 5;
     // Name of the service group.
-    string name = 5;
+    string name = 6;
     // Description of the service group.
-    string description = 6;
-    // ServicesInstances defining a list of service identifiers that belong to the group.
-    repeated string service_instances = 7;
+    string description = 7;
+    // ServicesInstances with the list of instance objects for this group
+    repeated ServiceInstance service_instances = 8;
     // Policy indicating the deployment collocation policy.
-    CollocationPolicy policy = 8;
+    CollocationPolicy policy = 9;
+    // The status for this service group instance will be the worst status of its services
+    ServiceStatus status = 10;
+    // Metadata for this service group
+    InstanceMetadata metadata = 11;
+    // Particular deployment specs for this service
+    ServiceGroupDeploymentSpecs specs = 12;
 }
 
 message ServiceInstance {
@@ -304,41 +365,47 @@ message ServiceInstance {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
+    // ServiceGroupInstanceId with the service group instance identifier.
+    string service_group_instance_id = 4;
     // ServiceId with the service identifier.
-    string service_id = 4;
+    string service_id = 5;
+    // Unique identifier for this instance
+    string service_instance_id = 6;
     // Name of the service.
-    string name = 5;
+    string name = 7;
     // Description of the service.
-    string description = 6;
+    string description = 8;
     // ServiceType represents the underlying technology of the service to be launched.
-    ServiceType type = 7;
+    ServiceType type = 9;
     // Image contains the URL/name of the image to be executed.
-    string image = 8;
+    string image = 10;
     // ImageCredentials with the data required to access the repository the image is available at.
-    ImageCredentials credentials = 9;
+    ImageCredentials credentials = 11;
     // DeploySpecs with the resource specs required by the service.
-    DeploySpecs specs = 10;
+    DeploySpecs specs = 12;
     // Storage restrictions
-    repeated Storage storage = 11;
+    repeated Storage storage = 13;
     // ExposedPorts contains the list of ports exposed by the current service.
-    repeated Port exposed_ports = 12;
+    repeated Port exposed_ports = 14;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 13;
+    map<string, string> environment_variables = 15;
     // Configs contains the configuration files required by the service.
-    repeated ConfigFile configs = 14;
+    repeated ConfigFile configs = 16;
     // Labels with the user defined labels.
-    map<string, string> labels = 15;
+    map<string, string> labels = 17;
     // DeployAfter contains the list of services that must be running before launching a service.
-    repeated string deploy_after = 16;
+    repeated string deploy_after = 18;
     // Status of the deployed service
-    ServiceStatus status = 17;
+    ServiceStatus status = 19;
     // Endpoints exposed to the users by the service.
-    repeated string endpoints = 18;
+    repeated string endpoints = 20;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
-    string deployed_on_cluster_id = 19;
+    string deployed_on_cluster_id = 21;
     // Run arguments
-    repeated string run_arguments = 20;
+    repeated string run_arguments = 22;
+    // Relevant information about this instance
+    string info = 23;
 }
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
