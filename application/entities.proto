@@ -352,6 +352,8 @@ message ServiceGroupInstance {
     CollocationPolicy policy = 9;
     // The status for this service group instance will be the worst status of its services
     ServiceStatus status = 10;
+    // Metadata for this service group
+    ServiceGroupInstance metadata = 11;
 }
 
 message ServiceInstance {
