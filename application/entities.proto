@@ -346,14 +346,14 @@ message ServiceGroupInstance {
     string name = 6;
     // Description of the service group.
     string description = 7;
-    // ServicesInstances defining a list of service identifiers that belong to the group.
-    repeated string service_instances = 8;
+    // ServicesInstances with the list of instance objects for this group
+    repeated ServiceInstance service_instances = 8;
     // Policy indicating the deployment collocation policy.
     CollocationPolicy policy = 9;
     // The status for this service group instance will be the worst status of its services
     ServiceStatus status = 10;
     // Metadata for this service group
-    ServiceGroupInstance metadata = 11;
+    InstanceMetadata metadata = 11;
 }
 
 message ServiceInstance {
