@@ -26,8 +26,6 @@ message AppDescriptor {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
-    // Services of the application.
-    repeated Service services = 9;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -79,7 +77,7 @@ message ServiceGroup {
     // Description of the service group.
     string description = 5;
     // Services defining a list of service identifiers that belong to the group.
-    repeated string services = 6;
+    repeated Service services = 6;
     // Policy indicating the deployment collocation policy.
     CollocationPolicy policy = 7;
     // Particular deployment specs for this service
