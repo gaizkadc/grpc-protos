@@ -82,6 +82,8 @@ message ServiceGroup {
     CollocationPolicy policy = 7;
     // Particular deployment specs for this service
     ServiceGroupDeploymentSpecs specs = 8;
+    // Labels defined by the user.
+    map<string, string> labels = 9;
 }
 
 // CollocationPolicy defines how the services of a service group must be deployed.
@@ -250,8 +252,6 @@ message AddAppDescriptorRequest {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
-    // Services of the application.
-    repeated Service services = 9;
 }
 
 message AppDescriptorList {
@@ -348,6 +348,8 @@ message ServiceGroupInstance {
     InstanceMetadata metadata = 11;
     // Particular deployment specs for this service
     ServiceGroupDeploymentSpecs specs = 12;
+    // Labels defined by the user.
+    map<string, string> labels = 13;
 }
 
 message ServiceInstance {
