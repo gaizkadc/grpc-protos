@@ -99,36 +99,49 @@ message UndeployRequest {
 message ClusterScoreRequest {
    // RequestId identifier for this request
    string request_id = 1;
-   // AppInstanceId the application this requirements refer to
-   string app_instance_id = 2;
    // Requirements set of requirements for the application
-   repeated Requirement requirements = 3;
+   repeated Requirement requirements = 2;
 }
 
 // A requirement of resources for a certain service.
 message Requirement {
-   // ServiceId id of the application to be deployed
-   string service_id = 1;
+   // RequestId identifier for this request
+   string request_id = 1;
+   // Application instance id
+   string app_instance_id = 2;
+   // Group service instance id
+   string group_service_instance_id = 3;
    // CPU required
-   int64 cpu = 2;
+   int64 cpu = 4;
    // Memory required
-   int64 memory = 3;
+   int64 memory = 5;
    // Storage required
-   int64 storage = 4;
+   int64 storage = 6;
    // Replicas required
-   int32 replicas = 5;
+   int32 replicas = 7;
 }
 
 
 // Response when clusters are queried for their corresponding scores.
 message ClusterScoreResponse {
-   // RequestId
+   // Request id
    string request_id = 1;
+   // Application instance id
+   string app_instance_id = 2;
    // ClusterId identifying this cluster
-   string cluster_id = 2;
-   // Score for the set of requirements
-   float score = 3;
+   string cluster_id = 3;
+   // Score for different combinations of deployments
+   repeated DeploymentScore score = 4;
 }
+
+// Score for the deployment of a collection of group instances.
+message DeploymentScore {
+   // List of groups to be deployed together
+   repeated string group_service_instances = 1;
+   // The score associated with the list of services mentioned above
+   float score = 2;
+}
+
 
 // --------------------------
 // Conductor Monitor services
