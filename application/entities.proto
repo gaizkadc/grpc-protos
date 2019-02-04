@@ -241,21 +241,19 @@ message AddAppDescriptorRequest {
     string organization_id = 2;
     // Name of the application.
     string name = 3;
-    // Description of the application.
-    string description = 4;
     // ConfigurationOptions defines a key-value map of configuration options.
-    map<string, string> configuration_options = 5;
+    map<string, string> configuration_options = 4;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 6;
+    map<string, string> environment_variables = 5;
     // Labels defined by the user.
-    map<string, string> labels = 7;
+    map<string, string> labels = 6;
     // Rules that define the connectivity between the elements of an application.
-    repeated SecurityRule rules = 8;
+    repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
-    repeated ServiceGroup groups = 9;
+    repeated ServiceGroup groups = 8;
     // Services of the application.
-    repeated Service services = 10;
+    repeated Service services = 9;
 }
 
 message AppDescriptorList {
@@ -412,8 +410,6 @@ message AddAppInstanceRequest {
     string app_descriptor_id = 2;
     // Name of the application instance.
     string name = 3;
-    // Description of the application the application instance.
-    string description = 4;
 }
 
 message AppInstanceId {
