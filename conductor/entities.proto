@@ -126,20 +126,20 @@ message Requirement {
 message ClusterScoreResponse {
    // Request id
    string request_id = 1;
-   // Application instance id
-   string app_instance_id = 2;
    // ClusterId identifying this cluster
-   string cluster_id = 3;
+   string cluster_id = 2;
    // Score for different combinations of deployments
-   repeated DeploymentScore score = 4;
+   repeated DeploymentScore score = 3;
 }
 
 // Score for the deployment of a collection of group instances.
 message DeploymentScore {
+   // Application instance id
+   string app_instance_id = 1;
    // List of groups to be deployed together
-   repeated string group_service_instances = 1;
+   repeated string group_service_instances = 2;
    // The score associated with the list of services mentioned above
-   float score = 2;
+   float score = 3;
 }
 
 
