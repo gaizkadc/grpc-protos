@@ -26,8 +26,6 @@ message AppDescriptor {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
-    // Services of the application.
-    repeated Service services = 9;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -40,16 +38,20 @@ message SecurityRule {
     string rule_id = 3;
     // Name of the security rule.
     string name = 4;
-    // SourceServiceId defining the service onto which the security rule is defined.
-    string source_service_id = 5;
-    // SourcePort defining the port that is affected by the current rule.
-    int32 source_port = 6;
+    // TargetServiceGroupName defining the name of the service to be accessed.
+    string target_service_group_name = 5;
+    // TargetServiceName name of the service belonging to be source group mentioned above to be accessed.
+    string target_service_name = 6;
+    // TargetPort defining the port that is affected by the current rule.
+    int32 target_port = 7;
     // Access level to that port defining who can access the port.
-    PortAccess access = 7;
+    PortAccess access = 8;
+    // Name of the service group
+    string auth_service_group_name = 9;
     // AuthServices defining a list of services that can access the port.
-    repeated string auth_services = 8;
+    repeated string auth_services = 10;
     // DeviceGroups defining a list of device groups that can access the port.
-    repeated string device_groups = 9;
+    repeated string device_groups = 11;
 }
 
 // PortAccess enumeration defining the actor with access to a given port.
@@ -76,14 +78,14 @@ message ServiceGroup {
     string service_group_id = 3;
     // Name of the service group.
     string name = 4;
-    // Description of the service group.
-    string description = 5;
     // Services defining a list of service identifiers that belong to the group.
-    repeated string services = 6;
+    repeated Service services = 6;
     // Policy indicating the deployment collocation policy.
     CollocationPolicy policy = 7;
     // Particular deployment specs for this service
     ServiceGroupDeploymentSpecs specs = 8;
+    // Labels defined by the user.
+    map<string, string> labels = 9;
 }
 
 // CollocationPolicy defines how the services of a service group must be deployed.
@@ -139,12 +141,12 @@ message Service {
     string organization_id = 1;
     // AppDescriptorId with the application descriptor identifier.
     string app_descriptor_id = 2;
-    // ServiceId with the service identifier.
-    string service_id = 3;
+    // Service group id this service belongs to.
+    string service_group_id = 3;
+    // Service id
+    string service_id = 4;
     // Name of the service.
-    string name = 4;
-    // Description of the service.
-    string description = 5;
+    string name = 5;
     // ServiceType represents the underlying technology of the service to be launched.
     ServiceType type = 6;
     // Image contains the URL/name of the image to be executed.
@@ -164,7 +166,7 @@ message Service {
     repeated ConfigFile configs = 13;
     // Labels with the user defined labels.
     map<string, string> labels = 14;
-    // DeployAfter contains the list of services that must be running before launching a service.
+    // DeployAfter contains the list of service names that must be running before launching this service.
     repeated string deploy_after = 15;
     // Run arguments
     repeated string run_arguments = 16;
@@ -190,6 +192,7 @@ enum EndpointType {
     REST = 1;
     WEB = 2;
     PROMETHEUS = 3;
+    INGESTION = 4;
 }
 
 message Endpoint {
@@ -252,8 +255,6 @@ message AddAppDescriptorRequest {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
-    // Services of the application.
-    repeated Service services = 9;
 }
 
 message AppDescriptorList {
@@ -296,11 +297,11 @@ message InstanceMetadata {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
-    // Identifier of the monitored entity
+    // Identifier of the monitored entity. This generic id can be used to monitor different kinds of objects.
     string monitored_instance_id = 4;
     // Type of instance this metadata refers to
     InstanceType type = 5;
-    // List of instances supervised byu this metadata structure
+    // List of instances supervised by this metadata structure
     repeated string instances_id = 6;
     // Number of desired replicas specified in the descriptor
     int32 desired_replicas = 7;
@@ -338,18 +339,18 @@ message ServiceGroupInstance {
     string service_group_instance_id = 5;
     // Name of the service group.
     string name = 6;
-    // Description of the service group.
-    string description = 7;
     // ServicesInstances with the list of instance objects for this group
-    repeated ServiceInstance service_instances = 8;
+    repeated ServiceInstance service_instances = 7;
     // Policy indicating the deployment collocation policy.
-    CollocationPolicy policy = 9;
+    CollocationPolicy policy = 8;
     // The status for this service group instance will be the worst status of its services
-    ServiceStatus status = 10;
+    ServiceStatus status = 9;
     // Metadata for this service group
-    InstanceMetadata metadata = 11;
+    InstanceMetadata metadata = 10;
     // Particular deployment specs for this service
-    ServiceGroupDeploymentSpecs specs = 12;
+    ServiceGroupDeploymentSpecs specs = 11;
+    // Labels defined by the user.
+    map<string, string> labels = 12;
 }
 
 message ServiceInstance {
@@ -359,16 +360,16 @@ message ServiceInstance {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 4;
     // ServiceGroupInstanceId with the service group instance identifier.
-    string service_group_instance_id = 4;
+    string service_group_instance_id = 5;
     // ServiceId with the service identifier.
-    string service_id = 5;
+    string service_id = 6;
     // Unique identifier for this instance
-    string service_instance_id = 6;
+    string service_instance_id = 7;
     // Name of the service.
-    string name = 7;
-    // Description of the service.
-    string description = 8;
+    string name = 8;
     // ServiceType represents the underlying technology of the service to be launched.
     ServiceType type = 9;
     // Image contains the URL/name of the image to be executed.
@@ -392,8 +393,8 @@ message ServiceInstance {
     repeated string deploy_after = 18;
     // Status of the deployed service
     ServiceStatus status = 19;
-    // Endpoints exposed to the users by the service.
-    repeated string endpoints = 20;
+    // Endpoints instances exposing content to the users in his service.
+    repeated EndpointInstance endpoints = 20;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
     string deployed_on_cluster_id = 21;
     // Run arguments
@@ -401,6 +402,18 @@ message ServiceInstance {
     // Relevant information about this instance
     string info = 23;
 }
+
+// EndpointInstance represents a working endpoint exposing data to the outside world. The main difference between
+// and endpoint and its instance is the availability of FQDN exposing all the information.
+message EndpointInstance {
+    // EndpointInstanceId unique id for this endpoint
+    string endpoint_instance_id = 1;
+    // Type of endpoint
+    EndpointType type = 2;
+    // FQDN to be accessed by any client
+    string fqdn = 3;
+}
+
 
 // AddAppInstanceRequest message to create a new application instance. Initially, the instance will be a copy of the
 // associated descriptor. This will change in future releases to allow per instance customization.
@@ -436,13 +449,15 @@ message UpdateServiceStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
-    string app_instance_id = 3;
+    string app_instance_id = 2;
+    // ServiceGroupInstanceId with the service group this service belongs to.
+    string service_group_instance_id = 3;
     // ServiceId with the service identifier.
-    string service_id = 4;
+    string service_instance_id = 4;
     // Status with the new transition.
     ServiceStatus status = 5;
     // Endpoints exposed to the users by the service.
-    repeated string endpoints = 6;
+    repeated EndpointInstance endpoints = 6;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
     string deployed_on_cluster_id = 7;
 }
