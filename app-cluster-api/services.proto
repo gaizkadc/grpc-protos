@@ -10,6 +10,7 @@ option go_package = "github.com/nalej/grpc-app-cluster-api-go";
 import "common/entities.proto";
 import "conductor/entities.proto";
 import "deployment-manager/entities.proto";
+import "unified-logging/entities.proto";
 
 // Service deployed in local clusters to score locally available resources.
 service Musician {
@@ -22,4 +23,12 @@ service DeploymentManager {
     rpc Execute(deployment_manager.DeploymentFragmentRequest) returns (deployment_manager.DeploymentFragmentResponse) {}
     // Request to undeploy an application
     rpc Undeploy(deployment_manager.UndeployRequest) returns (common.Success) {}
+}
+
+// Slave services for localling retrieving a set of logs.
+service UnifiedLogging {
+    // Search for log entries matching a query.
+    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {}
+    // Expire the logs of a given application.
+    rpc Expire(unified_logging.ExpirationRequest) returns(common.Success) {}
 }
