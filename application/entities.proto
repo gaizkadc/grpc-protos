@@ -118,10 +118,12 @@ message ConfigFile {
     string app_descriptor_id = 2;
     // ConfigFileId with the config file identifier.
     string config_file_id = 3;
+    // Name with the config file name 
+    string name = 4;
     // Content of the configuration file.
-    bytes content = 4;
+    bytes content = 5;
     // MountPath of the configuration file in the service instance.
-    string mount_path = 5;
+    string mount_path = 6;
 }
 
 message ImageCredentials {
