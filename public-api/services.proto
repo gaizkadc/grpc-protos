@@ -19,6 +19,7 @@ import "user-manager/entities.proto";
 import "conductor/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
+import "unified-logging/entities.proto";
 import "google/api/annotations.proto";
 
 // Organization related information.
@@ -258,6 +259,16 @@ service Applications {
     rpc GetAppInstance(application.AppInstanceId) returns (AppInstance) {
         option (google.api.http) = {
             get: "/v1/apps/inst/{organization_id}/{app_instance_id}/get"
+        };
+    }
+}
+
+service UnifiedLogging{
+    // Search for log entries matching a query.
+    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {
+        option (google.api.http) = {
+            post: "/v1/apps/inst/{organization_id}/{app_instance_id}/logs"
+            body: "*"
         };
     }
 }
