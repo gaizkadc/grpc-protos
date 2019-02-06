@@ -44,10 +44,12 @@ message DeploymentFragment {
    string fragment_id = 6;
    // Group service instance id
    string group_service_instance_id = 7;
+   // Cluster Id of the cluster to deploy this fragment
+   string cluster_id = 8;
    // Nalej variables for this deployment
-   map<string,string> nalej_variables = 8;
+   map<string,string> nalej_variables = 9;
    // Stages to be deployed
-   repeated DeploymentStage stages = 9;
+   repeated DeploymentStage stages = 10;
 }
 
 // A stage represents a collection of services and related components that can be deployed
