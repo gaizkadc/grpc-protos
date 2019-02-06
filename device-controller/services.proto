@@ -1,0 +1,40 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package device_controller;
+option go_package = "github.com/nalej/grpc-device-controller-go";
+
+import "common/entities.proto";
+import "device-controller/entities.proto";
+import "google/api/annotations.proto";
+
+// Ping operations
+service PingService {
+
+    // Ping is an operation triggered by the SDK
+    rpc Ping (common.Empty) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v0/ping"
+            body: "*"
+        };
+    }
+
+    // Operation that is called by the SDK to inform the target cluster of the last latency measurement
+    rpc RegisterPing (Latency) returns (RegisterPingResult) {
+        option (google.api.http) = {
+            post: "/v0/registerping"
+            body: "*"
+        };
+    }
+
+    rpc SelectCluster(LatencyList) returns (SelectedCluster) {
+        option (google.api.http) = {
+            post: "/v0/selectcluster"
+            body: "*"
+        };
+    }
+
+}
