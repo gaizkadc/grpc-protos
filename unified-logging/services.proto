@@ -1,0 +1,27 @@
+/*
+ * Copyright (C) 2019 Nalej Group - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package unified_logging;
+option go_package = "github.com/nalej/grpc-unified-logging-go";
+
+import "unified-logging/entities.proto";
+import "common/entities.proto";
+
+// Coordinator service with the operations offered by the query coordinator.
+service Coordinator {
+    // Search for log entries matching a query.
+    rpc Search(SearchRequest) returns (LogResponse) {}
+    // Expire the logs of a given application.
+    rpc Expire(ExpirationRequest) returns(common.Success) {}
+}
+
+// Slave services for localling retrieving a set of logs.
+service Slave {
+    // Search for log entries matching a query.
+    rpc Search(SearchRequest) returns(LogResponse) {}
+    // Expire the logs of a given application.
+    rpc Expire(ExpirationRequest) returns(common.Success) {}
+}
