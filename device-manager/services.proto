@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-device-manager-go";
 
 import "authx/entities.proto";
 import "device-manager/entities.proto";
+import "device-controller/entities.proto";
 import "device/entities.proto";
 import "common/entities.proto";
 import "organization/entities.proto";
@@ -28,3 +29,6 @@ service Devices {
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
 }
 
+service Latency {
+    rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (device_controller.RegisterLatencyResult) {}
+}
