@@ -21,6 +21,8 @@ service InfrastructureManager {
     rpc GetCluster(infrastructure.ClusterId) returns (infrastructure.Cluster) {}
     // ListClusters obtains a list of the clusters in the organization.
     rpc ListClusters(organization.OrganizationId) returns (infrastructure.ClusterList) {}
+    // UpdateCluster allows the user to update the information of a cluster.
+    rpc UpdateCluster(infrastructure.UpdateClusterRequest) returns (infrastructure.Cluster){}
     // DrainCluster reschedules the services deployed in a given cluster.
     rpc DrainCluster(infrastructure.ClusterId) returns (common.Success){}
     // CordonCluster blocks the deployment of new services in a given cluster.
@@ -28,6 +30,8 @@ service InfrastructureManager {
     // RemoveCluster removes a cluster from an organization. Notice that removing a cluster implies draining the cluster
     // of running applications.
     rpc RemoveCluster(infrastructure.RemoveClusterRequest) returns (common.Success) {}
+    // UpdateNode allows the user to update the information of a node.
+    rpc UpdateNode(infrastructure.UpdateNodeRequest) returns (infrastructure.Node) {}
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(infrastructure.ClusterId) returns (infrastructure.NodeList) {}
 }
