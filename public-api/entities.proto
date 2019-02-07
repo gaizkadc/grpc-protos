@@ -306,6 +306,8 @@ message ServiceGroupInstance {
     repeated string service_instances = 7;
     // Policy indicating the deployment collocation policy.
     string policy_name = 8;
+    // delete
+    string to_delete = 9;
 }
 
 // AppInstance represents an instance of the application in the system.
