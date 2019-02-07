@@ -12,7 +12,7 @@ import "device-controller/entities.proto";
 import "google/api/annotations.proto";
 
 // Ping operations
-service Latency {
+service Connection {
 
     // Ping is an operation triggered by the SDK
     rpc Ping (common.Empty) returns (common.Success) {
