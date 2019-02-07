@@ -11,16 +11,26 @@ import "device/entities.proto";
 
 // Latency represents a latency measurement in milliseconds
 message Latency {
-    // Identifier of the device that sends the ping
-    device.DeviceId device = 1;
     // latency in milliseconds
     int32 measure = 2;
 }
 
+message RegisterPingRequest {
+    // Identifier of the device that sends the ping
+    device.DeviceId device = 1;
+    // Latency to register
+    Latency latency = 2;
+}
+
+message SelectClusterRequest {
+    // Identifier of the device that sends the ping
+    device.DeviceId device = 1;
+    // list of latencies to compare
+    LatencyList latencies = 2;
+}
+
 // LatencyList represents a list of latencies
 message LatencyList{
-    // Identifier of the device that sends the list of lantencies
-    device.DeviceId device = 1;
     repeated Latency latencies = 2;
 }
 
