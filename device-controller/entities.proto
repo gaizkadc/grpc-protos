@@ -7,15 +7,31 @@ syntax = "proto3";
 package device_controller;
 option go_package = "github.com/nalej/grpc-device-controller-go";
 
+import "device/entities.proto";
+
 // Latency represents a latency measurement in milliseconds
 message Latency {
     // latency in milliseconds
-    int32 measure = 1;
+    int32 measure = 2;
+}
+
+message RegisterPingRequest {
+    // Identifier of the device that sends the ping
+    device.DeviceId device_id = 1;
+    // Latency to register
+    Latency latency = 2;
+}
+
+message SelectClusterRequest {
+    // Identifier of the device that sends the ping
+    device.DeviceId device_id = 1;
+    // list of latencies to compare
+    LatencyList latencies = 2;
 }
 
 // LatencyList represents a list of latencies
 message LatencyList{
-    repeated Latency latencies = 1;
+    repeated Latency latencies = 2;
 }
 
 enum PingResult {
