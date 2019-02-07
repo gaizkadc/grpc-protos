@@ -121,25 +121,27 @@ message UpdateClusterRequest {
     // ClusterId with the cluster identifier.
     string cluster_id = 2;
     // UpdateName flag to determine if the name needs to be changed.
-    bool updateName = 3;
+    bool update_name = 3;
     // Name of the cluster.
     string name = 4;
     // UpdateDescription flag to determine if the description needs to be changed.
-    bool updateDescription = 5;
+    bool update_description = 5;
     // Description of the cluster.
     string description = 6;
     // UpdateHostname flag to determine if the hostname needs to be updated.
-    bool updateHostname = 7;
+    bool update_hostname = 7;
     // Hostname of the cluster master.
     string hostname = 8;
-    // UpdateLabels flag to determine if the labels needs to be updated.
-    bool updateLabels = 9;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 9;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 10;
     // Labels for the cluster.
-    map <string, string> labels = 10;
+    map <string, string> labels = 11;
     // UpdateStatus flag to determine if the status needs to be updated.
-    bool updateStatus = 11;
+    bool update_status = 12;
     // Status of the cluster based on monitoring information.
-    InfraStatus status = 12;
+    InfraStatus status = 13;
 }
 
 message ClusterList {
@@ -202,12 +204,14 @@ message UpdateNodeRequest {
     string organization_id = 1;
     // Id with the node identifier.
     string node_id = 2;
-    // UpdateLabels flag to determine if the labels needs to be updated.
-    bool updateLabels = 3;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 9;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 10;
     // Labels for the cluster.
     map <string, string> labels = 4;
     // UpdateStatus flag to determine if the status needs to be updated.
-    bool updateStatus = 5;
+    bool update_status = 5;
     // Status of the cluster based on monitoring information.
     InfraStatus status = 6;
 }
