@@ -7,6 +7,8 @@ syntax = "proto3";
 package application_manager;
 option go_package = "github.com/nalej/grpc-application-manager-go";
 
+import public "application/entities.proto";
+
 message DeployRequest{
     string organization_id = 1;
     string app_descriptor_id = 2;
@@ -48,7 +50,7 @@ message ApplicationClusterEndpoints{
     // DeviceControllerURL with the URL the device controller is exposed on the target application cluster.
     string device_controller_url = 1;
     // Endpoints available on the given application cluster.
-    repeated string endpoints = 2;
+    repeated application.EndpointInstance endpoints = 2;
 }
 
 message ApplicationEndpoints{
