@@ -16,10 +16,14 @@ message Latency {
 }
 
 message RegisterLatencyRequest {
-    // Identifier of the device that sends the ping
-    device.DeviceId device_id = 1;
+    // organization identifier
+    string organization_id = 1;
+    // device_group identifier
+    string device_group_id = 2;
+    // device identifier
+    string device_id = 3;
     // Latency to register
-    Latency latency = 2;
+    Latency latency = 4;
 }
 
 message SelectClusterRequest {
