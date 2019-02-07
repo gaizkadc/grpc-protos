@@ -15,7 +15,7 @@ message Latency {
     int32 measure = 2;
 }
 
-message RegisterPingRequest {
+message RegisterLatencyRequest {
     // Identifier of the device that sends the ping
     device.DeviceId device_id = 1;
     // Latency to register
@@ -23,18 +23,17 @@ message RegisterPingRequest {
 }
 
 message SelectClusterRequest {
-    // Identifier of the device that sends the ping
-    device.DeviceId device_id = 1;
+    // organization identifier
+    string organization_id = 1;
+    // device_group identifier
+    string device_group_id = 2;
+    // device identifier
+    string device_id = 3;
     // list of latencies to compare
-    LatencyList latencies = 2;
+    repeated Latency latencies = 4;
 }
 
-// LatencyList represents a list of latencies
-message LatencyList{
-    repeated Latency latencies = 2;
-}
-
-enum PingResult {
+enum RegisterResult {
     // the device can continue working as it
     OK = 0;
     // latency check on all available clusters must be performed
@@ -42,8 +41,8 @@ enum PingResult {
 }
 // RegisterPingResult defines the result of a RegisterPing operation,
 // can be OK or LATENCY_CHECK_REQUIRED
-message RegisterPingResult {
-    PingResult ping_result = 1;
+message RegisterLatencyResult {
+    RegisterResult result = 1;
 }
 
 // SelectedCluster is an index of the cluster to which the device is advised to connect

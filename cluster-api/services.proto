@@ -11,6 +11,7 @@ import "common/entities.proto";
 import "conductor/entities.proto";
 import "network/entities.proto";
 import "authx/entities.proto";
+import "device-controller/entities.proto";
 
 // Conductor operations.
 service Conductor{
@@ -26,4 +27,10 @@ service NetworkManager {
     rpc AuthorizeMember(network.AuthorizeMemberRequest) returns (common.Success){}
     // AddDNSEntry creates a new DNSEntry on the system.
     rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
+}
+
+// PingService operations
+service DeviceManager {
+    // RegisterLatency register a device latency
+    rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (device_controller.RegisterLatencyResult) {}
 }
