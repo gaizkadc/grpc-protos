@@ -220,41 +220,47 @@ message ServiceInstance {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 4;
+    // ServiceGroupInstanceId with the service group instance identifier.
+    string service_group_instance_id = 5;
     // ServiceId with the service identifier.
-    string service_id = 4;
+    string service_id = 6;
+    // Unique identifier for this instance
+    string service_instance_id = 7;
     // Name of the service.
-    string name = 5;
-    // Description of the service.
-    string description = 6;
+    string name = 8;
     // ServiceType represents the underlying technology of the service to be launched.
-    string type_name = 7;
+    string type_name = 9;
     // Image contains the URL/name of the image to be executed.
-    string image = 8;
+    string image = 10;
     // ImageCredentials with the data required to access the repository the image is available at.
-    application.ImageCredentials credentials = 9;
+    application.ImageCredentials credentials = 11;
     // DeploySpecs with the resource specs required by the service.
-    application.DeploySpecs specs = 10;
+    application.DeploySpecs specs = 12;
     // Storage restrictions
-    repeated Storage storage = 11;
+    repeated Storage storage = 13;
     // ExposedPorts contains the list of ports exposed by the current service.
-    repeated Port exposed_ports = 12;
+    repeated Port exposed_ports = 14;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 13;
+    map<string, string> environment_variables = 15;
     // Configs contains the configuration files required by the service.
-    repeated application.ConfigFile configs = 14;
+    repeated application.ConfigFile configs = 16;
     // Labels with the user defined labels.
-    map<string, string> labels = 15;
+    map<string, string> labels = 17;
     // DeployAfter contains the list of services that must be running before launching a service.
-    repeated string deploy_after = 16;
+    repeated string deploy_after = 18;
     // Status of the deployed service
-    string status_name = 17;
+    string status_name = 19;
     // Endpoints exposed to the users by the service.
-    repeated string endpoints = 18;
+    repeated string endpoints = 20;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
-    string deployed_on_cluster_id = 19;
+    string deployed_on_cluster_id = 21;
     // Run arguments
-    repeated string run_arguments = 20;
+    repeated string run_arguments = 22;
+    // Relevant information about this instance
+    string info = 23;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -267,16 +273,18 @@ message SecurityRule {
     string rule_id = 3;
     // Name of the security rule.
     string name = 4;
-    // SourceServiceId defining the service onto which the security rule is defined.
-    string source_service_id = 5;
-    // SourcePort defining the port that is affected by the current rule.
-    int32 source_port = 6;
+    // TargetServiceGroupName defining the name of the service to be accessed.
+    string target_service_group_name = 5;
+    // TargetServiceName name of the service belonging to be source group mentioned above to be accessed.
+    string target_service_name = 6;
+    // TargetPort defining the port that is affected by the current rule.
+    int32 target_port = 7;
     // Access level to that port defining who can access the port.
-    string access_name = 7;
+    string access_name = 8;
     // AuthServices defining a list of services that can access the port.
-    repeated string auth_services = 8;
+    repeated string auth_services = 9;
     // DeviceGroups defining a list of device groups that can access the port.
-    repeated string device_groups = 9;
+    repeated string device_groups = 10;
 }
 
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
@@ -290,10 +298,10 @@ message ServiceGroupInstance {
     string app_instance_id = 3;
     // ServiceGroupId with the group identifier.
     string service_group_id = 4;
+    // Unique identifier for this instance
+    string service_group_instance_id = 5;
     // Name of the service group.
-    string name = 5;
-    // Description of the service group.
-    string description = 6;
+    string name = 6;
     // ServicesInstances defining a list of service identifiers that belong to the group.
     repeated string service_instances = 7;
     // Policy indicating the deployment collocation policy.
@@ -310,23 +318,19 @@ message AppInstance {
     string app_instance_id = 3;
     // Name of the application.
     string name = 4;
-    // Description of the application.
-    string description = 5;
     // ConfigurationOptions defines a key-value map of configuration options.
-    map<string, string> configuration_options = 6;
+    map<string, string> configuration_options = 5;
     // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
     // running services.
-    map<string, string> environment_variables = 7;
+    map<string, string> environment_variables = 6;
     // Labels defined by the user.
-    map<string, string> labels = 8;
+    map<string, string> labels = 7;
     // Rules that define the connectivity between the elements of an application.
-    repeated SecurityRule rules = 9;
+    repeated SecurityRule rules = 8;
     // Groups with the Service collocation strategies.
-    repeated ServiceGroupInstance groups = 10;
-    // Services of the applicaiton.
-    repeated ServiceInstance services = 11;
+    repeated ServiceGroupInstance groups = 9;
     // Status of the deployed instance.
-    string status_name = 12;
+    string status_name = 10;
 }
 
 message AppInstanceList {
