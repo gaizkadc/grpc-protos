@@ -9,11 +9,6 @@ option go_package = "github.com/nalej/grpc-device-controller-go";
 
 import "device/entities.proto";
 
-// Latency represents a latency measurement in milliseconds
-message Latency {
-    // latency in milliseconds
-    int32 measure = 2;
-}
 
 message RegisterLatencyRequest {
     // organization identifier
@@ -22,8 +17,8 @@ message RegisterLatencyRequest {
     string device_group_id = 2;
     // device identifier
     string device_id = 3;
-    // Latency to register
-    Latency latency = 4;
+    // Latency to register (milliseconds)
+    int32 latency = 4;
 }
 
 message SelectClusterRequest {
@@ -34,7 +29,7 @@ message SelectClusterRequest {
     // device identifier
     string device_id = 3;
     // list of latencies to compare
-    repeated Latency latencies = 4;
+    repeated int32 latencies = 4;
 }
 
 enum RegisterResult {
