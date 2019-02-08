@@ -18,6 +18,8 @@ service Applications {
     rpc ListAppDescriptors(organization.OrganizationId) returns (AppDescriptorList){}
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppDescriptor(AppDescriptorId) returns (AppDescriptor) {}
+    // UpdateAppDescriptor allows the user to update the information of a registered descriptor.
+    rpc UpdateAppDescriptor(UpdateAppDescriptorRequest) returns (AppDescriptor){}
     // RemoveAppDescriptor removes an application descriptor.
     rpc RemoveAppDescriptor(AppDescriptorId) returns (common.Success){}
 

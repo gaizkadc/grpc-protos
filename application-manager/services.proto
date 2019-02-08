@@ -21,6 +21,8 @@ service ApplicationManager {
     rpc ListAppDescriptors(organization.OrganizationId) returns (application.AppDescriptorList){}
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppDescriptor(application.AppDescriptorId) returns (application.AppDescriptor) {}
+    // UpdateAppDescriptor allows the user to update the information of a registered descriptor.
+    rpc UpdateAppDescriptor(application.UpdateAppDescriptorRequest) returns (application.AppDescriptor){}
     // RemoveAppDescriptor removes an application descriptor from the system.
     rpc RemoveAppDescriptor(application.AppDescriptorId) returns (common.Success){}
 
@@ -34,8 +36,9 @@ service ApplicationManager {
     // GetAppDescriptor retrieves a given application descriptor.
     rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {}
 
-
+    // RetrieveTargetApplications retrieves a list of applications that matches a set of filters.
     rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList){}
+    // RetrieveEndpoints retrieves the endpoints associated with a given application.
     rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints){}
 
 }
