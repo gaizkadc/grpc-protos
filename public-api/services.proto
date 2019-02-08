@@ -57,7 +57,7 @@ service Clusters {
         };
     }
     // Update the cluster information.
-    rpc Update(UpdateClusterRequest) returns (common.Success){
+    rpc Update(UpdateClusterRequest) returns (Cluster){
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/update"
             body: "*"
@@ -71,6 +71,13 @@ service Nodes {
     rpc List(infrastructure.ClusterId) returns(NodeList){
         option (google.api.http) = {
             get: "/v1/nodes/{organization_id}/{cluster_id}/list"
+        };
+    }
+    // UpdateNode allows the user to update the information of a node.
+    rpc UpdateNode(UpdateNodeRequest) returns (Node) {
+        option (google.api.http) = {
+            post: "/v1/nodes/{organization_id}/{node_id}/update"
+            body: "*"
         };
     }
 }
@@ -223,6 +230,13 @@ service Applications {
     rpc GetAppDescriptor(application.AppDescriptorId) returns (application.AppDescriptor) {
         option (google.api.http) = {
             get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/get"
+        };
+    }
+    // UpdateAppDescriptor allows the user to update the information of a registered descriptor.
+    rpc UpdateAppDescriptor(application.UpdateAppDescriptorRequest) returns (application.AppDescriptor){
+        option (google.api.http) = {
+            post: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/update"
+            body: "*"
         };
     }
     // DeleteAppDescriptor deletes a given application descriptor.

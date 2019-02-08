@@ -263,6 +263,20 @@ message AppDescriptorList {
     repeated AppDescriptor descriptors = 1;
 }
 
+// UpdateAppDescriptorRequest allows the user to update some of the fields of a registered descriptor.
+message UpdateAppDescriptorRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 3;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 4;
+    // Labels for the cluster.
+    map <string, string> labels = 5;
+}
+
 // AppInstance represents an instance of the application in the system.
 message AppInstance {
     // OrganizationId with the organization identifier.

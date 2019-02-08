@@ -57,12 +57,16 @@ message UpdateClusterRequest {
     string organization_id = 1;
     // ClusterId with the cluster identifier.
     string cluster_id = 2;
+    // UpdateName flag to determine if the name needs to be changed.
+    bool update_name = 3;
     // Name of the cluster.
-    string name = 3;
-    // Description of the cluster.
-    string description = 4;
+    string name = 4;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 5;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 6;
     // Labels for the cluster.
-    map <string, string> labels = 5;
+    map <string, string> labels = 7;
 }
 
 // Type of platform targetting this install request
@@ -129,6 +133,18 @@ message NodeList {
     repeated Node nodes = 1;
 }
 
+message UpdateNodeRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // NodeId with the node identifier.
+    string node_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 3;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 4;
+    // Labels for the cluster.
+    map <string, string> labels = 5;
+}
 
 // --------------------------------
 // Resources
