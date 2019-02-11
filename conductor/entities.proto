@@ -34,22 +34,26 @@ message DeploymentFragment {
    string organization_id = 1;
    // Organization name, particularly useful when creating human-readable naming
    string organization_name = 2;
+   // Application descriptor id
+   string app_descriptor_id = 3;
    // Application instance
-   string app_instance_id = 3;
+   string app_instance_id = 4;
    // Application name for human-readable instances
-   string app_name = 4;
+   string app_name = 5;
    // Id of the plan this fragment belongs to
-   string deployment_id = 5;
+   string deployment_id = 6;
    // Id of this fragment
-   string fragment_id = 6;
+   string fragment_id = 7;
+   // Group service
+   string service_group_id = 8;
    // Group service instance id
-   string group_service_instance_id = 7;
+   string service_group_instance_id = 9;
    // Cluster Id of the cluster to deploy this fragment
-   string cluster_id = 8;
+   string cluster_id = 10;
    // Nalej variables for this deployment
-   map<string,string> nalej_variables = 9;
+   map<string,string> nalej_variables = 11;
    // Stages to be deployed
-   repeated DeploymentStage stages = 10;
+   repeated DeploymentStage stages = 12;
 }
 
 // A stage represents a collection of services and related components that can be deployed
@@ -188,16 +192,18 @@ message ServiceUpdate {
    string service_group_id = 4;
    // Service group instance
    string service_group_instance_id =5;
+   // Service id
+   string service_id = 6;
    // Instance of this service
-   string service_instance_id = 6;
+   string service_instance_id = 7;
    // ClusterId where the service is deployed
-   string cluster_id = 7;
+   string cluster_id = 8;
    // The current status of the service
-   application.ServiceStatus status = 8;
+   application.ServiceStatus status = 9;
    // Endpoints exposed through ingresses.
-   repeated application.EndpointInstance endpoints = 9;
+   repeated application.EndpointInstance endpoints = 10;
    // Textual information important to understand this status update
-   string info = 10;
+   string info = 11;
 }
 
 // Indicate the status of a set of services
