@@ -180,20 +180,24 @@ enum DeploymentFragmentStatus {
 message ServiceUpdate {
    // Organization this service belongs to
    string organization_id = 1;
+   // Application
+   string application_id = 2;
    // Application instance
-   string application_instance_id = 2;
+   string application_instance_id = 3;
+   // Group
+   string service_group_id = 4;
    // Service group instance
-   string service_group_instance_id =3;
+   string service_group_instance_id =5;
    // Instance of this service
-   string service_instance_id = 4;
+   string service_instance_id = 6;
    // ClusterId where the service is deployed
-   string cluster_id = 5;
+   string cluster_id = 7;
    // The current status of the service
-   application.ServiceStatus status = 6;
+   application.ServiceStatus status = 8;
    // Endpoints exposed through ingresses.
-   repeated application.EndpointInstance endpoints = 7;
+   repeated application.EndpointInstance endpoints = 9;
    // Textual information important to understand this status update
-   string info = 8;
+   string info = 10;
 }
 
 // Indicate the status of a set of services
