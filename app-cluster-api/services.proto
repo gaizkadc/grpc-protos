@@ -9,8 +9,9 @@ option go_package = "github.com/nalej/grpc-app-cluster-api-go";
 
 import "common/entities.proto";
 import "conductor/entities.proto";
-import "deployment-manager/entities.proto";
 import "unified-logging/entities.proto";
+import "deployment-manager/entities.proto";
+
 
 // Service deployed in local clusters to score locally available resources.
 service Musician {
