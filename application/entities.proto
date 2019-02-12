@@ -369,6 +369,21 @@ message ServiceGroupInstance {
     map<string, string> labels = 12;
 }
 
+// AddServiceGroupInstanceRequest contains the information required to append a new service group instance to an
+// already deployed application instance.
+message AddServiceGroupInstanceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 4;
+}
+
+
+
 message ServiceInstance {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -417,6 +432,22 @@ message ServiceInstance {
     repeated string run_arguments = 22;
     // Relevant information about this instance
     string info = 23;
+}
+
+// Request to add a new service instance to an already existing service group instance.
+message AddServiceInstanceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 4;
+    // ServiceGroupInstanceId with the service group instance identifier.
+    string service_group_instance_id = 5;
+    // ServiceId with the service identifier.
+    string service_id = 6;
 }
 
 // EndpointInstance represents a working endpoint exposing data to the outside world. The main difference between
