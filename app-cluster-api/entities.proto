@@ -7,3 +7,4 @@ syntax = "proto3";
 package app_cluster_api;
 option go_package = "github.com/nalej/grpc-app-cluster-api-go";
 
+// Remember to force this file to be generated!!!
