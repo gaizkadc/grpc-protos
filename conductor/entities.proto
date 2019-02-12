@@ -64,7 +64,7 @@ message DeploymentStage {
    // Id for this stage
    string stage_id = 2;
    // Collection of services that can be simultaneously deployed
-   repeated application.Service services = 3;
+   repeated application.ServiceInstance services = 3;
 }
 
 
