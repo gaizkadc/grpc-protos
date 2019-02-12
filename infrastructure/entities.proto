@@ -51,22 +51,20 @@ message Cluster {
     string cluster_id = 2;
     // Name of the cluster.
     string name = 3;
-    // Description of the cluster.
-    string description = 4;
     // Type of cluster.
-    ClusterType cluster_type = 5;
+    ClusterType cluster_type = 4;
     // Hostname of the cluster master. This value is used to connect to the app cluster ingress.
-    string hostname = 6;
+    string hostname = 5;
     // ControlPlaneHostname with the hostname to access K8s API.
-    string control_plane_hostname = 7;
+    string control_plane_hostname = 6;
     // Multitenant support definition.
-    MultitenantSupport multitenant = 8;
+    MultitenantSupport multitenant = 7;
     // Status of the cluster based on monitoring information.
-    InfraStatus status = 9;
+    InfraStatus status = 8;
     // Labels for the cluster.
-    map <string, string> labels = 10;
+    map <string, string> labels = 9;
     // Cordon flags to signal conductor not to schedule apps in the cluster.
-    bool cordon = 11;
+    bool cordon = 10;
 }
 
 message ClusterId {
@@ -84,14 +82,12 @@ message AddClusterRequest {
     string cluster_id = 3;
     // Name of the cluster.
     string name = 4;
-    // Description of the cluster.
-    string description = 5;
     // Hostname of the cluster master.
-    string hostname = 6;
+    string hostname = 5;
     // ControlPlaneHostname with the hostname to access K8s API.
-    string control_plane_hostname = 7;
+    string control_plane_hostname = 6;
     // Labels for the cluster.
-    map <string, string> labels = 8;
+    map <string, string> labels = 7;
 }
 
 message RemoveClusterRequest {
@@ -124,24 +120,20 @@ message UpdateClusterRequest {
     bool update_name = 3;
     // Name of the cluster.
     string name = 4;
-    // UpdateDescription flag to determine if the description needs to be changed.
-    bool update_description = 5;
-    // Description of the cluster.
-    string description = 6;
     // UpdateHostname flag to determine if the hostname needs to be updated.
-    bool update_hostname = 7;
+    bool update_hostname = 5;
     // Hostname of the cluster master.
-    string hostname = 8;
+    string hostname = 6;
     // Add Label flag to indicate that the set of labels need to be added.
-    bool add_labels = 9;
+    bool add_labels = 7;
     // Remove label flag to indicate that the set of labels need to be removed.
-    bool remove_labels = 10;
+    bool remove_labels = 8;
     // Labels for the cluster.
-    map <string, string> labels = 11;
+    map <string, string> labels = 9;
     // UpdateStatus flag to determine if the status needs to be updated.
-    bool update_status = 12;
+    bool update_status = 10;
     // Status of the cluster based on monitoring information.
-    InfraStatus status = 13;
+    InfraStatus status = 11;
 }
 
 message ClusterList {
