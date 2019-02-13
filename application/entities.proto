@@ -172,6 +172,8 @@ message Service {
     repeated string deploy_after = 15;
     // Run arguments
     repeated string run_arguments = 16;
+    // DeploymentSelectors defines a key-value map of deployment selectors
+    map<string, string> deployment_selectors = 17;
 }
 
 enum ServiceStatus {
@@ -432,6 +434,8 @@ message ServiceInstance {
     repeated string run_arguments = 22;
     // Relevant information about this instance
     string info = 23;
+    // DeploymentSelectors defines a key-value map of deployment selectors
+    map<string, string> deployment_selectors = 24;
 }
 
 // Request to add a new service instance to an already existing service group instance.
