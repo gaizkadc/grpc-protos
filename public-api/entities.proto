@@ -303,6 +303,42 @@ message SecurityRule {
     repeated string device_groups = 10;
 }
 
+// This is a common metadata entity that collects information for a deployed instance. This instance can be a
+// service instance or a service group instance.
+message InstanceMetadata {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Identifier of the monitored entity. This generic id can be used to monitor different kinds of objects.
+    string monitored_instance_id = 4;
+    // Type of instance this metadata refers to
+    string type_name = 5;
+    // List of instances supervised by this metadata structure
+    repeated string instances_id = 6;
+    // Number of desired replicas specified in the descriptor
+    int32 desired_replicas = 7;
+    // Number of available replicas for this instance
+    int32 available_replicas = 8;
+    // Number of unavailable replicas for this descriptor
+    int32 unavailable_replicas = 9;
+    // Status of every item monitored by this metadata entry
+    map<string,string> status_name = 10;
+    // Relevant information for every monitored instance
+    map<string, string> info = 11;
+}
+
+// It specifies how to proceed deploying a service group. Some specs here may invalidate specific service deployment
+// specs.
+message ServiceGroupDeploymentSpecs {
+    // How many times this service group must be replicated
+    int32 num_replicas = 1;
+    // Indicate if this service group must be replicated in every cluster
+    bool multi_cluster_replica = 2;
+}
+
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation
 // policy.
 message ServiceGroupInstance {
@@ -318,10 +354,18 @@ message ServiceGroupInstance {
     string service_group_instance_id = 5;
     // Name of the service group.
     string name = 6;
-    // ServicesInstances defining a list of service identifiers that belong to the group.
-    repeated string service_instances = 7;
+    // ServicesInstances with the list of instance objects for this group
+    repeated ServiceInstance service_instances = 7;
     // Policy indicating the deployment collocation policy.
     string policy_name = 8;
+    // The status for this service group instance will be the worst status of its services
+    string status_name = 9;
+    // Metadata for this service group
+    InstanceMetadata metadata = 10;
+    // Particular deployment specs for this service
+    ServiceGroupDeploymentSpecs specs = 11;
+    // Labels defined by the user.
+    map<string, string> labels = 12;
 }
 
 // AppInstance represents an instance of the application in the system.
@@ -347,6 +391,8 @@ message AppInstance {
     repeated ServiceGroupInstance groups = 9;
     // Status of the deployed instance.
     string status_name = 10;
+    // Metadata descriptor for the instances triggered by this app
+    repeated InstanceMetadata metadata = 11;
 }
 
 message AppInstanceList {
