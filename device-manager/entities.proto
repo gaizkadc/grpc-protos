@@ -48,7 +48,7 @@ message UpdateDeviceGroupRequest{
     bool default_device_connectivity = 6;
 }
 
-enum LatencyStatus {
+enum DeviceStatus {
     ONLINE = 0;
     OFFLINE = 1;
 }
@@ -68,8 +68,8 @@ message Device{
     bool enabled = 6;
     // DeviceApiKey contains the API KEY used by the device to send data.
     string device_api_key = 7;
-    // LatencyStatus contains the status of the device (ONLINE/OFFLINE)
-    LatencyStatus latency_status = 8;
+    // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
+    DeviceStatus device_status = 8;
 }
 
 message DeviceList{
