@@ -48,6 +48,11 @@ message UpdateDeviceGroupRequest{
     bool default_device_connectivity = 6;
 }
 
+enum LatencyStatus {
+    ONLINE = 0;
+    OFFLINE = 1;
+}
+
 message Device{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -63,6 +68,8 @@ message Device{
     bool enabled = 6;
     // DeviceApiKey contains the API KEY used by the device to send data.
     string device_api_key = 7;
+    // LatencyStatus contains the status of the device (ONLINE/OFFLINE)
+    LatencyStatus latency_status = 8;
 }
 
 message DeviceList{
@@ -106,4 +113,22 @@ message DeviceLabelRequest {
     // DeviceId with the device identifier.
     string device_id = 3;
     map<string, string> labels = 4;
+}
+
+// Latency
+message Latency{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    // Latency measure
+    int32 latency = 4;
+    // timestamp of the latency creation
+    int64 inserted = 5;
+}
+
+message LatencyList {
+    repeated Latency latencies = 1;
 }
