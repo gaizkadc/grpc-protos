@@ -116,7 +116,7 @@ message DeviceLabelRequest {
 }
 
 // Latency
-message Latency{
+message LatencyMeasure{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // DeviceGroupId with the device group identifier.
@@ -129,6 +129,6 @@ message Latency{
     int64 inserted = 5;
 }
 
-message LatencyList {
-    repeated Latency latencies = 1;
+message LatencyMeasureList {
+    repeated LatencyMeasure latencies = 1;
 }
