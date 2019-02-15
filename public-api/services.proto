@@ -107,7 +107,7 @@ service Devices {
             get: "/v1/device/group/{organization_id}/list"
         };
     }
-    rpc ListDevices(device.DeviceGroupId) returns (device_manager.DeviceList){
+    rpc ListDevices(device.DeviceGroupId) returns (DeviceList){
         option (google.api.http) = {
             get: "/v1/device/{organization_id}/list"
         };
@@ -124,7 +124,7 @@ service Devices {
             body: "*"
         };
     }
-    rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){
+    rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (Device){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/update"
             body: "*"

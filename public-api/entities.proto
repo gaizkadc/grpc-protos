@@ -399,3 +399,25 @@ message AppInstanceList {
     repeated AppInstance instances = 1;
 }
 
+// --------------------------------
+// Devices
+// --------------------------------
+message Device{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    // RegisterSince is the timestamp when the device joined the group.
+    int64 register_since = 4;
+    // Labels defined by the user.
+    map<string, string> labels = 5;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 6;
+    // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
+    string device_status_name = 7;
+}
+message DeviceList{
+    repeated Device devices = 1;
+}

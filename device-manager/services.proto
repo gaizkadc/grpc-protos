@@ -31,4 +31,7 @@ service Devices {
 
 service Latency {
     rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (common.Success) {}
+
+    rpc GetLatency (device.DeviceId) returns (LatencyMeasure) {}
+    rpc GetLatencyList(device.DeviceGroupId) returns (LatencyMeasureList) {}
 }
