@@ -65,8 +65,53 @@ message DeploymentStage {
    string stage_id = 2;
    // Collection of services that can be simultaneously deployed
    repeated application.ServiceInstance services = 3;
-   // Security rules associated with the services.
-   repeated application.SecurityRule security_rules = 4;
+   // DeviceGroupRules with the security rules affecting device group access.
+   repeated DeviceGroupSecurityRuleInstance device_group_rules = 4;
+   // PublicRules with the security rules related to public access of a given endpoint.
+   repeated PublicSecurityRuleInstance public_rules = 5;
+}
+
+message PublicSecurityRuleInstance {
+   // OrganizationId with the organization identifier.
+   string organization_id = 1;
+   // AppDescriptorId with the application descriptor identifier.
+   string app_descriptor_id = 2;
+   // RuleId with the security rule identifier.
+   string rule_id = 3;
+   // TargetServiceGroupId with the group identifier as provided by the user.
+   string target_service_group_id = 4;
+   // TargetServiceGroupInstanceId with the group identifier provided by the system.
+   string target_service_group_instance_id = 5;
+   // TargetServiceId with the service identifier as provided by the user.
+   string target_service_id = 6;
+   // TargetServiceInstanceId with the service identifier as provided by the system.
+   string target_service_instance_id = 7;
+   // TargetPort defining the port that is affected by the current rule.
+   int32 target_port = 8;
+}
+
+// DeviceGroupSecurityRuleInstance defining which device groups may access a given service.
+message DeviceGroupSecurityRuleInstance {
+   // OrganizationId with the organization identifier.
+   string organization_id = 1;
+   // AppDescriptorId with the application descriptor identifier.
+   string app_descriptor_id = 2;
+   // RuleId with the security rule identifier.
+   string rule_id = 3;
+   // TargetServiceGroupId with the group identifier as provided by the user.
+   string target_service_group_id = 4;
+   // TargetServiceGroupInstanceId with the group identifier provided by the system.
+   string target_service_group_instance_id = 5;
+   // TargetServiceId with the service identifier as provided by the user.
+   string target_service_id = 6;
+   // TargetServiceInstanceId with the service identifier as provided by the system.
+   string target_service_instance_id = 7;
+   // TargetPort defining the port that is affected by the current rule.
+   int32 target_port = 8;
+   // DeviceGroupIds with the identifiers of the device groups that have access to the service.
+   repeated string device_group_ids = 12;
+   // DeviceGroupJWTSecrets with the secrets of those groups so that JWT can be enforced by the apps.
+   repeated string device_group_jwt_secrets = 13;
 }
 
 
