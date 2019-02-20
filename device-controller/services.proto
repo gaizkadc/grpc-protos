@@ -17,8 +17,7 @@ service Connection {
     // Ping is an operation triggered by the SDK
     rpc Ping (common.Empty) returns (common.Success) {
         option (google.api.http) = {
-            post: "/v0/ping"
-            body: "*"
+            get: "/v0/ping"
         };
     }
 
