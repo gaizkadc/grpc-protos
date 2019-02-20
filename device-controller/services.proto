@@ -18,7 +18,6 @@ service Connection {
     rpc Ping (common.Empty) returns (common.Success) {
         option (google.api.http) = {
             get: "/v0/ping"
-            body: "*"
         };
     }
 
