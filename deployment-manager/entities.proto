@@ -71,16 +71,14 @@ message RegisterNetworkEntryRequest {
     string organization_name = 2;
     // Application instance
     string app_instance_id = 3;
-    // Instance hostname
-    string hostname = 4;
     // Service name
-    string service_name = 5;
+    string service_name = 4;
     // Service IP
-    string service_ip = 6;
+    string service_ip = 5;
     // Network id
-    string network_id = 7;
+    string network_id = 6;
     // ServiceGroupInstanceId
-    string service_group_instance_id = 8;
+    string service_group_instance_id = 7;
     // Service App Instance Id
-    string service_app_instance_id = 9;
+    string service_app_instance_id = 8;
 }
