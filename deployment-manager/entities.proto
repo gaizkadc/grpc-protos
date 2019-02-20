@@ -79,4 +79,8 @@ message RegisterNetworkEntryRequest {
     string service_ip = 6;
     // Network id
     string network_id = 7;
+    // ServiceGroupInstanceId
+    string service_group_instance_id = 8;
+    // Service App Instance Id
+    string service_app_instance_id = 9;
 }
