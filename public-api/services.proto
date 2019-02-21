@@ -109,7 +109,7 @@ service Devices {
     }
     rpc ListDevices(device.DeviceGroupId) returns (DeviceList){
         option (google.api.http) = {
-            get: "/v1/device/{organization_id}/list"
+            get: "/v1/device/{organization_id}/{device_group_id}/list"
         };
     }
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){
