@@ -159,3 +159,11 @@ message DeviceLoginRequest {
     string device_api_key = 2;
 
 }
+
+// DeviceGroupSecret, secret to generate the device group JWT token
+message DeviceGroupSecret {
+    string organization_id = 1;
+    string device_group_id = 2;
+    string secret = 3;
+
+}
