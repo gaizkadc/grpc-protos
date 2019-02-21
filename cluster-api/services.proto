@@ -11,6 +11,7 @@ import "common/entities.proto";
 import "conductor/entities.proto";
 import "network/entities.proto";
 import "authx/entities.proto";
+import "device/entities.proto";
 import "device-controller/entities.proto";
 
 // Conductor operations.
@@ -29,8 +30,10 @@ service NetworkManager {
     rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
 }
 
-// PingService operations
+// DeviceManager operations
 service DeviceManager {
     // RegisterLatency register a device latency
     rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (common.Success) {}
+    // GetDeviceGroupSecret retrieves the secret associated with a device group
+    rpc GetDeviceGroupSecret (device.DeviceGroupId) returns (authx.DeviceGroupSecret){}
 }
