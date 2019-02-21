@@ -11,6 +11,7 @@ import "common/entities.proto";
 import "conductor/entities.proto";
 import "network/entities.proto";
 import "authx/entities.proto";
+import "device/entities.proto";
 import "device-controller/entities.proto";
 
 // Conductor operations.
