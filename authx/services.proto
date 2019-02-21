@@ -84,4 +84,7 @@ service Authx {
     rpc RefreshDeviceToken (RefreshTokenRequest) returns (LoginResponse) {
     }
 
+    // GetDeviceGroupSecret retrieves the secret associated with a device group
+    rpc GetDeviceGroupSecret (device.DeviceGroupId) returns (DeviceGroupSecret){}
+
 }
