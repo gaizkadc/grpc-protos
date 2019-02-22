@@ -33,9 +33,12 @@ message DeviceGroupList{
 message AddDeviceGroupRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // Name of the device group
     string name = 2;
+    // Enabled determines if the device accepts new devices and allow device login.
     bool enabled = 3;
-    bool device_default_connectivity = 4;
+    // DefaultDeviceConnectivity determines if a new device attached to the group is enabled.
+    bool default_device_connectivity = 4;
 }
 
 message UpdateDeviceGroupRequest{
