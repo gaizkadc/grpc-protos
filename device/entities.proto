@@ -97,3 +97,18 @@ message RemoveDeviceRequest {
     // DeviceId with the device identifier.
     string device_id = 3;
 }
+
+message UpdateDeviceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 4;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 5;
+    // Labels for the cluster.
+    map <string, string> labels = 6;
+}
