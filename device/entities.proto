@@ -109,6 +109,6 @@ message UpdateDeviceRequest {
     bool add_labels = 4;
     // Remove label flag to indicate that the set of labels need to be removed.
     bool remove_labels = 5;
-    // Labels for the cluster.
+    // Labels for the device.
     map <string, string> labels = 6;
 }
