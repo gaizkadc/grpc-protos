@@ -29,6 +29,9 @@ service Devices {
     rpc GetDevice (device.DeviceId) returns (device.Device) {}
     // RemoveDevice removes a given device
     rpc RemoveDevice(device.RemoveDeviceRequest) returns (common.Success) {}
+    // UpdateDevice updates the information of a device (labels)
+    rpc UpdateDevice(device.UpdateDeviceRequest) returns (device.Device) {}
+
 
 
 }
