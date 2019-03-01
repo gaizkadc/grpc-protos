@@ -16,6 +16,8 @@ service Devices {
     rpc AddDeviceGroup(device.AddDeviceGroupRequest) returns (device.DeviceGroup) {}
     // ListDeviceGroups obtains a list of device groups in an organization.
     rpc ListDeviceGroups(organization.OrganizationId) returns (device.DeviceGroupList) {}
+    // GetDeviceGroupsByNames obtains a list the device groups .
+    rpc GetDeviceGroupsByNames(device.GetDeviceGroupsRequest) returns (device.DeviceGroupList) {}
     // GetDeviceGroup retrieves a given device group in an organization.
     rpc GetDeviceGroup (device.DeviceGroupId) returns (device.DeviceGroup) {}
     // RemoveDeviceGroup removes a device group
