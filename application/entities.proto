@@ -52,6 +52,8 @@ message SecurityRule {
     repeated string auth_services = 10;
     // DeviceGroups defining a list of device groups that can access the port.
     repeated string device_groups = 11;
+    // DeviceGroupNames defining a list of device groups names that can access the port.
+    repeated string device_group_names = 12;
 }
 
 // PortAccess enumeration defining the actor with access to a given port.

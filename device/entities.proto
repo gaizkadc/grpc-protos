@@ -65,6 +65,13 @@ message AddDeviceGroupRequest {
     map<string, string> labels = 6;
 }
 
+message GetDeviceGroupsRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Name of the device group.
+    repeated string device_group_names = 2;
+}
+
 message AddDeviceRequest {
     // OrganizationID with the organization identifier
     string organization_id = 1;
