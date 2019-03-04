@@ -317,22 +317,24 @@ message InstanceMetadata {
     string app_descriptor_id = 2;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 3;
+    // ServiceGroupId with the id of the service groups the controlled instance belongs to
+    string service_group_id = 5;
     // Identifier of the monitored entity. This generic id can be used to monitor different kinds of objects.
-    string monitored_instance_id = 4;
+    string monitored_instance_id = 6;
     // Type of instance this metadata refers to
-    InstanceType type = 5;
+    InstanceType type = 7;
     // List of instances supervised by this metadata structure
-    repeated string instances_id = 6;
+    repeated string instances_id = 8;
     // Number of desired replicas specified in the descriptor
-    int32 desired_replicas = 7;
+    int32 desired_replicas = 9;
     // Number of available replicas for this instance
-    int32 available_replicas = 8;
+    int32 available_replicas = 10;
     // Number of unavaiable replicas for this descriptor
-    int32 unavailable_replicas = 9;
+    int32 unavailable_replicas = 11;
     // Status of every item monitored by this metadata entry
-    map<string,ServiceStatus> status = 10;
+    map<string,ServiceStatus> status = 12;
     // Relevant information for every monitored instance
-    map<string, string> info = 11;
+    map<string, string> info = 13;
 }
 
 // Enumerate with the type of instances we can deploy in the system.
@@ -513,4 +515,14 @@ message UpdateServiceStatusRequest {
     repeated EndpointInstance endpoints = 6;
     // DeployedOnClusterId specifies which is the cluster where the service is running.
     string deployed_on_cluster_id = 7;
+}
+
+// GetServiceGroupInstanceMetadataRequest returns the metadata for a an existing service group instance.
+message GetServiceGroupInstanceRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 2;
+    // ServiceGroupInsdtanceId the identifier of the group instance.
+    string service_group_instance_id = 3;
 }

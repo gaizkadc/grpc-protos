@@ -41,4 +41,8 @@ service Applications {
     // AddServiceInstance to an already existing service group instance
     rpc AddServiceInstance(AddServiceInstanceRequest) returns (ServiceInstance){}
 
+    // GetServiceGroupInstanceMetadata returns the metadata entry of an existing ServiceGroupInstance
+    rpc GetServiceGroupInstanceMetadata(GetServiceGroupInstanceMetadataRequest) returns (InstanceMetadata){}
+    // UpdateServiceGroupInstanceMetadata updates the value of an existing metadata instance
+    rpc UpdateServiceGroupInstanceMetadata(InstanceMetadata) returns (common.Success){}
 }
