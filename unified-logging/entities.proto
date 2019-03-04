@@ -8,6 +8,14 @@ package unified_logging;
 option go_package = "github.com/nalej/grpc-unified-logging-go";
 import "google/protobuf/timestamp.proto";
 
+// SortOrder is used to define the ordering of search results
+enum SortOrder {
+    // Ascending order
+    ASC = 0;
+    // Descending order
+    DESC = 1;
+}
+
 // SearchRequest message with the query to be resolved.
 message SearchRequest{
     // OrganizationId with the organization identifier.
@@ -23,6 +31,8 @@ message SearchRequest{
     google.protobuf.Timestamp from = 5;
     // To specifies the maximum timestamp of the expected entries.
     google.protobuf.Timestamp to = 6;
+    // Order specifies the sort order of the entries (on timestamp)
+    SortOrder order = 7;
 }
 
 // ExpirationRequest to remove entries from the index.
