@@ -297,10 +297,14 @@ message SecurityRule {
     int32 target_port = 7;
     // Access level to that port defining who can access the port.
     string access_name = 8;
+    // Name of the service group
+    string auth_service_group_name = 9;
     // AuthServices defining a list of services that can access the port.
-    repeated string auth_services = 9;
-    // DeviceGroups defining a list of device groups that can access the port.
-    repeated string device_groups = 10;
+    repeated string auth_services = 10;
+    // DeviceGroups defining a list of device groups that can access the port. This field cannot be set by the user when uploading the descriptor.
+    repeated string device_group_ids = 11;
+    // DeviceGroupNames defining a list of device groups names that can access the port.
+    repeated string device_group_names = 12;
 }
 
 // This is a common metadata entity that collects information for a deployed instance. This instance can be a
