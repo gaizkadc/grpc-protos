@@ -386,6 +386,8 @@ message AddServiceGroupInstanceRequest {
     string app_instance_id = 3;
     // ServiceGroupId with the group identifier.
     string service_group_id = 4;
+    // Initial piece of metadata for this service group instance
+    InstanceMetadata metadata = 5;
 }
 
 
