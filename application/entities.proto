@@ -518,7 +518,7 @@ message UpdateServiceStatusRequest {
 }
 
 // GetServiceGroupInstanceMetadataRequest returns the metadata for a an existing service group instance.
-message GetServiceGroupInstanceRequest {
+message GetServiceGroupInstanceMetadataRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
