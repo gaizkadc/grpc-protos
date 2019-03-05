@@ -375,6 +375,11 @@ message ServiceGroupInstance {
     map<string, string> labels = 12;
 }
 
+// ServiceGroupInstancesList is a list of service group instances to be returned after instantiation.
+message ServiceGroupInstancesList {
+    repeated ServiceGroupInstance service_group_instances = 1;
+}
+
 // AddServiceGroupInstanceRequest contains the information required to append a new service group instance to an
 // already deployed application instance.
 message AddServiceGroupInstancesRequest {
