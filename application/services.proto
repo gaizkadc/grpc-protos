@@ -37,7 +37,7 @@ service Applications {
     rpc RemoveAppInstance(AppInstanceId) returns (common.Success){}
 
     // AddServiceGroupInstance to an already existing application instance
-    rpc AddServiceGroupInstance(AddServiceGroupInstanceRequest) returns (ServiceGroupInstance){}
+    rpc AddServiceGroupInstance(AddServiceGroupInstancesRequest) returns (ServiceGroupInstance){}
     // AddServiceInstance to an already existing service group instance
     rpc AddServiceInstance(AddServiceInstanceRequest) returns (ServiceInstance){}
 

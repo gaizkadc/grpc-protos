@@ -105,6 +105,8 @@ message ServiceGroupDeploymentSpecs {
     int32 num_replicas = 1;
     // Indicate if this service group must be replicated in every cluster
     bool multi_cluster_replica = 2;
+    // DeploymentSelectors defines a key-value map of deployment selectors
+    map<string, string> deployment_selectors = 3;
 }
 
 // ServiceType defines the types of services supported in the system.
@@ -174,8 +176,6 @@ message Service {
     repeated string deploy_after = 15;
     // Run arguments
     repeated string run_arguments = 16;
-    // DeploymentSelectors defines a key-value map of deployment selectors
-    map<string, string> deployment_selectors = 17;
 }
 
 enum ServiceStatus {
@@ -377,7 +377,7 @@ message ServiceGroupInstance {
 
 // AddServiceGroupInstanceRequest contains the information required to append a new service group instance to an
 // already deployed application instance.
-message AddServiceGroupInstanceRequest {
+message AddServiceGroupInstancesRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppDescriptorId with the application descriptor identifier.
@@ -386,8 +386,8 @@ message AddServiceGroupInstanceRequest {
     string app_instance_id = 3;
     // ServiceGroupId with the group identifier.
     string service_group_id = 4;
-    // Initial piece of metadata for this service group instance
-    InstanceMetadata metadata = 5;
+    // NumInstances indicates the number of replicas to run.
+    int32 num_instances = 5;
 }
 
 
@@ -440,8 +440,6 @@ message ServiceInstance {
     repeated string run_arguments = 22;
     // Relevant information about this instance
     string info = 23;
-    // DeploymentSelectors defines a key-value map of deployment selectors
-    map<string, string> deployment_selectors = 24;
 }
 
 // Request to add a new service instance to an already existing service group instance.
