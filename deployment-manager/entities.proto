@@ -31,6 +31,9 @@ message DeploymentFragmentRequest {
     RollbackPolicy rollback_policy = 4;
 }
 
+
+
+
 message DeploymentFragmentResponse {
     string request_id = 1;
     //status summary

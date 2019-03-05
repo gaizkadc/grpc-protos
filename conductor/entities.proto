@@ -16,6 +16,8 @@ import "google/protobuf/timestamp.proto";
 // --------------------------
 // Conductor services
 
+
+
 // Data structure defining a deployment plan for Nalej applications.
 message DeploymentPlan {
    // Id for this plan
