@@ -23,7 +23,10 @@ service Coordinator {
 // The request messages are reused from the Coordinator. The organization ID
 // and cluster ID can either be blank, or must match the current cluster.
 service Slave {
+    // Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary(ClusterSummaryRequest) returns(ClusterSummary) {}
+    // Retrieve statistics on cluster with respect to platform resources
     rpc GetClusterStats(ClusterStatsRequest) returns(ClusterStats) {}
+    // Execute a query directly on the monitoring storage backend
     rpc Query(QueryRequest) returns(QueryResponse) {}
 }
