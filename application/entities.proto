@@ -532,6 +532,11 @@ message GetServiceGroupInstanceMetadataRequest {
     string service_group_instance_id = 3;
 }
 
+enum AppEndpointProtocol {
+    HTTP = 0;
+    HTTPS = 1;
+}
+
 message AppEndpoint {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -544,7 +549,7 @@ message AppEndpoint {
     // Port port in the endpoint
     int32   port = 5;
     // protocol (http, https)
-    string  protocol = 6;
+    AppEndpointProtocol  protocol = 6;
     // EndpointInstance represents working endpoint exposing data to the outside world
     EndpointInstance endpoint_instance = 7;
 }
