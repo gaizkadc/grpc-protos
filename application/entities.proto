@@ -531,3 +531,25 @@ message GetServiceGroupInstanceMetadataRequest {
     // ServiceGroupInsdtanceId the identifier of the group instance.
     string service_group_instance_id = 3;
 }
+
+message AppEndpoint {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+    // ServiceGroupInstanceId the identifier of the group instance.
+    string  service_group_instance_id = 3;
+    // ServiceInstanceId the identifier of the service instance.
+    string  service_instance_id = 4;
+    // Port port in the endpoint
+    int32   port = 5;
+    // protocol (http, https)
+    string  protocol = 6;
+    // EndpointInstance represents working endpoint exposing data to the outside world
+    EndpointInstance endpoint_instance = 7;
+}
+
+message GetAppEndPointRequest {
+    // FQDN to be accessed by any client
+    string fqdn = 1;
+}
