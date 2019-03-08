@@ -29,7 +29,7 @@ enum Platform {
     MINIKUBE = 0;
     // Azure for cloud-based deployments
     AZURE = 1;
-    // Baremetal install relying on MetalLB
+    // Baremetal install relying on MetalLB.
     BAREMETAL = 2;
 }
 
