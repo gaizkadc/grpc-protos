@@ -20,6 +20,7 @@ import "conductor/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
 import "unified-logging/entities.proto";
+import "infrastructure-monitor/entities.proto";
 import "google/api/annotations.proto";
 
 // Organization related information.
@@ -60,6 +61,14 @@ service Clusters {
     rpc Update(UpdateClusterRequest) returns (Cluster){
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/update"
+            body: "*"
+        };
+    }
+
+    // Retrieve a summary of high level cluster resource availability
+    rpc Monitor(infrastructure_monitor.ClusterSummaryRequest) returns(infrastructure_monitor.ClusterSummary) {
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/{cluster_id}/monitor"
             body: "*"
         };
     }

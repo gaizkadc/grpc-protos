@@ -1,0 +1,159 @@
+/*
+ * Copyright (C) 2019 Nalej Group - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package infrastructure_monitor;
+option go_package = "github.com/nalej/grpc-infrastructure-monitor-go";
+
+import "google/protobuf/timestamp.proto";
+
+// Request a summary of cluster resource information. If the range is omitted,
+// the current point-results are returned; otherwise, an average over the
+// specified number of minutes is returned.
+message ClusterSummaryRequest {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // Range over which to average the results
+    int32 range_minutes = 3;
+}
+
+// Single cluster resource statistic
+message ClusterStat {
+    int64 total = 1;
+    int64 available = 2;
+}
+
+// Response message for cluster resource summary information
+message ClusterSummary {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // CPU resource information in millicores
+    ClusterStat cpu_millicores = 3;
+    // RAM resource information in bytes
+    ClusterStat memory_bytes = 4;
+    // Persistant storage information in bytes. Note that this is on block level,
+    // i.e., the amount of total bytes from all block devices present in the
+    // cluster. This does not mean all is usable for user applications.
+    ClusterStat storage_bytes = 5;
+}
+
+// Enum of all statistics available that are relevant for the platform
+enum PlatformStatsField {
+    SERVICES = 0;
+    VOLUMES = 1;
+    FRAGMENTS = 2;
+    ENDPOINTS = 3;
+}
+
+// Request for all platform-relevant statistics available for a single cluster
+message ClusterStatsRequest {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // Range over which to average the results
+    int32 range_minutes = 3;
+    // Statistics to request. All if not specified.
+    repeated PlatformStatsField fields = 4;
+}
+
+// A single platform-relevant statistic
+message PlatformStat {
+    // Counter: total amount of created entities
+    int64 created = 1;
+    // Counter: total amount of deleted entities
+    int64 deleted = 2;
+    // Gauge: number of currently running entities
+    int64 current_running = 3;
+    // Gauge: number of entities currently in error state
+    int64 current_error = 4;
+}
+
+// Response for platform-relevant statistics for a single cluster
+message ClusterStats {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // Map for all platform fields. Note that this is a mapping from
+    // PlatformStatsField to the PlatformStat; the PlatformStatsField
+    // is represented as an int instead of the enum due to protobuf
+    // limitations.
+    map<int32, PlatformStat> stats = 3;
+}
+
+// Enum for the specific query type for raw queries; depending on the
+// available backends.
+enum QueryType {
+    PROMETHEUS = 0;
+}
+
+// Execute a raw query on a single cluster
+message QueryRequest {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // Backend query type
+    QueryType type = 3;
+    // Query string
+    string query = 4;
+    // Time range and resolution over which to execute the query
+    // See e.g. https://prometheus.io/docs/prometheus/latest/querying/api/#range-queries
+    message QueryRange {
+        // Start of query time range
+        google.protobuf.Timestamp start = 1;
+        // End of query time range
+        google.protobuf.Timestamp end = 2;
+        // Query resolution step width in float number of seconds
+        float step = 3;
+    }
+    QueryRange range = 5;
+}
+
+// Response to a raw query request
+message QueryResponse {
+    // Organization identifier
+    string organization_id = 1;
+    // Cluster identifier
+    string cluster_id = 2;
+    // Backend query response type
+    QueryType type = 3;
+
+    // See https://prometheus.io/docs/prometheus/latest/querying/api/#expression-queries
+    message PrometheusResponse {
+        // Response result type, depending on query
+        enum ResultType {
+            MATRIX = 0;
+            VECTOR = 1;
+            SCALAR = 2;
+            STRING = 3;
+        }
+        ResultType result_type = 1;
+
+        // List of responses
+        message ResultValue {
+            message Value {
+                google.protobuf.Timestamp timestamp = 1;
+                string value = 2;
+            }
+
+            // Map of metadata labels for this specific response value list
+            map<string, string> metric = 1;
+            // Value list for this metrci
+            repeated Value value = 2;
+        }
+        repeated ResultValue result = 2;
+    }
+
+    // The query response has exactly one valid response result type
+    oneof result {
+        PrometheusResponse prometheus_result = 16;
+    }
+}

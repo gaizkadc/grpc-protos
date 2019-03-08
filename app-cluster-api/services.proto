@@ -9,8 +9,9 @@ option go_package = "github.com/nalej/grpc-app-cluster-api-go";
 
 import "common/entities.proto";
 import "conductor/entities.proto";
-import "unified-logging/entities.proto";
 import "deployment-manager/entities.proto";
+import "infrastructure-monitor/entities.proto";
+import "unified-logging/entities.proto";
 
 
 // Service deployed in local clusters to score locally available resources.
@@ -32,4 +33,14 @@ service UnifiedLogging {
     rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {}
     // Expire the logs of a given application.
     rpc Expire(unified_logging.ExpirationRequest) returns(common.Success) {}
+}
+
+// Slave services for infrastructure monitoring information
+service InfrastructureMonitor {
+    // Retrieve a summary of high level cluster resource availability
+    rpc GetClusterSummary(infrastructure_monitor.ClusterSummaryRequest) returns(infrastructure_monitor.ClusterSummary) {}
+    // Retrieve statistics on cluster with respect to platform resources
+    rpc GetClusterStats(infrastructure_monitor.ClusterStatsRequest) returns(infrastructure_monitor.ClusterStats) {}
+    // Execute a query directly on the monitoring storage backend
+    rpc Query(infrastructure_monitor.QueryRequest) returns(infrastructure_monitor.QueryResponse) {}
 }
