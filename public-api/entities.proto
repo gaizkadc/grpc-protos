@@ -275,8 +275,6 @@ message ServiceInstance {
     repeated string run_arguments = 22;
     // Relevant information about this instance
     string info = 23;
-    // DeploymentSelectors defines a key-value map of deployment selectors
-    map<string, string> deployment_selectors = 24;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -341,6 +339,8 @@ message ServiceGroupDeploymentSpecs {
     int32 num_replicas = 1;
     // Indicate if this service group must be replicated in every cluster
     bool multi_cluster_replica = 2;
+    // DeploymentSelectors defines a key-value map of deployment selectors
+    map<string, string> deployment_selectors = 3;
 }
 
 // ServiceGroupInstance structure to represent a collection of services that must be deployed following a given collocation

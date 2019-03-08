@@ -45,4 +45,9 @@ service Applications {
     rpc GetServiceGroupInstanceMetadata(GetServiceGroupInstanceMetadataRequest) returns (InstanceMetadata){}
     // UpdateServiceGroupInstanceMetadata updates the value of an existing metadata instance
     rpc UpdateServiceGroupInstanceMetadata(InstanceMetadata) returns (common.Success){}
+
+    // AddAppEndPoint adds a new App Endpoint to a given service instance
+    rpc AddAppEndpoint(AppEndpoint) returns (common.Success) {}
+    // GetAppEndPoint retrieves an appEndpoint
+    rpc GetAppEndpoint(GetAppEndPointRequest) returns (AppEndpoint){}
 }
