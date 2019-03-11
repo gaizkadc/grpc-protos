@@ -48,6 +48,6 @@ service Applications {
 
     // AddAppEndPoint adds a new App Endpoint to a given service instance
     rpc AddAppEndpoint(AppEndpoint) returns (common.Success) {}
-    // GetAppEndPoint retrieves an appEndpoint
-    rpc GetAppEndpoint(GetAppEndPointRequest) returns (AppEndpoint){}
+    // GetAppEndPoint retrieves a list of appEndpoints
+    rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
 }
