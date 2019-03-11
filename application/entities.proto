@@ -558,6 +558,10 @@ message AppEndpoint {
     EndpointInstance endpoint_instance = 7;
 }
 
+message AddEndpointList {
+    repeated AppEndpoint appEndpoints = 1;
+}
+
 message GetAppEndPointRequest {
     // FQDN to be accessed by any client
     string fqdn = 1;
