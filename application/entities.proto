@@ -505,6 +505,8 @@ message UpdateAppStatusRequest {
     string app_instance_id = 2;
     // Status with the new transition.
     ApplicationStatus status = 3;
+    // Textual information relevant to this update
+    string info = 4;
 }
 
 message UpdateServiceStatusRequest {
