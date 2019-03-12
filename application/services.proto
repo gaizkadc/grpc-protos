@@ -50,4 +50,6 @@ service Applications {
     rpc AddAppEndpoint(AppEndpoint) returns (common.Success) {}
     // GetAppEndPoint retrieves a list of appEndpoints
     rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
+    // RemoveAppEndpoints removes all the app endpoints of an app_instance
+    rpc RemoveAppEndpoints(RemoveEndpointRequest) returns (common.Success) {}
 }
