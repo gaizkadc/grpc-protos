@@ -566,6 +566,7 @@ message GetAppEndPointRequest {
     // FQDN to be accessed by any client
     string fqdn = 1;
 }
+// RemoveEndpointRequest
 message RemoveEndpointRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
