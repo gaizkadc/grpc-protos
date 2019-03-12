@@ -100,12 +100,10 @@ function getLastMergeCommit {
   FOUND_MERGE=0
   while [ $FOUND_MERGE -eq 0 ]; do
     MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-    echo $MERGELOG
     if [[ $MERGELOG == *"Merge branch 'master' into"* ]]; then
       MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
-      echo $MERGE_NUMBER
     else
-      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk '{if (NR==2) print $0}')
+      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
       FOUND_MERGE=1
     fi
   done
@@ -113,9 +111,9 @@ function getLastMergeCommit {
 
 function getModifiedDirs {
   getLastMergeCommit
-  echo $GITLASTMERGECOMMIT
+  echo "Last commit merge: ${GITLASTMERGECOMMIT}"
   MODIFIEDDIRS=$(git diff --name-only $GITLASTCOMMIT $GITLASTMERGECOMMIT | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
-  echo $MODIFIEDDIRS
+  echo "Modified directories: ${MODIFIEDDIRS}"
 }
 
 function buildFromLastMerge {
@@ -126,9 +124,9 @@ function buildFromLastMerge {
     echo "No protocol buffer was modified since last merge"
     exit 0
   fi
-  # for d in $MODIFIEDDIRS; do
-  #   buildDir $d
-  # done
+  for d in $MODIFIEDDIRS; do
+    buildDir $d
+  done
 }
 
 function buildSingle {
