@@ -70,9 +70,9 @@ message PlatformStat {
     // Counter: total amount of deleted entities
     int64 deleted = 2;
     // Gauge: number of currently running entities
-    int64 current_running = 3;
+    int64 running = 3;
     // Gauge: number of entities currently in error state
-    int64 current_error = 4;
+    int64 errors = 4;
 }
 
 // Response for platform-relevant statistics for a single cluster
