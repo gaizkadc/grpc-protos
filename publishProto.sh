@@ -91,16 +91,29 @@ function buildAll {
 }
 
 function getLastMergeCommit {
+  MERGE_NUMBER=1
   GITLASTCOMMIT=$(git rev-parse HEAD)
-  GITLASTMERGECOMMIT=$(git log --merges -n 1 --pretty=format:"%H")
+  GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
   if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
-    GITLASTMERGECOMMIT=$(git log --merges -n 2 --pretty=format:"%H" | awk '{if (NR==2) print $0 }')
+    MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
   fi
+  FOUND_MERGE=0
+  while [ $FOUND_MERGE -eq 0 ]; do
+    MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+    if [[ $MERGELOG == *"Merge branch 'master' into"* ]]; then
+      MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+    else
+      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+      FOUND_MERGE=1
+    fi
+  done
 }
 
 function getModifiedDirs {
   getLastMergeCommit
+  echo "Last commit merge: ${GITLASTMERGECOMMIT}"
   MODIFIEDDIRS=$(git diff --name-only $GITLASTCOMMIT $GITLASTMERGECOMMIT | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
+  echo "Modified directories: ${MODIFIEDDIRS}"
 }
 
 function buildFromLastMerge {
