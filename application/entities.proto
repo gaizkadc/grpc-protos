@@ -573,3 +573,31 @@ message RemoveEndpointRequest {
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
 }
+
+message AppZtNetwork {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+    // ZeroTier network id
+    string network_id = 3;
+}
+
+// AddAppZtNetworkRequest add a new zerotier network id
+message AddAppZtNetworkRequest {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+    // ZeroTier network id
+    string network_id = 3;
+}
+
+// DeleteAppZtNetworkRequest remove any network id for the given app instance
+message RemoveAppZtNetworkRequest {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+}
+

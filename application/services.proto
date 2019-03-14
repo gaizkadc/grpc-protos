@@ -52,4 +52,10 @@ service Applications {
     rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
     // RemoveAppEndpoints removes all the app endpoints of an app_instance
     rpc RemoveAppEndpoints(RemoveEndpointRequest) returns (common.Success) {}
+
+    // AddAppZtNetwork add a new zerotier network for an existing app instance
+    rpc AddAppZtNetwork(AddAppZtNetworkRequest) returns (common.Success) {}
+    // RemoveAppZtNetwork remove the network instance for an application instance
+    rpc RemoveAppZtNetwork(RemoveAppZtNetworkRequest) returns (common.Success) {}
+
 }
