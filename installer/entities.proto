@@ -98,4 +98,6 @@ message StaticIPAddresses {
     string dns = 3;
     // ZT Planet static IP address
     string zt_planet = 4;
+    // CoreDNS (External DNS) static IP address
+    string coredns_ext = 4;
 }
