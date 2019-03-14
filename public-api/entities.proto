@@ -370,6 +370,8 @@ message ServiceGroupInstance {
     ServiceGroupDeploymentSpecs specs = 11;
     // Labels defined by the user.
     map<string, string> labels = 12;
+    //all the global fqdn of the instances of the group
+    repeated string global_fqdn = 13;
 }
 
 // AppInstance represents an instance of the application in the system.
