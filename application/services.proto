@@ -57,5 +57,6 @@ service Applications {
     rpc AddAppZtNetwork(AddAppZtNetworkRequest) returns (common.Success) {}
     // RemoveAppZtNetwork remove the network instance for an application instance
     rpc RemoveAppZtNetwork(RemoveAppZtNetworkRequest) returns (common.Success) {}
-
+    // RemoveAppZtNetwork remove the network instance for an application instance
+    rpc GetAppZtNetwork(GetAppZtNetworkRequest) returns (AppZtNetwork) {}
 }
