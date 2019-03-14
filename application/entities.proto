@@ -601,3 +601,10 @@ message RemoveAppZtNetworkRequest {
     string  app_instance_id = 2;
 }
 
+// GetAppZtNetworkRequest get any network matching the given values
+message GetAppZtNetworkRequest {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+}
