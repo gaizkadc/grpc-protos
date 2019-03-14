@@ -31,15 +31,17 @@ message NetworkId {
 message AddNetworkRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // AppInstanceId with the application identifier.
+    string app_instance_id = 2;
     // Name of the network.
-    string name = 2;
+    string name = 3;
 }
 
 message DeleteNetworkRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // NetworkId with the network identifier.
-    string network_id = 2;
+    // AppInstanceId with the network identifier.
+    string app_instance_id = 2;
 }
 
 message NetworkList {
