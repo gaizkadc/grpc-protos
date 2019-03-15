@@ -399,6 +399,8 @@ message AppInstance {
     string status_name = 10;
     // Metadata descriptor for the instances triggered by this app
     repeated InstanceMetadata metadata = 11;
+    // Textual information about this particular application instance
+    string info = 12;
 }
 
 message AppInstanceList {
