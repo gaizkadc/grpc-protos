@@ -38,6 +38,8 @@ service Applications {
 
     // AddServiceGroupInstance to an already existing application instance
     rpc AddServiceGroupInstances(AddServiceGroupInstancesRequest) returns (ServiceGroupInstancesList){}
+    // RemoveServiceGroupInstancesRequest removes any service group instance from an application instance
+    rpc RemoveServiceGroupInstances(RemoveServiceGroupInstancesRequest) returns (common.Success){}
     // AddServiceInstance to an already existing service group instance
     rpc AddServiceInstance(AddServiceInstanceRequest) returns (ServiceInstance){}
 

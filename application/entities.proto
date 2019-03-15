@@ -399,7 +399,14 @@ message AddServiceGroupInstancesRequest {
     int32 num_instances = 5;
 }
 
-
+// RemoveServiceGroupInstancesRequest contains the information required to remove any service group instance
+// from an existing application instance
+message RemoveServiceGroupInstancesRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 2;
+}
 
 message ServiceInstance {
     // OrganizationId with the organization identifier.
