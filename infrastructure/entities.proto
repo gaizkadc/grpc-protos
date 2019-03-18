@@ -206,4 +206,8 @@ message UpdateNodeRequest {
     bool update_status = 5;
     // Status of the cluster based on monitoring information.
     InfraStatus status = 6;
+    // UpdateState flag to determine if the state needs to be updated.
+    bool update_state = 7;
+    // State of the node
+    NodeState state = 8;
 }
