@@ -139,6 +139,12 @@ service Devices {
             body: "*"
         };
     }
+    rpc RemoveDevice(device.DeviceId) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/device/{organization_id}/remove"
+            body: "*"
+        };
+    }
 }
 
 // Resource level related information.

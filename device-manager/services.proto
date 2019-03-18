@@ -27,6 +27,7 @@ service Devices {
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
     rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
+    rpc RemoveDevice(device.DeviceId) returns (common.Success){}
 }
 
 service Latency {
