@@ -24,8 +24,8 @@ pipeline {
                     latestCommit = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
                     lastMergeCommit = sh(returnStdout: true, script: """
                     MERGE_NUMBER=1
-                    GITLASTCOMMIT=$(git rev-parse HEAD)
-                    GITLASTMERGECOMMIT=$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%H")
+                    GITLASTCOMMIT=\$(git rev-parse HEAD)
+                    GITLASTMERGECOMMIT=\$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%H")
                     if [ "\$GITLASTCOMMIT" == "\$GITLASTMERGECOMMIT" ]; then
                         MERGE_NUMBER=\$(( \$MERGE_NUMBER + 1))
                     fi
