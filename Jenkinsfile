@@ -6,75 +6,45 @@ def protoList = []
 def repoList = []
 
 pipeline {
-    agent { node { label 'protos-slave' } }
+    agent { node { label 'grpc-protos' } }
     options {
-        checkoutToSubdirectory("${packagePath}")
+        buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
     stages {
         stage("Variable initialization") {
+            steps { stepVariableInitialization packagePath }
+        }
+        stage("Git setup") {
+            steps { container("golang") { stepGitSetup() } }
+        }
+        stage("Detect modified protocol buffers") {
             steps {
                 script {
-                    dir("${packagePath}") {
-                        env.authorName = sh(returnStdout: true, script: "set +ex && git log --pretty=format:'%aN' -n 1").trim()
-                    }
+                    latestCommit = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+                    lastMergeCommit = sh(returnStdout: true, script: """
+                    MERGE_NUMBER=1
+                    GITLASTCOMMIT=$(git rev-parse HEAD)
+                    GITLASTMERGECOMMIT=$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%H")
+                    if [ "\$GITLASTCOMMIT" == "\$GITLASTMERGECOMMIT" ]; then
+                        MERGE_NUMBER=\$(( \$MERGE_NUMBER + 1))
+                    fi
+                    FOUND_MERGE=0
+                    while [ \$FOUND_MERGE -eq 0 ]; do
+                        MERGELOG=\$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%s" | awk -v nr="\$MERGE_NUMBER" '{if (NR==nr) print \$0}')
+                        if [[ \$MERGELOG == *"Merge branch 'master' into"* ]]; then
+                        MERGE_NUMBER=\$(( \$MERGE_NUMBER + 1))
+                        else
+                        GITLASTMERGECOMMIT=\$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%H" | awk -v nr="\$MERGE_NUMBER" '{if (NR==nr) print \$0}')
+                        FOUND_MERGE=1
+                        fi
+                    done
+                    """).trim()
+                    modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'")
+                    echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
+                    echo "Detected directories to generate:"
+                    echo modifiedDirs
                 }
-            }
-        }
-        stage("gRPC repository generation") {
-            when { not { branch 'master' } }
-            steps {
-                dir("${packagePath}") {
-                    script {
-                        if (env.CHANGE_ID) {
-                            slackSend channel: "#madridteam", message: "Probando si ${env.authorName} ha hecho los protos bien...", botUser: false
-                        }
-                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) DRY_RUN=true make generate service=diff"
-                    }
-                }
-            }
-            post {
-                success {
-                    script {
-                        if (env.CHANGE_ID) {
-                            slackSend channel: "#madridteam", message: "La prueba de protos de ${env.authorName} salió bien", botUser: false
-                        }
-                    }
-                }
-                failure {
-                    script {
-                        if (env.CHANGE_ID) {
-                            slackSend channel: "#madridteam", message: "Ha fallado al probar los protos de ${env.authorName}", botUser: false
-                        }
-                    }
-                }
-            }
-        }
-        stage("gRPC repository generation and publish") {
-            when { branch 'master' } 
-            steps {
-                dir("${packagePath}") {
-                    script {
-                        slackSend channel: "#madridteam", message: "Generando protos", botUser: false
-                        sh "CURRENT_BRANCH=master REPOPATH=\$(pwd) make generate service=diff"
-                    }
-                }
-            }
-            post {
-                success {
-                    slackSend channel: "#madridteam", message: "Protos generados OK", botUser: false
-                }
-                failure {
-                    slackSend channel: "#madridteam", message: "Ha fallado la generación de protos", botUser: false
-                }
-            }
-        }
-    }
-    post {
-        always {
-            dir("${packagePath}") {
-                sh "sudo chown -R jenkins:jenkins *"
-                deleteDir()
             }
         }
     }
