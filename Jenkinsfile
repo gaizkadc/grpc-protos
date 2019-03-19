@@ -39,6 +39,7 @@ pipeline {
                         FOUND_MERGE=1
                         fi
                     done
+                    echo \$GITLASTMERGECOMMIT
                     """).trim()
                     modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'")
                     echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
