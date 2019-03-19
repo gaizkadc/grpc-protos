@@ -44,7 +44,7 @@ pipeline {
                     modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'").trim()
                     modifiedList = modifiedDirs.split("\n")
                     echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
-                    echo "Detected directories to generate:\n${modifiedDirs}"
+                    echo "Detected directories to generate:\n${modifiedList}"
                 }
             }
         }
