@@ -44,8 +44,7 @@ pipeline {
                     lastMergeCommit = "7c3496fb797b2e6989d46a198008924a7c5b6b12"  // Test with a known commit that has changes
                     modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'")
                     echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
-                    echo "Detected directories to generate:"
-                    echo modifiedDirs
+                    echo "Detected directories to generate0:\n${modifiedDirs}"
                 }
             }
         }
