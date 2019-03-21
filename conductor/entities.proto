@@ -239,16 +239,18 @@ message ServiceUpdate {
    string service_group_instance_id =5;
    // Service id
    string service_id = 6;
+   // Service name
+   string service_name = 7;
    // Instance of this service
-   string service_instance_id = 7;
+   string service_instance_id = 8;
    // ClusterId where the service is deployed
-   string cluster_id = 8;
+   string cluster_id = 9;
    // The current status of the service
-   application.ServiceStatus status = 9;
+   application.ServiceStatus status = 10;
    // Endpoints exposed through ingresses.
-   repeated application.EndpointInstance endpoints = 10;
+   repeated application.EndpointInstance endpoints = 11;
    // Textual information important to understand this status update
-   string info = 11;
+   string info = 12;
 }
 
 // Indicate the status of a set of services
