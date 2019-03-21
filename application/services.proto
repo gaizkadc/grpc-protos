@@ -49,7 +49,7 @@ service Applications {
     rpc UpdateServiceGroupInstanceMetadata(InstanceMetadata) returns (common.Success){}
 
     // AddAppEndPoint adds a new App Endpoint to a given service instance
-    rpc AddAppEndpoint(AppEndpoint) returns (common.Success) {}
+    rpc AddAppEndpoint(AddAppEndpointRequest) returns (common.Success) {}
     // GetAppEndPoint retrieves a list of appEndpoints
     rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
     // RemoveAppEndpoints removes all the app endpoints of an app_instance
