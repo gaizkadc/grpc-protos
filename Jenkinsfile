@@ -55,7 +55,7 @@ pipeline {
                     script {
                         for (directory in modifiedList) {
                             dir(directory) {
-                                sh(script """
+                                sh(script: """
                                 if [ -f .protolangs ]; then
                                     while read lang; do
                                         echo "Generating ${directory} protocol buffers for \$lang language"
