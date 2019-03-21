@@ -57,6 +57,7 @@ pipeline {
                             sh(script: """
                             ln -s /go/src ${WORKSPACE}/src
                             cd ${directory}
+                            ls -la ${directory}
                             if [ -f .protolangs ]; then
                                 while read lang; do
                                     echo "Generating ${directory} protocol buffers for \$lang language"
