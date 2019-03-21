@@ -3,6 +3,7 @@ def slackHelper = new SlackHelper()
 def packageName = "grpc-protos"
 def packagePath = "${packageName}"
 def modifiedDirs = ""
+def modifiedList = []
 
 pipeline {
     agent { node { label 'grpc-protos' } }
@@ -44,9 +45,29 @@ pipeline {
                     modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'").trim()
                     modifiedList = modifiedDirs.split("\n")
                     echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
-                    echo "Detected directories to generate:\n${modifiedList}"
+                    echo "Detected directories to generate:\n${modifiedDirs}"
+                }
+            }
+        }
+        stage("Generate modified protocol buffers") {
+            steps {
+                container("protoc") {
+                    for (directory in modifiedList) {
+                        dir(directory) {
+                            sh(script """
+                            if [ -f .protolangs ]; then
+                                while read lang; do
+                                    echo "Generating ${directory} protocol buffers for \$lang language"
+                                    /usr/local/bin/entrypoint.sh -d ${directory} -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
+                                    ls -la ${directory}/pb-\$lang
+                                done < .protolangs
+                            fi
+                            """)
+                        }
+                    }
                 }
             }
         }
     }
+
 }
