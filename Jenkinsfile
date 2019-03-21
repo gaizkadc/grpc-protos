@@ -55,6 +55,7 @@ pipeline {
                     script {
                         for (directory in modifiedList) {
                             sh(script: """
+                            ln -s /go/src ${WORKSPACE}/src
                             cd ${directory}
                             if [ -f .protolangs ]; then
                                 while read lang; do
