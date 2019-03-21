@@ -42,7 +42,7 @@ pipeline {
                     // echo \$GITLASTMERGECOMMIT
                     // """).trim()
                     lastMergeCommit = "6493e67c151c1c115148f0c3d2192650e448a216"  // Test with a known commit that has changes
-                    modifiedDirs = sh(returnStdout: true, script: "git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'").trim()
+                    modifiedDirs = sh(returnStdout: true, script: "set +ex && git diff --name-only ${latestCommit} ${lastMergeCommit} | grep \"^.*\\/.*.proto\$\" | awk -F/ '{print \$1}'").trim()
                     modifiedList = modifiedDirs.split("\n")
                     echo "We are going to build the protocol buffers since commit ID: ${lastMergeCommit}"
                     echo "Detected directories to generate:\n${modifiedDirs}"
@@ -56,11 +56,11 @@ pipeline {
                         sh("ln -s /go/src ${WORKSPACE}/src")
                         for (directory in modifiedList) {
                             sh(script: """
+                            set +ex
                             if [ -f ${directory}/.protolangs ]; then
                                 while read lang; do
                                     echo "Generating ${directory} protocol buffers for \$lang language"
                                     /usr/local/bin/entrypoint.sh -d ${directory} -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
-                                    ls -la ${directory}/pb-\$lang
                                 done < ${directory}/.protolangs
                             fi
                             """)
