@@ -54,17 +54,17 @@ pipeline {
                 container("protoc") {
                     script {
                         for (directory in modifiedList) {
-                            dir(directory) {
-                                sh(script: """
-                                if [ -f .protolangs ]; then
-                                    while read lang; do
-                                        echo "Generating ${directory} protocol buffers for \$lang language"
-                                        /usr/local/bin/entrypoint.sh -d ${directory} -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
-                                        ls -la ${directory}/pb-\$lang
-                                    done < .protolangs
-                                fi
-                                """)
-                            }
+                            sh(script: """
+                            cd ${directory}
+                            if [ -f .protolangs ]; then
+                                while read lang; do
+                                    echo "Generating ${directory} protocol buffers for \$lang language"
+                                    /usr/local/bin/entrypoint.sh -d ${directory} -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
+                                    ls -la ${directory}/pb-\$lang
+                                done < .protolangs
+                            fi
+                            cd ..
+                            """)
                         }
                     }
                 }
