@@ -102,7 +102,7 @@ enum CollocationPolicy {
 // specs.
 message ServiceGroupDeploymentSpecs {
     // How many times this service group must be replicated
-    int32 num_replicas = 1;
+    int32 replicas = 1;
     // Indicate if this service group must be replicated in every cluster
     bool multi_cluster_replica = 2;
     // DeploymentSelectors defines a key-value map of deployment selectors
