@@ -53,9 +53,9 @@ pipeline {
             steps {
                 container("protoc") {
                     script {
+                        sh("ln -s /go/src ${WORKSPACE}/src")
                         for (directory in modifiedList) {
                             sh(script: """
-                            ln -s /go/src ${WORKSPACE}/src
                             if [ -f ${directory}/.protolangs ]; then
                                 while read lang; do
                                     echo "Generating ${directory} protocol buffers for \$lang language"
