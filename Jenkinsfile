@@ -56,16 +56,13 @@ pipeline {
                         for (directory in modifiedList) {
                             sh(script: """
                             ln -s /go/src ${WORKSPACE}/src
-                            cd ${directory}
-                            ls -la
-                            if [ -f .protolangs ]; then
+                            if [ -f ${directory}/.protolangs ]; then
                                 while read lang; do
                                     echo "Generating ${directory} protocol buffers for \$lang language"
-                                    /usr/local/bin/entrypoint.sh -d . -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
+                                    /usr/local/bin/entrypoint.sh -d ${directory} -i . -i /usr/local/include/google -o ${directory}/pb-\$lang -l \$lang --with-docs --with-gateway
                                     ls -la ${directory}/pb-\$lang
-                                done < .protolangs
+                                done < ${directory}/.protolangs
                             fi
-                            cd ..
                             """)
                         }
                     }
