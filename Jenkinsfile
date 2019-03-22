@@ -91,13 +91,13 @@ pipeline {
                                             echo "VERSION file does not exist. Creatinig initial version file"
                                             writeFile("VERSION", "0.0.0")
                                         }
-                                        currentVersion = readFile("VERSION").trim()
-                                        versionValues = currentVersion.split('.')
-                                        echo "values: ${versionValues}"
-                                        versionValues[2] = (versionValues[2].toInteger() + 1).toString()
-                                        newVersion = versionValues.join(".")
-                                        echo "New version will be ${newVersion}"
-                                        writeFile("VERSION", newVersion)
+                                        currentVersion = readFile("VERSION").trim().split()
+                                        echo currentVersion
+                                        // echo "values: ${versionValues}"
+                                        // versionValues[2] = (versionValues[2].toInteger() + 1).toString()
+                                        // newVersion = versionValues.join(".")
+                                        // echo "New version will be ${newVersion}"
+                                        // writeFile("VERSION", newVersion)
                                         // git add .
                                         // git commit -m "Auto generated gRPC"
                                         // git push origin HEAD
