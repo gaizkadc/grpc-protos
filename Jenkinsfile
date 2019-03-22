@@ -92,7 +92,9 @@ pipeline {
                                             writeFile("VERSION", "0.0.0")
                                         }
                                         currentVersion = readFile("VERSION")
+                                        echo currentVersion
                                         versionValues = currentVersion.split(".")
+                                        echo versionValues
                                         versionValues[2] = (versionValues[2].toInteger() + 1).toString()
                                         newVersion = versionValues.join(".")
                                         echo "New version will be ${newVersion}"
