@@ -20,10 +20,12 @@ message DeployRequest{
 message ApplicationFilter{
     // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupId with the Identifier of the target device group
+    string device_group_id = 2;
     // DeviceGroupName with the name of the target device group
-    string device_group_name = 2;
+    string device_group_name = 3;
     // Match labels contains the set of labels that should be matched against available applications.
-    map<string, string> match_labels = 3;
+    map<string, string> match_labels = 4;
 }
 
 // TargetApplication retrieves the list of labels in a given application instance. This is provided as to
