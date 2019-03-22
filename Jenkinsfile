@@ -92,7 +92,8 @@ pipeline {
                                             writeFile("VERSION", "0.0.0")
                                         }
                                         currentVersion = sh(returnStdout: true, script: "cat VERSION").trim()
-                                        println currentVersion.getClass()
+                                        versionValues = currentVersion.split(".")
+                                        println versionValues
                                         // echo "values: ${versionValues}"
                                         // versionValues[2] = (versionValues[2].toInteger() + 1).toString()
                                         // newVersion = versionValues.join(".")
