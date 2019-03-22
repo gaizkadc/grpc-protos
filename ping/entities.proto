@@ -14,6 +14,7 @@ message PingRequest {
     int32 request_number = 1;
 }
 
+
 // PingResponse defines the message sent by the server with a response message.
 message PingResponse {
     int32 request_number = 2;
