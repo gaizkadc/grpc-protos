@@ -87,27 +87,22 @@ pipeline {
                                     repoName = "grpc-${directory}-${lang}"
                                     git url: "git@github.com:nalej/${repoName}.git", credentialsId: "jarvis-git-ssh-user"
                                     sshagent(['jarvis-git-ssh-user']) {
-                                        sh(script: """
-                                        #!/bin/bash
-                                        if [ ! -f VERSION ]; then
-                                            echo "Creating initial version"
-                                            echo "0.0.0" > VERSION
-                                        fi
-                                        CURRENT_VERSION_STRING=\$(cat VERSION)
-                                        VERSION_VALUES=\$(echo \$CURRENT_VERSION_STRING | tr '.' ' ')
-                                        V_MAJOR=\${VERSION_VALUES[0]}
-                                        V_MINOR=\${VERSION_VALUES[1]}
-                                        V_PATCH=\${VERSION_VALUES[2]}
-                                        V_PATCH=\$((V_PATCH + 1))
-                                        NEW_VERSION="\${V_MAJOR}.\${V_MINOR}.\${V_PATCH}"
-                                        echo "New version will be \${NEW_VERSION}"
-                                        echo \$NEW_VERSION > VERSION
-                                        git add .
-                                        git commit -m "Auto generated gRPC"
-                                        git push origin HEAD
-                                        git tag -a -m "Auto generated version \${NEW_VERSION}." "v\$NEW_VERSION"
-                                        git push origin --tags
-                                        """)
+                                        if (!fileExists("VERSION")) {
+                                            echo "VERSION file does not exist. Creatinig initial version file"
+                                            writeFile("VERSION", "0.0.0")
+                                        }
+                                        currentVersion = readFile("VERSION")
+                                        versionValues = currentVersion.split(".")
+                                        versionValues[2] = (versionValues[2].toInteger() + 1).toString()
+                                        newVersion = versionValues.join(".")
+                                        echo "New version will be ${newVersion}"
+                                        writeFile("VERSION", newVersion)
+                                        // git add .
+                                        // git commit -m "Auto generated gRPC"
+                                        // git push origin HEAD
+                                        // git tag -a -m "Auto generated version \${NEW_VERSION}." "v\$NEW_VERSION"
+                                        // git push origin --tags
+                                        // """)
                                     }
                                 }
                             }
