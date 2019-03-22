@@ -32,7 +32,7 @@ pipeline {
                     FOUND_MERGE=0
                     while [ \$FOUND_MERGE -eq 0 ]; do
                         MERGELOG=\$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%s" | awk -v nr="\$MERGE_NUMBER" '{if (NR==nr) print \$0}')
-                        if [[ \$MERGELOG == *"Merge branch 'master' into"* ]]; then
+                        if [[ "\$MERGELOG" == *"Merge branch 'master' into"* ]]; then
                         MERGE_NUMBER=\$(( \$MERGE_NUMBER + 1))
                         else
                         GITLASTMERGECOMMIT=\$(git log --merges -n \$MERGE_NUMBER --pretty=format:"%H" | awk -v nr="\$MERGE_NUMBER" '{if (NR==nr) print \$0}')
@@ -93,7 +93,7 @@ pipeline {
                                             echo "0.0.0" > VERSION
                                         fi
                                         CURRENT_VERSION_STRING=\$(cat VERSION)
-                                        VERSION_VALUES=\$(`echo \$CURRENT_VERSION_STRING | tr '.' ' '`)
+                                        VERSION_VALUES=\$(echo \$CURRENT_VERSION_STRING | tr '.' ' ')
                                         V_MAJOR=\${VERSION_VALUES[0]}
                                         V_MINOR=\${VERSION_VALUES[1]}
                                         V_PATCH=\${VERSION_VALUES[2]}
