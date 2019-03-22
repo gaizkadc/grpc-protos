@@ -88,6 +88,7 @@ pipeline {
                                     git url: "git@github.com:nalej/${repoName}.git", credentialsId: "jarvis-git-ssh-user"
                                     sshagent(['jarvis-git-ssh-user']) {
                                         sh(script: """
+                                        #!/bin/bash
                                         if [ ! -f VERSION ]; then
                                             echo "Creating initial version"
                                             echo "0.0.0" > VERSION
