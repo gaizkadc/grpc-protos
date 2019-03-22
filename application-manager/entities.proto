@@ -20,9 +20,10 @@ message DeployRequest{
 message ApplicationFilter{
     // OrganizationID with the organization identifier
     string organization_id = 1;
-    // DeviceGroupId with the Identifier of the target device group
+    // DeviceGroupId with the Identifier of the target device group. Required for security purposes
     string device_group_id = 2;
-    // DeviceGroupName with the name of the target device group
+    // DeviceGroupName with the name of the target device group. Required for security purposes.
+    // it will be checked that the device_id of the device_group_name and the device_group_id are the same
     string device_group_name = 3;
     // Match labels contains the set of labels that should be matched against available applications.
     map<string, string> match_labels = 4;
