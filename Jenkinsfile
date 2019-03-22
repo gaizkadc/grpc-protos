@@ -92,8 +92,8 @@ pipeline {
                                             echo "Creating initial version"
                                             echo "0.0.0" > VERSION
                                         fi
-                                        CURRENT_VERSION_STRING=`cat VERSION`
-                                        VERSION_VALUES=(`echo \$CURRENT_VERSION_STRING | tr '.' ' '`)
+                                        CURRENT_VERSION_STRING=\$(cat VERSION)
+                                        VERSION_VALUES=\$(`echo \$CURRENT_VERSION_STRING | tr '.' ' '`)
                                         V_MAJOR=\${VERSION_VALUES[0]}
                                         V_MINOR=\${VERSION_VALUES[1]}
                                         V_PATCH=\${VERSION_VALUES[2]}
