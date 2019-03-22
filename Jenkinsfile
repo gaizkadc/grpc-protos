@@ -93,18 +93,18 @@ pipeline {
                                             echo "0.0.0" > VERSION
                                         fi
                                         CURRENT_VERSION_STRING=`cat VERSION`
-                                        VERSION_VALUES=(`echo $CURRENT_VERSION_STRING | tr '.' ' '`)
-                                        V_MAJOR=${VERSION_VALUES[0]}
-                                        V_MINOR=${VERSION_VALUES[1]}
-                                        V_PATCH=${VERSION_VALUES[2]}
-                                        V_PATCH=$((V_PATCH + 1))
-                                        NEW_VERSION="${V_MAJOR}.${V_MINOR}.${V_PATCH}"
-                                        echo "New version will be ${NEW_VERSION}"
-                                        echo $NEW_VERSION > VERSION
+                                        VERSION_VALUES=(`echo \$CURRENT_VERSION_STRING | tr '.' ' '`)
+                                        V_MAJOR=\${VERSION_VALUES[0]}
+                                        V_MINOR=\${VERSION_VALUES[1]}
+                                        V_PATCH=\${VERSION_VALUES[2]}
+                                        V_PATCH=\$((V_PATCH + 1))
+                                        NEW_VERSION="\${V_MAJOR}.\${V_MINOR}.\${V_PATCH}"
+                                        echo "New version will be \${NEW_VERSION}"
+                                        echo \$NEW_VERSION > VERSION
                                         git add .
                                         git commit -m "Auto generated gRPC"
                                         git push origin HEAD
-                                        git tag -a -m "Auto generated version ${NEW_VERSION}." "v$NEW_VERSION"
+                                        git tag -a -m "Auto generated version \${NEW_VERSION}." "v\$NEW_VERSION"
                                         git push origin --tags
                                         """)
                                     }
