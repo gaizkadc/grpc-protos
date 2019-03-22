@@ -91,10 +91,10 @@ pipeline {
                                             echo "VERSION file does not exist. Creatinig initial version file"
                                             writeFile("VERSION", "0.0.0")
                                         }
-                                        currentVersion = readFile("VERSION")
-                                        echo currentVersion
+                                        currentVersion = readFile("VERSION").trim()
+                                        echo "currentVersion: ${currentVersion}"
                                         versionValues = currentVersion.split(".")
-                                        echo versionValues
+                                        echo "values: ${versionValues}"
                                         versionValues[2] = (versionValues[2].toInteger() + 1).toString()
                                         newVersion = versionValues.join(".")
                                         echo "New version will be ${newVersion}"
