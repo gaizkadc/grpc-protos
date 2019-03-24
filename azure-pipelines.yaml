@@ -1,5 +1,7 @@
 variables:
   - group: ssh-credentials
+  - group: common-vars
+  - group: slack-webhooks
   - name: gitHostName
     value: "git@github.com:nalej"
   - name: mergeCommit
@@ -67,6 +69,8 @@ jobs:
     parameters:
       author: $(authorName)
       modifiedDirectories: $(modifiedDirectories)
+      buildUrl: $(buildUrl)$(Build.BuildId)
+      slackWebhook: $(slackCIProtobuf)
 
   - script: |
       echo "Checking if we need to download the docker image"
