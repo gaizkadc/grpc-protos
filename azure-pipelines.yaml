@@ -10,6 +10,8 @@ variables:
     value: ""
   - name: authorName
     value: ""
+  - name: protosOutput
+    value: ""
 
 resources:
   repositories:
@@ -80,8 +82,11 @@ jobs:
         cd $protobuf
         if [ -f .protolangs ]; then
           while read lang; do
-            docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
-            if [ "$protosResult" != "0" ]; then
+            $protosOutput=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway)
+            protosResult=$?
+            echo $protosOutput
+            echo '##vso[task.setvariable variable=protosOutput]'$protosOutput
+            if [ "$protosResult" -ne "0" ]; then
               exit 1
             fi
           done < .protolangs
@@ -140,3 +145,4 @@ jobs:
       author: $(authorName)
       buildUrl: $(buildUrl)$(Build.BuildId)
       slackWebhook: $(slackCIProtobuf)
+      protosOutput: $(protosOutput)
