@@ -2,6 +2,8 @@ variables:
   - group: ssh-credentials
   - name: mergeCommit
     value: ""
+  - name: modifiedDirectories
+    value: ""
 
 resources:
   repositories:
@@ -22,10 +24,6 @@ jobs:
       sshPublicKey: $(sshPublicKey)
   
   - script: |
-      echo $(mergeCommit)
-    displayName: test mergeCommit
-  
-  - script: |
       MERGE_NUMBER=1
       GITLASTCOMMIT=$(Build.SourceVersion)
       GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
@@ -43,8 +41,12 @@ jobs:
           FOUND_MERGE=1
         fi
       done
-    displayName: Detect what protobuf have changed
+      echo "Looking for differences between $GITLASTMERGECOMMIT (last merge commit) and $GITLASTCOMMIT (HEAD commit)"
+    displayName: Look for the last real merge commit
   
   - script: |
-      echo $(mergeCommit)
-    displayName: test mergeCommit
+      MODIFIEDDIRS=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
+      echo '##vso[task.setvariable variable=modifiedDirectories]'$MODIFIEDDIRS
+      echo "Detected directories to generate:"
+      echo $MODIFIEDDIRS
+    displayName: Get changed protobuf directories from last merge until now
