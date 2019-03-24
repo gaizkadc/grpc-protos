@@ -22,7 +22,7 @@ jobs:
   steps:
     - script: |
         echo "Author name: $(git log --pretty=format:'%aN' -n 1)"
-        echo "Author email: $(git log --pretty=format:'%aE' -n 1")"
+        echo "Author email: $(git log --pretty=format:'%aE' -n 1)"
         echo "Build.Reason: $(Build.Reason)"  
         echo "Build.SourceBranch: $(Build.SourceBranch)"
         echo "Build.SourceVersion: $(Build.SourceVersion)"
