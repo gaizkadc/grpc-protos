@@ -56,14 +56,17 @@ jobs:
     displayName: Get changed protobuf directories from last merge until now
   
   - script: |
-      for protobuf in $(modifiedDirectories); do
-        cd $protobuf
-        if [ -f .protolangs ]; then
-          while read lang; do
-            echo "Building $protobuf definitions for $lang language"
-            docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
-          done < .protolangs
-        fi
-      done
+      ls -la $(system.defaultWorkingDirectory)
+      # for protobuf in $(modifiedDirectories); do
+      #   cd $protobuf
+      #   if [ -f .protolangs ]; then
+      #     while read lang; do
+      #       echo "Building $protobuf definitions for $lang language"
+            
+      #       docker pull namely/protoc-all:1.15 > /dev/null 2>&1
+      #       docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
+      #     done < .protolangs
+      #   fi
+      # done
     displayName: Generate protobufs for the modified directories
     condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
