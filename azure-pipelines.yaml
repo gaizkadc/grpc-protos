@@ -1,7 +1,7 @@
 variables:
   - group: ssh-credentials
   - name: mergeCommit
-    value: ""
+    value: "6493e67c151c1c115148f0c3d2192650e448a216"
   - name: modifiedDirectories
     value: ""
 
@@ -23,26 +23,26 @@ jobs:
       sshHostName: $(hostName)
       sshPublicKey: $(sshPublicKey)
   
-  - script: |
-      MERGE_NUMBER=1
-      GITLASTCOMMIT=$(Build.SourceVersion)
-      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
-      if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
-        MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
-      fi
-      FOUND_MERGE=0
-      while [ $FOUND_MERGE -eq 0 ]; do
-        MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-        if [[ "$MERGELOG" == *"Merge branch 'master' into"* ]]; then
-          MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
-        else
-          GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-          echo '##vso[task.setvariable variable=mergeCommit]'$GITLASTMERGECOMMIT
-          FOUND_MERGE=1
-        fi
-      done
-      echo "Looking for differences between $GITLASTMERGECOMMIT (last merge commit) and $GITLASTCOMMIT (HEAD commit)"
-    displayName: Look for the last real merge commit
+  # - script: |
+  #     MERGE_NUMBER=1
+  #     GITLASTCOMMIT=$(Build.SourceVersion)
+  #     GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
+  #     if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
+  #       MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+  #     fi
+  #     FOUND_MERGE=0
+  #     while [ $FOUND_MERGE -eq 0 ]; do
+  #       MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+  #       if [[ "$MERGELOG" == *"Merge branch 'master' into"* ]]; then
+  #         MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+  #       else
+  #         GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+  #         echo '##vso[task.setvariable variable=mergeCommit]'$GITLASTMERGECOMMIT
+  #         FOUND_MERGE=1
+  #       fi
+  #     done
+  #     echo "Looking for differences between $GITLASTMERGECOMMIT (last merge commit) and $GITLASTCOMMIT (HEAD commit)"
+  #   displayName: Look for the last real merge commit
   
   - script: |
       MODIFIEDDIRS=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
@@ -56,17 +56,16 @@ jobs:
     displayName: Get changed protobuf directories from last merge until now
   
   - script: |
-      ls -la $(system.defaultWorkingDirectory)
-      # for protobuf in $(modifiedDirectories); do
-      #   cd $protobuf
-      #   if [ -f .protolangs ]; then
-      #     while read lang; do
-      #       echo "Building $protobuf definitions for $lang language"
-            
-      #       docker pull namely/protoc-all:1.15 > /dev/null 2>&1
-      #       docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
-      #     done < .protolangs
-      #   fi
-      # done
+      echo "Checking if we need to download the docker image"
+      docker pull namely/protoc-all:1.15 > /dev/null 2>&1
+      for protobuf in $(modifiedDirectories); do
+        cd $protobuf
+        if [ -f .protolangs ]; then
+          while read lang; do
+            echo "Building $protobuf definitions for $lang language"
+            docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
+          done < .protolangs
+        fi
+      done
     displayName: Generate protobufs for the modified directories
     condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
