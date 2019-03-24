@@ -1,0 +1,50 @@
+variables:
+  - group: ssh-credentials
+  - name: mergeCommit
+    value: ""
+
+resources:
+  repositories:
+    - repository: ci_templates
+      type: github
+      name: nalej/ci-templates
+      endpoint: nalej
+
+jobs:
+- job: DeployComponent
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  
+  steps:
+  - template: git/setup.yaml@ci_templates
+    parameters:
+      sshHostName: $(hostName)
+      sshPublicKey: $(sshPublicKey)
+  
+  - script: |
+      echo $(mergeCommit)
+    displayName: test mergeCommit
+  
+  - script: |
+      MERGE_NUMBER=1
+      GITLASTCOMMIT=$(Build.SourceVersion)
+      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
+      if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
+        MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+      fi
+      FOUND_MERGE=0
+      while [ $FOUND_MERGE -eq 0 ]; do
+        MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+        if [[ "$MERGELOG" == *"Merge branch 'master' into"* ]]; then
+          MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+        else
+          GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+          echo '##vso[task.setvariable variable=mergeCommit]$GITLASTMERGECOMMIT'
+          FOUND_MERGE=1
+        fi
+      done
+    displayName: Detect what protobuf have changed
+  
+  - script: |
+      echo $(mergeCommit)
+    displayName: test mergeCommit
