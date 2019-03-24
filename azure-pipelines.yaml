@@ -131,3 +131,9 @@ jobs:
     workingDirectory: $(system.defaultWorkingDirectory)/dist
     displayName: Publish new protobuf definitions version to its repositories
     condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  
+  - template: slack/protobuf/finish.yaml@ci_templates
+    parameters:
+      author: $(authorName)
+      buildUrl: $(buildUrl)$(Build.BuildId)
+      slackWebhook: $(slackCIProtobuf)
