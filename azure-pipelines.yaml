@@ -47,6 +47,23 @@ jobs:
   - script: |
       MODIFIEDDIRS=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
       echo '##vso[task.setvariable variable=modifiedDirectories]'$MODIFIEDDIRS
-      echo "Detected directories to generate:"
-      echo $MODIFIEDDIRS
+      if [ "$MODIFIEDDIRS" == "" ]; then
+        echo "No modified directories detected"
+      else
+        echo "Detected directories to generate:"
+        echo $MODIFIEDDIRS
+      fi
     displayName: Get changed protobuf directories from last merge until now
+  
+  - script: |
+      for protobuf in $(modifiedDirectories); do
+        cd $protobuf
+        if [ -f .protolangs ]; then
+          while read lang; do
+            echo "Building $protobuf definitions for $lang language"
+            docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
+          done < .protolangs
+        fi
+      done
+    displayName: Generate protobufs for the modified directories
+    condition: and(succeded(), ne(variables['modifiedDirectories'], ''))
