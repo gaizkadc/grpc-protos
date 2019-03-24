@@ -39,7 +39,7 @@ jobs:
           MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
         else
           GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-          echo '##vso[task.setvariable variable=mergeCommit]$GITLASTMERGECOMMIT'
+          echo '##vso[task.setvariable variable=mergeCommit]'$GITLASTMERGECOMMIT
           FOUND_MERGE=1
         fi
       done
