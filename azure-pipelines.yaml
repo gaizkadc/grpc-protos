@@ -27,6 +27,7 @@ jobs:
   - script: |
       authorName=$(git log --pretty=format:'%aN' -n 1)
       echo '##vso[task.setvariable variable=authorName]'$authorName
+    displayName: Set up the environment
       
   - template: git/setup.yaml@ci_templates
     parameters:
