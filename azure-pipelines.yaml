@@ -106,11 +106,11 @@ jobs:
         newVersion="${vMajor}.${vMinor}.${vPatch}"
         echo "New version will be ${newVersion}"
         echo $newVersion > VERSION
-        # git add .
-        # git commit -m "Auto generated gRPC"
-        # git push origin HEAD
-        # git tag -a -m "Auto generated version ${newVersion}." "v$newVersion"
-        # git push origin --tags
+        git add .
+        git commit -m "Auto generated gRPC"
+        git push origin HEAD
+        git tag -a -m "Auto generated version ${newVersion}." "v$newVersion"
+        git push origin --tags
         cd ..
       done
     workingDirectory: $(system.defaultWorkingDirectory)/dist
