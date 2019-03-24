@@ -12,7 +12,6 @@ import "google/api/annotations.proto";
 // PingRequest defines the message sent by the client with a request number.
 message PingRequest {
     int32 request_number = 1;
-    int32 fail_field = 1;
 }
 
 
