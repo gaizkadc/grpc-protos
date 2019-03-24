@@ -86,8 +86,7 @@ jobs:
         fi
       done
     displayName: Clone modified protobuf repositories and copy new versions
-    condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
-    # condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
   - script: |
       for directory in $(find . -maxdepth 1 -type d \( ! -name . \))
@@ -115,5 +114,4 @@ jobs:
       done
     workingDirectory: $(system.defaultWorkingDirectory)/dist
     displayName: Publish new protobuf definitions version to its repositories
-    condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
-    # condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
