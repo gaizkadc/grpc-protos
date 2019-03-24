@@ -81,8 +81,6 @@ jobs:
         if [ -f .protolangs ]; then
           while read lang; do
             docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
-            protosResult=$?
-            echo "$protosResult"
             if [ "$protosResult" != "0" ]; then
               exit 1
             fi
