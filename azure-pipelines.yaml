@@ -66,4 +66,4 @@ jobs:
         fi
       done
     displayName: Generate protobufs for the modified directories
-    condition: and(succeded(), ne(variables['modifiedDirectories'], ''))
+    condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
