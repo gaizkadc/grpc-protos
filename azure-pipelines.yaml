@@ -64,8 +64,15 @@ jobs:
           while read lang; do
             echo "Building $protobuf definitions for $lang language"
             docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway
+            echo "### Protobuf"
+            ls -la
+            echo "### pb-$lang"
+            ls -la pb-$lang
+            echo "### grpc-$protobuf-$lang"
+            ls -la pb-$lang/github.com/nalej/grpc-$protobuf-$lang
           done < .protolangs
         fi
+        cd $(system.defaultWorkingDirectory)
       done
     displayName: Generate protobufs for the modified directories
     condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
