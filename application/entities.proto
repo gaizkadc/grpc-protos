@@ -483,6 +483,8 @@ message EndpointInstance {
     EndpointType type = 2;
     // FQDN to be accessed by any client
     string fqdn = 3;
+    // Port port in the endpoint
+    int32 port = 4;
 }
 
 
@@ -561,12 +563,10 @@ message AddAppEndpointRequest {
     string  service_instance_id = 4;
     // ServiceName ( to compose the Global FQDN)
     string service_name = 5;
-    // Port port in the endpoint
-    int32   port = 6;
     // protocol (http, https)
-    AppEndpointProtocol  protocol = 7;
+    AppEndpointProtocol  protocol = 6;
     // EndpointInstance represents working endpoint exposing data to the outside world
-    EndpointInstance endpoint_instance = 8;
+    EndpointInstance endpoint_instance = 7;
 }
 
 message AppEndpoint {
@@ -578,12 +578,10 @@ message AppEndpoint {
     string  service_group_instance_id = 3;
     // ServiceInstanceId the identifier of the service instance.
     string  service_instance_id = 4;
-    // Port port in the endpoint
-    int32   port = 5;
     // protocol (http, https)
-    AppEndpointProtocol  protocol = 6;
+    AppEndpointProtocol  protocol = 5;
     // EndpointInstance represents working endpoint exposing data to the outside world
-    EndpointInstance endpoint_instance = 7;
+    EndpointInstance endpoint_instance = 6;
 }
 
 message AddEndpointList {
