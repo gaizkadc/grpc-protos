@@ -102,7 +102,7 @@ enum CollocationPolicy {
 // specs.
 message ServiceGroupDeploymentSpecs {
     // How many times this service group must be replicated
-    int32 num_replicas = 1;
+    int32 replicas = 1;
     // Indicate if this service group must be replicated in every cluster
     bool multi_cluster_replica = 2;
     // DeploymentSelectors defines a key-value map of deployment selectors
@@ -483,6 +483,8 @@ message EndpointInstance {
     EndpointType type = 2;
     // FQDN to be accessed by any client
     string fqdn = 3;
+    // Port port in the endpoint
+    int32 port = 4;
 }
 
 
@@ -550,6 +552,23 @@ enum AppEndpointProtocol {
     HTTPS = 1;
 }
 
+message AddAppEndpointRequest {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+    // ServiceGroupInstanceId the identifier of the group instance.
+    string  service_group_instance_id = 3;
+    // ServiceInstanceId the identifier of the service instance.
+    string  service_instance_id = 4;
+    // ServiceName ( to compose the Global FQDN)
+    string service_name = 5;
+    // protocol (http, https)
+    AppEndpointProtocol  protocol = 6;
+    // EndpointInstance represents working endpoint exposing data to the outside world
+    EndpointInstance endpoint_instance = 7;
+}
+
 message AppEndpoint {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -559,12 +578,10 @@ message AppEndpoint {
     string  service_group_instance_id = 3;
     // ServiceInstanceId the identifier of the service instance.
     string  service_instance_id = 4;
-    // Port port in the endpoint
-    int32   port = 5;
     // protocol (http, https)
-    AppEndpointProtocol  protocol = 6;
+    AppEndpointProtocol  protocol = 5;
     // EndpointInstance represents working endpoint exposing data to the outside world
-    EndpointInstance endpoint_instance = 7;
+    EndpointInstance endpoint_instance = 6;
 }
 
 message AddEndpointList {

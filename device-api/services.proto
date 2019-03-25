@@ -25,7 +25,7 @@ service Device {
 
 service Applications {
     // RetrieveTargetApplications retrieves the list of target applications that accept data from the device.
-    rpc RetrieveTargetApplications(application_manager.ApplicationFilter) returns(application_manager.TargetApplicationList){
+    rpc RetrieveTargetApplications(ApplicationFilter) returns(application_manager.TargetApplicationList){
         option (google.api.http) = {
             post: "/v1/applications/target"
             body: "*"

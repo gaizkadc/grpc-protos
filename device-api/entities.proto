@@ -6,3 +6,13 @@ syntax = "proto3";
 
 package device_api;
 option go_package = "github.com/nalej/grpc-device-api-go";
+
+// ApplicationFilter allows the device to request the set of available application setting filters.
+message ApplicationFilter{
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // DeviceGroupName with the name of the target device group
+    string device_group_name = 2;
+    // Match labels contains the set of labels that should be matched against available applications.
+    map<string, string> match_labels = 3;
+}

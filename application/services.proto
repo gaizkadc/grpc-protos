@@ -29,6 +29,8 @@ service Applications {
     rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}
     // GetAppInstance retrieves a given application instance.
     rpc GetAppInstance(AppInstanceId) returns (AppInstance) {}
+    // UpdateAppInstance adds a new application instance to a given organization.
+    rpc UpdateAppInstance(AppInstance) returns (common.Success){}
     // UpdateAppStatus updates the status of an application instance.
     rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
     // UpdateServiceStatus updates the status of an application instance service.
@@ -49,7 +51,7 @@ service Applications {
     rpc UpdateServiceGroupInstanceMetadata(InstanceMetadata) returns (common.Success){}
 
     // AddAppEndPoint adds a new App Endpoint to a given service instance
-    rpc AddAppEndpoint(AppEndpoint) returns (common.Success) {}
+    rpc AddAppEndpoint(AddAppEndpointRequest) returns (common.Success) {}
     // GetAppEndPoint retrieves a list of appEndpoints
     rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
     // RemoveAppEndpoints removes all the app endpoints of an app_instance
