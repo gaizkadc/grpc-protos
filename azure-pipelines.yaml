@@ -26,10 +26,7 @@ jobs:
     vmImage: 'Ubuntu-16.04'
   
   steps:
-  - script: |
-      authorName=$(git log --pretty=format:'%aN' -n 1)
-      echo '##vso[task.setvariable variable=authorName]'$authorName
-    displayName: Set up the environment
+  - template: misc/variables.yaml@ci_templates
       
   - template: git/setup.yaml@ci_templates
     parameters:
