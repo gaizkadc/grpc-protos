@@ -30,7 +30,7 @@ service Applications {
     // GetAppInstance retrieves a given application instance.
     rpc GetAppInstance(AppInstanceId) returns (AppInstance) {}
     // UpdateAppInstance adds a new application instance to a given organization.
-    rpc UpdateAppInstance(AppInstance) returns (AppInstance){}
+    rpc UpdateAppInstance(AppInstance) returns (common.Success){}
     // UpdateAppStatus updates the status of an application instance.
     rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
     // UpdateServiceStatus updates the status of an application instance service.
