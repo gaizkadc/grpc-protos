@@ -28,14 +28,21 @@ message SignupInfoRequest{
     string preshared_secret = 2;
 }
 
-// extend organization info
+// extended organization info
 message OrganizationInfo{
+    // OrganizationID organization identifier
     string organization_id = 1;
+    // Name of the organization
     string name = 2;
+    // creation time
     int64 created = 3;
+    // Number of users in the organization
     int32 number_users = 4;
+    // Number of clusters the organization has
     int32 number_clusters = 5;
+    // Number of descriptors
     int32 number_descriptors = 6;
+    // Number of instances deployed
     int32 number_instances = 7;
 }
 
