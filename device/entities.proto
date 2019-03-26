@@ -37,6 +37,7 @@ message Device {
     map<string, string> labels = 5;
 }
 
+// Message that contains the fields to identifier the device group
 message DeviceGroupId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -44,10 +45,12 @@ message DeviceGroupId {
     string device_group_id = 2;
 }
 
+// Message that contains a list of device groups
 message DeviceGroupList {
     repeated DeviceGroup groups = 1;
 }
 
+// RemoveDeviceGroupRequest remove a device group
 message RemoveDeviceGroupRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -55,6 +58,7 @@ message RemoveDeviceGroupRequest {
     string device_group_id = 2;
 }
 
+// AddDeviceGroupRequest add a device group in the system
 message AddDeviceGroupRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
@@ -65,6 +69,7 @@ message AddDeviceGroupRequest {
     map<string, string> labels = 6;
 }
 
+// GetDeviceGroupsRequest returns the devices info of an organization that match the names
 message GetDeviceGroupsRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -72,6 +77,7 @@ message GetDeviceGroupsRequest {
     repeated string device_group_names = 2;
 }
 
+// AddDeviceRequest add a device in the system
 message AddDeviceRequest {
     // OrganizationID with the organization identifier
     string organization_id = 1;
@@ -83,6 +89,7 @@ message AddDeviceRequest {
     map<string, string> labels = 4;
 }
 
+// Message that contains the fields to identifier a device
 message DeviceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -92,10 +99,12 @@ message DeviceId {
     string device_id = 3;
 }
 
+// DeviceList list of devices
 message DeviceList {
     repeated Device devices = 1;
 }
 
+// RemoveDeviceRequest remove a device from the system
 message RemoveDeviceRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -105,6 +114,7 @@ message RemoveDeviceRequest {
     string device_id = 3;
 }
 
+// UpdateDeviceRequest update the device labels
 message UpdateDeviceRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;

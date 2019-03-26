@@ -19,6 +19,7 @@ service Musician {
     rpc Score(conductor.ClusterScoreRequest) returns (conductor.ClusterScoreResponse) {}
 }
 
+// service deployed in local cluster to manage deploy and undeploy
 service DeploymentManager {
     // Request a deployment plan to be executed.
     rpc Execute(deployment_manager.DeploymentFragmentRequest) returns (deployment_manager.DeploymentFragmentResponse) {}

@@ -9,7 +9,7 @@ option go_package = "github.com/nalej/grpc-device-controller-go";
 
 import "device/entities.proto";
 
-
+// RegisterLatencyRequest register ping latency
 message RegisterLatencyRequest {
     // organization identifier
     string organization_id = 1;
@@ -21,6 +21,7 @@ message RegisterLatencyRequest {
     int32 latency = 4;
 }
 
+// SelectClusterRequest select the best latency in the list
 message SelectClusterRequest {
     // organization identifier
     string organization_id = 1;
@@ -32,6 +33,7 @@ message SelectClusterRequest {
     repeated int32 latencies = 4;
 }
 
+// RegisterResult indicates whether a ping is acceptable
 enum RegisterResult {
     // the device can continue working as it
     OK = 0;

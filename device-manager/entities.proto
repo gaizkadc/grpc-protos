@@ -44,13 +44,19 @@ message AddDeviceGroupRequest{
 message UpdateDeviceGroupRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
     string device_group_id = 2;
+    // UpdateEnabled determines if the flag 'Enabled' is going to update
     bool update_enabled = 3;
+    // Enabled determines if this group is able (or not) to interact with the running applications.
     bool enabled = 4;
+    // UpdateDeviceConnectivity determines if the flag 'DefaultDeviceConnectivity' is going to update
     bool update_device_connectivity = 5;
+    //determines whether the devices in a group are created enabled or disabled by default
     bool default_device_connectivity = 6;
 }
 
+// enumerate to determinate if a device is ONLINE or OFFLINE
 enum DeviceStatus {
     ONLINE = 0;
     OFFLINE = 1;
@@ -79,10 +85,15 @@ message DeviceList{
     repeated Device devices = 1;
 }
 
+// UpdateDeviceRequest enable/disable a device
 message UpdateDeviceRequest{
+    // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
     string device_group_id = 2;
+    // DeviceId with the device identifier.
     string device_id = 3;
+    // Enabled determines if the device can interact with the running applications.
     bool enabled = 4;
 }
 

@@ -130,6 +130,7 @@ message ConfigFile {
     string mount_path = 6;
 }
 
+// Credentials to pull the image
 message ImageCredentials {
     // Name of the user in the platform
     string username = 1;
@@ -177,7 +178,7 @@ message Service {
     // Run arguments
     repeated string run_arguments = 16;
 }
-
+// Enumerate with the status of the service installed in the system.
 enum ServiceStatus {
     SERVICE_SCHEDULED = 0;
     SERVICE_WAITING = 1;
@@ -192,7 +193,7 @@ message Port {
     int32 exposed_port = 3;
     repeated Endpoint endpoints = 4;
 }
-
+// Enumerate with the type of the endpoint.
 enum EndpointType {
     IS_ALIVE = 0;
     REST = 1;
@@ -205,13 +206,13 @@ message Endpoint {
     EndpointType type = 1;
     string path = 2;
 }
-
+// Storage restrictions
 message Storage {
     int64 size = 1;
     string mount_path = 2;
     StorageType type = 3;
 }
-
+// Enumerate with the storage type of a service
 enum StorageType {
     EPHEMERAL = 0;
     CLUSTER_LOCAL = 1;
@@ -225,6 +226,7 @@ message DeploySpecs {
     int32 replicas = 3;
 }
 
+// Application Instance Status
 enum ApplicationStatus {
     QUEUED = 0;
     PLANNING = 1;
@@ -236,14 +238,14 @@ enum ApplicationStatus {
     DEPLOYMENT_ERROR = 7;
     ERROR = 8;
 }
-
+// Application Descriptor Identifier
 message AppDescriptorId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppDescriptorId with the application descriptor identifier.
     string app_descriptor_id = 2;
 }
-
+// AddAppDescriptorRequest structure to add new application descriptor
 message AddAppDescriptorRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
@@ -262,7 +264,7 @@ message AddAppDescriptorRequest {
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
 }
-
+// list of application descriptors
 message AppDescriptorList {
     repeated AppDescriptor descriptors = 1;
 }
@@ -497,18 +499,19 @@ message AddAppInstanceRequest {
     // Name of the application instance.
     string name = 3;
 }
-
+// Application Instance Identifier
 message AppInstanceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
 }
-
+// list of application instances
 message AppInstanceList {
     repeated AppInstance instances = 1;
 }
 
+// structure to update the status of an application instance
 message UpdateAppStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -520,6 +523,7 @@ message UpdateAppStatusRequest {
     string info = 4;
 }
 
+// structure to update the status of a service
 message UpdateServiceStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -552,6 +556,7 @@ enum AppEndpointProtocol {
     HTTPS = 1;
 }
 
+// AddAppEndpointRequest message to create a endpointInstance in the system
 message AddAppEndpointRequest {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -569,6 +574,7 @@ message AddAppEndpointRequest {
     EndpointInstance endpoint_instance = 7;
 }
 
+// AppEndpoint is an structure to describe an application Endpoint
 message AppEndpoint {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -584,22 +590,23 @@ message AppEndpoint {
     EndpointInstance endpoint_instance = 6;
 }
 
-message AddEndpointList {
+// AppEndpointList list of application endpoints
+message AppEndpointList {
     repeated AppEndpoint appEndpoints = 1;
 }
-
+// GetAppEndPointRequest message to request an application Endpoint by a global_fqdn
 message GetAppEndPointRequest {
     // FQDN to be accessed by any client
     string fqdn = 1;
 }
-// RemoveEndpointRequest
-message RemoveEndpointRequest {
+// RemoveAppEndpointRequest message to delete all application endpoints of an instance
+message RemoveAppEndpointRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
 }
-
+// AppZtNetwork structure of a zerotier network
 message AppZtNetwork {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
