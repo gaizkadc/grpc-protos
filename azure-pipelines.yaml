@@ -1,0 +1,145 @@
+variables:
+  - group: ssh-credentials
+  - group: common-vars
+  - group: slack-webhooks
+  - name: gitHostName
+    value: "git@github.com:nalej"
+  - name: mergeCommit
+    value: ""
+  - name: modifiedDirectories
+    value: ""
+  - name: authorName
+    value: ""
+  - name: protosOutput
+    value: ""
+
+resources:
+  repositories:
+    - repository: ci_templates
+      type: github
+      name: nalej/ci-templates
+      endpoint: nalej
+
+jobs:
+- job: DeployComponent
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  
+  steps:
+  - template: misc/variables.yaml@ci_templates
+      
+  - template: git/setup.yaml@ci_templates
+    parameters:
+      sshHostName: $(hostName)
+      sshPublicKey: $(sshPublicKey)
+  
+  - script: |
+      MERGE_NUMBER=1
+      GITLASTCOMMIT=$(Build.SourceVersion)
+      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
+      if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
+        MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+      fi
+      FOUND_MERGE=0
+      while [ $FOUND_MERGE -eq 0 ]; do
+        MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+        if [[ "$MERGELOG" == *"Merge branch 'master' into"* ]]; then
+          MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+        else
+          GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
+          echo '##vso[task.setvariable variable=mergeCommit]'$GITLASTMERGECOMMIT
+          FOUND_MERGE=1
+        fi
+      done
+      echo "Looking for differences between $GITLASTMERGECOMMIT (last merge commit) and $GITLASTCOMMIT (HEAD commit)"
+    displayName: Look for the last real merge commit
+  
+  - script: |
+      MODIFIEDDIRS=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
+      echo '##vso[task.setvariable variable=modifiedDirectories]'$MODIFIEDDIRS
+      if [ "$MODIFIEDDIRS" == "" ]; then
+        echo "No modified directories detected"
+      else
+        echo "Detected directories to generate:"
+        echo $MODIFIEDDIRS
+      fi
+    displayName: Get changed protobuf directories from last merge until now
+      
+  - template: slack/protobuf/start.yaml@ci_templates
+    parameters:
+      author: $(authorName)
+      modifiedDirectories: $(modifiedDirectories)
+      buildUrl: $(buildUrl)$(Build.BuildId)
+      slackWebhook: $(slackCIProtobuf)
+
+  - script: |
+      echo "Checking if we need to download the docker image"
+      docker pull namely/protoc-all:1.15 > /dev/null 2>&1
+      for protobuf in $(modifiedDirectories); do
+        cd $protobuf
+        if [ -f .protolangs ]; then
+          while read lang; do
+            protosOutput=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway)
+            protosResult=$?
+            echo $protosOutput
+            echo '##vso[task.setvariable variable=protosOutput]'$protosOutput
+            if [ "$protosResult" -ne "0" ]; then
+              exit 1
+            fi
+          done < .protolangs
+        fi
+        cd $(system.defaultWorkingDirectory)
+      done
+    displayName: Generate protobufs for the modified directories
+    condition: and(succeeded(), ne(variables['modifiedDirectories'], ''))
+
+  - script: |
+      mkdir -p dist
+      for protobuf in $(modifiedDirectories); do
+        if [ -f $protobuf/.protolangs ]; then
+          while read lang; do
+            repositoryName="grpc-$protobuf-$lang"
+            git clone $(gitHostName)/$repositoryName.git dist/$repositoryName
+            cp -R $protobuf/pb-$lang/github.com/nalej/$repositoryName/* dist/$repositoryName/
+            cp -R $protobuf/pb-$lang/doc dist/$repositoryName/
+            cp -R $protobuf/pb-$lang/$protobuf/*.swagger.json dist/$repositoryName/doc/.
+          done < $protobuf/.protolangs
+        fi
+      done
+    displayName: Clone modified protobuf repositories and copy new versions
+    condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - script: |
+      for directory in $(find . -maxdepth 1 -type d \( ! -name . \))
+      do
+        cd $directory
+        if [ ! -f VERSION ]; then
+          echo "Creating initial version"
+          echo "0.0.0" > VERSION
+        fi
+        currentVersionString=`cat VERSION`
+        versionValues=(`echo $currentVersionString | tr '.' ' '`)
+        vMajor=${versionValues[0]}
+        vMinor=${versionValues[1]}
+        vPatch=${versionValues[2]}
+        vPatch=$((vPatch + 1))
+        newVersion="${vMajor}.${vMinor}.${vPatch}"
+        echo "New version will be ${newVersion}"
+        echo $newVersion > VERSION
+        git add .
+        git commit -m "Auto generated gRPC"
+        git push origin HEAD
+        git tag -a -m "Auto generated version ${newVersion}." "v$newVersion"
+        git push origin --tags
+        cd ..
+      done
+    workingDirectory: $(system.defaultWorkingDirectory)/dist
+    displayName: Publish new protobuf definitions version to its repositories
+    condition: and(and(succeeded(), ne(variables['modifiedDirectories'], '')), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  
+  - template: slack/protobuf/finish.yaml@ci_templates
+    parameters:
+      author: $(authorName)
+      buildUrl: $(buildUrl)$(Build.BuildId)
+      slackWebhook: $(slackCIProtobuf)
+      protosOutput: $(protosOutput)
