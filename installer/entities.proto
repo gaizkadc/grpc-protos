@@ -55,14 +55,10 @@ message InstallRequest {
     string private_key = 9;
     // Nodes contains the list of IP addresses to be installed.
     repeated string nodes = 10;
-    // Use Kube DNS configuration
-    bool use_kube_dns = 11;
-    // Use CoreDNS configuration
-    bool use_core_dns = 12;
     // Target platform
-    Platform target_platform = 13;
+    Platform target_platform = 11;
     // Static IP addresses
-    StaticIPAddresses static_ip_addresses = 14; 
+    StaticIPAddresses static_ip_addresses = 12;
 }
 
 message InstallId {
