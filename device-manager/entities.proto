@@ -7,6 +7,7 @@ syntax = "proto3";
 package device_manager;
 option go_package = "github.com/nalej/grpc-device-manager-go";
 
+// DeviceGroup contains the device group info
 message DeviceGroup {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -30,6 +31,7 @@ message DeviceGroupList{
     repeated DeviceGroup groups = 1;
 }
 
+// AddDeviceGroupRequest request to add a new device group in the system
 message AddDeviceGroupRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -41,6 +43,7 @@ message AddDeviceGroupRequest{
     bool default_device_connectivity = 4;
 }
 
+// AddDeviceGroupRequest request to update a device group
 message UpdateDeviceGroupRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -62,6 +65,7 @@ enum DeviceStatus {
     OFFLINE = 1;
 }
 
+// DeviceGroup contains the device info
 message Device{
     // OrganizationId with the organization identifier.
     string organization_id = 1;

@@ -9,7 +9,7 @@ option go_package = "github.com/nalej/grpc-application-manager-go";
 
 import public "application/entities.proto";
 
-// message to deploy an application descriptor
+// DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
     // OrganizationID with the organization identifier
     string organization_id = 1;

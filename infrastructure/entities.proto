@@ -158,6 +158,7 @@ message Node {
     NodeState state = 7;
 }
 
+// AddNodeRequest message to add a new node in the system
 message AddNodeRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
@@ -170,6 +171,7 @@ message AddNodeRequest {
     map<string, string> labels = 5;
 }
 
+// AttachNodeRequest message to attach a new node into a cluster
 message AttachNodeRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
@@ -180,6 +182,7 @@ message AttachNodeRequest {
     string node_id = 4;
 }
 
+// RemoveNodesRequest removes a list of nodes from an organization
 message RemoveNodesRequest {
     string request_id = 1;
     string organization_id = 2;

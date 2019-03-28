@@ -37,7 +37,7 @@ message Device {
     map<string, string> labels = 5;
 }
 
-// Message that contains the fields to identifier the device group
+// DeviceGroupId Message that contains the fields to identifier the device group
 message DeviceGroupId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -45,7 +45,7 @@ message DeviceGroupId {
     string device_group_id = 2;
 }
 
-// Message that contains a list of device groups
+// DeviceGroupList Message that contains a list of device groups
 message DeviceGroupList {
     repeated DeviceGroup groups = 1;
 }
@@ -89,7 +89,7 @@ message AddDeviceRequest {
     map<string, string> labels = 4;
 }
 
-// Message that contains the fields to identifier a device
+// DeviceId message that contains the fields to identifier a device
 message DeviceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;

@@ -87,7 +87,7 @@ message RefreshTokenRequest {
     string refresh_token = 2;
 }
 
-// Message for editing a user role.
+// EditUserRoleRequest Message for editing a user role.
 message EditUserRoleRequest {
     // Username whose role is changed
     string username = 1;
@@ -95,7 +95,7 @@ message EditUserRoleRequest {
     string new_role_id = 2;
 }
 
-// Message for change the user password.
+// ChangePasswordRequest Message for change the user password.
 message ChangePasswordRequest {
     // UserName
     string username = 1;
@@ -105,13 +105,13 @@ message ChangePasswordRequest {
     string newPassword = 3;
 }
 
-// message to delete the credentials of a user
+// DeleteCredentialsRequest message to delete the credentials of a user
 message DeleteCredentialsRequest {
     // Username
     string username = 1;
 }
 
-// Messages that contains the device credentials info
+// DeviceCredentials Message that contains the device credentials info
 message DeviceCredentials {
     // OrganizationID with the organization identifier
     string organization_id = 1;
@@ -148,7 +148,7 @@ message UpdateDeviceCredentialsRequest {
     bool enabled = 4;
 }
 
-// Message that contains the device group credentials info
+// DeviceGroupCredentials message that contains the device group credentials info
 message DeviceGroupCredentials {
     // OrganizationID with the organization identifier
     string organization_id = 1;
