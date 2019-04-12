@@ -29,6 +29,8 @@ message DeploymentFragmentRequest {
     string zt_network_id = 3;
     // Rollback policy
     RollbackPolicy rollback_policy = 4;
+    // Current number of retry
+    int32 num_retry = 5;
 }
 
 
