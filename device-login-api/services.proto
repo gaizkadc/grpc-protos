@@ -22,6 +22,7 @@ service Login {
     }
 }
 
+// Register operations
 service Register {
     // RegisterDevice registers a new device in a given device group.
     rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){

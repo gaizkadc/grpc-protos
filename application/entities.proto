@@ -98,7 +98,7 @@ enum CollocationPolicy {
     SEPARATE_CLUSTERS = 1;
 }
 
-// It specifies how to proceed deploying a service group. Some specs here may invalidate specific service deployment
+// ServiceGroupDeploymentSpecs specifies how to proceed deploying a service group. Some specs here may invalidate specific service deployment
 // specs.
 message ServiceGroupDeploymentSpecs {
     // How many times this service group must be replicated
@@ -114,7 +114,7 @@ enum ServiceType {
     DOCKER = 0;
 }
 
-// Configuration structure defining the service configuration.
+// ConfigFile represents the configuration structure defining the service configuration.
 message ConfigFile {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -130,6 +130,7 @@ message ConfigFile {
     string mount_path = 6;
 }
 
+// ImageCredentials contains the credentials to pull the image
 message ImageCredentials {
     // Name of the user in the platform
     string username = 1;
@@ -177,7 +178,7 @@ message Service {
     // Run arguments
     repeated string run_arguments = 16;
 }
-
+// ServiceStatus is an enumerate with the status of the service installed in the system.
 enum ServiceStatus {
     SERVICE_SCHEDULED = 0;
     SERVICE_WAITING = 1;
@@ -192,7 +193,7 @@ message Port {
     int32 exposed_port = 3;
     repeated Endpoint endpoints = 4;
 }
-
+// EndpointType is an enumerate with the type of the endpoint.
 enum EndpointType {
     IS_ALIVE = 0;
     REST = 1;
@@ -205,13 +206,13 @@ message Endpoint {
     EndpointType type = 1;
     string path = 2;
 }
-
+// Storage restrictions
 message Storage {
     int64 size = 1;
     string mount_path = 2;
     StorageType type = 3;
 }
-
+// StorageType enumerate with the storage type of a service
 enum StorageType {
     EPHEMERAL = 0;
     CLUSTER_LOCAL = 1;
@@ -225,6 +226,7 @@ message DeploySpecs {
     int32 replicas = 3;
 }
 
+// ApplicationStatus enumerate with the Application Instance Status
 enum ApplicationStatus {
     QUEUED = 0;
     PLANNING = 1;
@@ -236,14 +238,14 @@ enum ApplicationStatus {
     DEPLOYMENT_ERROR = 7;
     ERROR = 8;
 }
-
+// AppDescriptorId contains the Application Descriptor Identifier
 message AppDescriptorId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppDescriptorId with the application descriptor identifier.
     string app_descriptor_id = 2;
 }
-
+// AddAppDescriptorRequest structure to add new application descriptor
 message AddAppDescriptorRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
@@ -262,7 +264,7 @@ message AddAppDescriptorRequest {
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
 }
-
+// AppDescriptorList is a list of application descriptors
 message AppDescriptorList {
     repeated AppDescriptor descriptors = 1;
 }
@@ -310,7 +312,7 @@ message AppInstance {
     string info = 12;
 }
 
-// This is a common metadata entity that collects information for a deployed instance. This instance can be a
+// InstanceMetadata is a common metadata entity that collects information for a deployed instance. This instance can be a
 // service instance or a service group instance.
 message InstanceMetadata {
     // OrganizationId with the organization identifier.
@@ -339,7 +341,7 @@ message InstanceMetadata {
     map<string, string> info = 13;
 }
 
-// Enumerate with the type of instances we can deploy in the system.
+// InstanceType enumerate with the type of instances we can deploy in the system.
 enum InstanceType {
     // A service
     SERVICE_INSTANCE = 0;
@@ -408,6 +410,7 @@ message RemoveServiceGroupInstancesRequest {
     string app_instance_id = 2;
 }
 
+// ServiceInstance contains the information of an instance of a service
 message ServiceInstance {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -458,7 +461,7 @@ message ServiceInstance {
     string info = 23;
 }
 
-// Request to add a new service instance to an already existing service group instance.
+// AddServiceInstanceRequest Request to add a new service instance to an already existing service group instance.
 message AddServiceInstanceRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -497,18 +500,19 @@ message AddAppInstanceRequest {
     // Name of the application instance.
     string name = 3;
 }
-
+// AppInstanceId contains an Application Instance Identifier
 message AppInstanceId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
 }
-
+// list of application instances
 message AppInstanceList {
     repeated AppInstance instances = 1;
 }
 
+// UpdateAppStatusRequest is a structure to update the status of an application instance
 message UpdateAppStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -520,6 +524,7 @@ message UpdateAppStatusRequest {
     string info = 4;
 }
 
+// UpdateServiceStatusRequest is a structure to update the status of a service
 message UpdateServiceStatusRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -552,6 +557,7 @@ enum AppEndpointProtocol {
     HTTPS = 1;
 }
 
+// AddAppEndpointRequest message to create a endpointInstance in the system
 message AddAppEndpointRequest {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -569,6 +575,7 @@ message AddAppEndpointRequest {
     EndpointInstance endpoint_instance = 7;
 }
 
+// AppEndpoint is an structure to describe an application Endpoint
 message AppEndpoint {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;
@@ -584,22 +591,23 @@ message AppEndpoint {
     EndpointInstance endpoint_instance = 6;
 }
 
-message AddEndpointList {
+// AppEndpointList list of application endpoints
+message AppEndpointList {
     repeated AppEndpoint appEndpoints = 1;
 }
-
+// GetAppEndPointRequest message to request an application Endpoint by a global_fqdn
 message GetAppEndPointRequest {
     // FQDN to be accessed by any client
     string fqdn = 1;
 }
-// RemoveEndpointRequest
-message RemoveEndpointRequest {
+// RemoveAppEndpointRequest message to delete all application endpoints of an instance
+message RemoveAppEndpointRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
 }
-
+// AppZtNetwork structure of a zerotier network
 message AppZtNetwork {
     // OrganizationId with the organization identifier.
     string  organization_id = 1;

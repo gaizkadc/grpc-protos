@@ -43,7 +43,7 @@ message ClusterSummary {
     ClusterStat storage_bytes = 5;
 }
 
-// Enum of all statistics available that are relevant for the platform
+// PlatformStatsField Enum of all statistics available that are relevant for the platform
 enum PlatformStatsField {
     SERVICES = 0;
     VOLUMES = 1;
@@ -51,7 +51,7 @@ enum PlatformStatsField {
     ENDPOINTS = 3;
 }
 
-// Request for all platform-relevant statistics available for a single cluster
+// ClusterStatsRequest Request for all platform-relevant statistics available for a single cluster
 message ClusterStatsRequest {
     // Organization identifier
     string organization_id = 1;
@@ -63,7 +63,7 @@ message ClusterStatsRequest {
     repeated PlatformStatsField fields = 4;
 }
 
-// A single platform-relevant statistic
+// PlatformStat A single platform-relevant statistic
 message PlatformStat {
     // Counter: total amount of created entities
     int64 created = 1;
@@ -75,7 +75,7 @@ message PlatformStat {
     int64 errors = 4;
 }
 
-// Response for platform-relevant statistics for a single cluster
+// ClusterStats Response for platform-relevant statistics for a single cluster
 message ClusterStats {
     // Organization identifier
     string organization_id = 1;
@@ -88,13 +88,13 @@ message ClusterStats {
     map<int32, PlatformStat> stats = 3;
 }
 
-// Enum for the specific query type for raw queries; depending on the
+// QueryType Enum for the specific query type for raw queries; depending on the
 // available backends.
 enum QueryType {
     PROMETHEUS = 0;
 }
 
-// Execute a raw query on a single cluster
+// QueryRequest Execute a raw query on a single cluster
 message QueryRequest {
     // Organization identifier
     string organization_id = 1;
@@ -117,7 +117,7 @@ message QueryRequest {
     QueryRange range = 5;
 }
 
-// Response to a raw query request
+// QueryResponse Response to a raw query request
 message QueryResponse {
     // Organization identifier
     string organization_id = 1;

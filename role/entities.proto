@@ -9,24 +9,36 @@ option go_package = "github.com/nalej/grpc-role-go";
 
 // AddRoleRequest with the information required to create a new role in the system model.
 message AddRoleRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // Name of the role
     string name = 2;
+    // Description of the role
     string description = 3;
+    // Internal flag to indicate if the role is a system role (internal) or not
     bool internal = 4;
 }
 
 // Role represents a role in the system. The primitives associated to it are managed by Authx.
 message Role {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // RoleId with the role identifier
     string role_id = 2;
+    // Name of the role
     string name = 3;
+    // Description of the role
     string description = 4;
+    // Internal flag to indicate if the role is a system role (internal) or not
     bool internal = 5;
+    // unix time when the role has been created
     int64 created = 6;
 }
 
 message RoleId {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // RoleId with the role identifier
     string role_id = 2;
 }
 
@@ -37,6 +49,8 @@ message RoleList {
 
 // RemoveRoleRequest with the information required to remove a role.
 message RemoveRoleRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // RoleId with the role identifier
     string role_id = 2;
 }

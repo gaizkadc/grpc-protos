@@ -27,70 +27,97 @@ enum AccessPrimitive {
 
 // Role defines a role for users of an organization with the associated capabilities
 message Role {
+    //OrganizationID with the organization identifier
     string organization_id = 1;
+    // RoleID with the role identifier
     string role_id = 2;
+    // Name of the role
     string name = 3;
+    // Internal determines whether the role is internal or not
     bool internal = 4;
+    // Primitives list of the role capabilities
     repeated AccessPrimitive primitives = 5;
 }
-
+// RoleList list of roles
 message RoleList {
     repeated Role roles = 1;
 }
 
-// RoleId is the identificator of the role.
+// RoleId Role identifier message .
 message RoleId {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // RoleID with the role identifier
     string role_id = 2;
 }
 
 // AddBasicCredentialRequest is the message that add new credential using login and password.
 message AddBasicCredentialRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // Username
     string username = 2;
+    // Password
     string password = 3;
+    // RoleID with the role identifier
     string role_id = 4;
 }
 
 // LoginWithBasicCredentialsRequest is the request for login with basic credentials.
 message LoginWithBasicCredentialsRequest {
+    // Username
     string username = 1;
+    // Password
     string password = 2;
 }
 
 // LoginResponse is the message that contains the generated token and the refresh token.
 message LoginResponse {
+    // Token generated
     string token = 1;
+    // Refresh Token
     string refresh_token = 2;
 }
 
 // RefreshTokenRequest is the request for refreshing the generated token.
 message RefreshTokenRequest {
+    // Token
     string token = 1;
+    // RefreshToken
     string refresh_token = 2;
 }
 
-// Message for editing a user role.
+// EditUserRoleRequest Message for editing a user role.
 message EditUserRoleRequest {
+    // Username whose role is changed
     string username = 1;
+    // NewRoleID new rol of the user
     string new_role_id = 2;
 }
 
-// Message for change the user password.
+// ChangePasswordRequest Message for change the user password.
 message ChangePasswordRequest {
+    // UserName
     string username = 1;
+    // Password old password
     string password = 2;
+    // newPassword
     string newPassword = 3;
 }
 
+// DeleteCredentialsRequest message to delete the credentials of a user
 message DeleteCredentialsRequest {
+    // Username
     string username = 1;
 }
 
-// Messages for device credentials
+// DeviceCredentials Message that contains the device credentials info
 message DeviceCredentials {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // DeviceID with the device identifier
     string device_id = 3;
     // Enabled determines if the device can interact with the running applications.
     bool enabled = 4;
@@ -101,22 +128,31 @@ message DeviceCredentials {
 
 // AddDeviceCredentialsRequest is the request for add a new device credential
 message AddDeviceCredentialsRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // DeviceID with the device identifier
     string device_id = 3;
 }
 
 // UpdateDeviceCredentialsRequest is the message to Enable/disable the device
 message UpdateDeviceCredentialsRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // DeviceID with the device identifier
     string device_id = 3;
+    // Enabled flag to enable / disable a device
     bool enabled = 4;
 }
 
-// Messages for device Group
+// DeviceGroupCredentials message that contains the device group credentials info
 message DeviceGroupCredentials {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
     // Enabled determines if the device can interact with the running applications.
     bool enabled = 3;
@@ -129,41 +165,58 @@ message DeviceGroupCredentials {
 
 // AddDeviceGroupCredentialsRequest, message for add a new device group credential
 message AddDeviceGroupCredentialsRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
     // Enabled determines if this group is able to interact with the running applications.
     bool enabled = 3;
+    // DefaultDeviceConnectivity
+    //determines whether the devices in a group are created enabled or disabled by default
     bool default_device_connectivity = 4;
 }
 
 // UpdateDeviceGroupCredentialsRequest, message to enable/disable the device group
 message UpdateDeviceGroupCredentialsRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // UpdateEnabled determines if the flag 'enabled' is going to update
     bool update_enabled = 3;
+    // Enabled determines if this group is able (or not) to interact with the running applications.
     bool enabled = 4;
+    // UpdateDeviceConnectivity determines if the flag 'DefaultDeviceConnectivity' is going to update
     bool update_device_connectivity = 5;
+    //determines whether the devices in a group are created enabled or disabled by default
     bool default_device_connectivity = 6;
 }
 
 // DeviceGroupLoginRequest, message to login a group
 message DeviceGroupLoginRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupApiKey with the generated api_key for the device group
     string device_group_api_key = 2;
 
 }
 
 // DeviceLoginRequest, message to login a device
 message DeviceLoginRequest {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceApiKey with the api key retrieved in the registerDevice
     string device_api_key = 2;
 
 }
 
 // DeviceGroupSecret, secret to generate the device group JWT token
 message DeviceGroupSecret {
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // DeviceGroupID with the device group identifier
     string device_group_id = 2;
+    // Secret to generate the JWT token
     string secret = 3;
 
 }

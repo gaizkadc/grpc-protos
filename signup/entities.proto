@@ -7,8 +7,11 @@ syntax = "proto3";
 package signup;
 option go_package = "github.com/nalej/grpc-signup-go";
 
+// SignupOrganizationRequest to register a new organization in the system
 message SignupOrganizationRequest{
+    // organizationName name of the organization
     string organization_name = 1;
+    // Credentials user of the new organization
     string owner_email = 2;
     string owner_name = 3;
     string owner_password = 4;
@@ -16,6 +19,7 @@ message SignupOrganizationRequest{
 }
 
 message SignupOrganizationResponse{
+    // OrganizationID identifier of the new organization
     string organization_id = 1;
 }
 
@@ -24,13 +28,21 @@ message SignupInfoRequest{
     string preshared_secret = 2;
 }
 
+// extended organization info
 message OrganizationInfo{
+    // OrganizationID organization identifier
     string organization_id = 1;
+    // Name of the organization
     string name = 2;
+    // creation time
     int64 created = 3;
+    // Number of users in the organization
     int32 number_users = 4;
+    // Number of clusters the organization has
     int32 number_clusters = 5;
+    // Number of descriptors
     int32 number_descriptors = 6;
+    // Number of instances deployed
     int32 number_instances = 7;
 }
 

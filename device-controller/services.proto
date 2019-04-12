@@ -21,14 +21,14 @@ service Connection {
         };
     }
 
-    // Operation that is called by the SDK to inform the target cluster of the last latency measurement
+    // RegisterLatency Operation that is called by the SDK to inform the target cluster of the last latency measurement
     rpc RegisterLatency (RegisterLatencyRequest) returns (RegisterLatencyResult) {
         option (google.api.http) = {
             post: "/v0/registerlatency"
             body: "*"
         };
     }
-
+    // SelectCluster operation to select the best latency in the list
     rpc SelectCluster(SelectClusterRequest) returns (SelectedCluster) {
         option (google.api.http) = {
             post: "/v0/selectcluster"
