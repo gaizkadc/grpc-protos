@@ -14,7 +14,7 @@ import "common/entities.proto";
 // Service in charge of orchestrating deployment operations.
 service Conductor {
     // Request an application deployment to be done on top of Nalej.
-    rpc Deploy(DeploymentRequest) returns (DeploymentResponse) {}
+    rpc Deploy(DeploymentRequest) returns (common.Success) {}
 
     // Request an already deployed application to be undeployed.
     rpc Undeploy(UndeployRequest) returns (common.Success) {}

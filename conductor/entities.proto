@@ -116,29 +116,19 @@ message DeviceGroupSecurityRuleInstance {
 // DeploymentRequest contains all the information required by conductor to start a deployment.
 message DeploymentRequest {
    string request_id = 1;
-   // ID of the application to deploy
-   application.AppDescriptorId app_id = 2;
+   // ID of the instance to deploy
+   application.AppInstanceId app_instance_id = 2;
    // Name for the deployment
    string name = 3;
-   // Description for this deployment
-   string description = 4;
    // Number of retries.
    // Internal field. Only conductor modifies this value.
-   int32 num_retries = 5;
+   int32 num_retries = 4;
    // Time last retry
    // Internal field. Only conductor modifies this value.
-   google.protobuf.Timestamp time_retry = 6;
+   google.protobuf.Timestamp time_retry = 5;
 
 }
 
-// Deployment response has the resulting execution of a deployment process.
-message DeploymentResponse {
-   string request_id = 1;
-   // ID of the deployed instance
-   string app_instance_id = 2;
-   // Status for this application. The first request will probably return a QUEUED status.
-   application.ApplicationStatus status = 3;
-}
 
 // Request to undeploy an already deployed application
 message UndeployRequest {
