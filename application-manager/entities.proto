@@ -17,6 +17,8 @@ message DeployRequest{
     string app_descriptor_id = 2;
     // Deploy Name
     string name = 3;
+    // Parameters with a list of values ​​that the parameters in this deployment will take
+    application.InstanceParameterList parameters = 4;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
