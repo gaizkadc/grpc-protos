@@ -300,6 +300,7 @@ service Applications {
         };
     }
 
+    // ListDescriptorAppParameters retrieves a list of parameters of an application
     rpc ListDescriptorAppParameters (application.AppDescriptorId) returns (AppParameterList) {
         option (google.api.http) = {
             get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/parameters"
