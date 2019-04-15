@@ -408,6 +408,29 @@ message AppInstanceList {
     repeated AppInstance instances = 1;
 }
 
+// AppParameter represents the definition of an application parameter
+message AppParameter {
+    // Name with the name of the parameter. It can not start with 'NALEJ'
+    // It will be used to substitute it through the descriptor when application is deployed.
+    string name = 1;
+    // Description with the description of the parameter.
+    string description = 2;
+    //XPATH to access the parameter
+    string path = 3;
+    // DataType with the value type (bool, integer, float, enum, string, password)
+    string type = 4;
+    // DefaultValue with the value by default of the field
+    string default_value = 5;
+    // Category indicates if the parameter is basic or advanced
+    string category = 6;
+    // enumValues indicates, in case of an enum type parameter, the values allowed
+    repeated string enum_values = 7;
+}
+
+message AppParameterList {
+    repeated AppParameter parameters;
+}
+
 // --------------------------------
 // Devices
 // --------------------------------
