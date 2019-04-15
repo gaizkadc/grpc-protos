@@ -53,9 +53,9 @@ service Applications {
     // AddAppEndPoint adds a new App Endpoint to a given service instance
     rpc AddAppEndpoint(AddAppEndpointRequest) returns (common.Success) {}
     // GetAppEndPoint retrieves a list of appEndpoints
-    rpc GetAppEndpoints(GetAppEndPointRequest) returns (AddEndpointList){}
+    rpc GetAppEndpoints(GetAppEndPointRequest) returns (AppEndpointList){}
     // RemoveAppEndpoints removes all the app endpoints of an app_instance
-    rpc RemoveAppEndpoints(RemoveEndpointRequest) returns (common.Success) {}
+    rpc RemoveAppEndpoints(RemoveAppEndpointRequest) returns (common.Success) {}
 
     // AddAppZtNetwork add a new zerotier network for an existing app instance
     rpc AddAppZtNetwork(AddAppZtNetworkRequest) returns (common.Success) {}

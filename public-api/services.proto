@@ -93,52 +93,61 @@ service Nodes {
 
 // Operations on device groups and devices.
 service Devices {
+    // add a new device group in an organization
     rpc AddDeviceGroup(device_manager.AddDeviceGroupRequest) returns (device_manager.DeviceGroup){
         option (google.api.http) = {
             post: "/v1/device/group/{organization_id}/add"
             body: "*"
         };
     }
+    // UpateDeviceGroup allows to update the deviceGroup configuration
     rpc UpdateDeviceGroup(device_manager.UpdateDeviceGroupRequest) returns (device_manager.DeviceGroup){
         option (google.api.http) = {
             post: "/v1/device/group/{organization_id}/update"
             body: "*"
         };
     }
+    // RemoveDeviceGroup removes a device group of an organization from the system
     rpc RemoveDeviceGroup(device.DeviceGroupId) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/group/{organization_id}/remove"
             body: "*"
         };
     }
+    // ListDeviceGroups retrieves the device groups information of an organization
     rpc ListDeviceGroups(organization.OrganizationId) returns (device_manager.DeviceGroupList){
         option (google.api.http) = {
             get: "/v1/device/group/{organization_id}/list"
         };
     }
+    // ListDevices retrieves the device information of a device group
     rpc ListDevices(device.DeviceGroupId) returns (DeviceList){
         option (google.api.http) = {
             get: "/v1/device/{organization_id}/{device_group_id}/list"
         };
     }
+    // AddLabelToDevice allows the user to add labels to a device
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/label/add"
             body: "*"
         };
     }
+    // RemoveLabelFromDevice allows the user to remove labels to a device
     rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/label/remove"
             body: "*"
         };
     }
+    // UpdateDevice allows the user to enable/disable a device
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (Device){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/update"
             body: "*"
         };
     }
+    // RemoveDevice allows to remove a device from the system
     rpc RemoveDevice(device.DeviceId) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/device/{organization_id}/remove"

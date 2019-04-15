@@ -9,15 +9,19 @@ option go_package = "github.com/nalej/grpc-application-manager-go";
 
 import public "application/entities.proto";
 
+// DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
+    // OrganizationID with the organization identifier
     string organization_id = 1;
+    // AppDescriptorID with the application descriptor identifier
     string app_descriptor_id = 2;
+    // Deploy Name
     string name = 3;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
 message ApplicationFilter{
-    // OrganizationID with the organization identifier
+    // OrganizationId with the organization identifier
     string organization_id = 1;
     // DeviceGroupId with the Identifier of the target device group. Required for security purposes
     string device_group_id = 2;
@@ -31,7 +35,9 @@ message ApplicationFilter{
 // TargetApplication retrieves the list of labels in a given application instance. This is provided as to
 // give the device extra options for local filtering.
 message TargetApplication {
+    // AppInstanceId with the application instance identifier
     string app_instance_id = 1;
+    // Labels to filter
     map<string, string> labels = 2;
 }
 
@@ -41,6 +47,7 @@ message TargetApplicationList{
     repeated TargetApplication applications = 1;
 }
 
+// RetrieveEndpointsRequest message to ask for the endpoints of a given application instance
 message RetrieveEndpointsRequest{
     // OrganizationID with the organization identifier
     string organization_id = 1;
@@ -48,13 +55,14 @@ message RetrieveEndpointsRequest{
     string app_instance_id = 2;
 }
 
+// ApplicationClusterEndpoints contains the endpoints info of and application instance
 message ApplicationClusterEndpoints{
     // DeviceControllerURL with the URL the device controller is exposed on the target application cluster.
     string device_controller_url = 1;
     // Endpoints available on the given application cluster.
     repeated application.EndpointInstance endpoints = 2;
 }
-
+// ApplicationEndpoints message with a list of ApplicationEndpoints
 message ApplicationEndpoints{
     // ClusterEndpoints with the list of cluster and associated endpoints an application instance is available.
     repeated ApplicationClusterEndpoints cluster_endpoints = 2;

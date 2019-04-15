@@ -221,6 +221,7 @@ message Port {
     repeated Endpoint endpoints = 4;
 }
 
+// Storage restrictions
 message Storage {
     int64 size = 1;
     string mount_path = 2;

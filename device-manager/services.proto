@@ -16,23 +16,36 @@ import "organization/entities.proto";
 import "google/api/annotations.proto";
 
 service Devices {
+    // AddDeviceGroup adds a new DeviceGroup
     rpc AddDeviceGroup(AddDeviceGroupRequest) returns (DeviceGroup){}
+    // UpdateDeviceGroup allows to update a device group
     rpc UpdateDeviceGroup(UpdateDeviceGroupRequest) returns (DeviceGroup){}
+    // RemoveDeviceGroup removes a device group from the system
     rpc RemoveDeviceGroup(device.DeviceGroupId) returns (common.Success){}
+    // ListDeviceGroups retrieves a list of deviceGroups
     rpc ListDeviceGroups(organization.OrganizationId) returns (device_manager.DeviceGroupList){}
 
+    // RegisterDevice allows to register a device into a devicegroup
     rpc RegisterDevice(device_manager.RegisterDeviceRequest) returns(device_manager.RegisterResponse){}
+    // GetDevice retrieves the device information
     rpc GetDevice(device.DeviceId) returns (device_manager.Device){}
+    // ListDevices retrieves a list of devices in a devicegroup
     rpc ListDevices(device.DeviceGroupId) returns (device_manager.DeviceList){}
+    // AddLabelToDevice allows update the device adding labels
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
+    // AddLabelToDevice allows update the device removing labels
     rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
+    // UpdateDevice allows to enable os disable a device
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
+    // RemoveDevice removes a device from the system
     rpc RemoveDevice(device.DeviceId) returns (common.Success){}
 }
 
 service Latency {
+    // RegisterLatency registers the ping latency of a device
     rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (common.Success) {}
-
+    // GetLatency retrieves the latencies registered of a device
     rpc GetLatency (device.DeviceId) returns (LatencyMeasure) {}
+    // GetLatency retrieves the latencies registered of devices of a group
     rpc GetLatencyList(device.DeviceGroupId) returns (LatencyMeasureList) {}
 }
