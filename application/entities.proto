@@ -638,7 +638,7 @@ message RemoveAppEndpointRequest {
 }
 
 // -- Application parameters
-
+// ParamDataType type of the value of the parameter. It must be validated
 enum ParamDataType {
     BOOLEAN = 0;
     INTEGER = 1;
@@ -648,6 +648,7 @@ enum ParamDataType {
     PASSWORD = 5;
 }
 
+// ParamCategory. There are two types of parameters, basic (shown) or advanced (only shown on request)
 enum ParamCategory {
     BASIC = 0;
     ADVANCED = 1;
