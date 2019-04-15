@@ -528,6 +528,8 @@ message AddAppInstanceRequest {
     string app_descriptor_id = 2;
     // Name of the application instance.
     string name = 3;
+    // Parameters with a list of values that the parameters in this deployment will take
+    InstanceParameterList parameters = 4;
 }
 // AppInstanceId contains an Application Instance Identifier
 message AppInstanceId {
@@ -535,8 +537,6 @@ message AppInstanceId {
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
-    // Parameters with a list of values ​​that the parameters in this deployment will take
-    InstanceParameterList parameters = 3;
 }
 // list of application instances
 message AppInstanceList {
