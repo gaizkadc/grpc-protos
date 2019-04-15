@@ -63,4 +63,16 @@ service Applications {
     rpc RemoveAppZtNetwork(RemoveAppZtNetworkRequest) returns (common.Success) {}
     // RemoveAppZtNetwork remove the network instance for an application instance
     rpc GetAppZtNetwork(GetAppZtNetworkRequest) returns (AppZtNetwork) {}
+
+    // GetDescriptorAppParameters retrieves a list of application parameters of a descriptor
+    rpc GetDescriptorAppParameters (AppDescriptorId) returns (AppParameterList){}
+    // GetInstanceParameters retrieves a list of application parameters of an instance
+    rpc GetInstanceParameters (AppInstanceId) returns (InstanceParameterList) {}
+
+    // AddParametrizedDescriptor adds a parametrized descriptor to a given descriptor
+    rpc AddParametrizedDescriptor(ParametrizedDescriptor) returns (common.Success){}
+    // GetParametrizedDescriptor retrieves the parametrized descriptor associated with an instance
+    rpc GetParametrizedDescriptor(AppInstanceId) returns (ParametrizedDescriptor) {}
+    // RemoveParametrizedDescriptor removes the parametrized descriptor associated with an instance
+    rpc RemoveParametrizedDescriptor(AppInstanceId) returns (common.Success) {}
 }

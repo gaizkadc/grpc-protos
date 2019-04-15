@@ -26,6 +26,8 @@ message AppDescriptor {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
+    // AppParameter with the parameters definition of an application
+    repeated AppParameter parameters = 9;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -261,6 +263,8 @@ message AddAppDescriptorRequest {
     repeated SecurityRule rules = 7;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 8;
+    // Parameters with the parameters definition
+    repeated AppParameter parameters = 9;
 }
 
 message AppDescriptorList {
@@ -280,6 +284,31 @@ message UpdateAppDescriptorRequest{
     // Labels for the cluster.
     map <string, string> labels = 5;
 }
+
+// ParametrizedDescriptor structure defines the descriptor once the substitution of the parameters has been applied for their values.
+// this structure is associated with an instance
+message ParametrizedDescriptor {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceID with the identifier of the instance associated to this descriptor
+    string app_instance_id = 3;
+    // Name of the application.
+    string name = 4;
+    // ConfigurationOptions defines a key-value map of configuration options.
+    map<string, string> configuration_options = 5;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 6;
+    // Labels defined by the user.
+    map<string, string> labels = 7;
+    // Rules that define the connectivity between the elements of an application.
+    repeated SecurityRule rules = 8;
+    // Groups with the Service collocation strategies.
+    repeated ServiceGroup groups = 9;
+}
+
 
 // AppInstance represents an instance of the application in the system.
 message AppInstance {
@@ -598,6 +627,57 @@ message RemoveEndpointRequest {
     string organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string app_instance_id = 2;
+}
+
+// -- Application parameters
+
+enum ParamDataType {
+    BOOLEAN = 0;
+    INTEGER = 1;
+    FLOAT = 2;
+    ENUM = 3;
+    STRING = 4;
+    PASSWORD = 5;
+}
+
+enum ParamCategory {
+    BASIC = 0;
+    ADVANCED = 1;
+}
+
+// AppParameter represents the definition of an application parameter
+message AppParameter {
+    // Name with the name of the parameter. It can not start with 'NALEJ'
+    // It will be used to substitute it through the descriptor when application is deployed.
+    string name = 1;
+    // Description with the description of the parameter.
+    string description = 2;
+    //XPATH to access the parameter
+    string path = 3;
+    // DataType with the value type (bool, integer, float, enum, string, password)
+    ParamDataType type = 4;
+    // DefaultValue with the value by default of the field
+    string default_value = 5;
+    // Category indicates if the parameter is basic or advanced
+    ParamCategory category = 6;
+    // enumValues indicates, in case of an enum type parameter, the values allowed
+    repeated string enum_values = 7;
+}
+
+// AppParameterList lis of parameters in a descriptor
+message AppParameterList {
+    repeated AppParameter parameters = 1;
+}
+
+// InstanceParameter represents the value of a parameter in the instance
+message InstanceParameter {
+    string parameter_name = 1;
+    string value = 2;
+}
+
+// InstanceParameterList represents a list of InstanceParameters in one instance
+message InstanceParameterList {
+    repeated InstanceParameter parameters = 1;
 }
 
 message AppZtNetwork {
