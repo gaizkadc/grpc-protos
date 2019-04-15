@@ -302,7 +302,7 @@ service Applications {
 
     rpc ListDescriptorAppParameters (application.AppDescriptorId) returns (AppParameterList) {
         option (google.api.http) = {
-            get: "/v1/apps/inst/{organization_id}/{app_instance_id}/parameters"
+            get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/parameters"
         };
     }
 }
