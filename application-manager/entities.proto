@@ -17,8 +17,8 @@ message DeployRequest{
     string app_descriptor_id = 2;
     // Deploy Name
     string name = 3;
-    // Deploy descriptor (it is not used)
-    string description = 4;
+    // Parameters with a list of values ​​that the parameters in this deployment will take
+    application.InstanceParameterList parameters = 4;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
@@ -68,4 +68,13 @@ message ApplicationClusterEndpoints{
 message ApplicationEndpoints{
     // ClusterEndpoints with the list of cluster and associated endpoints an application instance is available.
     repeated ApplicationClusterEndpoints cluster_endpoints = 2;
+}
+
+// Deployment response has the resulting execution of a deployment process.
+message DeploymentResponse {
+    string request_id = 1;
+    // ID of the deployed instance
+    string app_instance_id = 2;
+    // Status for this application. The first request will probably return a QUEUED status.
+    application.ApplicationStatus status = 3;
 }

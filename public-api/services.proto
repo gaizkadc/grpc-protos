@@ -272,7 +272,7 @@ service Applications {
     }
 
     // Deploy an application descriptor.
-    rpc Deploy(application_manager.DeployRequest) returns (conductor.DeploymentResponse){
+    rpc Deploy(application_manager.DeployRequest) returns (application_manager.DeploymentResponse){
         option (google.api.http) = {
             post: "/v1/apps/inst/{organization_id}/{app_descriptor_id}/deploy"
             body: "*"
@@ -297,6 +297,13 @@ service Applications {
     rpc GetAppInstance(application.AppInstanceId) returns (AppInstance) {
         option (google.api.http) = {
             get: "/v1/apps/inst/{organization_id}/{app_instance_id}/get"
+        };
+    }
+
+    // ListDescriptorAppParameters retrieves a list of parameters of an application
+    rpc ListDescriptorAppParameters (application.AppDescriptorId) returns (AppParameterList) {
+        option (google.api.http) = {
+            get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/parameters"
         };
     }
 }
