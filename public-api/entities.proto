@@ -428,7 +428,7 @@ message AppParameter {
 }
 
 message AppParameterList {
-    repeated AppParameter parameters;
+    repeated AppParameter parameters = 1;
 }
 
 // --------------------------------
