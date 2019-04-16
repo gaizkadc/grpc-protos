@@ -8,8 +8,8 @@ syntax = "proto3";
 package conductor;
 option go_package = "github.com/nalej/grpc-conductor-go";
 
-import public "application/entities.proto";
-import public "infrastructure/entities.proto";
+import "application/entities.proto";
+import "infrastructure/entities.proto";
 import "google/protobuf/timestamp.proto";
 
 
