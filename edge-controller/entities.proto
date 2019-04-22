@@ -8,6 +8,7 @@ package edge_controller;
 option go_package = "github.com/nalej/grpc-edge-controller-go";
 
 import "inventory-manager/entities.proto";
+import "inventory/entities.proto";
 
 // Agents
 
@@ -15,6 +16,16 @@ import "inventory-manager/entities.proto";
 message AgentJoinRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // AgentId with the agent identifier that is monitoring this asset if any.
+    string agent_id = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+    // OS contains Operating System information.
+    inventory.OperatingSystemInfo os = 4;
+    // Hardware information.
+    inventory.HardwareInfo hardware = 5;
+    // Storage information.
+    inventory.StorageHardwareInfo storage = 6;
 }
 
 // CheckResult message with the pending request if any that an agent needs to execute.

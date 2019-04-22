@@ -85,6 +85,22 @@ message Asset{
     string eic_net_ip = 10;
 }
 
+// AddAssetRequest with the message sent to create a new asset.
+message AddAssetRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier that is monitoring this asset if any.
+    string agent_id = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 4;
+    // Hardware information.
+    HardwareInfo hardware = 5;
+    // Storage information.
+    StorageHardwareInfo storage = 6;
+}
+
 // AssetId
 message AssetId{
     // OrganizationId with the organization identifier.
@@ -97,6 +113,19 @@ message AssetId{
 message AssetList{
     // Assets
     repeated Asset assets = 1;
+}
+
+message UpdateAssetRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 7;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 8;
+    // Labels for the cluster.
+    map <string, string> labels = 9;
 }
 
 //
@@ -132,4 +161,26 @@ message EdgeController{
 message EdgeControllerList{
     // Controllers
     repeated EdgeController controllers = 1;
+}
+
+message AddEdgeControllerRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Name of the EIC.
+    string name = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+}
+
+message UpdateEdgeControllerRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 7;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 8;
+    // Labels for the cluster.
+    map <string, string> labels = 9;
 }

@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package inventory_manager;
-option go_package = "github.com/nalej/grpc-inventory-go";
+option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "organization/entities.proto";
 import "common/entities.proto";
