@@ -39,7 +39,7 @@ service Agent{
     // InstallAgent triggers the installation of an agent.
     rpc InstallAgent(InstallAgentRequest) returns (InstallAgentResponse){}
     // CreateAgentJoinToken creates a join token for an agent on a remote EIC.
-    rpc CreateAgentJoinToken(organization.OrganizationId) returns (AgentJoinToken)
+    rpc CreateAgentJoinToken(organization.OrganizationId) returns (AgentJoinToken){}
     // AgentJoin processes a join request from a remote agent.
     rpc AgentJoin(AgentJoinRequest) returns (AgentJoinResponse){}
     // LogAgentAlive method invoked by the EIC to update the status of several agents.
