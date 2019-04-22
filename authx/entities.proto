@@ -7,6 +7,10 @@ syntax = "proto3";
 package authx;
 option go_package = "github.com/nalej/grpc-authx-go";
 
+//
+// Users
+//
+
 // AccessPrimitives define a set of capabilities a role may access.
 enum AccessPrimitive {
     // Access to all organization related functionality.
@@ -110,6 +114,10 @@ message DeleteCredentialsRequest {
     // Username
     string username = 1;
 }
+
+//
+// Device Groups & Devices.
+//
 
 // DeviceCredentials Message that contains the device credentials info
 message DeviceCredentials {
@@ -219,4 +227,16 @@ message DeviceGroupSecret {
     // Secret to generate the JWT token
     string secret = 3;
 
+}
+
+//
+// Edge inventory
+//
+
+// EICJoinToken with the information required for an EIC to connect with the system.
+message EICJoinToken{
+    // Token to be used by the agent.
+    string token = 1;
+    // Cacert with the CA certificate.
+    string cacert = 2;
 }

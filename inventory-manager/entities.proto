@@ -1,0 +1,303 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package inventory_manager;
+option go_package = "github.com/nalej/grpc-inventory-manager-go";
+
+import "inventory/entities.proto";
+
+//
+// Inventory
+//
+
+// ConnectedStatus
+enum ConnectedStatus{
+    ONLINE = 0;
+    OFFLINE = 1;
+}
+
+// Asset represents an element in the network from which we register some type of information. Example of
+// assets could be workstations, nodes in a cluster, or other type of hardware.
+message Asset{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // AgentId with the agent identifier that is monitoring this asset if any.
+    string agent_id = 3;
+    // Show flag to determine if this asset should be shown on the UI. This flag is internally used
+    // for the async uninstall/removal of the asset.
+    bool show = 4;
+    // Created time
+    int64 created = 5;
+    // Labels defined by the user.
+    map<string, string> labels = 6;
+    // OS contains Operating System information.
+    inventory.OperatingSystemInfo os = 7;
+    // Hardware information.
+    inventory.HardwareInfo hardware = 8;
+    // EicNetIp contains the current IP address that connects the asset to the EIC.
+    string eic_net_ip = 9;
+    // Status of the agent.
+    ConnectedStatus status = 10;
+}
+
+// AssetList with a list of assets.
+message AssetList{
+    // Assets
+    repeated Asset assets = 1;
+}
+
+// InventorySummary with information that will be shown on the UI.
+message InventorySummary{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // TotalNumCPU with the total number of CPU among all assets.
+    int64 total_num_cpu = 2;
+    // TotalStorage with the total capacity in MB among all assets.
+    int64 total_storage = 3;
+    // TotalRam with the total RAM in MB among all assets.
+    int64 total_ram = 4;
+}
+
+//
+// EIC
+//
+
+// EICJoinRequest with the message sent by a new EIC to join the platform.
+message EICJoinRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+// VPNCredentials with the information required for the EIC to establish the VPN connection.
+message VPNCredentials{
+    // Cacert with the CA certificate.
+    string cacert = 1;
+    // Username to connect to the VPN.
+    string username = 2;
+    // Password
+    string password = 3;
+    // Hostname with the URL of the VPN server that receives the connection.
+    string hostname = 4;
+}
+
+// EICJoinResponse with the information returned to an EIC on successfull join.
+message EICJoinResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the edge controller identifier.
+    string edge_controller_id = 2;
+    // Credentials for the VPN.
+    VPNCredentials credentials = 3;
+}
+
+// EICStartInfo with the information sent by the EIC every time it connects back to the platform.
+message EICStartInfo{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the edge controller identifier.
+    string edge_controller_id = 2;
+    // Ip of the EIC.
+    string ip = 3;
+}
+
+// EdgeController receiving information from agents abouts assets.
+message EdgeController{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // Show flag to determine if this asset should be shown on the UI. This flag is internally used
+    // for the async uninstall/removal of the asset.
+    bool show = 3;
+    // Created time
+    int64 created = 4;
+    // Name of the EIC.
+    string name = 5;
+    // Labels defined by the user.
+    map<string, string> labels = 6;
+    // Status for the UI.
+    ConnectedStatus status = 7;
+}
+
+// EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
+enum EdgeOperation{
+    // Unlink a given EIC. Given the nature of VM/appliance uninstall may not be possible.
+    UNLINK = 0;
+    // UninstallAgent request an agent managed by the EIC to uninstall itself.
+    UNINSTALL_AGENT = 1;
+    // TriggerAgentOp request an agent to perform an operation.
+    TRIGGER_AGENT_OP = 2;
+}
+
+// EdgeControllerOp represents an operation queued for a EIC.
+message EdgeControllerOp{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // OperationId contains the identifier of this operation.
+    string operation_id = 3;
+    // Created time
+    int64 created = 4;
+    // Operation to be performed
+    EdgeOperation operation = 5;
+    // AgentOp with an operation to be performed by an agent in case operation is TRIGGER_AGENT_OP
+    AgentOpRequest agent_op = 6;
+}
+
+//
+// Agents
+//
+
+message AgentId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier.
+    string agent_id = 2;
+}
+
+message AgentOpRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // AgentId with the agent identifier.
+    string agent_id = 3;
+    // Operation to be performed. No enum is used as to no constraint agent evolution.
+    string operation = 4;
+    // Plugin in charge of executing such operation.
+    string plugin = 5;
+    // Params for the operation.
+    map<string, string> params = 6;
+}
+
+// AgentOpStatus contains the status of the execution of a given agent operation.
+enum AgentOpStatus{
+    SCHEDULED = 0;
+    SUCCESS = 1;
+    FAIL = 2;
+}
+
+message AgentOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // AgentId with the agent identifier.
+    string agent_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 4;
+    // Timestamp of the response.
+    int64 timestamp = 5;
+    // Status indicates if the operation was successfull
+    AgentOpStatus status = 6;
+    // Info with additional information for an operation.
+    string info = 7;
+}
+
+message AgentOperationId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier.
+    string agent_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 4;
+}
+
+message AgentOpResponseList{
+    repeated AgentOpResponse operations = 1;
+}
+
+
+// AgentType defining the type of supported agent to be installed.
+enum AgentType{
+    // Linux agent on x86
+    LINUX_X86 = 0;
+    // Linux agent on ARM 32 bits
+    LINUX_ARM32 = 1;
+    // Linux agent on ARM 64 bits
+    LINUX_ARM64 = 2;
+    // Windows agent
+    WINDOWS = 3;
+}
+
+// SSHCredentials to connect to the remote machine to install the agent.
+message SSHCredentials{
+    // Username.
+    string username = 1;
+    // Credentials either password or certificate.
+    oneof credentials{
+        // Password.
+        string password = 2;
+        // ClientCertificate embedded.
+        string client_certificate = 3;
+    }
+}
+
+// InstallAgentRequest with the request send by the user to install an agent.
+message InstallAgentRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // AgentType with the type of agent to be installed.
+    AgentType agent_type = 3;
+    // Credentials to be used to connect to the machine and install the agent.
+    SSHCredentials credentials = 4;
+    // TargetHost to be installed.
+    string target_host = 5;
+}
+
+// InstallAgentResponse with the response for an agent install process.
+message InstallAgentResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // InstallRequestId with the identifier.
+    string install_request_id = 3;
+}
+
+// AgentJoinRequest message sent by the EIC upon receiving an AgentJoinRequest from an agent.
+message AgentJoinRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that is processing the agent request.
+    string edge_controller_id = 2;
+}
+
+// AgentJoinResponse with the information created by the system model upon creating o a new asset.
+message AgentJoinResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier as generated by the system model.
+    string agent_id = 2;
+}
+
+// AgentJoinToken with the information required for an agent to connect with the system.
+message AgentJoinToken{
+    // Token to be used by the agent.
+    string token = 1;
+    // Cacert with the CA certificate.
+    string cacert = 2;
+}
+
+// EICStartInfo with the information sent by the EIC every time it connects back to the platform.
+message AgentStartInfo{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier.
+    string agent_id = 2;
+    // Ip that is visible from the EIC.
+    string ip = 3;
+}
+
+// AgentsIds with a list of agent identifiers.
+message AgentIds{
+    repeated string ids = 1;
+}

@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package inventory_manager;
+option go_package = "github.com/nalej/grpc-inventory-manager-go";
+
+import "organization/entities.proto";
+import "common/entities.proto";
+import "inventory-manager/entities.proto";
+import "authx/entities.proto";
+import "inventory/entities.proto";
+
+
+// Inventory services.
+service Inventory{
+    // List the assets.
+    rpc List(organization.OrganizationId) returns (AssetList){}
+    // Summary retrieves a summary of the assets in the inventory.
+    rpc Summary(organization.OrganizationId) returns (InventorySummary){}
+}
+
+// EIC related operations.
+service EIC{
+    // CreateEICToken creates a new token for an EIC to join the platform.
+    rpc CreateEICToken(organization.OrganizationId) returns (authx.EICJoinToken){}
+    // EICJoin processes a join request.
+    rpc EICJoin(EICJoinRequest) returns (EICJoinResponse){}
+    // EICStart operation invoked by the EIC every time it connects back to the platform.
+    rpc EICStart(EICStartInfo) returns (common.Success){}
+    // UnlinkEIC operation to remove/uninstall an EIC.
+    rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){}
+}
+
+// Agent operations.
+service Agent{
+    // InstallAgent triggers the installation of an agent.
+    rpc InstallAgent(InstallAgentRequest) returns (InstallAgentResponse){}
+    // CreateAgentJoinToken creates a join token for an agent on a remote EIC.
+    rpc CreateAgentJoinToken(organization.OrganizationId) returns (AgentJoinToken){}
+    // AgentJoin processes a join request from a remote agent.
+    rpc AgentJoin(AgentJoinRequest) returns (AgentJoinResponse){}
+    // LogAgentAlive method invoked by the EIC to update the status of several agents.
+    rpc LogAgentAlive(AgentIds) returns (common.Success){}
+    // TriggerAgentOperation triggers the execution of an operation in an agent managed by an EIC.
+    rpc TriggerAgentOperation(AgentOpRequest) returns (AgentOpResponse){}
+    // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
+    rpc CallbackAgentOperation(AgentOpResponse) returns (common.Success){}
+    // ListAgentOperations retrieves the history of operations executed by the agent.
+    rpc ListAgentOperations(AgentId) returns (AgentOpResponseList){}
+    // DeleteAgentOperation deletes an agent operation from the history.
+    rpc DeleteAgentOperation(AgentOperationId) returns (common.Success){}
+}

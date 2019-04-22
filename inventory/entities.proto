@@ -1,0 +1,186 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package inventory;
+option go_package = "github.com/nalej/grpc-inventory-go";
+
+//
+// Assets.
+//
+
+// OperatingSystemInfo contains information about the operating system of an asset. Notice that no
+// enums have been used for either the name or the version as to no constraint the elements of the
+// inventory even if we do not have an agent running supporting those.
+message OperatingSystemInfo{
+    // Name of the operating system. Expecting full name.
+    string name = 1;
+    // Version installed.
+    string version = 2;
+}
+
+// HardareInfo contains information about the hardware of an asset.
+message HardwareInfo{
+    // CPUs contains the list of CPU available in a given asset.
+    repeated CPUInfo cpus = 1;
+    // InstalledRam contains the total RAM available in MB.
+    int64 installed_ram = 2;
+    // NetInterfaces with the list of networking cards.
+    repeated NetworkingHardwareInfo net_interfaces = 3;
+}
+
+// CPUInfo contains information about a CPU.
+message CPUInfo{
+    // Manufacturer of the CPU.
+    string manufacturer = 1;
+    // Model of the CPU.
+    string model = 2;
+    // Architecture of the CPU.
+    string architecture = 3;
+    // NumCores with the number of cores.
+    int32 num_cores = 4;
+}
+
+// NetworkingHardwareInfo with the list of network interfaces that are available.
+message NetworkingHardwareInfo{
+    // Type of network interface. For example, ethernet, wifi, infiniband, etc.
+    string type = 1;
+    // Link capacity in Mbps.
+    int64 link_capacity = 2;
+}
+
+// StorageHardwareInfo with the storage related information.
+message StorageHardwareInfo{
+    // Type of storage.
+    string type = 1;
+    // Total capacity in MB.
+    int64 total_capacity = 2;
+}
+
+// Asset represents an element in the network from which we register some type of information. Example of
+// assets could be workstations, nodes in a cluster, or other type of hardware.
+message Asset{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // AgentId with the agent identifier that is monitoring this asset if any.
+    string agent_id = 3;
+    // Show flag to determine if this asset should be shown on the UI. This flag is internally used
+    // for the async uninstall/removal of the asset.
+    bool show = 4;
+    // Created time
+    int64 created = 5;
+    // Labels defined by the user.
+    map<string, string> labels = 6;
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 7;
+    // Hardware information.
+    HardwareInfo hardware = 8;
+    // Storage information.
+    StorageHardwareInfo storage = 9;
+    // EicNetIp contains the current IP address that connects the asset to the EIC.
+    string eic_net_ip = 10;
+}
+
+// AddAssetRequest with the message sent to create a new asset.
+message AddAssetRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AgentId with the agent identifier that is monitoring this asset if any.
+    string agent_id = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 4;
+    // Hardware information.
+    HardwareInfo hardware = 5;
+    // Storage information.
+    StorageHardwareInfo storage = 6;
+}
+
+// AssetId
+message AssetId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+}
+
+// AssetList with a list of assets.
+message AssetList{
+    // Assets
+    repeated Asset assets = 1;
+}
+
+message UpdateAssetRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 7;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 8;
+    // Labels for the cluster.
+    map <string, string> labels = 9;
+}
+
+//
+// Controller
+//
+
+// EdgeControllerId with the EIC identifier on a given organization.
+message EdgeControllerId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+}
+
+// EdgeController entity.
+message EdgeController{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // Show flag to determine if this asset should be shown on the UI. This flag is internally used
+    // for the async uninstall/removal of the asset.
+    bool show = 3;
+    // Created time
+    int64 created = 4;
+    // Name of the EIC.
+    string name = 5;
+    // Labels defined by the user.
+    map<string, string> labels = 6;
+}
+
+// EdgeControllerList with a list of controllers.
+message EdgeControllerList{
+    // Controllers
+    repeated EdgeController controllers = 1;
+}
+
+message AddEdgeControllerRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Name of the EIC.
+    string name = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+}
+
+message UpdateEdgeControllerRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // Add Label flag to indicate that the set of labels need to be added.
+    bool add_labels = 7;
+    // Remove label flag to indicate that the set of labels need to be removed.
+    bool remove_labels = 8;
+    // Labels for the cluster.
+    map <string, string> labels = 9;
+}
