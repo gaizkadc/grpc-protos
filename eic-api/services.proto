@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package eic_api;
+option go_package = "github.com/nalej/grpc-eic-api-go";
+
+import "eic-api/entities.proto";
+import "inventory-manager/entities.proto";
+
+// Users service exposing user related functionality.
+service EIC {
+    // Join operation for the EIC.
+    rpc Join(inventory_manager.EICJoinRequest) returns (inventory_manager.EICJoinResponse){}
+}

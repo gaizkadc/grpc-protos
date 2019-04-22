@@ -1,0 +1,23 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package edge_controller;
+option go_package = "github.com/nalej/grpc-edge-controller-go";
+
+import "inventory-manager/entities.proto";
+
+// Agents
+
+// AgentJoinRequest send by an agent to an EIC to join the platform.
+message AgentJoinRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+// CheckResult message with the pending request if any that an agent needs to execute.
+message CheckResult{
+    repeated inventory_manager.AgentOpRequest pending_requests = 1;
+}

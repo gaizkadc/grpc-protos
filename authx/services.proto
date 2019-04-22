@@ -88,3 +88,9 @@ service Authx {
     rpc GetDeviceGroupSecret (device.DeviceGroupId) returns (DeviceGroupSecret){}
 
 }
+
+// Inventory related operations.
+service Inventory{
+    // CreateEICJoinToken creates an EICJoinToken for new controllers to join the system.
+    rpc CreateEICJoinToken (organization.OrganizationId) returns (EICJoinToken){}
+}

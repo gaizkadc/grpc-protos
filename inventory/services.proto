@@ -1,0 +1,36 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package inventory;
+option go_package = "github.com/nalej/grpc-inventory-go";
+
+import "common/entities.proto";
+import "inventory/entities.proto";
+import "organization/entities.proto";
+
+// Assets operations.
+service Assets {
+    // Add a new asset to the system.
+    rpc Add(AddAssetRequest) returns (Asset){}
+    // List the assets of an organization.
+    rpc List(organization.OrganizationId) returns (AssetList){}
+    // Remove a given assets from an organization.
+    rpc Remove(AssetId) returns (common.Success){}
+    // Update the information of an asset.
+    rpc Update(UpdateAssetRequest) returns (Asset){}
+}
+
+// Controllers operations
+service Controllers {
+    // Add a controller to the system.
+    rpc Add(AddEdgeControllerRequest) returns (EdgeController){}
+    // List the controllers of an organization.
+    rpc List(organization.OrganizationId) returns (EdgeControllerList){}
+    // Remove a given controller from an organization.
+    rpc Remove(EdgeControllerId) returns (common.Success){}
+    // Update the information of a controller.
+    rpc Update(UpdateEdgeControllerRequest) returns (EdgeController){}
+}
