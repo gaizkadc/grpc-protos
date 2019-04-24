@@ -10,10 +10,14 @@ option go_package = "github.com/nalej/grpc-edge-controller-go";
 import "common/entities.proto";
 import "edge-controller/entities.proto";
 import "inventory-manager/entities.proto";
+import "inventory/entities.proto";
 
 service EIC {
     // Unlink the receiving EIC.
     rpc Unlink(common.Empty) returns (common.Success){}
+    // TriggerAgentOperation registers the operation in the EIC so that the agent will be notified on the
+    // next connection.
+    rpc TriggerAgentOperation(inventory_manager.AgentOpRequest) returns (inventory_manager.AgentOpResponse){}
 }
 
 service Agent{
@@ -23,10 +27,7 @@ service Agent{
     // AgentStart operation invoked by an agent every time it starts.
     rpc AgentStart(inventory_manager.AgentStartInfo) returns (common.Success){}
     // TriggerAgentOperation triggers the execution of an operation in an agent managed by an EIC.
-    rpc AgentCheck(inventory_manager.AgentId) returns (CheckResult){}
-    // TriggerAgentOperation registers the operation in the EIC so that the agent will be notified on the
-    // next connection.
-    rpc TriggerAgentOperation(inventory_manager.AgentOpRequest) returns (inventory_manager.AgentOpResponse){}
+    rpc AgentCheck(inventory.AssetId) returns (CheckResult){}
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
     rpc CallbackAgentOperation(inventory_manager.AgentOpResponse) returns (common.Success){}
 }

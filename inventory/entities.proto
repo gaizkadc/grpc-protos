@@ -80,7 +80,7 @@ message Asset{
     // Hardware information.
     HardwareInfo hardware = 8;
     // Storage information.
-    StorageHardwareInfo storage = 9;
+    repeated StorageHardwareInfo storage = 9;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 10;
 }
