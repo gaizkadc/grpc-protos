@@ -24,7 +24,7 @@ message AgentJoinRequest{
     // Hardware information.
     inventory.HardwareInfo hardware = 4;
     // Storage information.
-    inventory.StorageHardwareInfo storage = 5;
+    repeated inventory.StorageHardwareInfo storage = 5;
 }
 
 // CheckResult message with the pending request if any that an agent needs to execute.
