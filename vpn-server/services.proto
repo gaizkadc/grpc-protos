@@ -12,7 +12,7 @@ import "common/entities.proto";
 // VPN Server service
 service VPNServer {
     // Add user to the VPN server
-    rpc AddUser(AddUser) returns (common.Success) {}
+    rpc AddUser (AddUser) returns (common.Success) {}
     // Delete user from the VPN server
-    rpc GetCluster(DeleteUser) returns (common.Success) {}
+    rpc DeleteUser (DeleteUser) returns (common.Success) {}
 }
