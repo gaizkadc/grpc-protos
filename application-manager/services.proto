@@ -26,7 +26,7 @@ service ApplicationManager {
     rpc RemoveAppDescriptor(application.AppDescriptorId) returns (common.Success){}
 
     // ListInstanceParameters retrieves a list of instance parameters
-    rpc ListInstanceParameters (application.AppDescriptorId) returns (application.InstanceParameterList) {}
+    rpc ListInstanceParameters (application.AppInstanceId) returns (application.InstanceParameterList) {}
 
     // Deploy an application descriptor.
     rpc Deploy(DeployRequest) returns (DeploymentResponse){}
