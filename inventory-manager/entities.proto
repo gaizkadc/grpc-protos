@@ -166,16 +166,14 @@ message AgentOpRequest{
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier that will receive the operation.
     string edge_controller_id = 2;
-    // AgentId with the agent identifier.
-    string agent_id = 3;
     // AssetId with the asset identifier.
-    string asset_id = 4;
+    string asset_id = 3;
     // Operation to be performed. No enum is used as to no constraint agent evolution.
-    string operation = 5;
+    string operation = 4;
     // Plugin in charge of executing such operation.
-    string plugin = 6;
+    string plugin = 5;
     // Params for the operation.
-    map<string, string> params = 7;
+    map<string, string> params = 6;
 }
 
 // AgentOpStatus contains the status of the execution of a given agent operation.
@@ -190,8 +188,8 @@ message AgentOpResponse{
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier that facilitated the operation.
     string edge_controller_id = 2;
-    // AgentId with the agent identifier.
-    string agent_id = 3;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
     // OperationId with the operation identifier.
     string operation_id = 4;
     // Timestamp of the response.
@@ -205,8 +203,8 @@ message AgentOpResponse{
 message AgentOperationId{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AgentId with the agent identifier.
-    string agent_id = 3;
+    // AssetId with the agent identifier.
+    string asset_id = 3;
     // OperationId with the operation identifier.
     string operation_id = 4;
 }
