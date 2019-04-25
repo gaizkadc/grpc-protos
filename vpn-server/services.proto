@@ -1,10 +1,10 @@
 /*
  * Copyright (C) 2019 Nalej - All Rights Reserved
  */
- 
+
 syntax = "proto3";
 
-package vpn-server;
+package vpn_server;
 option go_package = "github.com/nalej/grpc-vpn-server-go";
 
 import "common/entities.proto";
