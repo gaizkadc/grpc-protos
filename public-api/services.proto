@@ -306,6 +306,13 @@ service Applications {
             get: "/v1/apps/desc/{organization_id}/{app_descriptor_id}/parameters"
         };
     }
+    // ListInstanceParameters retrieves a list of parameters of an instance (deployment parameters)
+    rpc ListInstanceParameters (application.AppInstanceId) returns (application.InstanceParameterList) {
+        option (google.api.http) = {
+            get: "/v1/apps/desc/{organization_id}/{app_instance_id}/parameters"
+        };
+    }
+
 }
 
 service UnifiedLogging{
