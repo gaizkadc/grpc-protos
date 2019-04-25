@@ -13,7 +13,9 @@ import "common/entities.proto";
 // VPN Server service
 service VPNServer {
     // Add user to the VPN server
-    rpc AddUser (AddUserRequest) returns (common.Success) {}
+    rpc AddVPNUser (AddVPNUserRequest) returns (VPNUser) {}
     // Delete user from the VPN server
-    rpc DeleteUser (DeleteUserRequest) returns (common.Success) {}
+    rpc DeleteVPNUser (DeleteVPNUserRequest) returns (common.Success) {}
+    // List users in a VPN server
+    rpc ListVPNUsers (VPNServerURL) returns (VPNUserList) {}
 }

@@ -8,15 +8,35 @@ package vpn_server;
 option go_package = "github.com/nalej/grpc-vpn-server-go";
 
 // AddUser message
-message AddUserRequest {
+message AddVPNUserRequest {
+    // Username
+    string username = 1;
+}
+
+// VPN Server URL
+message VPNServerURL {
+    // URL
+    string url = 1;
+}
+
+// Response to the AddUserRequest
+message VPNUser {
     // Username
     string username = 1;
     // Password
     string password = 2;
+    // VPN server URL
+    VPNServerURL url = 3;
 }
 
 // DeleteUser message
-message DeleteUserRequest {
+message DeleteVPNUserRequest {
     // Username
     string username = 1;
+}
+
+// VPNUserList message
+message VPNUserList {
+    // List of usernames
+    repeated string username = 1;
 }
