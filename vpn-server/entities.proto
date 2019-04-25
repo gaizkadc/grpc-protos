@@ -1,0 +1,22 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package vpn-server;
+option go_package = "github.com/nalej/grpc-vpn-server-go";
+
+// AddUser message
+message AddUser {
+    // Username
+    string username = 1;
+    // Password
+    string password = 2;
+}
+
+// DeleteUser message
+message DeleteUser {
+    // Username
+    string username = 1;
+}
