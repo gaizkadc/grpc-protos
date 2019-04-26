@@ -27,6 +27,9 @@ service ApplicationManager {
 
     // ListInstanceParameters retrieves a list of instance parameters
     rpc ListInstanceParameters (application.AppInstanceId) returns (application.InstanceParameterList) {}
+    // ListDescriptorAppParameters retrieves a list of parameters of an application
+    rpc ListDescriptorAppParameters (application.AppDescriptorId) returns (application.AppParameterList) {}
+
 
     // Deploy an application descriptor.
     rpc Deploy(DeployRequest) returns (DeploymentResponse){}
