@@ -1,0 +1,21 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package vpn_server;
+option go_package = "github.com/nalej/grpc-vpn-server-go";
+
+import "vpn-server/entities.proto";
+import "common/entities.proto";
+
+// VPN Server service
+service VPNServer {
+    // Add user to the VPN server
+    rpc AddVPNUser (AddVPNUserRequest) returns (VPNUser) {}
+    // Delete user from the VPN server
+    rpc DeleteVPNUser (DeleteVPNUserRequest) returns (common.Success) {}
+    // List users in a VPN server
+    rpc ListVPNUsers (VPNServerURL) returns (VPNUserList) {}
+}
