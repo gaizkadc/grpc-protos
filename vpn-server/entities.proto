@@ -11,6 +11,8 @@ option go_package = "github.com/nalej/grpc-vpn-server-go";
 message AddVPNUserRequest {
     // Username
     string username = 1;
+    // VPN server URL
+    VPNServerURL url = 2;
 }
 
 // VPN Server URL
