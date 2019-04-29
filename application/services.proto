@@ -33,6 +33,8 @@ service Applications {
     rpc UpdateAppInstance(AppInstance) returns (common.Success){}
     // UpdateAppStatus updates the status of an application instance.
     rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
+    // UpdateRulesInstance updates the rules of an application instance.
+    rpc UpdateRulesInstance(UpdateRulesRequest) returns (common.Success){}
     // UpdateServiceStatus updates the status of an application instance service.
     rpc UpdateServiceStatus(UpdateServiceStatusRequest) returns(common.Success){}
     // RemoveAppInstance removes an application instance
@@ -70,7 +72,7 @@ service Applications {
     rpc GetInstanceParameters (AppInstanceId) returns (InstanceParameterList) {}
 
     // AddParametrizedDescriptor adds a parametrized descriptor to a given descriptor
-    rpc AddParametrizedDescriptor(ParametrizedDescriptor) returns (common.Success){}
+    rpc AddParametrizedDescriptor(ParametrizedDescriptor) returns (ParametrizedDescriptor){}
     // GetParametrizedDescriptor retrieves the parametrized descriptor associated with an instance
     rpc GetParametrizedDescriptor(AppInstanceId) returns (ParametrizedDescriptor) {}
     // RemoveParametrizedDescriptor removes the parametrized descriptor associated with an instance

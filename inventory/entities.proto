@@ -11,6 +11,13 @@ option go_package = "github.com/nalej/grpc-inventory-go";
 // Assets.
 //
 
+// OperatingSystemClass defines the types of OS supported.
+enum OperatingSystemClass {
+    LINUX = 0;
+    WINDOWS = 1;
+    DARWIN = 2;
+}
+
 // OperatingSystemInfo contains information about the operating system of an asset. Notice that no
 // enums have been used for either the name or the version as to no constraint the elements of the
 // inventory even if we do not have an agent running supporting those.
@@ -19,6 +26,10 @@ message OperatingSystemInfo{
     string name = 1;
     // Version installed.
     string version = 2;
+    // Class of the operating system - determines the binary format together with architecture
+    OperatingSystemClass class = 3;
+    // Architecture of the OS.
+    string architecture = 4;
 }
 
 // HardareInfo contains information about the hardware of an asset.
