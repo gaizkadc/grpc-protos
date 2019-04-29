@@ -13,12 +13,16 @@ message AddVPNUserRequest {
     string username = 1;
     // VPN server URL
     VPNServerURL url = 2;
+    // VPN Server password
+    string VPNServerPassword = 3;
 }
 
 // VPN Server URL
 message VPNServerURL {
-    // URL
-    string url = 1;
+    // Hostname
+    string hostname = 1;
+    // Port
+    string port = 2;
 }
 
 // Response to the AddUserRequest
@@ -27,14 +31,24 @@ message VPNUser {
     string username = 1;
     // Password
     string password = 2;
-    // VPN server URL
-    VPNServerURL url = 3;
 }
 
 // DeleteUser message
 message DeleteVPNUserRequest {
     // Username
     string username = 1;
+    // VPN server URL
+    VPNServerURL url = 2;
+    // VPN Server password
+    string VPNServerPassword = 3;
+}
+
+// GetVPNUserList message
+message GetVPNUserListRequest {
+    // VPN server URL
+    VPNServerURL url = 1;
+    // VPN Server password
+    string VPNServerPassword = 2;
 }
 
 // VPNUserList message
