@@ -72,7 +72,7 @@ service Applications {
     rpc GetInstanceParameters (AppInstanceId) returns (InstanceParameterList) {}
 
     // AddParametrizedDescriptor adds a parametrized descriptor to a given descriptor
-    rpc AddParametrizedDescriptor(ParametrizedDescriptor) returns (ParametrizedDescriptor, common.Success){}
+    rpc AddParametrizedDescriptor(ParametrizedDescriptor) returns (ParametrizedDescriptor){}
     // GetParametrizedDescriptor retrieves the parametrized descriptor associated with an instance
     rpc GetParametrizedDescriptor(AppInstanceId) returns (ParametrizedDescriptor) {}
     // RemoveParametrizedDescriptor removes the parametrized descriptor associated with an instance
