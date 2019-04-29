@@ -23,7 +23,8 @@ message ApplicationOps {
     }
 }
 
-message AgentsOps {
+// InvetoryOps message with all the messages that could be send related to inventory operations
+message InventoryOps {
     oneof Operation{
         // AgentOpResponse with the result of an operation executed by an agent.
         inventory_manager.AgentOpResponse agent_op_response = 1;
