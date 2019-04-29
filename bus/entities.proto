@@ -12,7 +12,7 @@ import "conductor/entities.proto";
 
 // This protobuff file defines type structures available per topic in the Nalej bus
 
-// Message for an application ops message
+// Message for an application ops message containing one of the possible messages.
 message ApplicationOps {
     oneof Operation {
         // Deployment request
