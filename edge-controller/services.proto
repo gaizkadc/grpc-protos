@@ -24,8 +24,6 @@ service Agent{
     // AgentJoin processes a join request from a local agent by sending synchronously the request to the
     // management cluster.
     rpc AgentJoin(AgentJoinRequest) returns (inventory_manager.AgentJoinResponse){}
-    // AgentStart operation invoked by an agent every time it starts.
-    rpc AgentStart(inventory_manager.AgentStartInfo) returns (common.Success){}
     // TriggerAgentOperation triggers the execution of an operation in an agent managed by an EIC.
     rpc AgentCheck(inventory.AssetId) returns (CheckResult){}
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
