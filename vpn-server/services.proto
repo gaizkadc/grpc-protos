@@ -17,5 +17,5 @@ service VPNServer {
     // Delete user from the VPN server
     rpc DeleteVPNUser (DeleteVPNUserRequest) returns (common.Success) {}
     // List users in a VPN server
-    rpc ListVPNUsers (VPNServerURL) returns (VPNUserList) {}
+    rpc ListVPNUsers (GetVPNUserListRequest) returns (VPNUserList) {}
 }
