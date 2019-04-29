@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-bus-go";
 
 import "conductor/entities.proto";
 import "inventory-manager/entities.proto";
+import "inventory/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
@@ -30,5 +31,7 @@ message InventoryOps {
         inventory_manager.AgentOpResponse agent_op_response = 1;
         // AgentIds with the Agents that are alive
         inventory_manager.AgentIds agent_ids = 2;
+        // EdgeControllerId with the EIC that is alive
+        inventory.EdgeControllerId edge_controller_id = 3;
     }
 }
