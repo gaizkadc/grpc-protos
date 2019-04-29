@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-bus-go";
 
 import "conductor/entities.proto";
 import "inventory-manager/entities.proto";
+import "inventory/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
