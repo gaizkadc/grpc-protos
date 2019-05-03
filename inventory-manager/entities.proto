@@ -168,12 +168,14 @@ message AgentOpRequest{
     string edge_controller_id = 2;
     // AssetId with the asset identifier.
     string asset_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 4;
     // Operation to be performed. No enum is used as to no constraint agent evolution.
-    string operation = 4;
+    string operation = 5;
     // Plugin in charge of executing such operation.
-    string plugin = 5;
+    string plugin = 6;
     // Params for the operation.
-    map<string, string> params = 6;
+    map<string, string> params = 7;
 }
 
 // AgentOpStatus contains the status of the execution of a given agent operation.
