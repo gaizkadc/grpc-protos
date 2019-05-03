@@ -94,5 +94,5 @@ service Inventory{
     // CreateEICJoinToken creates an EICJoinToken for new controllers to join the system.
     rpc CreateEICJoinToken (organization.OrganizationId) returns (EICJoinToken){}
     // ValidEICJoinToken checks if the Token provide is still valid to join a EIC.
-    rpc ValidEICJoinToken(EICJoinToken) returns (common.Success){}
+    rpc ValidEICJoinToken(EICJoinRequest) returns (common.Success){}
 }
