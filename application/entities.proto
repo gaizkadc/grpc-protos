@@ -684,6 +684,8 @@ message AppParameter {
     ParamCategory category = 6;
     // enumValues indicates, in case of an enum type parameter, the values allowed
     repeated string enum_values = 7;
+    // required indicates if the param must be filled to deploy an application
+    bool required = 8;
 }
 
 // AppParameterList lis of parameters in a descriptor
