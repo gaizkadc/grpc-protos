@@ -27,7 +27,7 @@ service EIC{
     // CreateEICToken creates a new token for an EIC to join the platform.
     rpc CreateEICToken(organization.OrganizationId) returns (EICJoinToken){}
     // EICJoin processes a join request.
-    rpc EICJoin(authx.EICJoinRequest) returns (EICJoinResponse){}
+    rpc EICJoin(EICJoinRequest) returns (EICJoinResponse){}
     // EICStart operation invoked by the EIC every time it connects back to the platform.
     rpc EICStart(EICStartInfo) returns (common.Success){}
     // UnlinkEIC operation to remove/uninstall an EIC.

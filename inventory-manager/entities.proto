@@ -92,6 +92,16 @@ message VPNCredentials{
     string hostname = 4;
 }
 
+// EICJoinRequest with the request sent by the EIC to join the system.
+message EICJoinRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Name of the EIC.
+    string name = 2;
+    // Labels defined by the user.
+    map<string, string> labels = 3;
+}
+
 // EICJoinResponse with the information returned to an EIC on successfull join.
 message EICJoinResponse{
     // OrganizationId with the organization identifier.
