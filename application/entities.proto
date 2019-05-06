@@ -573,17 +573,6 @@ message UpdateServiceStatusRequest {
     string deployed_on_cluster_id = 7;
 }
 
-// UpdateRulesRequest is a structure to update the rules of an instance
-message UpdateRulesRequest {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // AppInstanceId with the application instance identifier.
-    string app_instance_id = 2;
-    // Rules that define the connectivity between the elements of an application.
-    repeated SecurityRule rules = 3;
-
-}
-
 // GetServiceGroupInstanceMetadataRequest returns the metadata for a an existing service group instance.
 message GetServiceGroupInstanceMetadataRequest {
     // OrganizationId with the organization identifier.

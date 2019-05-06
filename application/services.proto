@@ -33,8 +33,6 @@ service Applications {
     rpc UpdateAppInstance(AppInstance) returns (common.Success){}
     // UpdateAppStatus updates the status of an application instance.
     rpc UpdateAppStatus(UpdateAppStatusRequest) returns (common.Success){}
-    // UpdateRulesInstance updates the rules of an application instance.
-    rpc UpdateRulesInstance(UpdateRulesRequest) returns (common.Success){}
     // UpdateServiceStatus updates the status of an application instance service.
     rpc UpdateServiceStatus(UpdateServiceStatusRequest) returns(common.Success){}
     // RemoveAppInstance removes an application instance
