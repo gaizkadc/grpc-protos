@@ -9,50 +9,40 @@ option go_package = "github.com/nalej/grpc-vpn-server-go";
 
 // AddUser message
 message AddVPNUserRequest {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
     // Username
-    string username = 1;
-    // VPN server URL
-    VPNServerURL url = 2;
-    // VPN Server password
-    string VPNServerPassword = 3;
-}
-
-// VPN Server URL
-message VPNServerURL {
-    // Hostname
-    string hostname = 1;
-    // Port
-    string port = 2;
+    string username = 2;
 }
 
 // Response to the AddUserRequest
 message VPNUser {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
     // Username
-    string username = 1;
+    string username = 2;
     // Password
-    string password = 2;
+    string password = 3;
 }
 
 // DeleteUser message
 message DeleteVPNUserRequest {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
     // Username
-    string username = 1;
-    // VPN server URL
-    VPNServerURL url = 2;
-    // VPN Server password
-    string VPNServerPassword = 3;
+    string username = 2;
 }
 
 // GetVPNUserList message
 message GetVPNUserListRequest {
-    // VPN server URL
-    VPNServerURL url = 1;
-    // VPN Server password
-    string VPNServerPassword = 2;
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
 }
 
 // VPNUserList message
 message VPNUserList {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
     // List of usernames
-    repeated string username = 1;
+    repeated string usernames = 2;
 }
