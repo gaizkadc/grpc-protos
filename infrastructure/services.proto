@@ -24,6 +24,10 @@ service Clusters {
     // RemoveCluster removes a cluster from an organization. Notice that removing a cluster implies draining the cluster
     // of running applications.
     rpc RemoveCluster(RemoveClusterRequest) returns (common.Success) {}
+    // Cordon a cluster. The cluster will not accept any new application deployment request.
+    rpc CordonCluster(CordonClusterRequest) returns (common.Success) {}
+    // Uncordon a cluster. The cordon flag will be disabled for this cluster.
+    rpc UncordonCluster(CordonClusterRequest) returns (common.Success) {}
 }
 
 // Nodes management service.
