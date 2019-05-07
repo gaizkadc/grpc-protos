@@ -22,6 +22,7 @@ import "device/entities.proto";
 import "unified-logging/entities.proto";
 import "infrastructure-monitor/entities.proto";
 import "google/api/annotations.proto";
+import "inventory-manager/entities.proto";
 
 // Organization related information.
 service Organizations {
@@ -320,6 +321,24 @@ service UnifiedLogging{
     rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {
         option (google.api.http) = {
             post: "/v1/apps/inst/{organization_id}/{app_instance_id}/logs"
+            body: "*"
+        };
+    }
+}
+
+// EdgeControllers related operations.
+service EdgeControllers{
+    // CreateEICToken creates a new token for an EIC to join the platform.
+    rpc CreateEICToken(organization.OrganizationId) returns (inventory_manager.EICJoinToken){
+        option (google.api.http) = {
+            post: "/v1/ec/{organization_id}/token/create"
+            body: "*"
+        };
+    }
+    // UnlinkEIC operation to remove/uninstall an EIC.
+    rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/ec/{organization_id}/unlink"
             body: "*"
         };
     }
