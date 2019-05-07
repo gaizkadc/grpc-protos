@@ -23,6 +23,7 @@ import "unified-logging/entities.proto";
 import "infrastructure-monitor/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
+import "inventory/entities.proto";
 
 // Organization related information.
 service Organizations {
