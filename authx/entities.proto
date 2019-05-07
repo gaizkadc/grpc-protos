@@ -242,6 +242,8 @@ message EICJoinToken{
     string token = 2;
     // Cacert with the CA certificate.
     string cacert = 3;
+    // ExpiresOn indicating the timestamp until which the token may be used.
+    int64 expires_on = 4;
 }
 
 // EICJoinRequest send by an EIC to join the platform. The information contained in this message is
