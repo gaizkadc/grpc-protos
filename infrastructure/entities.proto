@@ -98,6 +98,18 @@ message RemoveClusterRequest {
     string cluster_id = 3;
 }
 
+message CordonClusterRequest {
+    string request_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // Id with the cluster identifier.
+    string cluster_id = 3;
+    oneof cordon {
+        bool activate = 4;
+        bool deactivate = 5;
+    }
+}
+
 // UpdateClusterRequest to update different fields of the Cluster.
 message UpdateClusterRequest {
     // OrganizationId with the organization identifier.
