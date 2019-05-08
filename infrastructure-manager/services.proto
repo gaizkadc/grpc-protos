@@ -23,10 +23,6 @@ service InfrastructureManager {
     rpc ListClusters(organization.OrganizationId) returns (infrastructure.ClusterList) {}
     // UpdateCluster allows the user to update the information of a cluster.
     rpc UpdateCluster(infrastructure.UpdateClusterRequest) returns (infrastructure.Cluster){}
-    // DrainCluster reschedules the services deployed in a given cluster.
-    rpc DrainCluster(infrastructure.ClusterId) returns (common.Success){}
-    // CordonCluster blocks the deployment of new services in a given cluster.
-    rpc CordonCluster(infrastructure.ClusterId) returns (common.Success){}
     // RemoveCluster removes a cluster from an organization. Notice that removing a cluster implies draining the cluster
     // of running applications.
     rpc RemoveCluster(infrastructure.RemoveClusterRequest) returns (common.Success) {}
@@ -34,4 +30,8 @@ service InfrastructureManager {
     rpc UpdateNode(infrastructure.UpdateNodeRequest) returns (infrastructure.Node) {}
     // ListNodes obtains a list of nodes in a cluster.
     rpc ListNodes(infrastructure.ClusterId) returns (infrastructure.NodeList) {}
+    // Cordon a cluster. The cluster will not accept any new application deployment request.
+    rpc CordonCluster(infrastructure.ClusterId) returns (common.Success) {}
+    // Uncordon a cluster. The cordon flag will be disabled for this cluster.
+    rpc UncordonCluster(infrastructure.ClusterId) returns (common.Success) {}
 }
