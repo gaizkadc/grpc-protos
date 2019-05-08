@@ -74,6 +74,20 @@ service Clusters {
             body: "*"
         };
     }
+
+    rpc Cordon(infrastructure.ClusterId) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/{cluster_id}/cordon"
+            body: "*"
+        };
+    }
+
+    rpc Uncordon(infrastructure.ClusterId) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/{cluster_id}/uncordon"
+            body: "*"
+        };
+    }
 }
 
 // Node related information.
