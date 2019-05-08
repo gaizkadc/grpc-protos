@@ -44,6 +44,8 @@ message Cluster {
     int64 total_nodes = 8;
     // RunningNodes contains the number of nodes in the system that are currently working.
     int64 running_nodes = 9;
+    // Boolean indicating if this cluster is set as cordon
+    bool cordon = 10;
 }
 
 message ClusterList {
