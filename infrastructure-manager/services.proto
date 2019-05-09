@@ -34,4 +34,6 @@ service InfrastructureManager {
     rpc CordonCluster(infrastructure.ClusterId) returns (common.Success) {}
     // Uncordon a cluster. The cordon flag will be disabled for this cluster.
     rpc UncordonCluster(infrastructure.ClusterId) returns (common.Success) {}
+    // Drain a cluster.
+    rpc DrainCluster(infrastructure.ClusterId) returns (common.Success) {}
 }

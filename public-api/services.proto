@@ -88,6 +88,14 @@ service Clusters {
             body: "*"
         };
     }
+
+    rpc Drain(infrastructure.ClusterId) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/{cluster_id}/drain"
+            body: "*"
+        };
+    }
+    
 }
 
 // Node related information.
