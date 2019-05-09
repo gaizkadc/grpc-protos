@@ -14,7 +14,7 @@ import "common/entities.proto";
 // VPN Server service
 service EdgeInventoryProxy {
     // Start EIController
-    rpc EICStart (EICStartInfo) returns (common.Success) {}
+    rpc EICStart (inventory_manager.EICStartInfo) returns (common.Success) {}
     // LCheck if EIC is alive
-    rpc EICAlive (EdgeController) returns (common.Success) {}
+    rpc EICAlive (inventory_manager.EdgeController) returns (common.Success) {}
 }
