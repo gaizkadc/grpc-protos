@@ -14,15 +14,21 @@ import "inventory/entities.proto";
 
 // This protobuff file defines type structures available per topic in the Nalej bus
 
-// Message for an application ops message containing one of the possible messages.
+// Message for an application ops message containing one of the following messages.
 message ApplicationOps {
     oneof Operation {
         // Deployment request
         conductor.DeploymentRequest deploy_request = 1;
         // Undeploy request
         conductor.UndeployRequest undeploy_request = 2;
+    }
+}
+
+// Message for an infrastructure ops message containing one of the following messages.
+message InfrastructureOps {
+    oneof Operation {
         // Drain request
-        conductor.DrainClusterRequest drain_request = 3;
+        conductor.DrainClusterRequest drain_request = 1;
     }
 }
 
