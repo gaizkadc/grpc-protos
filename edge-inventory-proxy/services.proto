@@ -1,0 +1,20 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package edge_inventory_proxy;
+option go_package = "github.com/nalej/grpc-edge-inventory-proxy-go";
+
+import "edge-inventory-proxy/entities.proto";
+import "inventory-manager/entities.proto";
+import "common/entities.proto";
+
+// VPN Server service
+service EdgeInventoryProxy {
+    // Start EIController
+    rpc EICStart (EICStartInfo) returns (common.Success) {}
+    // LCheck if EIC is alive
+    rpc EICAlive (EdgeController) returns (common.Success) {}
+}
