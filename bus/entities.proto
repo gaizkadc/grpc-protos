@@ -21,6 +21,8 @@ message ApplicationOps {
         conductor.DeploymentRequest deploy_request = 1;
         // Undeploy request
         conductor.UndeployRequest undeploy_request = 2;
+        // Drain request
+        conductor.DrainClusterRequest drain_request = 3;
     }
 }
 
