@@ -255,3 +255,8 @@ message DeploymentServiceUpdateRequest {
    repeated ServiceUpdate list = 4;
 }
 
+// Indicate the drain of a cluster
+message DrainClusterRequest {
+   // ClusterID
+   infrastructure.ClusterId cluster_id = 1;
+}
