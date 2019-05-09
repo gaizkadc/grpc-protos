@@ -11,10 +11,10 @@ import "edge-inventory-proxy/entities.proto";
 import "inventory-manager/entities.proto";
 import "common/entities.proto";
 
-// VPN Server service
+// Edge Inventory Proxy service
 service EdgeInventoryProxy {
     // Start EIController
     rpc EICStart (inventory_manager.EICStartInfo) returns (common.Success) {}
-    // LCheck if EIC is alive
+    // Check if EIC is alive
     rpc EICAlive (inventory_manager.EdgeController) returns (common.Success) {}
 }
