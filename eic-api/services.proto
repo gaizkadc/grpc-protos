@@ -13,5 +13,10 @@ import "inventory-manager/entities.proto";
 // Users service exposing user related functionality.
 service EIC {
     // Join operation for the EIC.
-    rpc Join(inventory_manager.EICJoinRequest) returns (inventory_manager.EICJoinResponse){}
+    rpc Join(inventory_manager.EICJoinRequest) returns (inventory_manager.EICJoinResponse){
+        option (google.api.http) = {
+            post: "/v1/join"
+            body: "*"
+        };
+    }
 }
