@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-eic-api-go";
 
 import "eic-api/entities.proto";
 import "inventory-manager/entities.proto";
+import "google/api/annotations.proto";
 
 // Users service exposing user related functionality.
 service EIC {
