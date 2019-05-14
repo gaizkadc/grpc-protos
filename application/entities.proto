@@ -241,8 +241,8 @@ enum ApplicationStatus {
     PLANNING_ERROR = 6;
     DEPLOYMENT_ERROR = 7;
     ERROR = 8;
-    SERVICE_TERMINATING = 9;
-    SERVICE_TERMINATED = 10;
+    TERMINATING = 9;
+    TERMINATED = 10;
 }
 // AppDescriptorId contains the Application Descriptor Identifier
 message AppDescriptorId {
