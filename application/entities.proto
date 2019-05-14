@@ -187,6 +187,8 @@ enum ServiceStatus {
     SERVICE_DEPLOYING = 2;
     SERVICE_RUNNING = 3;
     SERVICE_ERROR = 4;
+    SERVICE_TERMINATING = 5;
+    SERVICE_TERMINATED = 6;
 }
 
 message Port {
@@ -239,6 +241,8 @@ enum ApplicationStatus {
     PLANNING_ERROR = 6;
     DEPLOYMENT_ERROR = 7;
     ERROR = 8;
+    TERMINATING = 9;
+    TERMINATED = 10;
 }
 // AppDescriptorId contains the Application Descriptor Identifier
 message AppDescriptorId {
