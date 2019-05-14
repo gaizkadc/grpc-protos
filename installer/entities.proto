@@ -96,4 +96,6 @@ message StaticIPAddresses {
     string zt_planet = 4;
     // CoreDNS (External DNS) static IP address
     string coredns_ext = 5;
+    // VPN Server static IP address
+    string vpn_server = 6;
 }
