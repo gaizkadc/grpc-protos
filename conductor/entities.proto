@@ -213,6 +213,8 @@ enum DeploymentFragmentStatus {
    DONE = 2;
    ERROR = 3;
    RETRYING = 4;
+   TERMINATING = 5;
+   TERMINATED = 6;
 }
 
 // Status of a service to update
