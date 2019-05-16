@@ -80,6 +80,8 @@ message EICJoinToken{
     string join_url = 4;
     // ExpiresOn indicating the timestamp until which the token may be used.
     int64 expires_on = 5;
+    // DnsURL with the URL the EIC needs to connect.
+    string dns_url = 6;
 }
 
 // VPNCredentials with the information required for the EIC to establish the VPN connection.
