@@ -12,10 +12,25 @@ import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 import "common/entities.proto";
 
-// Edge Inventory Proxy service
+// Edge Inventory Proxy service - for communication from Edge Controller to Inventory Manager
 service EdgeInventoryProxy {
     // Start EIController
     rpc EICStart (inventory_manager.EICStartInfo) returns (common.Success) {}
     // Check if EIC is alive
     rpc EICAlive (inventory.EdgeControllerId) returns (common.Success) {}
+}
+
+// Edge Controller Proxy service - for communication for Inventory Manager to Edge Controller
+service EdgeControllerProxy {
+    // TriggerAgentOperation registers the operation in the EIC so that the agent will be notified on the
+    // next connection.
+    rpc TriggerAgentOperation(inventory_manager.AgentOpRequest) returns (inventory_manager.AgentOpResponse){}
+    // Configure changes specific configuration options of the Edge Controller
+    // and/or Edge Controller plugins
+    rpc Configure(inventory_manager.ConfigureEICRequest) returns (common.Success){}
+    // ListMetrics returns available metrics for a certain selection of assets
+    rpc ListMetrics(inventory_manager.AssetSelector) returns (inventory_manager.MetricsList){}
+    // QueryMetrics retrieves the monitoring data of assets local to this
+    // Edge Controller
+    rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
 }
