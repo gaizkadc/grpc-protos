@@ -10,6 +10,7 @@ option go_package = "github.com/nalej/grpc-public-api-go";
 import "infrastructure/entities.proto";
 import "application/entities.proto";
 import "installer/entities.proto";
+import "inventory-manager/entities.proto";
 
 // --------------------------------
 // Organization related entities.
@@ -155,6 +156,16 @@ message ResourceSummary {
     string organization_id = 1;
     int64 total_clusters = 2;
     int64 total_nodes = 3;
+}
+
+message ConfigureMetricsRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId indicates the Edge Controller for this configuration
+    // request. Empty means all Edge Controllers.
+    string edge_controller_id = 2;
+    // MetricConfig contains the metrics configuration options
+    inventory_manager.MetricsConfiguration metrics_config = 3;
 }
 
 // --------------------------------

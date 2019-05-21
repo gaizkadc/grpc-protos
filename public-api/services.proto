@@ -190,6 +190,32 @@ service Resources {
     }
 }
 
+// Inventory monitoring
+service InventoryMonitoring {
+    // ListMetrics returns available metrics for a certain selection of assets
+    rpc ListMetrics(inventory_manager.AssetSelector) returns (inventory_manager.MetricsList){
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/metrics/list"
+            body: "*"
+        };
+    }
+    // QueryMetrics retrieves the monitoring data of selected assets
+    rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){
+        option (google.api.http) = {
+            post: "/v1/inventory/{assets.organization_id}/metrics/query"
+            body: "*"
+        };
+    }
+    // ConfigureMetrics sets metrics-specific configuration options for relevant
+    // Edge Controllers
+    rpc ConfigureMetrics(ConfigureMetricsRequest) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/metrics/configure"
+            body: "*"
+        };
+    }
+}
+
 // User level related information.
 service Users {
     rpc Add(AddUserRequest) returns (User){

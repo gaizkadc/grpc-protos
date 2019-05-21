@@ -63,6 +63,104 @@ message InventorySummary{
     int64 total_ram = 4;
 }
 
+
+//
+// Inventory monitoring
+//
+
+// AssetSelector is used to identify a group of assets. This group consists
+// of the assets that match the intersection of all the message fields.
+message AssetSelector{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the edge controller identifier.
+    string edge_controller_id = 2;
+    // AssetIds is a list of specific asset IDs. Note that all other
+    // non-zero fields should still match, too
+    repeated string asset_ids = 3;
+    // GroupIds is a list of asset groups
+    repeated string group_ids = 4;
+    // User-defined labels, key-value
+    map<string, string> labels = 5;
+}
+
+// MetricsList is used to communicate what metrics are available for a group
+// of assets
+message MetricsList{
+    repeated string metrics = 1;
+}
+
+// QueryMetricsRequest describes a query to retrieve specific metrics, either
+// individual data points, vectors or matrices; not aggregated, aggregated
+// over time, and/or aggregated over asset
+message QueryMetricsRequest{
+    // Assets identifies the assets for which we want metrics
+    AssetSelector assets = 1;
+    // Metrics is the list of metrics to retrieve; if emtpy, return all
+    repeated string metrics = 2;
+
+    // TimeRange describes the time range for which we want metrics
+    message TimeRange{
+        // Either timestamp != 0 && (time_start == time_end == resolution == 0),
+        // or timestamp == 00 && (time_start != 0 || time_end != 0)
+
+        // Timestamp is set to request single data point
+        int64 timestamp = 1;
+        // TimeStart indicates the start of the time range;
+        // time_start == 0 means starting from oldest data available
+        int64 time_start = 2;
+        // TimeEnd indicates the end of the time range;
+        // time_end == 0 means ending at newest data available
+        int64 time_end = 3;
+        // Resolution indicates the seconds between returned data points;
+        // If resolution == 0, return a single, aggregated data point
+        int64 resolution = 4;
+    }
+    TimeRange time_range = 3;
+
+    // AggregationType indicates if and how the results should be aggregated
+    // over the selected assets (aggregation over time range is specified by
+    // resolution and is always averaged)
+    enum AggregationType{
+        NONE = 0;
+        SUM = 1;
+        AVG = 2;
+    }
+    AggregationType aggregation = 4;
+}
+
+// QueryMetricsResult contains the result of a metrics query. This can
+// encapsulate a single value per metric, a vector or a matrix; this depends
+// on whether a single point in time or a time range is requested, whether
+// a single asset or asset group is requested and what, if any, aggregation
+// is requested.
+message QueryMetricsResult{
+    // Value is a tuple of (timestamp, value). This will be linked
+    // to a specific asset and a specific metric.
+    message Value{
+        int64 timestamp = 1;
+        int64 value = 2;
+    }
+    // AssetMetricValues is a list of values for a specific asset. This will
+    // be linked to a specific metric.
+    message AssetMetricValues{
+        // AssetId is the asset identifier these values relate to. If we are
+        // returning a result that is aggregated over assets, this will indicate
+        // what aggregation is used ("_sum", or "_avg")
+        string asset_id = 1;
+        repeated Value values = 2;
+    }
+    // AssetMetrics is a list of assets with their values; This will be linked
+    // to a specific metric.
+    message AssetMetrics{
+        repeated AssetMetricValues metrics = 1;
+    }
+
+    // Metrics is the mapping of metrics to a list of assets, each with a list
+    // of values
+    map<string, AssetMetrics> metrics = 1;
+}
+
 //
 // EIC
 //
@@ -126,6 +224,26 @@ message EICStartInfo{
     string ip = 3;
 }
 
+// ConfigureEICRequest contains specific configuration information for the
+// Edge Controller to be changed
+message ConfigureEICRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+
+    // The following fields contain configuration for specific elements
+    // or plugins of the Edge Controller
+    MetricsConfiguration metrics_config = 16;
+}
+
+// MetricsConfiguration contains metrics-specific configuration information
+// for the Edge Controller
+message MetricsConfiguration{
+    // Maximum age of metrics in seconds after which the data is pruged
+    int64 max_metrics_age_secs = 1;
+}
+    
 // EdgeController receiving information from agents abouts assets.
 message EdgeController{
     // OrganizationId with the organization identifier.
