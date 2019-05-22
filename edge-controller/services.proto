@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Nalej - All Rights Reserved
+ * Copyright (C) 2019 Nalej - All Rights Reserved
  */
 
 syntax = "proto3";
@@ -18,6 +18,14 @@ service EIC {
     // TriggerAgentOperation registers the operation in the EIC so that the agent will be notified on the
     // next connection.
     rpc TriggerAgentOperation(inventory_manager.AgentOpRequest) returns (inventory_manager.AgentOpResponse){}
+    // Configure changes specific configuration options of the Edge Controller
+    // and/or Edge Controller plugins
+    rpc Configure(inventory_manager.ConfigureEICRequest) returns (common.Success){}
+    // ListMetrics returns available metrics for a certain selection of assets
+    rpc ListMetrics(inventory_manager.AssetSelector) returns (inventory_manager.MetricsList){}
+    // QueryMetrics retrieves the monitoring data of assets local to this
+    // Edge Controller
+    rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
 }
 
 service Agent{
@@ -25,7 +33,7 @@ service Agent{
     // management cluster.
     rpc AgentJoin(AgentJoinRequest) returns (inventory_manager.AgentJoinResponse){}
     // TriggerAgentOperation triggers the execution of an operation in an agent managed by an EIC.
-    rpc AgentCheck(inventory.AssetId) returns (CheckResult){}
+    rpc AgentCheck(AgentCheckRequest) returns (CheckResult){}
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
     rpc CallbackAgentOperation(inventory_manager.AgentOpResponse) returns (common.Success){}
 }
