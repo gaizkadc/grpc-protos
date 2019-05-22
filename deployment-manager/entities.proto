@@ -45,11 +45,22 @@ message DeploymentFragmentResponse {
 // --------------------------
 // DeploymentManager Network services
 
+// Message to undeploy all the entries for an application
 message UndeployRequest {
     // organization
     string organization_id = 1;
     // application
     string app_instance_id = 2;
+}
+
+// Message to undeploy a fragment
+message UndeployFragmentRequest {
+    // organization
+    string organization_id = 1;
+    // application
+    string app_instance_id = 2;
+    // deployment fragment
+    string deployment_fragment_id = 3;
 }
 
 // Message to authorize a member in an existing network
