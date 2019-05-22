@@ -50,6 +50,8 @@ message UndeployRequest {
     string organization_id = 1;
     // application
     string app_instance_id = 2;
+    // deployment fragment
+    string deployment_fragment_id = 3;
 }
 
 // Message to authorize a member in an existing network
