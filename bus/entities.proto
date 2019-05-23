@@ -8,6 +8,7 @@ package bus;
 option go_package = "github.com/nalej/grpc-bus-go";
 
 import "conductor/entities.proto";
+import "infrastructure/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 
@@ -29,6 +30,8 @@ message InfrastructureOps {
     oneof Operation {
         // Drain request
         conductor.DrainClusterRequest drain_request = 1;
+        // Update cluster request
+        infrastructure.UpdateClusterRequest update_cluster_request = 2;
     }
 }
 
