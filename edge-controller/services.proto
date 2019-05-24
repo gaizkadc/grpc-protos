@@ -37,5 +37,5 @@ service Agent{
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
     rpc CallbackAgentOperation(inventory_manager.AgentOpResponse) returns (common.Success){}
     // CreateAgentJoinToken generates a JoinToken to allow an agent to join to a controller
-    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
 }

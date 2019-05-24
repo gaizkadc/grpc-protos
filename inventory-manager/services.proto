@@ -12,7 +12,6 @@ import "common/entities.proto";
 import "inventory-manager/entities.proto";
 import "authx/entities.proto";
 import "inventory/entities.proto";
-import "edge-controller/entities.proto";
 
 
 // Inventory services.
@@ -52,7 +51,7 @@ service Agent{
     // InstallAgent triggers the installation of an agent.
     rpc InstallAgent(InstallAgentRequest) returns (InstallAgentResponse){}
     // CreateAgentJoinToken creates a join token for an agent on a remote EIC.
-    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken){}
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (AgentJoinToken){}
     // AgentJoin processes a join request from a remote agent.
     rpc AgentJoin(AgentJoinRequest) returns (AgentJoinResponse){}
     // LogAgentAlive method invoked by the EIC to update the status of several agents.

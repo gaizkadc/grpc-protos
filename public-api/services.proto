@@ -24,7 +24,6 @@ import "infrastructure-monitor/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
-import "edge-controller/entities.proto";
 
 // Organization related information.
 service Organizations {
@@ -397,7 +396,7 @@ service EdgeControllers{
 
 // Agent related operations
 service Agent {
-    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {
         option (google.api.http) = {
             post: "/v1/agent/{organization_id}/{edge_controller_id}/token/create"
             body: "*"
