@@ -16,8 +16,8 @@ import "inventory/entities.proto";
 
 // Inventory services.
 service Inventory{
-    // List the assets.
-    rpc List(organization.OrganizationId) returns (AssetList){}
+    // List the devices, assets and controllers.
+    rpc List(organization.OrganizationId) returns (InventoryList){}
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (InventorySummary){}
 }

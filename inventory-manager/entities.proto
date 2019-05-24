@@ -8,6 +8,7 @@ package inventory_manager;
 option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "inventory/entities.proto";
+import "device/entities.proto";
 
 //
 // Inventory
@@ -455,4 +456,14 @@ message AgentStartInfo{
 // AgentsIds with a list of agent identifiers.
 message AgentIds{
     repeated string ids = 1;
+}
+
+// InventoryList message with a collection of all elements in the inventory
+message InventoryList{
+    // Devices
+    repeated device.Device devices = 1;
+    // Assets
+    repeated inventory.Asset assets = 2;
+    // Controllers
+    repeated inventory.EdgeController controllers = 3;
 }
