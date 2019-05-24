@@ -35,5 +35,5 @@ service EdgeControllerProxy {
     // Edge Controller
     rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
     // CreateAgentToken creates a new join token for an agent to join the EIC
-    rpc CreateAgentToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
 }

@@ -44,8 +44,7 @@ service EIC{
     rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){}
     // ConfigureEIC changes specific configurable options for one ore more ECs
     rpc ConfigureEIC(ConfigureEICRequest) returns (common.Success){}
-    // CreateAgentToken creates a new join token for an agent to join the EIC
-    rpc CreateAgentToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
+
 }
 
 // Agent operations.
@@ -53,7 +52,7 @@ service Agent{
     // InstallAgent triggers the installation of an agent.
     rpc InstallAgent(InstallAgentRequest) returns (InstallAgentResponse){}
     // CreateAgentJoinToken creates a join token for an agent on a remote EIC.
-    rpc CreateAgentJoinToken(organization.OrganizationId) returns (AgentJoinToken){}
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken){}
     // AgentJoin processes a join request from a remote agent.
     rpc AgentJoin(AgentJoinRequest) returns (AgentJoinResponse){}
     // LogAgentAlive method invoked by the EIC to update the status of several agents.

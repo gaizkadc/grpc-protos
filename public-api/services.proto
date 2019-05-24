@@ -392,13 +392,17 @@ service EdgeControllers{
             body: "*"
         };
     }
-    rpc CreateAgentToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {
+
+}
+
+// Agent related operations
+service Agent {
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {
         option (google.api.http) = {
             post: "/v1/agent/{organization_id}/{edge_controller_id}/token/create"
             body: "*"
         };
     }
-
 }
 
 // Inventory
