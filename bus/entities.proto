@@ -46,11 +46,17 @@ message InventoryOps {
     oneof Operation{
         // AgentOpResponse with the result of an operation executed by an agent.
         inventory_manager.AgentOpResponse agent_op_response = 1;
+    }
+}
+
+// InventoryEvents message with all the messages that could be send related to inventory events
+message InventoryEvents{
+    oneof Event{
         // AgentIds with the Agents that are alive
-        inventory_manager.AgentIds agent_ids = 2;
+        inventory_manager.AgentIds agent_ids = 1;
         // EdgeControllerId with the EIC that is alive
-        inventory.EdgeControllerId edge_controller_id = 3;
+        inventory.EdgeControllerId edge_controller_id = 2;
         // EicStart with the EIC start message
-        inventory_manager.EICStartInfo eic_start = 4;
+        inventory_manager.EICStartInfo eic_start = 3;
     }
 }
