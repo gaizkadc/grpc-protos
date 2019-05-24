@@ -30,8 +30,14 @@ message InfrastructureOps {
     oneof Operation {
         // Drain request
         conductor.DrainClusterRequest drain_request = 1;
-        // Update cluster request
-        infrastructure.UpdateClusterRequest update_cluster_request = 2;
+    }
+}
+
+// Message for infrastructure events containing one of the following messages.
+message InfrastructureEvents {
+    oneof Event {
+        // Update cluster
+        infrastructure.UpdateClusterRequest update_cluster_request = 1;
     }
 }
 
