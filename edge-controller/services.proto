@@ -8,6 +8,7 @@ package edge_controller;
 option go_package = "github.com/nalej/grpc-edge-controller-go";
 
 import "common/entities.proto";
+import "edge-controller/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 
