@@ -34,3 +34,14 @@ service DNS {
     // DeleteDNSEntry deletes a DNSEntry from the system.
     rpc DeleteDNSEntry(DeleteDNSEntryRequest) returns (common.Success){}
 }
+
+// ServiceDNS in charge of DNS entries used for different services of the platform
+// not for application networks.
+service ServiceDNS {
+    // AddEntry adds a new entry.
+    rpc AddEntry(AddServiceDNSEntryRequest) returns (common.Success){}
+    // DeleteEntry deletes a given entry.
+    rpc DeleteEntry(DeleteServiceDNSEntryRequest) returns (common.Success){}
+    // ListEntries lists all the DNS entries from an organization.
+    rpc ListEntries(organization.OrganizationId) returns (ServiceDNSEntryList){}
+}
