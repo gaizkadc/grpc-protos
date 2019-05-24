@@ -12,6 +12,7 @@ import "common/entities.proto";
 import "inventory-manager/entities.proto";
 import "authx/entities.proto";
 import "inventory/entities.proto";
+import "edge-controller/entities.proto";
 
 
 // Inventory services.
@@ -43,6 +44,8 @@ service EIC{
     rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){}
     // ConfigureEIC changes specific configurable options for one ore more ECs
     rpc ConfigureEIC(ConfigureEICRequest) returns (common.Success){}
+    // CreateAgentToken creates a new join token for an agent to join the EIC
+    rpc CreateAgentToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
 }
 
 // Agent operations.

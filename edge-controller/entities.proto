@@ -74,3 +74,15 @@ message MetricsPluginData {
     // Mapping from metrics name to value for this measurement
     map<string, int64> metrics = 2;
 }
+
+
+message AgentJoinToken {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier
+    string edge_controller_id = 2;
+    // Token to be used by the agent
+    string token = 3;
+    // ExpiresOn indicating the timestamp until which the token may be used.
+    int64 expires_on = 4;
+}

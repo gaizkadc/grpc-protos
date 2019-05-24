@@ -26,6 +26,8 @@ service EIC {
     // QueryMetrics retrieves the monitoring data of assets local to this
     // Edge Controller
     rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
+    // CreateAgentToken generates a JoinToken to allow an agent to join to a controller
+    rpc CreateAgentToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
 }
 
 service Agent{
