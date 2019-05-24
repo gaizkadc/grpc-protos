@@ -95,3 +95,44 @@ message DNSEntry {
 message DNSEntryList {
     repeated DNSEntry dns_entries = 1;
 }
+
+//
+// Service DNS
+//
+
+// AddServiceDNSEntryRequest message with the information required to add a new entry for an internal service.
+message AddServiceDNSEntryRequest{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+    // IP of that FQDN.
+    string ip = 3;
+    // Tags of the entry.
+    repeated string tags = 4;
+}
+
+// DeleteServiceDNSEntryRequest message with the information required to delete an entry.
+message DeleteServiceDNSEntryRequest{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+}
+
+// ServiceDNSEntry message with the information of a single service entry in the DNS.
+message ServiceDNSEntry{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+    // IP of that FQDN.
+    string ip = 3;
+    // Tags of the entry.
+    repeated string tags = 4;
+}
+
+// ServiceDNSEntryList message with a list of ServiceDNSEntry.
+message ServiceDNSEntryList{
+    repeated ServiceDNSEntry entries = 1;
+}
