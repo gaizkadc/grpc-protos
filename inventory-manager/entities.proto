@@ -192,6 +192,8 @@ message VPNCredentials{
     string password = 3;
     // Hostname with the URL of the VPN server that receives the connection.
     string hostname = 4;
+    // Proxyname with the URL of the VPN proxy
+    string proxyname = 5;
 }
 
 // EICJoinRequest with the request sent by the EIC to join the system.
