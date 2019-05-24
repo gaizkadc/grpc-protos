@@ -11,7 +11,6 @@ import "edge-inventory-proxy/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 import "common/entities.proto";
-import "edge-controller/entities.proto";
 
 // Edge Inventory Proxy service - for communication from Edge Controller to Inventory Manager
 service EdgeInventoryProxy {
@@ -35,5 +34,5 @@ service EdgeControllerProxy {
     // Edge Controller
     rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
     // CreateAgentToken creates a new join token for an agent to join the EIC
-    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (edge_controller.AgentJoinToken) {}
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
 }
