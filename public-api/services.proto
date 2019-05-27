@@ -407,7 +407,7 @@ service Agent {
 // Inventory
 service Inventory {
     // ListMetrics returns available metrics for a certain selection of assets
-    rpc List(organization.OrganizationId) returns (inventory_manager.InventoryList){
+    rpc List(organization.OrganizationId) returns (public_api.InventoryList){
         option (google.api.http) = {
             get: "/v1/inventory/{organization_id}/list"
         };
