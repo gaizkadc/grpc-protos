@@ -53,9 +53,28 @@ message AuthorizeMemberRequest {
     string organization_id = 1;
     // Network ID
     string network_id = 2;
-    // Member ID to join the network
+    // Member ID to jointhe network
     string member_id = 3;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+
 }
+
+message DisauthorizeMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+}
+
 
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier

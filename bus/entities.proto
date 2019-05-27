@@ -11,6 +11,7 @@ import "conductor/entities.proto";
 import "infrastructure/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
+import "network/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
@@ -58,5 +59,15 @@ message InventoryEvents{
         inventory.EdgeControllerId edge_controller_id = 2;
         // EicStart with the EIC start message
         inventory_manager.EICStartInfo eic_start = 3;
+    }
+}
+
+// NetworkOps message with all the messages that could be sent to the network manager
+message NetworkOps {
+    oneof Operation{
+        // AuthorizeMemberRequest give permission to a member to join a network
+        network.AuthorizeMemberRequest authorize_member_request = 1;
+        // DisauthorizeMemberRequest remove permission to a member to be in a network
+        network.DisauthorizeMemberRequest disauthorize_member_request = 2;
     }
 }
