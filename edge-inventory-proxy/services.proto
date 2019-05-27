@@ -18,6 +18,8 @@ service EdgeInventoryProxy {
     rpc EICStart (inventory_manager.EICStartInfo) returns (common.Success) {}
     // Check if EIC is alive
     rpc EICAlive (inventory.EdgeControllerId) returns (common.Success) {}
+    // AgentJoin processes a join request from a remote agent.
+    rpc AgentJoin(inventory_manager.AgentJoinRequest) returns (inventory_manager.AgentJoinResponse){}
 }
 
 // Edge Controller Proxy service - for communication for Inventory Manager to Edge Controller
