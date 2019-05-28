@@ -516,27 +516,29 @@ message OperatingSystemInfo{
 message Asset{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AssetId with the asset identifier.
-    string asset_id = 2;
+    string asset_id = 3;
     // AgentId with the agent identifier that is monitoring this asset if any.
-    string agent_id = 3;
+    string agent_id = 4;
     // Show flag to determine if this asset should be shown on the UI. This flag is internally used
     // for the async uninstall/removal of the asset.
-    bool show = 4;
+    bool show = 5;
     // Created time
-    int64 created = 5;
+    int64 created = 6;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 7;
     // OS contains Operating System information.
-    OperatingSystemInfo os = 7;
+    OperatingSystemInfo os = 8;
     // Hardware information.
-    inventory.HardwareInfo hardware = 8;
+    inventory.HardwareInfo hardware = 9;
     // Storage information.
-    repeated inventory.StorageHardwareInfo storage = 9;
+    repeated inventory.StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
-    string eic_net_ip = 10;
+    string eic_net_ip = 11;
     // StatusName with the status of the asset.
-    string status_name = 11;
+    string status_name = 12;
 }
 
 
