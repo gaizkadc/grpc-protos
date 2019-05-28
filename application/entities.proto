@@ -7,8 +7,6 @@ syntax = "proto3";
 package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
-import "google/protobuf/timestamp.proto";
-
 
 // AppDescriptor structure defines the top level abstraction for an application and all the associated services.
 message AppDescriptor {
@@ -753,7 +751,7 @@ message ZtNetworkMember {
     // IsProxy set this entry as a proxy
     bool is_proxy = 7;
     // CreatedAt timestamp this entry was created
-    google.protobuf.Timestamp created_at = 8;
+    int64 created_at = 8;
 }
 
 // AddAuthorizedZtNetworkMemberRequest Add Zt member authorization data
