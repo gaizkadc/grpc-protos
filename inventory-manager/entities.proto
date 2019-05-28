@@ -462,6 +462,16 @@ message AgentIds{
     repeated string ids = 1;
 }
 
+// AgentsAlive with a list of agents .
+message AgentsAlive {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that is processing the agent request.
+    string edge_controller_id = 2;
+    // Agents with the agent identifier and the last timestamp received
+    map<string, int64>  agents = 3;
+}
+
 // InventoryList message with a collection of all elements in the inventory
 message InventoryList{
     // Devices
