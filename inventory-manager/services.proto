@@ -43,6 +43,8 @@ service EIC{
     rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){}
     // ConfigureEIC changes specific configurable options for one ore more ECs
     rpc ConfigureEIC(ConfigureEICRequest) returns (common.Success){}
+    // Check if EIC is alive
+    rpc EICAlive (inventory.EdgeControllerId) returns (common.Success) {}
 
 }
 
@@ -55,7 +57,7 @@ service Agent{
     // AgentJoin processes a join request from a remote agent.
     rpc AgentJoin(AgentJoinRequest) returns (AgentJoinResponse){}
     // LogAgentAlive method invoked by the EIC to update the status of several agents.
-    rpc LogAgentAlive(AgentIds) returns (common.Success){}
+    rpc LogAgentAlive(AgentsAlive) returns (common.Success){}
     // TriggerAgentOperation triggers the execution of an operation in an agent managed by an EIC.
     rpc TriggerAgentOperation(AgentOpRequest) returns (AgentOpResponse){}
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.

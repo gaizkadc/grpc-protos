@@ -53,8 +53,8 @@ message InventoryOps {
 // InventoryEvents message with all the messages that could be send related to inventory events
 message InventoryEvents{
     oneof Event{
-        // AgentIds with the Agents that are alive
-        inventory_manager.AgentIds agent_ids = 1;
+        // AgentsAlive with the Agents that are alive
+        inventory_manager.AgentsAlive agents_alive = 1;
         // EdgeControllerId with the EIC that is alive
         inventory.EdgeControllerId edge_controller_id = 2;
         // EicStart with the EIC start message
