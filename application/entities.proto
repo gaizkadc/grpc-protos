@@ -775,7 +775,7 @@ message AddAuthorizedZtNetworkMemberRequest {
 message RemoveAuthorizedZtNetworkMemberRequest {
     // Organization ID
     string organization_id = 1;
-    // Application instance id
+    // Application instance id for this app
     string app_instance_id = 2;
     // Service group instance id
     string service_group_instance_id = 3;
