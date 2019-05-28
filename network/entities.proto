@@ -61,7 +61,8 @@ message AuthorizeMemberRequest {
     string service_group_instance_id = 5;
     // Service application instance id
     string service_application_instance_id = 6;
-
+    // IsProxy set this entry as a proxy
+    bool is_proxy = 7;
 }
 
 message DisauthorizeMemberRequest {
