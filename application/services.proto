@@ -64,7 +64,7 @@ service Applications {
     // RemoveAppZtNetwork remove the network instance for an application instance
     rpc GetAppZtNetwork(GetAppZtNetworkRequest) returns (AppZtNetwork) {}
     // Add Zt member authorization data
-    rpc AddAuthorizedZtNetworkMember(AddAuthorizedZtNetworkMemberRequest) returns (common.Success) {}
+    rpc AddAuthorizedZtNetworkMember(AddAuthorizedZtNetworkMemberRequest) returns (ZtNetworkMember) {}
     // Delete Zt member authorization data
     rpc RemoveAuthorizedZtNetworkMember(RemoveAuthorizedZtNetworkMemberRequest) returns (common.Success) {}
 
