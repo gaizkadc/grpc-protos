@@ -75,41 +75,45 @@ message StorageHardwareInfo{
 message Asset{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AssetId with the asset identifier.
-    string asset_id = 2;
+    string asset_id = 3;
     // AgentId with the agent identifier that is monitoring this asset if any.
-    string agent_id = 3;
+    string agent_id = 4;
     // Show flag to determine if this asset should be shown on the UI. This flag is internally used
     // for the async uninstall/removal of the asset.
-    bool show = 4;
+    bool show = 5;
     // Created time
-    int64 created = 5;
+    int64 created = 6;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 7;
     // OS contains Operating System information.
-    OperatingSystemInfo os = 7;
+    OperatingSystemInfo os = 8;
     // Hardware information.
-    HardwareInfo hardware = 8;
+    HardwareInfo hardware = 9;
     // Storage information.
-    repeated StorageHardwareInfo storage = 9;
+    repeated StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
-    string eic_net_ip = 10;
+    string eic_net_ip = 11;
 }
 
 // AddAssetRequest with the message sent to create a new asset.
 message AddAssetRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AgentId with the agent identifier that is monitoring this asset if any.
-    string agent_id = 2;
+    string agent_id = 3;
     // Labels defined by the user.
-    map<string, string> labels = 3;
+    map<string, string> labels = 4;
     // OS contains Operating System information.
-    OperatingSystemInfo os = 4;
+    OperatingSystemInfo os = 5;
     // Hardware information.
-    HardwareInfo hardware = 5;
+    HardwareInfo hardware = 6;
     // Storage information.
-    StorageHardwareInfo storage = 6;
+    StorageHardwareInfo storage = 7;
 }
 
 // AssetId
@@ -132,11 +136,11 @@ message UpdateAssetRequest{
     // AssetId with the asset identifier.
     string asset_id = 2;
     // Add Label flag to indicate that the set of labels need to be added.
-    bool add_labels = 7;
+    bool add_labels = 3;
     // Remove label flag to indicate that the set of labels need to be removed.
-    bool remove_labels = 8;
+    bool remove_labels = 4;
     // Labels for the cluster.
-    map <string, string> labels = 9;
+    map <string, string> labels = 5;
 }
 
 //
@@ -189,9 +193,9 @@ message UpdateEdgeControllerRequest{
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
     // Add Label flag to indicate that the set of labels need to be added.
-    bool add_labels = 7;
+    bool add_labels = 3;
     // Remove label flag to indicate that the set of labels need to be removed.
-    bool remove_labels = 8;
+    bool remove_labels = 4;
     // Labels for the cluster.
-    map <string, string> labels = 9;
+    map <string, string> labels = 5;
 }
