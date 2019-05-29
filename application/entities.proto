@@ -784,3 +784,13 @@ message RemoveAuthorizedZtNetworkMemberRequest {
     // IsProxy set this entry as a proxy
     bool is_proxy = 5;
 }
+
+// Message to remove all the members of a network
+message RemoveCompleteAppZtNetworkMemberNetRequest {
+    // Organization ID
+    string organization_Id = 1;
+    // Application isntance id
+    string app_instance_id = 2;
+    // Network id
+    string network_id = 3;
+}
