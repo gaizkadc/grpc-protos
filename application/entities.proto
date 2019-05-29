@@ -788,7 +788,7 @@ message RemoveAuthorizedZtNetworkMemberRequest {
 // Message to remove all the members of a network
 message RemoveCompleteAppZtNetworkMemberNetRequest {
     // Organization ID
-    string organization_Id = 1;
+    string organization_id = 1;
     // Application isntance id
     string app_instance_id = 2;
     // Network id
