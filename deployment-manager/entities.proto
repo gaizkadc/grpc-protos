@@ -77,6 +77,12 @@ message AuthorizeNetworkMembershipRequest {
     string network_id = 5;
     // Member id
     string member_id = 6;
+    // ServiceGroupInstance id
+    string service_group_instance_id = 7;
+    // ServiceInstanceId
+    string service_instance_id = 8;
+    // IsProxy
+    bool is_proxy = 9;
 }
 
 // Message to register a new network entry
