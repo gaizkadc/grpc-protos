@@ -71,6 +71,17 @@ message PluginData{
 message MetricsPluginData {
     // Timestamp for the data points
     int64 timestamp = 1;
-    // Mapping from metrics name to value for this measurement
-    map<string, int64> metrics = 2;
+
+    // Single metric
+    message Metric {
+        // Metric name
+        string name = 1;
+	// Map of metric attributes
+	map<string, string> tags = 2;
+	// Metric values
+	map<string, uint64> fields = 3;
+    }
+
+    // All metrics for this heartbeat
+    repeated Metric metrics = 2;
 }
