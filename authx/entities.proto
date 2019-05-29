@@ -254,3 +254,25 @@ message EICJoinRequest{
     // Token to be used by the agent.
     string token = 2;
 }
+
+//
+// Certificates
+//
+
+// PEMCertificate with the certicate, public key and private key.
+message PEMCertificate{
+    // Certificate content
+    string certificate = 1;
+    // PrivateKey for the certificate
+    string private_key = 2;
+}
+
+// EdgeControllerCertRequest with the elements required to create the certificate for an edge controller.
+message EdgeControllerCertRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // Name of the EIC.
+    string name = 3;
+}

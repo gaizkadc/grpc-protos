@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "inventory/entities.proto";
 import "device-manager/entities.proto";
+import "authx/entities.proto";
 
 //
 // Inventory
@@ -223,6 +224,8 @@ message EICJoinResponse{
     string edge_controller_id = 2;
     // Credentials for the VPN.
     VPNCredentials credentials = 3;
+    // Certificate to be used by the EIC to enable authentication from the point of view of the agents connecting to it.
+    authx.PEMCertificate certificate = 4;
 }
 
 // EICStartInfo with the information sent by the EIC every time it connects back to the platform.
