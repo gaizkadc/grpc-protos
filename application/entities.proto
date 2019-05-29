@@ -7,6 +7,7 @@ syntax = "proto3";
 package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
+
 // AppDescriptor structure defines the top level abstraction for an application and all the associated services.
 message AppDescriptor {
     // OrganizationId with the organization identifier.
@@ -731,4 +732,55 @@ message GetAppZtNetworkRequest {
     string  organization_id = 1;
     // AppInstanceId with the application instance identifier.
     string  app_instance_id = 2;
+}
+
+// ZtNetworkMember contains all the information of a known zt network entry
+message ZtNetworkMember {
+    // Organization ID
+    string organization_id = 1;
+    // Network ID
+    string network_id = 2;
+    // Member ID to jointhe network
+    string member_id = 3;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+    // IsProxy set this entry as a proxy
+    bool is_proxy = 7;
+    // CreatedAt timestamp this entry was created
+    int64 created_at = 8;
+}
+
+// AddAuthorizedZtNetworkMemberRequest Add Zt member authorization data
+message AddAuthorizedZtNetworkMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Network ID
+    string network_id = 2;
+    // Member ID to jointhe network
+    string member_id = 3;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+    // IsProxy set this entry as a proxy
+    bool is_proxy = 7;
+}
+// RemoveAuthorizedZtNetworkMemberRequest Delete Zt member authorization data
+message RemoveAuthorizedZtNetworkMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Application instance id for this app
+    string app_instance_id = 2;
+    // Service group instance id
+    string service_group_instance_id = 3;
+    // Service application instance id
+    string service_application_instance_id = 4;
+    // IsProxy set this entry as a proxy
+    bool is_proxy = 5;
 }
