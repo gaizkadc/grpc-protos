@@ -232,4 +232,8 @@ message UpdateEdgeControllerRequest{
     bool remove_labels = 4;
     // Labels for the cluster.
     map <string, string> labels = 5;
+    // UpdateLastAlive flag to indicate that last_alive_timestamp need to be updated
+    bool update_last_alive = 6;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 7;
 }
