@@ -45,11 +45,22 @@ message DeploymentFragmentResponse {
 // --------------------------
 // DeploymentManager Network services
 
+// Message to undeploy all the entries for an application
 message UndeployRequest {
     // organization
     string organization_id = 1;
     // application
     string app_instance_id = 2;
+}
+
+// Message to undeploy a fragment
+message UndeployFragmentRequest {
+    // organization
+    string organization_id = 1;
+    // application
+    string app_instance_id = 2;
+    // deployment fragment
+    string deployment_fragment_id = 3;
 }
 
 // Message to authorize a member in an existing network
@@ -66,6 +77,12 @@ message AuthorizeNetworkMembershipRequest {
     string network_id = 5;
     // Member id
     string member_id = 6;
+    // ServiceGroupInstance id
+    string service_group_instance_id = 7;
+    // ServiceInstanceId
+    string service_instance_id = 8;
+    // IsProxy
+    bool is_proxy = 9;
 }
 
 // Message to register a new network entry

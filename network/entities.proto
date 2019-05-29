@@ -53,9 +53,29 @@ message AuthorizeMemberRequest {
     string organization_id = 1;
     // Network ID
     string network_id = 2;
-    // Member ID to join the network
+    // Member ID to jointhe network
     string member_id = 3;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+    // IsProxy set this entry as a proxy
+    bool is_proxy = 7;
 }
+
+message DisauthorizeMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_instance_id = 5;
+    // Service application instance id
+    string service_application_instance_id = 6;
+}
+
 
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier
@@ -94,4 +114,45 @@ message DNSEntry {
 
 message DNSEntryList {
     repeated DNSEntry dns_entries = 1;
+}
+
+//
+// Service DNS
+//
+
+// AddServiceDNSEntryRequest message with the information required to add a new entry for an internal service.
+message AddServiceDNSEntryRequest{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+    // IP of that FQDN.
+    string ip = 3;
+    // Tags of the entry.
+    repeated string tags = 4;
+}
+
+// DeleteServiceDNSEntryRequest message with the information required to delete an entry.
+message DeleteServiceDNSEntryRequest{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+}
+
+// ServiceDNSEntry message with the information of a single service entry in the DNS.
+message ServiceDNSEntry{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // FQDN from the DNS entry.
+    string fqdn = 2;
+    // IP of that FQDN.
+    string ip = 3;
+    // Tags of the entry.
+    repeated string tags = 4;
+}
+
+// ServiceDNSEntryList message with a list of ServiceDNSEntry.
+message ServiceDNSEntryList{
+    repeated ServiceDNSEntry entries = 1;
 }

@@ -8,6 +8,8 @@ package inventory_manager;
 option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "inventory/entities.proto";
+import "device-manager/entities.proto";
+import "authx/entities.proto";
 
 //
 // Inventory
@@ -24,25 +26,33 @@ enum ConnectedStatus{
 message Asset{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AssetId with the asset identifier.
-    string asset_id = 2;
+    string asset_id = 3;
     // AgentId with the agent identifier that is monitoring this asset if any.
-    string agent_id = 3;
+    string agent_id = 4;
     // Show flag to determine if this asset should be shown on the UI. This flag is internally used
     // for the async uninstall/removal of the asset.
-    bool show = 4;
+    bool show = 5;
     // Created time
-    int64 created = 5;
+    int64 created = 6;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 7;
     // OS contains Operating System information.
-    inventory.OperatingSystemInfo os = 7;
+    inventory.OperatingSystemInfo os = 8;
     // Hardware information.
-    inventory.HardwareInfo hardware = 8;
+    inventory.HardwareInfo hardware = 9;
+    // Storage information.
+    repeated inventory.StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
-    string eic_net_ip = 9;
+    string eic_net_ip = 11;
+    // LastOpSummary contains the result of the last operation fr this asset
+    inventory.AgentOpSummary last_op_summary = 12;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 13;
     // Status of the agent.
-    ConnectedStatus status = 10;
+    ConnectedStatus status = 14;
 }
 
 // AssetList with a list of assets.
@@ -192,6 +202,8 @@ message VPNCredentials{
     string password = 3;
     // Hostname with the URL of the VPN server that receives the connection.
     string hostname = 4;
+    // Proxyname with the URL of the VPN proxy
+    string proxyname = 5;
 }
 
 // EICJoinRequest with the request sent by the EIC to join the system.
@@ -212,6 +224,8 @@ message EICJoinResponse{
     string edge_controller_id = 2;
     // Credentials for the VPN.
     VPNCredentials credentials = 3;
+    // Certificate to be used by the EIC to enable authentication from the point of view of the agents connecting to it.
+    authx.PEMCertificate certificate = 4;
 }
 
 // EICStartInfo with the information sent by the EIC every time it connects back to the platform.
@@ -259,8 +273,10 @@ message EdgeController{
     string name = 5;
     // Labels defined by the user.
     map<string, string> labels = 6;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 7;
     // Status for the UI.
-    ConnectedStatus status = 7;
+    ConnectedStatus status = 8;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
@@ -435,11 +451,15 @@ message AgentJoinResponse{
 }
 
 // AgentJoinToken with the information required for an agent to connect with the system.
-message AgentJoinToken{
-    // Token to be used by the agent.
-    string token = 1;
-    // Cacert with the CA certificate.
-    string cacert = 2;
+message AgentJoinToken {
+    // OrganizationID with the organization identifier
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier
+    string edge_controller_id = 2;
+    // Token to be used by the agent
+    string token = 3;
+    // ExpiresOn indicating the timestamp until which the token may be used.
+    int64 expires_on = 4;
 }
 
 // EICStartInfo with the information sent by the EIC every time it connects back to the platform.
@@ -453,4 +473,24 @@ message AgentStartInfo{
 // AgentsIds with a list of agent identifiers.
 message AgentIds{
     repeated string ids = 1;
+}
+
+// AgentsAlive with a list of agents .
+message AgentsAlive {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that is processing the agent request.
+    string edge_controller_id = 2;
+    // Agents with the agent identifier and the last timestamp received
+    map<string, int64>  agents = 3;
+}
+
+// InventoryList message with a collection of all elements in the inventory
+message InventoryList{
+    // Devices
+    repeated device_manager.Device devices = 1;
+    // Assets
+    repeated inventory.Asset assets = 2;
+    // Controllers
+    repeated inventory.EdgeController controllers = 3;
 }

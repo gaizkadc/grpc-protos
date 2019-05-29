@@ -391,4 +391,25 @@ service EdgeControllers{
             body: "*"
         };
     }
+
+}
+
+// Agent related operations
+service Agent {
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {
+        option (google.api.http) = {
+            post: "/v1/agent/{organization_id}/{edge_controller_id}/token/create"
+            body: "*"
+        };
+    }
+}
+
+// Inventory
+service Inventory {
+    // ListMetrics returns available metrics for a certain selection of assets
+    rpc List(organization.OrganizationId) returns (public_api.InventoryList){
+        option (google.api.http) = {
+            get: "/v1/inventory/{organization_id}/list"
+        };
+    }
 }

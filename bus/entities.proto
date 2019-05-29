@@ -8,8 +8,10 @@ package bus;
 option go_package = "github.com/nalej/grpc-bus-go";
 
 import "conductor/entities.proto";
+import "infrastructure/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
+import "network/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
@@ -32,14 +34,40 @@ message InfrastructureOps {
     }
 }
 
-// InvetoryOps message with all the messages that could be send related to inventory operations
+// Message for infrastructure events containing one of the following messages.
+message InfrastructureEvents {
+    oneof Event {
+        // Update cluster
+        infrastructure.UpdateClusterRequest update_cluster_request = 1;
+    }
+}
+
+// InventoryOps message with all the messages that could be send related to inventory operations
 message InventoryOps {
     oneof Operation{
         // AgentOpResponse with the result of an operation executed by an agent.
         inventory_manager.AgentOpResponse agent_op_response = 1;
-        // AgentIds with the Agents that are alive
-        inventory_manager.AgentIds agent_ids = 2;
+    }
+}
+
+// InventoryEvents message with all the messages that could be send related to inventory events
+message InventoryEvents{
+    oneof Event{
+        // AgentsAlive with the Agents that are alive
+        inventory_manager.AgentsAlive agents_alive = 1;
         // EdgeControllerId with the EIC that is alive
-        inventory.EdgeControllerId edge_controller_id = 3;
+        inventory.EdgeControllerId edge_controller_id = 2;
+        // EicStart with the EIC start message
+        inventory_manager.EICStartInfo eic_start = 3;
+    }
+}
+
+// NetworkOps message with all the messages that could be sent to the network manager
+message NetworkOps {
+    oneof Operation{
+        // AuthorizeMemberRequest give permission to a member to join a network
+        network.AuthorizeMemberRequest authorize_member_request = 1;
+        // DisauthorizeMemberRequest remove permission to a member to be in a network
+        network.DisauthorizeMemberRequest disauthorize_member_request = 2;
     }
 }

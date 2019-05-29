@@ -12,6 +12,7 @@ import "edge-controller/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 
+// EIC service - for communication from Management cluster to Edge Controller
 service EIC {
     // Unlink the receiving EIC.
     rpc Unlink(common.Empty) returns (common.Success){}
@@ -26,8 +27,10 @@ service EIC {
     // QueryMetrics retrieves the monitoring data of assets local to this
     // Edge Controller
     rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
+    // CreateAgentJoinToken generates a JoinToken to allow an agent to join to a controller
+    rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
 }
-
+// Agent service - for communication for agents to Edge Controller
 service Agent{
     // AgentJoin processes a join request from a local agent by sending synchronously the request to the
     // management cluster.
