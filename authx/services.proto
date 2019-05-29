@@ -96,3 +96,9 @@ service Inventory{
     // ValidEICJoinToken checks if the Token provide is still valid to join a EIC.
     rpc ValidEICJoinToken(EICJoinRequest) returns (common.Success){}
 }
+
+// Certificate related operations for the different entities of the system.
+service Certificates{
+    // CreateControllerCert creates a certificate for an edge controller.
+    rpc CreateControllerCert(EdgeControllerCertRequest) returns (PEMCertificate){}
+}
