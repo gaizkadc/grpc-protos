@@ -119,7 +119,7 @@ message Asset{
     // AgentOpSummary contains the result of the last operation fr this asset
     AgentOpSummary last_op_result = 12;
     // LastAliveTimestamp contains the last alive message received
-    uint64 last_alive_timestamp = 13;
+    int64 last_alive_timestamp = 13;
 }
 
 // AddAssetRequest with the message sent to create a new asset.
@@ -203,7 +203,7 @@ message EdgeController{
     // Labels defined by the user.
     map<string, string> labels = 6;
     // LastAliveTimestamp contains the last alive message received
-    uint64 last_alive_timestamp = 7;
+    int64 last_alive_timestamp = 7;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -235,5 +235,5 @@ message UpdateEdgeControllerRequest{
     // UpdateLastAlive flag to indicate that last_alive_timestamp need to be updated
     bool update_last_alive = 6;
     // LastAliveTimestamp contains the last alive message received
-    uint64 last_alive_timestamp = 7;
+    int64 last_alive_timestamp = 7;
 }
