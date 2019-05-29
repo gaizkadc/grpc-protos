@@ -70,6 +70,26 @@ message StorageHardwareInfo{
     int64 total_capacity = 2;
 }
 
+// AgentOpStatus contains the status of the execution of a given agent operation.
+enum AgentOpStatus{
+    SCHEDULED = 0;
+    SUCCESS = 1;
+    FAIL = 2;
+}
+
+// AgentOpSummary contains the result of an asset operation
+// this is a provisional result!
+message AgentOpSummary{
+    // OperationId with the operation identifier.
+    string operation_id = 4;
+    // Timestamp of the response.
+    int64 timestamp = 5;
+    // Status indicates if the operation was successfull
+    AgentOpStatus status = 6;
+    // Info with additional information for an operation.
+    string info = 7;
+}
+
 // Asset represents an element in the network from which we register some type of information. Example of
 // assets could be workstations, nodes in a cluster, or other type of hardware.
 message Asset{
@@ -96,6 +116,10 @@ message Asset{
     repeated StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
+    // AgentOpSummary contains the result of the last operation fr this asset
+    AgentOpSummary last_op_result = 12;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 13;
 }
 
 // AddAssetRequest with the message sent to create a new asset.
@@ -141,6 +165,14 @@ message UpdateAssetRequest{
     bool remove_labels = 4;
     // Labels for the cluster.
     map <string, string> labels = 5;
+    // UpdateLastOpSummary flag to indicate that last_alive_timestamp need to be updated
+    bool update_last_op_summary = 6;
+    // LastOpSummary contains the result of the last operation fr this asset
+    AgentOpSummary last_op_summary = 7;
+    // UpdateLastAlive flag to indicate that last_alive_timestamp need to be updated
+    bool update_last_alive = 8;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 9;
 }
 
 //
@@ -170,6 +202,8 @@ message EdgeController{
     string name = 5;
     // Labels defined by the user.
     map<string, string> labels = 6;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 7;
 }
 
 // EdgeControllerList with a list of controllers.

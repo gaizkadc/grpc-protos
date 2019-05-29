@@ -26,25 +26,33 @@ enum ConnectedStatus{
 message Asset{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AssetId with the asset identifier.
-    string asset_id = 2;
+    string asset_id = 3;
     // AgentId with the agent identifier that is monitoring this asset if any.
-    string agent_id = 3;
+    string agent_id = 4;
     // Show flag to determine if this asset should be shown on the UI. This flag is internally used
     // for the async uninstall/removal of the asset.
-    bool show = 4;
+    bool show = 5;
     // Created time
-    int64 created = 5;
+    int64 created = 6;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 7;
     // OS contains Operating System information.
-    inventory.OperatingSystemInfo os = 7;
+    inventory.OperatingSystemInfo os = 8;
     // Hardware information.
-    inventory.HardwareInfo hardware = 8;
+    inventory.HardwareInfo hardware = 9;
+    // Storage information.
+    repeated inventory.StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
-    string eic_net_ip = 9;
+    string eic_net_ip = 11;
+    // LastOpSummary contains the result of the last operation fr this asset
+    inventory.AgentOpSummary last_op_summary = 12;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 13;
     // Status of the agent.
-    ConnectedStatus status = 10;
+    ConnectedStatus status = 14;
 }
 
 // AssetList with a list of assets.
@@ -265,8 +273,10 @@ message EdgeController{
     string name = 5;
     // Labels defined by the user.
     map<string, string> labels = 6;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 7;
     // Status for the UI.
-    ConnectedStatus status = 7;
+    ConnectedStatus status = 8;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
