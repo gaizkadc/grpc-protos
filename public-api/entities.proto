@@ -487,8 +487,12 @@ message EdgeController{
     string name = 5;
     // Labels defined by the user.
     map<string, string> labels = 6;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 7;
+    // Status for the UI.
+    inventory_manager.ConnectedStatus status = 8;
     // StatusName with the status of the asset.
-    string status_name = 7;
+    string status_name = 9;
 }
 
 // --------------------------------
@@ -537,8 +541,15 @@ message Asset{
     repeated inventory.StorageHardwareInfo storage = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
+    // LastOpSummary contains the result of the last operation fr this asset
+    inventory.AgentOpSummary last_op_summary = 12;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 13;
+    // Status of the agent.
+    inventory_manager.ConnectedStatus status = 14;
     // StatusName with the status of the asset.
-    string status_name = 12;
+    string status_name = 15;
+
 }
 
 

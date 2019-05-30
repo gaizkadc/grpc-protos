@@ -492,7 +492,7 @@ message InventoryList{
     // Devices
     repeated device_manager.Device devices = 1;
     // Assets
-    repeated inventory.Asset assets = 2;
+    repeated Asset assets = 2;
     // Controllers
-    repeated inventory.EdgeController controllers = 3;
+    repeated EdgeController controllers = 3;
 }
