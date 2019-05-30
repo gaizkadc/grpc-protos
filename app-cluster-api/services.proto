@@ -25,6 +25,8 @@ service DeploymentManager {
     rpc Execute(deployment_manager.DeploymentFragmentRequest) returns (deployment_manager.DeploymentFragmentResponse) {}
     // Request to undeploy an application
     rpc Undeploy(deployment_manager.UndeployRequest) returns (common.Success) {}
+    // Request to undeploy a fragment
+    rpc UndeployFragment(deployment_manager.UndeployFragmentRequest) returns (common.Success) {}
 }
 
 // Slave services for localling retrieving a set of logs.
