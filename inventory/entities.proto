@@ -173,6 +173,10 @@ message UpdateAssetRequest{
     bool update_last_alive = 8;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 9;
+    // UpdateIP contains a flag to indicate if eic_net_ip need to be updated
+    bool update_ip = 10;
+    // EicNetIp contains the current IP address that connects the asset to the EIC.
+    string eic_net_ip = 11;
 }
 
 //
