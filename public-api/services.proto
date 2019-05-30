@@ -412,4 +412,16 @@ service Inventory {
             get: "/v1/inventory/{organization_id}/list"
         };
     }
+    // GetControllerExtendedInfo returns the information of the edge controller with the information of its assets.
+    rpc GetControllerExtendedInfo(inventory.EdgeControllerId) returns (EdgeControllerExtendedInfo){
+        option (google.api.http) = {
+            get: "/v1/inventory/ec/{organization_id}/{edge_controller_id}/extended"
+        };
+    }
+    // GetAssetInfo returns the information of a given asset
+    rpc GetAssetInfo(inventory.AssetId) returns (Asset){
+        option (google.api.http) = {
+            get: "/v1/inventory/asset/{organization_id}/{asset_id}/extended"
+        };
+    }
 }

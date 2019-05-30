@@ -17,6 +17,8 @@ service Assets {
     rpc Add(AddAssetRequest) returns (Asset){}
     // List the assets of an organization.
     rpc List(organization.OrganizationId) returns (AssetList){}
+    // ListControllerAssets retrieves the list of assets managed by a given controller.
+    rpc ListControllerAssets(EdgeControllerId) returns (AssetList){}
     // Remove a given assets from an organization.
     rpc Remove(AssetId) returns (common.Success){}
     // Update the information of an asset.
@@ -29,6 +31,8 @@ service Controllers {
     rpc Add(AddEdgeControllerRequest) returns (EdgeController){}
     // List the controllers of an organization.
     rpc List(organization.OrganizationId) returns (EdgeControllerList){}
+    // Get the information of an edge controller.
+    rpc Get(EdgeControllerId) returns (EdgeController){}
     // Remove a given controller from an organization.
     rpc Remove(EdgeControllerId) returns (common.Success){}
     // Update the information of a controller.

@@ -498,3 +498,11 @@ message InventoryList{
     // Controllers
     repeated EdgeController controllers = 3;
 }
+
+// EdgeControllerExtendedInfo with the information of the controller and the associated assets.
+message EdgeControllerExtendedInfo{
+    // Controller information
+    EdgeController controller = 1;
+    // ManagedAssets with the assets managed by the controller
+    repeated Asset managed_assets = 2;
+}

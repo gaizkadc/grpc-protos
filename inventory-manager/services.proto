@@ -18,6 +18,10 @@ import "inventory/entities.proto";
 service Inventory{
     // List the devices, assets and controllers.
     rpc List(organization.OrganizationId) returns (InventoryList){}
+    // GetControllerExtendedInfo returns the information of the edge controller with the information of its assets.
+    rpc GetControllerExtendedInfo(inventory.EdgeControllerId) returns (EdgeControllerExtendedInfo){}
+    // GetAssetInfo returns the information of a given asset
+    rpc GetAssetInfo(inventory.AssetId) returns (Asset){}
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (InventorySummary){}
 }
