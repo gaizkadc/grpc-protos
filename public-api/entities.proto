@@ -488,7 +488,7 @@ message EdgeController{
     // Labels defined by the user.
     map<string, string> labels = 6;
     // LastAliveTimestamp contains the last alive message received
-    uint64 last_alive_timestamp = 7;
+    int64 last_alive_timestamp = 7;
     // Status for the UI.
     inventory_manager.ConnectedStatus status = 8;
     // StatusName with the status of the asset.
