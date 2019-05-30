@@ -489,6 +489,8 @@ message EdgeController{
     map<string, string> labels = 6;
     // StatusName with the status of the asset.
     string status_name = 7;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 8;
 }
 
 // --------------------------------
@@ -539,6 +541,8 @@ message Asset{
     string eic_net_ip = 11;
     // StatusName with the status of the asset.
     string status_name = 12;
+    // LastAliveTimestamp contains the last alive message received
+    uint64 last_alive_timestamp = 13;
 }
 
 
