@@ -50,7 +50,7 @@ message Asset{
     // LastOpSummary contains the result of the last operation fr this asset
     inventory.AgentOpSummary last_op_summary = 12;
     // LastAliveTimestamp contains the last alive message received
-    uint64 last_alive_timestamp = 13;
+    int64 last_alive_timestamp = 13;
     // Status of the agent.
     ConnectedStatus status = 14;
 }
@@ -485,6 +485,8 @@ message AgentsAlive {
     string edge_controller_id = 2;
     // Agents with the agent identifier and the last timestamp received
     map<string, int64>  agents = 3;
+    // AgentsIp with the updated agent ips
+    map<string, string> agents_ip = 4;
 }
 
 // InventoryList message with a collection of all elements in the inventory
