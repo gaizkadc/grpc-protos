@@ -448,6 +448,8 @@ message AgentJoinResponse{
     // Token that the agent needs to send for further requests. The token should be added in the
     // authorization metadata of the gRPC context.
     string token = 3;
+    // CACert used by the agent to authenticate the edge controller it connects to.
+    string ca_cert = 4;
 }
 
 // AgentJoinToken with the information required for an agent to connect with the system.
