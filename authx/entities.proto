@@ -275,4 +275,6 @@ message EdgeControllerCertRequest{
     string edge_controller_id = 2;
     // Name of the EIC.
     string name = 3;
+    // IP where the edge controller accepts agent connections.
+    repeated string ips = 4;
 }
