@@ -464,6 +464,8 @@ message AgentJoinToken {
     string token = 3;
     // ExpiresOn indicating the timestamp until which the token may be used.
     int64 expires_on = 4;
+    // CACert used by the agent to authenticate the edge controller it connects to.
+    string ca_cert = 5;
 }
 
 // EICStartInfo with the information sent by the EIC every time it connects back to the platform.
