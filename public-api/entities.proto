@@ -493,6 +493,9 @@ message EdgeController{
     inventory_manager.ConnectedStatus status = 8;
     // StatusName with the status of the asset.
     string status_name = 9;
+    // location with the EC location
+    string location = 10;
+
 }
 
 // --------------------------------
