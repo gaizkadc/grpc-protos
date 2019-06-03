@@ -217,7 +217,7 @@ message EICJoinRequest{
     // Location with the edge-controller location defined by the user
     string location= 4;
     // IP where the edge controller accepts agent connections.
-    repeated string ips = 4;
+    repeated string ips = 5;
 }
 
 // EICJoinResponse with the information returned to an EIC on successfull join.

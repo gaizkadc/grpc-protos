@@ -249,3 +249,5 @@ message UpdateEdgeControllerRequest{
     // location with the EC location
     string location = 9;
 }
+
+

@@ -495,7 +495,6 @@ message EdgeController{
     string status_name = 9;
     // location with the EC location
     string location = 10;
-
 }
 
 // --------------------------------
