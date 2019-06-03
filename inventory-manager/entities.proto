@@ -214,6 +214,8 @@ message EICJoinRequest{
     string name = 2;
     // Labels defined by the user.
     map<string, string> labels = 3;
+    // Location with the edge-controller location defined by the user
+    string location= 4;
     // IP where the edge controller accepts agent connections.
     repeated string ips = 4;
 }
