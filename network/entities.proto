@@ -69,11 +69,11 @@ message DisauthorizeMemberRequest {
     // Organization ID
     string organization_id = 1;
     // Application instance id
-    string app_instance_id = 4;
+    string app_instance_id = 2;
     // Service group instance id
-    string service_group_instance_id = 5;
+    string service_group_instance_id = 3;
     // Service application instance id
-    string service_application_instance_id = 6;
+    string service_application_instance_id = 4;
 }
 
 

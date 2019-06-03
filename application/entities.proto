@@ -781,16 +781,6 @@ message RemoveAuthorizedZtNetworkMemberRequest {
     string service_group_instance_id = 3;
     // Service application instance id
     string service_application_instance_id = 4;
-    // IsProxy set this entry as a proxy
-    bool is_proxy = 5;
-}
-
-// Message to remove all the members of a network
-message RemoveCompleteAppZtNetworkMemberNetRequest {
-    // Organization ID
-    string organization_id = 1;
-    // Application isntance id
-    string app_instance_id = 2;
-    // Network id
-    string network_id = 3;
+    // ZtNetworkId
+    string zt_network_id = 5;
 }
