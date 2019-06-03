@@ -279,6 +279,8 @@ message EdgeController{
     int64 last_alive_timestamp = 7;
     // Status for the UI.
     ConnectedStatus status = 8;
+    // location with the EC location
+    string location = 9;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.

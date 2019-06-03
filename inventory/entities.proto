@@ -208,6 +208,8 @@ message EdgeController{
     map<string, string> labels = 6;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 7;
+    // location with the EC location
+    string location = 8;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -223,6 +225,8 @@ message AddEdgeControllerRequest{
     string name = 2;
     // Labels defined by the user.
     map<string, string> labels = 3;
+    // location with the EC location
+    string location = 4;
 }
 
 message UpdateEdgeControllerRequest{
@@ -240,4 +244,8 @@ message UpdateEdgeControllerRequest{
     bool update_last_alive = 6;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 7;
+    // UpdateLocation flag to indicate that location need to be updated
+    bool update_location = 8;
+    // location with the EC location
+    string location = 9;
 }
