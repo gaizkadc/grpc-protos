@@ -493,6 +493,8 @@ message EdgeController{
     inventory_manager.ConnectedStatus status = 8;
     // StatusName with the status of the asset.
     string status_name = 9;
+    // location with the EC location
+    inventory.InventoryLocation location = 10;
 }
 
 // --------------------------------
@@ -550,6 +552,17 @@ message Asset{
     // StatusName with the status of the asset.
     string status_name = 15;
 
+}
+
+message AssetMonitoringRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
+    // Activate with a flag to indicate if the monitoring is going to activate or deactivate
+    bool activate = 4;
 }
 
 
