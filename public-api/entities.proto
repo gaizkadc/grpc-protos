@@ -494,7 +494,7 @@ message EdgeController{
     // StatusName with the status of the asset.
     string status_name = 9;
     // location with the EC location
-    string location = 10;
+    inventory.InventoryLocation location = 10;
 }
 
 // --------------------------------

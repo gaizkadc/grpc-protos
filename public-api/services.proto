@@ -376,22 +376,28 @@ service UnifiedLogging{
 }
 
 // EdgeControllers related operations.
-service EdgeControllers{
+service EdgeControllers {
     // CreateEICToken creates a new token for an EIC to join the platform.
-    rpc CreateEICToken(organization.OrganizationId) returns (inventory_manager.EICJoinToken){
+    rpc CreateEICToken (organization.OrganizationId) returns (inventory_manager.EICJoinToken) {
         option (google.api.http) = {
             post: "/v1/ec/{organization_id}/token/create"
             body: "*"
         };
     }
     // UnlinkEIC operation to remove/uninstall an EIC.
-    rpc UnlinkEIC(inventory.EdgeControllerId) returns (common.Success){
+    rpc UnlinkEIC (inventory.EdgeControllerId) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/ec/{organization_id}/unlink"
             body: "*"
         };
     }
-
+    // UpdateGeolocation operation to update aen edge controller geolocation
+    rpc UpdateGeolocation (inventory_manager.UpdateGeolocationRequest) returns (inventory.EdgeController) {
+        option (google.api.http) = {
+            post: "/v1/ec/{organization_id}/{edge_controller_id}/geolocation/update"
+            body: "*"
+        };
+    }
 }
 
 // Agent related operations
