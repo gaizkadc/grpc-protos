@@ -554,6 +554,17 @@ message Asset{
 
 }
 
+message AssetMonitoringRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
+    // Activate with a flag to indicate if the monitoring is going to activate or deactivate
+    bool activate = 4;
+}
+
 
 // --------------------------------
 // Inventory
