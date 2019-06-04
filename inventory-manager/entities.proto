@@ -214,8 +214,8 @@ message EICJoinRequest{
     string name = 2;
     // Labels defined by the user.
     map<string, string> labels = 3;
-    // Location with the edge-controller location defined by the user
-    string location= 4;
+    // Geolocation with the edge-controller location defined by the user
+    string geolocation= 4;
     // IP where the edge controller accepts agent connections.
     repeated string ips = 5;
 }
@@ -282,7 +282,7 @@ message EdgeController{
     // Status for the UI.
     ConnectedStatus status = 8;
     // location with the EC location
-    string location = 9;
+    inventory.InventoryLocation location = 9;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
