@@ -254,9 +254,10 @@ message UpdateEdgeControllerRequest{
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 7;
     // UpdateLocation flag to indicate that location need to be updated
-    bool update_location = 8;
+    bool update_geolocation = 8;
     // location with the EC geolocation
     string geolocation = 9;
 }
+
 
 

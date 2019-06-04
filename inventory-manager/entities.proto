@@ -311,6 +311,16 @@ message EdgeControllerOp{
     AgentOpRequest agent_op = 6;
 }
 
+message UpdateGeolocationRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // Geolocation with the new EC Geolocation
+    string geolocation = 3;
+}
+
+
 //
 // Agents
 //
