@@ -754,6 +754,24 @@ message ZtNetworkMember {
     int64 created_at = 8;
 }
 
+
+message GetAuthorizedZtNetworkMemberRequest {
+    // Organization ID
+    string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 2;
+    // Service group instance id
+    string service_group_instance_id = 3;
+    // Service application instance id
+    string service_application_instance_id = 4;
+}
+
+// Collection of members of a zt network
+message ZtNetworkMembers {
+    repeated ZtNetworkMember members  = 1;
+}
+
+
 // AddAuthorizedZtNetworkMemberRequest Add Zt member authorization data
 message AddAuthorizedZtNetworkMemberRequest {
     // Organization ID
