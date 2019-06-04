@@ -394,7 +394,7 @@ service EdgeControllers {
     // UpdateGeolocation operation to update aen edge controller geolocation
     rpc UpdateGeolocation (inventory_manager.UpdateGeolocationRequest) returns (inventory.EdgeController) {
         option (google.api.http) = {
-            post: "/v1/ec/{organization_id}/geolocation/update"
+            post: "/v1/ec/{organization_id}/{edge_controller_id}/geolocation/update"
             body: "*"
         };
     }
