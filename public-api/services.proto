@@ -404,7 +404,7 @@ service Agent {
     }
     rpc ActivateMonitoring (AssetMonitoringRequest) returns (inventory_manager.AgentOpResponse) {
         option (google.api.http) = {
-           post: "v1/agent/{organization_id}/{edge_controller_id}/{asset_id}/activate_monitoring"
+           post: "/v1/agent/{organization_id}/{edge_controller_id}/{asset_id}/activate_monitoring"
            body: "*"
         };
 }
