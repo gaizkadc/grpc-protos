@@ -138,6 +138,8 @@ message DeleteServiceDNSEntryRequest{
     string organization_id = 1;
     // FQDN from the DNS entry.
     string fqdn = 2;
+    // Tags of the entry.
+    repeated string tags = 3;
 }
 
 // ServiceDNSEntry message with the information of a single service entry in the DNS.
