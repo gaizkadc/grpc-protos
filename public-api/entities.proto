@@ -565,6 +565,22 @@ message AssetMonitoringRequest{
     bool activate = 4;
 }
 
+message AgentOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 4;
+    // Timestamp of the response.
+    int64 timestamp = 5;
+    // Status indicates if the operation was successfull
+    string status = 6;
+    // Info with additional information for an operation.
+    string info = 7;
+}
 
 // --------------------------------
 // Inventory
