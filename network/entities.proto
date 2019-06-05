@@ -80,25 +80,23 @@ message DisauthorizeMemberRequest {
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
-    // Organization name
-    string organization_name = 2;
-    // Application instance id
-    string app_instance_id = 3;
     // Service name
-    string service_name = 4;
-    // NetworkId with the network identifier.
-    string network_id = 5;
+    string service_name = 2;
     // FQDN from the DNS entry.
-    string fqdn = 6;
+    string fqdn = 3;
     // IP of that FQDN.
-    string ip = 7;
+    string ip = 4;
+    // Tags for this entry
+    repeated string tags = 5;
 }
 
 message DeleteDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
-    // Application instance id
-    string app_instance_id = 2;
+    // Service name
+    string service_name = 2;
+    // Tags for this entry
+    repeated string tags = 3;
 }
 
 message DNSEntry {
@@ -110,6 +108,8 @@ message DNSEntry {
     string fqdn = 3;
     // IP of that FQDN.
     string ip = 4;
+    // Tags for this entry
+    repeated string tags = 5;
 }
 
 message DNSEntryList {
