@@ -49,6 +49,8 @@ service EIC{
     rpc ConfigureEIC(ConfigureEICRequest) returns (common.Success){}
     // Check if EIC is alive
     rpc EICAlive (inventory.EdgeControllerId) returns (common.Success) {}
+    // UpdateECLocation operation to update the geolocation
+    rpc UpdateECGeolocation (UpdateGeolocationRequest) returns (inventory.EdgeController) {}
 
 }
 

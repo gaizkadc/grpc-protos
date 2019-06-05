@@ -18,6 +18,15 @@ enum OperatingSystemClass {
     DARWIN = 2;
 }
 
+// InventoryLocation defines the location of a device, ec or asset
+message InventoryLocation {
+    // geolocation defines the location
+    string geolocation = 1;
+    // geohash defines the location using a short alphanumeric string
+    string geohash = 2;
+
+}
+
 // OperatingSystemInfo contains information about the operating system of an asset. Notice that no
 // enums have been used for either the name or the version as to no constraint the elements of the
 // inventory even if we do not have an agent running supporting those.
@@ -208,6 +217,8 @@ message EdgeController{
     map<string, string> labels = 6;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 7;
+    // location with the EC location
+    InventoryLocation location = 8;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -223,6 +234,8 @@ message AddEdgeControllerRequest{
     string name = 2;
     // Labels defined by the user.
     map<string, string> labels = 3;
+    // location with the EC location
+    string geolocation = 4;
 }
 
 message UpdateEdgeControllerRequest{
@@ -240,4 +253,11 @@ message UpdateEdgeControllerRequest{
     bool update_last_alive = 6;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 7;
+    // UpdateLocation flag to indicate that location need to be updated
+    bool update_geolocation = 8;
+    // location with the EC geolocation
+    string geolocation = 9;
 }
+
+
+
