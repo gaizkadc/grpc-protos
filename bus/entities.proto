@@ -69,5 +69,9 @@ message NetworkOps {
         network.AuthorizeMemberRequest authorize_member_request = 1;
         // DisauthorizeMemberRequest remove permission to a member to be in a network
         network.DisauthorizeMemberRequest disauthorize_member_request = 2;
+        // AddDNSEntryRequest request the addition of a new entry into the DNS
+        network.AddDNSEntryRequest add_dns_entry_request = 3;
+        // DeleteDNSEntryRequest request the removal of an existing entry in to the DNS
+        network.DeleteDNSEntryRequest delete_dns_entry_request = 4;
     }
 }
