@@ -150,7 +150,7 @@ message AddAssetRequest{
     // Storage information.
     repeated StorageHardwareInfo storage = 7;
     // location with the asset location
-    string geolocation = 8;
+    InventoryLocation location = 8;
 }
 
 // AssetId
@@ -190,8 +190,10 @@ message UpdateAssetRequest{
     bool update_ip = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
-    // location with the asset geolocation
-    string geolocation = 12;
+    // UpdateLocation flag to indicate that location need to be updated
+    bool update_location = 12;
+    // location with the asset location
+    InventoryLocation location = 13;
 }
 
 //
