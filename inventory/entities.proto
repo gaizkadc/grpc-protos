@@ -129,6 +129,8 @@ message Asset{
     AgentOpSummary last_op_result = 12;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 13;
+    // location with the asset location
+    InventoryLocation location = 14;
 }
 
 // AddAssetRequest with the message sent to create a new asset.
@@ -147,6 +149,8 @@ message AddAssetRequest{
     HardwareInfo hardware = 6;
     // Storage information.
     repeated StorageHardwareInfo storage = 7;
+    // location with the asset location
+    string geolocation = 8;
 }
 
 // AssetId
@@ -186,6 +190,8 @@ message UpdateAssetRequest{
     bool update_ip = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
+    // location with the asset geolocation
+    string geolocation = 12;
 }
 
 //
