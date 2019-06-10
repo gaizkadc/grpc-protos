@@ -51,8 +51,10 @@ message Asset{
     inventory.AgentOpSummary last_op_summary = 12;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 13;
-    // Status of the agent.
+    // Status of the asset.
     ConnectedStatus status = 14;
+    // location with the asset location
+    inventory.InventoryLocation location = 15;
 }
 
 // AssetList with a list of assets.
