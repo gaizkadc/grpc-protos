@@ -25,7 +25,7 @@ service Inventory{
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (InventorySummary){}
     // UpdateAsset updates an asset in the inventory.
-    rpc UpdateAsset (inventory.UpdateAssetRequest) returns (Asset);
+    rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset){}
 }
 
 // Inventory Monitoring related operations
