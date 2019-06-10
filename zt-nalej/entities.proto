@@ -1,0 +1,18 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package zt_nalej;
+option go_package = "github.com/nalej/grpc-zt-nalej-go";
+
+message Route{
+    // VSA with the Virtual Service Address as defined by Conductor/Network manager when the application
+    // layout is defined.
+    string vsa = 1;
+    // RedirectToVPN with the target DNAT IP of the VSA entry.
+    string redirect_to_vpn = 2;
+    // Drop to decide if the target route should be disabled for the given pod.
+    bool drop =3;
+}

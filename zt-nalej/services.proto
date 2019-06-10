@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package zt_nalej;
+option go_package = "github.com/nalej/grpc-zt-nalej-go";
+
+import "common/entities.proto";
+import "zt-nalej/entities.proto";
+
+// Sidecar operations
+service Sidecar{
+    // Request to update a fragment plan status with all the corresponding services
+    rpc SetRoute(Route) returns(common.Success) {}
+}
