@@ -437,7 +437,7 @@ service Inventory {
         };
     }
     // UpdateAsset updates an asset from the inventory
-    rpc UpdateAsset (inventory.UpdateAssetRequest) return (inventory.Asset) {
+    rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset) {
         option (google.api.http) = {
             post: "/v1/inventory/{organization_id}/{asset_id}/update"
             body: "*"
