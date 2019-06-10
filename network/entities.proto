@@ -76,27 +76,39 @@ message DisauthorizeMemberRequest {
     string service_application_instance_id = 4;
 }
 
-
+// AddDNSEntryRequest message sent by conductor when a service is deployed.
 message AddDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ServiceGroupId with the service group identifier of the descriptor.
+    string service_group_id = 3;
+    // ServiceId with the service identifier of the descriptor.
+    string service_id = 4;
     // Service name
-    string service_name = 2;
+    string service_name = 5;
     // FQDN from the DNS entry.
-    string fqdn = 3;
+    string fqdn = 6;
     // IP of that FQDN.
-    string ip = 4;
+    string ip = 7;
     // Tags for this entry
-    repeated string tags = 5;
+    repeated string tags = 8;
 }
 
 message DeleteDNSEntryRequest {
     // OrganizationId with the organization identifier
     string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ServiceGroupId with the service group identifier of the descriptor.
+    string service_group_id = 3;
+    // ServiceId with the service identifier of the descriptor.
+    string service_id = 4;
     // Service name
-    string service_name = 2;
+    string service_name = 5;
     // Tags for this entry
-    repeated string tags = 3;
+    repeated string tags = 6;
 }
 
 message DNSEntry {
@@ -157,4 +169,42 @@ message ServiceDNSEntry{
 // ServiceDNSEntryList message with a list of ServiceDNSEntry.
 message ServiceDNSEntryList{
     repeated ServiceDNSEntry entries = 1;
+}
+
+
+//
+// Application Network
+//
+
+// InboundServiceProxy message sent when a new Proxy service is launched so that we can update
+// the networking rules of all outbound elements.
+message InboundServiceProxy{
+    // Organization ID
+    string organization_id = 1;
+    // Cluster ID where the service is deployed.
+    string cluster_id = 2;
+    // Application descriptor id
+    string app_descriptor_id = 3;
+    // Application instance id
+    string app_instance_id = 4;
+    // Service group instance id
+    string service_group_id = 5;
+    // Service id
+    string service_id = 6;
+    // IP address inside the vpn the service is connected as.
+    string ip = 7;
+}
+
+// OutboundService message sent by a sidecar ZT proxy to receive updates on the rules.
+message OutboundService{
+    // Organization ID
+    string organization_id = 1;
+    // Cluster ID where the service is deployed.
+    string cluster_id = 2;
+    // Application instance id
+    string app_instance_id = 3;
+    // Service group instance id
+    string service_group_instance_id = 4;
+    // Service application instance id
+    string service_application_instance_id = 5;
 }

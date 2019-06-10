@@ -104,3 +104,21 @@ message RegisterNetworkEntryRequest {
     // Service App Instance Id
     string service_app_instance_id = 8;
 }
+
+message ServiceRoute{
+    // Organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ServiceGroupId with the service group identifier of the descriptor.
+    string service_group_id = 3;
+    // ServiceId with the service identifier of the descriptor.
+    string service_id = 4;
+    // VSA with the Virtual Service Address as defined by Conductor/Network manager when the application
+    // layout is defined.
+    string vsa = 5;
+    // RedirectToVPN with the target DNAT IP of the VSA entry.
+    string redirect_to_vpn = 6;
+    // Drop to decide if the target route should be disabled for the given pod.
+    bool drop =7;
+}
