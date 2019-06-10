@@ -436,4 +436,11 @@ service Inventory {
             get: "/v1/inventory/asset/{organization_id}/{asset_id}/extended"
         };
     }
+    // UpdateAsset updates an asset from the inventory
+    rpc UpdateAsset (inventory.UpdateAssetRequest) return (inventory.Asset) {
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/{asset_id}/update"
+            body: "*"
+        };
+    }
 }
