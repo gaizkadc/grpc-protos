@@ -103,6 +103,8 @@ message UpdateDeviceRequest{
     string device_id = 3;
     // Enabled determines if the device can interact with the running applications.
     bool enabled = 4;
+    // Location of the device
+    inventory.InventoryLocation location = 5;
 }
 
 // RegisterDeviceRequest contains the information required to register a new device in a given device group.
