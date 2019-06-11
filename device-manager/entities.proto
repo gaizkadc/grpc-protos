@@ -7,6 +7,8 @@ syntax = "proto3";
 package device_manager;
 option go_package = "github.com/nalej/grpc-device-manager-go";
 
+import "inventory/entities.proto";
+
 // DeviceGroup contains the device group info
 message DeviceGroup {
     // OrganizationId with the organization identifier.
@@ -83,6 +85,8 @@ message Device{
     string device_api_key = 7;
     // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
     DeviceStatus device_status = 8;
+    // Device location
+    inventory.InventoryLocation location = 9;
 }
 
 message DeviceList{

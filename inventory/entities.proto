@@ -190,7 +190,7 @@ message UpdateAssetRequest{
     bool update_ip = 10;
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
-    // UpdateLocation flag to indicate that location need to be updated
+    // UpdateLocation flag to indicate that location needs to be updated
     bool update_location = 12;
     // location with the asset location
     InventoryLocation location = 13;

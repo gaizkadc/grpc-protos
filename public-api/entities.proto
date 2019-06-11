@@ -463,6 +463,8 @@ message Device{
     bool enabled = 6;
     // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
     string device_status_name = 7;
+    // location with the device location
+    inventory.InventoryLocation location = 8;
 }
 message DeviceList{
     repeated Device devices = 1;
