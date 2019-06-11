@@ -551,7 +551,8 @@ message Asset{
     inventory_manager.ConnectedStatus status = 14;
     // StatusName with the status of the asset.
     string status_name = 15;
-
+    // location with the asset location
+    inventory.InventoryLocation location = 16;
 }
 
 message AssetMonitoringRequest{
