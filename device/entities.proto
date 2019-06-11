@@ -135,5 +135,5 @@ message UpdateDeviceRequest {
     // UpdateLocation flag to indicate that location needs to be updated
     bool update_location = 7;
     // location with the device location
-    InventoryLocation location = 8;
+    inventory.InventoryLocation location = 8;
 }
