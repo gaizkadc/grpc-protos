@@ -35,7 +35,7 @@ service Devices {
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
     // AddLabelToDevice allows update the device removing labels
     rpc RemoveLabelFromDevice(device_manager.DeviceLabelRequest) returns (common.Success){}
-    // UpdateDevice allows to enable os disable a device
+    // UpdateDevice allows to update information from the device
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
     // RemoveDevice removes a device from the system
     rpc RemoveDevice(device.DeviceId) returns (common.Success){}
