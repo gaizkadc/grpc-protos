@@ -7,6 +7,8 @@ syntax = "proto3";
 package device;
 option go_package = "github.com/nalej/grpc-device-go";
 
+import "inventory/entities.proto";
+
 // DeviceGroup message defining the concept of a device group. A device group represents a collection
 // of individual devices in order to facilitate the connectivity with other elements of the system.
 message DeviceGroup {
