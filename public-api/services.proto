@@ -413,7 +413,14 @@ service Agent {
            post: "/v1/agent/{organization_id}/{edge_controller_id}/{asset_id}/activate_monitoring"
            body: "*"
         };
-}
+    }
+    // UninstallAgent operation to uninstall an agent
+    rpc UninstallAgent (inventory.AssetId) returns (common.Success){
+        option (google.api.http) = {
+           post: "/v1/agent/{organization_id}/{asset_id}/uninstall"
+           body: "*"
+        };
+    }
 }
 
 // Inventory
@@ -434,6 +441,13 @@ service Inventory {
     rpc GetAssetInfo(inventory.AssetId) returns (Asset){
         option (google.api.http) = {
             get: "/v1/inventory/asset/{organization_id}/{asset_id}/extended"
+        };
+    }
+    // UpdateAsset updates an asset from the inventory
+    rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset) {
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/{asset_id}/update"
+            body: "*"
         };
     }
 }

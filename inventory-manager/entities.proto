@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "inventory/entities.proto";
 import "device-manager/entities.proto";
+import "device/entities.proto";
 import "authx/entities.proto";
 
 //
@@ -51,8 +52,10 @@ message Asset{
     inventory.AgentOpSummary last_op_summary = 12;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 13;
-    // Status of the agent.
+    // Status of the asset.
     ConnectedStatus status = 14;
+    // location with the asset location
+    inventory.InventoryLocation location = 15;
 }
 
 // AssetList with a list of assets.
@@ -523,4 +526,14 @@ message EdgeControllerExtendedInfo{
     EdgeController controller = 1;
     // ManagedAssets with the assets managed by the controller
     repeated Asset managed_assets = 2;
+}
+
+// FullAssetId
+message FullAssetId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
 }

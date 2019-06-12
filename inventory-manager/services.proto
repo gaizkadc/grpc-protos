@@ -12,6 +12,7 @@ import "common/entities.proto";
 import "inventory-manager/entities.proto";
 import "authx/entities.proto";
 import "inventory/entities.proto";
+import "device/entities.proto";
 
 
 // Inventory services.
@@ -24,6 +25,10 @@ service Inventory{
     rpc GetAssetInfo(inventory.AssetId) returns (Asset){}
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (InventorySummary){}
+    // UpdateAsset updates an asset in the inventory.
+    rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset){}
+    // UpdateDevice updates a device in the inventory.
+    rpc UpdateDevice (device.UpdateDeviceRequest) returns (device.Device){}
 }
 
 // Inventory Monitoring related operations
@@ -72,4 +77,6 @@ service Agent{
     rpc ListAgentOperations(AgentId) returns (AgentOpResponseList){}
     // DeleteAgentOperation deletes an agent operation from the history.
     rpc DeleteAgentOperation(AgentOperationId) returns (common.Success){}
+    // UninstallAgent operation to uninstall an agent
+    rpc UninstallAgent (inventory.AssetId) returns (common.Success){}
 }
