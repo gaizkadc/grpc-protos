@@ -27,6 +27,8 @@ service DeploymentManager {
     rpc Undeploy(deployment_manager.UndeployRequest) returns (common.Success) {}
     // Request to undeploy a fragment
     rpc UndeployFragment(deployment_manager.UndeployFragmentRequest) returns (common.Success) {}
+    // SetServiceRoute setups an iptables DNAT for a given service
+    rpc SetServiceRoute(deployment_manager.ServiceRoute) returns (common.Success){}
 }
 
 // Slave services for localling retrieving a set of logs.

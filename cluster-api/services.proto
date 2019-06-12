@@ -28,6 +28,10 @@ service NetworkManager {
     rpc AuthorizeMember(network.AuthorizeMemberRequest) returns (common.Success){}
     // AddDNSEntry creates a new DNSEntry on the system.
     rpc AddDNSEntry(network.AddDNSEntryRequest) returns (common.Success){}
+    // RegisterInboundServiceProxy operation to update rules based on new service proxy being created.
+    rpc RegisterInboundServiceProxy(network.InboundServiceProxy) returns (common.Success){}
+    // RegisterOutboundProxy operation to retrieve existing networking rules.
+    rpc RegisterOutboundProxy(network.OutboundService) returns (common.Success){}
 }
 
 // DeviceManager operations

@@ -45,3 +45,10 @@ service ServiceDNS {
     // ListEntries lists all the DNS entries from an organization.
     rpc ListEntries(organization.OrganizationId) returns (ServiceDNSEntryList){}
 }
+
+service ApplicationNetwork{
+    // RegisterInboundServiceProxy operation to update rules based on new service proxy being created.
+    rpc RegisterInboundServiceProxy(InboundServiceProxy) returns (common.Success){}
+    // RegisterOutboundProxy operation to retrieve existing networking rules.
+    rpc RegisterOutboundProxy(OutboundService) returns (common.Success){}
+}

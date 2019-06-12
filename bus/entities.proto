@@ -73,5 +73,9 @@ message NetworkOps {
         network.AddDNSEntryRequest add_dns_entry_request = 3;
         // DeleteDNSEntryRequest request the removal of an existing entry in to the DNS
         network.DeleteDNSEntryRequest delete_dns_entry_request = 4;
+        // InboundAppServiceProxy message sent by a proxy when its created.
+        network.InboundServiceProxy inbound_app_service_proxy = 5;
+        // OutboundAppService message sent by a sidecar when its created.
+        network.OutboundService outbound_app_service = 6;
     }
 }
