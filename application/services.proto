@@ -63,6 +63,10 @@ service Applications {
     rpc RemoveAppZtNetwork(RemoveAppZtNetworkRequest) returns (common.Success) {}
     // RemoveAppZtNetwork remove the network instance for an application instance
     rpc GetAppZtNetwork(GetAppZtNetworkRequest) returns (AppZtNetwork) {}
+    // AddZtNetworkProxy adds a new network proxy for an existing private network
+    rpc AddZtNetworkProxy(ServiceProxy) returns(common.Success) {}
+    // RemoveZtnetworkProxy removes a proxy from the list of available entries of a private network
+    rpc RemoveZtnetworkProxy(RemoveAppZtNetworkProxy) returns(common.Success) {}
     // Add Zt member authorization data
     rpc AddAuthorizedZtNetworkMember(AddAuthorizedZtNetworkMemberRequest) returns (ZtNetworkMember) {}
     // Delete Zt member authorization data
