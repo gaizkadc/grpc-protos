@@ -43,7 +43,7 @@ jobs:
         $merge_log=$(git log --merges -n $merge_offset --pretty=format:"%s" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
         if [[ "$$merge_log" == *"Merge branch 'master' into"* ]]; then
           merge_offset=$(($merge_offset + 1))
-        elif [[ "$$merge_log" == *of github.com:* ]]; then
+        elif [[ "$$merge_log" == *"of github.com:"* ]]; then
           merge_offset=$(($merge_offset + 1))
         else
           git_last_merge_commit=$(git log --merges -n $merge_offset --pretty=format:"%H" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
