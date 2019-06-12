@@ -40,7 +40,7 @@ jobs:
       fi
       merge_found=0
       while [ $merge_found -eq 0 ]; do
-        $merge_log=$(git log --merges -n $merge_offset --pretty=format:"%s" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
+        merge_log=$(git log --merges -n $merge_offset --pretty=format:"%s" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
         if [[ "$merge_log" == *"Merge branch 'master' into"* ]]; then
           merge_offset=$(($merge_offset + 1))
         elif [[ "$merge_log" == *"of github.com:"* ]]; then
