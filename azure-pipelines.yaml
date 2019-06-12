@@ -124,7 +124,7 @@ jobs:
           echo "0.0.0" > VERSION
         fi
         current_version=$(cat VERSION)
-        version_values=$(echo $current_version | tr '.' ' ')
+        version_values=(`echo $current_version | tr '.' ' '`)
         major_version=${version_values[0]}
         minor_version=${version_values[1]}
         patch_version=${version_values[2]}
