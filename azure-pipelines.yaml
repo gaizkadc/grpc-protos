@@ -141,7 +141,7 @@ jobs:
         if [ $? -ne 0 ]; then
           git_output=$(cat ../git_publish_output)
           rm -rf ../git_publish_output
-          echo "##vso[task.logissue type=error]Error pushing changes to $directory repository..%0D%0ACommand output:%0D%0A${git_publish_output//$'\n'/'%0D%0A'}%0D%0AError CIE0028"
+          echo "##vso[task.logissue type=error]Error pushing changes to $directory repository..%0D%0ACommand output:%0D%0A${git_publish_output//$'\n'/'%0D%0A'}%0D%0AError CIE0029"
           echo "##vso[task.complete result=Failed;]"
         fi
         cd ..
