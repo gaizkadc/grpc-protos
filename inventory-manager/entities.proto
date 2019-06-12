@@ -527,3 +527,13 @@ message EdgeControllerExtendedInfo{
     // ManagedAssets with the assets managed by the controller
     repeated Asset managed_assets = 2;
 }
+
+// FullAssetId
+message FullAssetId{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
+    // AssetId with the asset identifier.
+    string asset_id = 3;
+}
