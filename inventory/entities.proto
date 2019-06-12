@@ -161,6 +161,7 @@ message AssetId{
     string asset_id = 2;
 }
 
+
 // AssetList with a list of assets.
 message AssetList{
     // Assets

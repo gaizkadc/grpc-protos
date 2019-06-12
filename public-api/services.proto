@@ -413,7 +413,14 @@ service Agent {
            post: "/v1/agent/{organization_id}/{edge_controller_id}/{asset_id}/activate_monitoring"
            body: "*"
         };
-}
+    }
+    // UninstallAgent operation to uninstall an agent
+    rpc UninstallAgent (inventory.AssetId) returns (common.Success){
+        option (google.api.http) = {
+           post: "/v1/agent/{organization_id}/{asset_id}/uninstall"
+           body: "*"
+        };
+    }
 }
 
 // Inventory
