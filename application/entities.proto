@@ -698,6 +698,41 @@ message InstanceParameterList {
     repeated InstanceParameter parameters = 1;
 }
 
+
+// ServiceProxy represents an inbound component running in front of a component that
+// offers a service implementation.
+message ServiceProxy {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 2;
+    // ServiceGroupInstanceId identifier of the service group instance.
+    string service_group_instance_id = 3;
+    // ServiceInstanceId identifier of the service instance.
+    string service_instance_id = 4;
+    // ServiceGroupId with the service group identifier of the descriptor.
+    string service_group_id = 5;
+    // ServiceId with the service identifier of the descriptor.
+    string service_id = 6;
+    // ClusterId id of the cluster where this proxy is running on.
+    string cluster_id = 7;
+    // Ip of the service.
+    string ip = 8;
+    // Associated FQDN.
+    string fqdn = 9;
+}
+
+// Representation of a list of proxies
+message ServiceProxyList {
+    repeated ServiceProxy list = 1;
+}
+
+// Map of service proxies per cluster
+// cluster_id -> proxies_list
+message ServiceProxyClusterMap {
+    map<string, ServiceProxyList> proxies_per_cluster = 1;
+}
+
 // AppZtNetwork structure of a zerotier network
 message AppZtNetwork {
     // OrganizationId with the organization identifier.
@@ -706,6 +741,26 @@ message AppZtNetwork {
     string  app_instance_id = 2;
     // ZeroTier network id
     string network_id = 3;
+    // Map of VSA entries service_fqdn -> ip
+    map<string,string> vsa_list = 4;
+    // Map of service proxies service_fqdn -> cluster_id -> [service_proxy...]
+    map<string, ServiceProxyClusterMap> available_proxies = 5;
+}
+
+message RemoveAppZtNetworkProxy {
+    // OrganizationId with the organization identifier.
+    string  organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string  app_instance_id = 2;
+    // Service FQDN
+    string fqdn = 3;
+    // ClusterId
+    string cluster_id = 4;
+    // Ip of the service
+    // ServiceGroupInstanceId identifier of the service group instance.
+    string service_group_instance_id = 5;
+    // ServiceInstanceId identifier of the service instance.
+    string service_instance_id = 6;
 }
 
 // AddAppZtNetworkRequest add a new zerotier network id
@@ -716,6 +771,8 @@ message AddAppZtNetworkRequest {
     string  app_instance_id = 2;
     // ZeroTier network id
     string network_id = 3;
+    // Map of VSA entries service_group_id -> ip
+    map<string, string> vsa_list = 4;
 }
 
 // DeleteAppZtNetworkRequest remove any network id for the given app instance
