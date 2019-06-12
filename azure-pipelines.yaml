@@ -59,6 +59,7 @@ jobs:
       echo '##vso[task.setvariable variable=modifiedDirectories]'$modified_dirs
       if [ "$modified_dirs" == "" ]; then
         echo "No modified directories detected"
+        echo "No modified directories detected" >> protobuf_generation_output
       else
         echo "Detected directories to generate:"
         echo $modified_dirs
