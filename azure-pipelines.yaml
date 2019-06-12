@@ -10,8 +10,6 @@ variables:
     value: ""
   - name: authorName
     value: ""
-  - name: protosOutput
-    value: ""
 
 resources:
   repositories:
@@ -34,34 +32,37 @@ jobs:
       sshPublicKey: $(sshPublicKey)
   
   - script: |
-      MERGE_NUMBER=1
-      GITLASTCOMMIT=$(Build.SourceVersion)
-      GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H")
-      if [ "$GITLASTCOMMIT" == "$GITLASTMERGECOMMIT" ]; then
-        MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+      merge_offset=1
+      git_last_commit=$(Build.SourceVersion)
+      git_last_merge_commit=$(git log --merges -n $merge_offset --pretty=format:"%H")
+      if [ "$git_last_commit" == "$git_last_merge_commit" ]; then
+        merge_offset=$(($merge_offset + 1))
       fi
-      FOUND_MERGE=0
-      while [ $FOUND_MERGE -eq 0 ]; do
-        MERGELOG=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%s" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-        if [[ "$MERGELOG" == *"Merge branch 'master' into"* ]]; then
-          MERGE_NUMBER=$(( $MERGE_NUMBER + 1))
+      merge_found=0
+      while [ $merge_found -eq 0 ]; do
+        merge_log=$(git log --merges -n $merge_offset --pretty=format:"%s" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
+        if [[ "$merge_log" == *"Merge branch 'master' into"* ]]; then
+          merge_offset=$(($merge_offset + 1))
+        elif [[ "$merge_log" == *"of github.com:"* ]]; then
+          merge_offset=$(($merge_offset + 1))
         else
-          GITLASTMERGECOMMIT=$(git log --merges -n $MERGE_NUMBER --pretty=format:"%H" | awk -v nr="$MERGE_NUMBER" '{if (NR==nr) print $0}')
-          echo '##vso[task.setvariable variable=mergeCommit]'$GITLASTMERGECOMMIT
-          FOUND_MERGE=1
+          git_last_merge_commit=$(git log --merges -n $merge_offset --pretty=format:"%H" | awk -v nr="$merge_offset" '{if (NR==nr) print $0}')
+          echo '##vso[task.setvariable variable=mergeCommit]'$git_last_merge_commit
+          merge_found=1
         fi
       done
-      echo "Looking for differences between $GITLASTMERGECOMMIT (last merge commit) and $GITLASTCOMMIT (HEAD commit)"
+      echo "Looking for differences between $git_last_merge_commit (last merge commit) and $git_last_commit (HEAD commit)"
     displayName: Look for the last real merge commit
   
   - script: |
-      MODIFIEDDIRS=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}')
-      echo '##vso[task.setvariable variable=modifiedDirectories]'$MODIFIEDDIRS
-      if [ "$MODIFIEDDIRS" == "" ]; then
+      modified_dirs=$(git diff --name-only $(Build.SourceVersion) $(mergeCommit) | grep "^.*\/.*.proto$" | awk -F/ '{print $1}' | uniq)
+      echo '##vso[task.setvariable variable=modifiedDirectories]'$modified_dirs
+      if [ "$modified_dirs" == "" ]; then
         echo "No modified directories detected"
+        echo "No modified directories detected" >> protobuf_generation_output
       else
         echo "Detected directories to generate:"
-        echo $MODIFIEDDIRS
+        echo $modified_dirs
       fi
     displayName: Get changed protobuf directories from last merge until now
       
@@ -79,13 +80,13 @@ jobs:
         cd $protobuf
         if [ -f .protolangs ]; then
           while read lang; do
-            protosOutput=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway)
-            protosResult=$?
-            echo $protosOutput
-            echo '##vso[task.setvariable variable=protosOutput]'$protosOutput
-            if [ "$protosResult" -ne "0" ]; then
-              exit 1
+            docker_output=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway)
+            if [ $? -ne 0 ]; then
+              echo "##vso[task.logissue type=error]Error generating protobufs of $protobuf for $lang language.%0D%0ACommand output:%0D%0A${docker_output//$'\n'/'%0D%0A'}%0D%0AError CIE0027"
+              echo "##vso[task.complete result=Failed;]"
             fi
+            echo $docker_output
+            echo $docker_output >> ../protobuf_generation_output
           done < .protolangs
         fi
         cd $(system.defaultWorkingDirectory)
@@ -100,6 +101,11 @@ jobs:
           while read lang; do
             repositoryName="grpc-$protobuf-$lang"
             git clone $(gitHostName)/$repositoryName.git dist/$repositoryName
+            if [ $? -ne 0 ]; then
+              echo "##vso[task.logissue type=error]Error cloning repository $repositoryName. Please check that the repository exists.%0D%0AError CIE0028"
+              echo "##vso[task.complete result=Failed;]"
+            fi
+
             cp -R $protobuf/pb-$lang/github.com/nalej/$repositoryName/* dist/$repositoryName/
             cp -R $protobuf/pb-$lang/doc dist/$repositoryName/
             cp -R $protobuf/pb-$lang/$protobuf/*.swagger.json dist/$repositoryName/doc/.
@@ -117,20 +123,27 @@ jobs:
           echo "Creating initial version"
           echo "0.0.0" > VERSION
         fi
-        currentVersionString=`cat VERSION`
-        versionValues=(`echo $currentVersionString | tr '.' ' '`)
-        vMajor=${versionValues[0]}
-        vMinor=${versionValues[1]}
-        vPatch=${versionValues[2]}
-        vPatch=$((vPatch + 1))
-        newVersion="${vMajor}.${vMinor}.${vPatch}"
-        echo "New version will be ${newVersion}"
-        echo $newVersion > VERSION
-        git add .
-        git commit -m "Auto generated gRPC"
-        git push origin HEAD
-        git tag -a -m "Auto generated version ${newVersion}." "v$newVersion"
-        git push origin --tags
+        current_version=$(cat VERSION)
+        version_values=$(echo $current_version | tr '.' ' ')
+        major_version=${version_values[0]}
+        minor_version=${version_values[1]}
+        patch_version=${version_values[2]}
+        patch_version=$((patch_version + 1))
+        new_version="${major_version}.${minor_version}.${patch_version}"
+        echo "New version will be ${new_version}"
+        echo $new_version > VERSION
+        git add . >> ../git_publish_output 2>&1 && \
+        git commit -m "Auto generated gRPC" >> ../git_publish_output 2>&1 && \
+        git push origin HEAD >> ../git_publish_output 2>&1 && \
+        git tag -a -m "Auto generated version ${new_version}." "v$new_version" >> ../git_publish_output 2>&1 && \
+        git push origin --tags >> ../git_publish_output 2>&1
+
+        if [ $? -ne 0 ]; then
+          git_output=$(cat ../git_publish_output)
+          rm -rf ../git_publish_output
+          echo "##vso[task.logissue type=error]Error pushing changes to $directory repository..%0D%0ACommand output:%0D%0A${git_publish_output//$'\n'/'%0D%0A'}%0D%0AError CIE0029"
+          echo "##vso[task.complete result=Failed;]"
+        fi
         cd ..
       done
     workingDirectory: $(system.defaultWorkingDirectory)/dist
@@ -142,4 +155,3 @@ jobs:
       author: $(authorName)
       buildUrl: $(buildUrl)$(Build.BuildId)
       slackWebhook: $(slackCIProtobuf)
-      protosOutput: $(protosOutput)
