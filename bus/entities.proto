@@ -60,7 +60,7 @@ message InventoryEvents{
         // EicStart with the EIC start message
         inventory_manager.EICStartInfo eic_start = 3;
         // AssetId with the asset identifier that is uninstalled
-        inventory.AssetId asset_id = 4;
+        inventory.AssetUninstalledId asset_id = 4;
     }
 }
 
