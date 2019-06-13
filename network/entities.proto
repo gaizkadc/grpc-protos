@@ -191,8 +191,14 @@ message InboundServiceProxy{
     string service_group_id = 5;
     // Service id
     string service_id = 6;
+    // Service group instance id
+    string service_group_instance_id = 7;
+    // Service instance id
+    string service_instance_id = 8;
     // IP address inside the vpn the service is connected as.
-    string ip = 7;
+    string ip = 9;
+    // FQDN for the proxy
+    string fqdn = 10;
 }
 
 // OutboundService message sent by a sidecar ZT proxy to receive updates on the rules.
@@ -206,5 +212,5 @@ message OutboundService{
     // Service group instance id
     string service_group_instance_id = 4;
     // Service application instance id
-    string service_application_instance_id = 5;
+    string service_instance_id = 5;
 }

@@ -10,6 +10,7 @@ package deployment_manager;
 option go_package = "github.com/nalej/grpc-deployment-manager-go";
 
 import "deployment-manager/entities.proto";
+import "network/entities.proto";
 import "common/entities.proto";
 
 service DeploymentManager {
@@ -30,4 +31,13 @@ service DeploymentManagerNetwork {
     rpc RegisterNetworkEntry(RegisterNetworkEntryRequest) returns(common.Success) {}
     // SetServiceRoute setups an iptables DNAT for a given service
     rpc SetServiceRoute(ServiceRoute) returns (common.Success){}
+}
+
+// Services controlling the declaration of new proxies for an application. The information will be forwarded
+// from the cluster app to the manager app accordingly.
+service ApplicationProxy{
+    // RegisterInboundServiceProxy operation to update rules based on new service proxy being created.
+    rpc RegisterInboundServiceProxy(network.InboundServiceProxy) returns (common.Success){}
+    // RegisterOutboundProxy operation to retrieve existing networking rules.
+    rpc RegisterOutboundProxy(network.OutboundService) returns (common.Success){}
 }
