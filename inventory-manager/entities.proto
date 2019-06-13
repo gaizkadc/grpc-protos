@@ -514,7 +514,7 @@ message AgentsAlive {
 // InventoryList message with a collection of all elements in the inventory
 message InventoryList{
     // Devices
-    repeated device_manager.Device devices = 1;
+    DeviceList devices = 1;
     // Assets
     repeated Asset assets = 2;
     // Controllers
