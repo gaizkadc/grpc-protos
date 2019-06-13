@@ -24,6 +24,8 @@ service EdgeInventoryProxy {
     rpc LogAgentAlive(inventory_manager.AgentsAlive) returns (common.Success){}
     // CallbackAgentOperation is called by the EIC upon execution of the operation by the agent.
     rpc CallbackAgentOperation(inventory_manager.AgentOpResponse) returns (common.Success){}
+    // AgentUninstalled processes an uninstall response from an EC
+    rpc AgentUninstalled(inventory.AssetId) returns (common.Success) {}
 }
 
 // Edge Controller Proxy service - for communication for Inventory Manager to Edge Controller
