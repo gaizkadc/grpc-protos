@@ -59,7 +59,7 @@ message InventoryEvents{
         inventory.EdgeControllerId edge_controller_id = 2;
         // EicStart with the EIC start message
         inventory_manager.EICStartInfo eic_start = 3;
-        // AssetId with the asset identifier that is uninstalled
+        // AssetUninstalledId with the asset identifier that is uninstalled
         inventory.AssetUninstalledId asset_id = 4;
     }
 }
