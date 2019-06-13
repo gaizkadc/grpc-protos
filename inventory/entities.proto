@@ -161,7 +161,13 @@ message AssetId{
     string asset_id = 2;
 }
 
-
+// AssetUninstalledId with the message sent to inform that an asset has been installed
+message AssetUninstalledId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+}
 // AssetList with a list of assets.
 message AssetList{
     // Assets
