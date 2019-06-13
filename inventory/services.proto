@@ -11,7 +11,6 @@ import "common/entities.proto";
 import "inventory/entities.proto";
 import "organization/entities.proto";
 import "device/entities.proto";
-import "inventory-manager/entities.proto";
 
 // Assets operations.
 service Assets {
@@ -46,5 +45,5 @@ service Controllers {
 // Devices operations
 service Devices {
     // ListDevices retrieves a list of devices in a devicegroup
-    rpc ListDevices(device.DeviceGroupId) returns (inventory_manager.DeviceList){}
+    rpc ListDevices(device.DeviceGroupId) returns (DeviceList){}
 }

@@ -514,7 +514,7 @@ message AgentsAlive {
 // InventoryList message with a collection of all elements in the inventory
 message InventoryList{
     // Devices
-    DeviceList devices = 1;
+    repeated Device devices = 1;
     // Assets
     repeated Asset assets = 2;
     // Controllers
@@ -553,7 +553,4 @@ message Device{
     string device_status_name = 5;
     // location with the device location
     inventory.InventoryLocation location = 6;
-}
-message DeviceList{
-    repeated Device devices = 1;
 }
