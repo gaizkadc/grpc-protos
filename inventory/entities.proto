@@ -161,7 +161,13 @@ message AssetId{
     string asset_id = 2;
 }
 
-
+// AssetUninstalledId with the message sent to inform that an asset has been installed
+message AssetUninstalledId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+}
 // AssetList with a list of assets.
 message AssetList{
     // Assets
@@ -268,5 +274,23 @@ message UpdateEdgeControllerRequest{
     string geolocation = 9;
 }
 
+// Device in inventory
+message Device{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceId with the device identifier.
+    string device_id = 2;
+    // RegisterSince is the timestamp when the device joined the group.
+    int64 register_since = 3;
+    // Labels defined by the user.
+    map<string, string> labels = 4;
+    // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
+    string device_status_name = 5;
+    // location with the device location
+    InventoryLocation location = 6;
+}
+message DeviceList{
+    repeated Device devices = 1;
+}
 
 

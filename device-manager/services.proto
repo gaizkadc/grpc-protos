@@ -13,7 +13,7 @@ import "device-controller/entities.proto";
 import "device/entities.proto";
 import "common/entities.proto";
 import "organization/entities.proto";
-import "google/api/annotations.proto";
+//import "google/api/annotations.proto";
 
 service Devices {
     // AddDeviceGroup adds a new DeviceGroup

@@ -592,7 +592,7 @@ message AgentOpResponse{
 // InventoryList message with a collection of all elements in the inventory
 message InventoryList{
     // Devices
-    repeated Device devices = 1;
+    inventory_manager.DeviceList devices = 1;
     // Assets
     repeated Asset assets = 2;
     // Controllers
