@@ -543,14 +543,22 @@ message FullAssetId{
 message Device{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
     // DeviceId with the device identifier.
-    string device_id = 2;
+    string device_id = 3;
+    // AssetDeviceId is the composite of DeviceID and DeviceGroupId
+    string asset_device_id = 4;
     // RegisterSince is the timestamp when the device joined the group.
-    int64 register_since = 3;
+    int64 register_since = 5;
     // Labels defined by the user.
-    map<string, string> labels = 4;
+    map<string, string> labels = 6;
+    // Enabled determines if the device can interact with the running applications.
+    bool enabled = 7;
+    // DeviceApiKey contains the API KEY used by the device to send data.
+    string device_api_key = 8;
     // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
-    string device_status_name = 5;
-    // location with the device location
-    inventory.InventoryLocation location = 6;
+    device_manager.DeviceStatus device_status = 9;
+    // Device location
+    inventory.InventoryLocation location = 10;
 }
