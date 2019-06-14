@@ -41,9 +41,3 @@ service Controllers {
     // Update the information of a controller.
     rpc Update(UpdateEdgeControllerRequest) returns (EdgeController){}
 }
-
-// Devices operations
-service Devices {
-    // ListDevices retrieves a list of devices in a devicegroup
-    rpc ListDevices(device.DeviceGroupId) returns (DeviceList){}
-}
