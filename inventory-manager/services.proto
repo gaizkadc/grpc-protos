@@ -10,7 +10,6 @@ option go_package = "github.com/nalej/grpc-inventory-manager-go";
 import "organization/entities.proto";
 import "common/entities.proto";
 import "inventory-manager/entities.proto";
-import "authx/entities.proto";
 import "inventory/entities.proto";
 import "device/entities.proto";
 
@@ -33,7 +32,7 @@ service Inventory{
 
 // Inventory Monitoring related operations
 service InventoryMonitoring{
-    // List available metrics for a specific Edge Controllor or
+    // List available metrics for a specific Edge Controller or
     // asset selector
     rpc ListMetrics(AssetSelector) returns (MetricsList){}
     // Query monitoring metrics

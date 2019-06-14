@@ -9,7 +9,6 @@ option go_package = "github.com/nalej/grpc-inventory-manager-go";
 
 import "inventory/entities.proto";
 import "device-manager/entities.proto";
-import "device/entities.proto";
 import "authx/entities.proto";
 
 //

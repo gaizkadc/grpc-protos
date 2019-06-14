@@ -16,7 +16,6 @@ import "application/entities.proto";
 import "application-manager/entities.proto";
 import "infrastructure-manager/entities.proto";
 import "user-manager/entities.proto";
-import "conductor/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
 import "unified-logging/entities.proto";
