@@ -130,7 +130,7 @@ jobs:
         patch_version=${version_values[2]}
         patch_version=$((patch_version + 1))
         new_version="${major_version}.${minor_version}.${patch_version}"
-        echo "        - $directory: $current_version -> *$new_version*" >> protobuf_generation_output
+        echo "        - $directory: $current_version -> *$new_version*" >> $(system.defaultWorkingDirectory)/protobuf_generation_output
         echo $new_version > VERSION
         git add . >> ../git_publish_output 2>&1 && \
         git commit -m "Auto generated gRPC" >> ../git_publish_output 2>&1 && \
