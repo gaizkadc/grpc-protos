@@ -10,7 +10,6 @@ option go_package = "github.com/nalej/grpc-inventory-go";
 import "common/entities.proto";
 import "inventory/entities.proto";
 import "organization/entities.proto";
-import "device/entities.proto";
 
 // Assets operations.
 service Assets {
