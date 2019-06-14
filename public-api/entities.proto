@@ -455,20 +455,24 @@ message Device{
     string device_group_id = 2;
     // DeviceId with the device identifier.
     string device_id = 3;
+    // AssetDeviceId is the composite of DeviceID and DeviceGroupId
+    string asset_device_id = 4;
     // RegisterSince is the timestamp when the device joined the group.
-    int64 register_since = 4;
+    int64 register_since = 5;
     // Labels defined by the user.
-    map<string, string> labels = 5;
+    map<string, string> labels = 6;
     // Enabled determines if the device can interact with the running applications.
-    bool enabled = 6;
+    bool enabled = 7;
     // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
-    string device_status_name = 7;
+    string device_status_name = 8;
     // location with the device location
-    inventory.InventoryLocation location = 8;
+    inventory.InventoryLocation location = 9;
 }
+
 message DeviceList{
     repeated Device devices = 1;
 }
+
 
 // --------------------------------
 // Controllers
