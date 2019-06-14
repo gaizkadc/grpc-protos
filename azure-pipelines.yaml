@@ -80,7 +80,7 @@ jobs:
         cd $protobuf
         if [ -f .protolangs ]; then
           while read lang; do
-            docker_output=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway)
+            docker_output=$(docker run -v $(system.defaultWorkingDirectory):/defs namely/protoc-all:1.15 -d $protobuf -i . -i /usr/local/include/google -o $protobuf/pb-$lang -l $lang --with-docs --with-gateway 2>&1)
             if [ $? -ne 0 ]; then
               echo "##vso[task.logissue type=error]Error generating protobufs of $protobuf for $lang language.%0D%0ACommand output:%0D%0A${docker_output//$'\n'/'%0D%0A'}%0D%0AError CIE0027"
               echo "##vso[task.complete result=Failed;]"
@@ -130,7 +130,7 @@ jobs:
         patch_version=${version_values[2]}
         patch_version=$((patch_version + 1))
         new_version="${major_version}.${minor_version}.${patch_version}"
-        echo "New version will be ${new_version}"
+        echo "        - $directory: $current_version -> *$new_version*" >> protobuf_generation_output
         echo $new_version > VERSION
         git add . >> ../git_publish_output 2>&1 && \
         git commit -m "Auto generated gRPC" >> ../git_publish_output 2>&1 && \
