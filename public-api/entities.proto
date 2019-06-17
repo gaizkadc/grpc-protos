@@ -106,7 +106,7 @@ message InstallRequest {
     // Target platform
     Platform target_platform = 12;
     // Static IP addresses
-    installer.StaticIPAddresses static_ip_addresses = 13; 
+    installer.StaticIPAddresses static_ip_addresses = 13;
 }
 
 // --------------------------------
@@ -448,6 +448,68 @@ message AppParameterList {
 // --------------------------------
 // Devices
 // --------------------------------
+
+// OperatingSystemInfo contains information about the operating system of an asset. Notice that no
+// enums have been used for either the name or the version as to no constraint the elements of the
+// inventory even if we do not have an agent running supporting those.
+message OperatingSystemInfo{
+    // Name of the operating system. Expecting full name.
+    string name = 1;
+    // Version installed.
+    string version = 2;
+    // Class of the operating system - determines the binary format together with architecture
+    string class_name = 3;
+    // Architecture of the OS.
+    string architecture = 4;
+}
+
+// HardareInfo contains information about the hardware of an asset.
+message HardwareInfo{
+    // CPUs contains the list of CPU available in a given asset.
+    repeated CPUInfo cpus = 1;
+    // InstalledRam contains the total RAM available in MB.
+    int64 installed_ram = 2;
+    // NetInterfaces with the list of networking cards.
+    repeated NetworkingHardwareInfo net_interfaces = 3;
+}
+
+// CPUInfo contains information about a CPU.
+message CPUInfo{
+    // Manufacturer of the CPU.
+    string manufacturer = 1;
+    // Model of the CPU.
+    string model = 2;
+    // Architecture of the CPU.
+    string architecture = 3;
+    // NumCores with the number of cores.
+    int32 num_cores = 4;
+}
+
+// NetworkingHardwareInfo with the list of network interfaces that are available.
+message NetworkingHardwareInfo{
+    // Type of network interface. For example, ethernet, wifi, infiniband, etc.
+    string type = 1;
+    // Link capacity in Mbps.
+    int64 link_capacity = 2;
+}
+
+// StorageHardwareInfo with the storage related information.
+message StorageHardwareInfo{
+    // Type of storage.
+    string type = 1;
+    // Total capacity in MB.
+    int64 total_capacity = 2;
+}
+
+// AssetInfo defines the information related to Hw, Storage and OS
+message AssetInfo {
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 1;
+    // Hardware information.
+    HardwareInfo hardware = 2;
+    // Storage information.
+    repeated StorageHardwareInfo storage = 3;
+}
 message Device{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -467,6 +529,8 @@ message Device{
     string device_status_name = 8;
     // location with the device location
     inventory.InventoryLocation location = 9;
+    // AssetInfo with the information related to Hw, Storage and OS
+    AssetInfo asset_info = 10;
 }
 
 message DeviceList{
