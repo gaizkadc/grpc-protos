@@ -564,6 +564,13 @@ message Device{
     inventory.AssetInfo asset_info = 11;
 }
 
+message DeviceId {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetDeviceId is the composite of DeviceID and DeviceGroupId
+    string asset_device_id = 2;
+}
+
 // UpdateDeviceLocationRequest updated the location of a device
 message UpdateDeviceLocationRequest{
     // OrganizationId with the organization identifier.
