@@ -407,7 +407,7 @@ service Agent {
             body: "*"
         };
     }
-    rpc ActivateMonitoring (AssetMonitoringRequest) returns (public_api.AgentOpResponse) {
+    rpc ActivateMonitoring (AssetMonitoringRequest) returns (AgentOpResponse) {
         option (google.api.http) = {
            post: "/v1/agent/{organization_id}/{edge_controller_id}/{asset_id}/activate_monitoring"
            body: "*"
@@ -425,7 +425,7 @@ service Agent {
 // Inventory
 service Inventory {
     // ListMetrics returns available metrics for a certain selection of assets
-    rpc List(organization.OrganizationId) returns (public_api.InventoryList){
+    rpc List(organization.OrganizationId) returns (InventoryList){
         option (google.api.http) = {
             get: "/v1/inventory/{organization_id}/list"
         };
@@ -433,7 +433,7 @@ service Inventory {
     // GetControllerExtendedInfo returns the information of the edge controller with the information of its assets.
     rpc GetControllerExtendedInfo(inventory.EdgeControllerId) returns (EdgeControllerExtendedInfo){
         option (google.api.http) = {
-            get: "/v1/inventory/ec/{organization_id}/{edge_controller_id}/extended"
+            get: "/v1/inventory/{organization_id}/ec/{edge_controller_id}/extended"
         };
     }
     // GetAssetInfo returns the information of a given asset
@@ -445,7 +445,14 @@ service Inventory {
     // UpdateAsset updates an asset from the inventory
     rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset) {
         option (google.api.http) = {
-            post: "/v1/inventory/{organization_id}/{asset_id}/update"
+            post: "/v1/inventory/{organization_id}/asset/{asset_id}/update"
+            body: "*"
+        };
+    }
+    // UpdateDeviceLocation updates the location of a device on the inventory view
+    rpc UpdateDeviceLocation (inventory_manager.UpdateDeviceLocationRequest) returns (device_manager.Device) {
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/device/{asset_device_id}/update"
             body: "*"
         };
     }

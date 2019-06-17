@@ -34,4 +34,3 @@ service Devices {
     // UpdateDevice updates the information of a device (labels)
     rpc UpdateDevice(device.UpdateDeviceRequest) returns (device.Device) {}
 }
-

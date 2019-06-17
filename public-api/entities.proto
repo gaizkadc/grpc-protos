@@ -595,7 +595,7 @@ message AgentOpResponse{
     string operation_id = 4;
     // Timestamp of the response.
     int64 timestamp = 5;
-    // Status indicates if the operation was successfull
+    // Status indicates if the operation was successful
     string status = 6;
     // Info with additional information for an operation.
     string info = 7;
