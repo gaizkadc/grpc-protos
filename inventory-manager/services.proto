@@ -22,6 +22,8 @@ service Inventory{
     rpc GetControllerExtendedInfo(inventory.EdgeControllerId) returns (EdgeControllerExtendedInfo){}
     // GetAssetInfo returns the information of a given asset
     rpc GetAssetInfo(inventory.AssetId) returns (Asset){}
+    // GetAssetInfo returns the information of a given device
+    rpc GetDeviceInfo (DeviceId) returns (Device) {}
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (InventorySummary){}
     // UpdateAsset updates an asset in the inventory.
