@@ -39,6 +39,8 @@ message Device {
     map<string, string> labels = 5;
     // location with the device location
     inventory.InventoryLocation location = 6;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 7;
 }
 
 // DeviceGroupId Message that contains the fields to identifier the device group
@@ -70,7 +72,7 @@ message AddDeviceGroupRequest {
     // Name of the device group.
     string name = 3;
     // Labels defined by the user.
-    map<string, string> labels = 6;
+    map<string, string> labels = 4;
 }
 
 // GetDeviceGroupsRequest returns the devices info of an organization that match the names
@@ -91,6 +93,8 @@ message AddDeviceRequest {
     string device_id = 3;
     // Labels defined by the user
     map<string, string> labels = 4;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 5;
 }
 
 // DeviceId message that contains the fields to identifier a device
@@ -136,4 +140,6 @@ message UpdateDeviceRequest {
     bool update_location = 7;
     // location with the device location
     inventory.InventoryLocation location = 8;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 9;
 }

@@ -87,6 +87,8 @@ message Device{
     DeviceStatus device_status = 8;
     // Device location
     inventory.InventoryLocation location = 9;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 10;
 }
 
 message DeviceList{
@@ -119,6 +121,8 @@ message RegisterDeviceRequest {
     string device_id = 4;
     // Labels defined by the user
     map<string, string> labels = 5;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 6;
 }
 
 // RegisterResponse contains the DeviceApiKey that is assigned to the device.

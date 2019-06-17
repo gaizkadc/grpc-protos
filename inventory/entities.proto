@@ -79,6 +79,16 @@ message StorageHardwareInfo{
     int64 total_capacity = 2;
 }
 
+// AssetInfo defines the information related to Hw, Storage and OS
+message AssetInfo {
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 1;
+    // Hardware information.
+    HardwareInfo hardware = 2;
+    // Storage information.
+    repeated StorageHardwareInfo storage = 3;
+}
+
 // AgentOpStatus contains the status of the execution of a given agent operation.
 enum AgentOpStatus{
     SCHEDULED = 0;
