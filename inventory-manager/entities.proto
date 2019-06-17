@@ -560,4 +560,6 @@ message Device{
     device_manager.DeviceStatus device_status = 9;
     // Device location
     inventory.InventoryLocation location = 10;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 11;
 }
