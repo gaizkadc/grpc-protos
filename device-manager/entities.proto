@@ -105,7 +105,19 @@ message UpdateDeviceRequest{
     string device_id = 3;
     // Enabled determines if the device can interact with the running applications.
     bool enabled = 4;
-    // Location of the device
+}
+
+// UpdateDeviceLocationRequest updated the location of a device
+message UpdateDeviceLocationRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string device_group_id = 2;
+    // DeviceId with the device identifier.
+    string device_id = 3;
+    // UpdateLocation flag to indicate that location needs to be updated
+    bool update_location = 4;
+    // location with the device location
     inventory.InventoryLocation location = 5;
 }
 

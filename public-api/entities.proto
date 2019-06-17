@@ -465,8 +465,6 @@ message Device{
     bool enabled = 7;
     // DeviceStatus contains the status of the device (ONLINE/OFFLINE)
     string device_status_name = 8;
-    // location with the device location
-    inventory.InventoryLocation location = 9;
 }
 
 message DeviceList{
@@ -583,7 +581,7 @@ message AgentOpResponse{
     string operation_id = 4;
     // Timestamp of the response.
     int64 timestamp = 5;
-    // Status indicates if the operation was successfull
+    // Status indicates if the operation was successful
     string status = 6;
     // Info with additional information for an operation.
     string info = 7;

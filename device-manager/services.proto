@@ -39,6 +39,8 @@ service Devices {
     rpc UpdateDevice(device_manager.UpdateDeviceRequest) returns (device_manager.Device){}
     // RemoveDevice removes a device from the system
     rpc RemoveDevice(device.DeviceId) returns (common.Success){}
+    // UpdateDeviceLocation updated the location of a device
+    rpc UpdateDeviceLocation (UpdateDeviceLocationRequest) returns (Device){}
 }
 
 service Latency {

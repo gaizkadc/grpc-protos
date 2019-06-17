@@ -136,10 +136,4 @@ message UpdateDeviceRequest {
     bool remove_labels = 5;
     // Labels for the device.
     map <string, string> labels = 6;
-    // UpdateLocation flag to indicate that location needs to be updated
-    bool update_location = 7;
-    // location with the device location
-    inventory.InventoryLocation location = 8;
-    // AssetInfo with the information related to Hw, Storage and OS
-    inventory.AssetInfo asset_info = 9;
 }
