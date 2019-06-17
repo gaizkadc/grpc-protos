@@ -106,7 +106,7 @@ message InstallRequest {
     // Target platform
     Platform target_platform = 12;
     // Static IP addresses
-    installer.StaticIPAddresses static_ip_addresses = 13; 
+    installer.StaticIPAddresses static_ip_addresses = 13;
 }
 
 // --------------------------------
@@ -448,6 +448,16 @@ message AppParameterList {
 // --------------------------------
 // Devices
 // --------------------------------
+
+// AssetInfo defines the information related to Hw, Storage and OS
+message AssetInfo {
+    // OS contains Operating System information.
+    OperatingSystemInfo os = 1;
+    // Hardware information.
+    inventory.HardwareInfo hardware = 2;
+    // Storage information.
+    repeated inventory.StorageHardwareInfo storage = 3;
+}
 message Device{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -467,6 +477,8 @@ message Device{
     string device_status_name = 8;
     // location with the device location
     inventory.InventoryLocation location = 9;
+    // AssetInfo with the information related to Hw, Storage and OS
+    AssetInfo asset_info = 10;
 }
 
 message DeviceList{
