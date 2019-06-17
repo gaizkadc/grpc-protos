@@ -35,6 +35,8 @@ message AddNetworkRequest {
     string app_instance_id = 2;
     // Name of the network.
     string name = 3;
+    // FQDN and corresponding VirtualServiceAddresses for this network
+    map<string, string> vsa = 4;
 }
 
 message DeleteNetworkRequest {
