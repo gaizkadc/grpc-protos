@@ -563,3 +563,15 @@ message Device{
     // AssetInfo with the information related to Hw, Storage and OS
     inventory.AssetInfo asset_info = 11;
 }
+
+// UpdateDeviceLocationRequest updated the location of a device
+message UpdateDeviceLocationRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetDeviceId with the device identifier.
+    string asset_device_id = 2;
+    // UpdateLocation flag to indicate that location needs to be updated
+    bool update_location = 3;
+    // location with the device location
+    inventory.InventoryLocation location = 4;
+}
