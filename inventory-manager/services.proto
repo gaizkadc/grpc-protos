@@ -29,7 +29,7 @@ service Inventory{
     // UpdateAsset updates an asset in the inventory.
     rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset){}
     // UpdateDevice updates a device in the inventory.
-    rpc UpdateDevice (device.UpdateDeviceRequest) returns (device.Device){}
+    rpc UpdateDevice (UpdateDeviceLocationRequest) returns (Device){}
 }
 
 // Inventory Monitoring related operations
