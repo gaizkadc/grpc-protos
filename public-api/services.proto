@@ -456,7 +456,7 @@ service Inventory {
         };
     }
     // UpdateDeviceLocation updates the location of a device on the inventory view
-    rpc UpdateDeviceLocation (inventory_manager.UpdateDeviceLocationRequest) returns (device_manager.Device) {
+    rpc UpdateDeviceLocation (inventory_manager.UpdateDeviceLocationRequest) returns (Device) {
         option (google.api.http) = {
             post: "/v1/inventory/{organization_id}/device/{asset_device_id}/update"
             body: "*"
