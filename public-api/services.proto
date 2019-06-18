@@ -442,6 +442,12 @@ service Inventory {
             get: "/v1/inventory/asset/{organization_id}/{asset_id}/extended"
         };
     }
+    // GetDeviceInfo returns the information of a given asset
+    rpc GetDeviceInfo(inventory_manager.DeviceId) returns (Device){
+        option (google.api.http) = {
+            get: "/v1/inventory/device/{organization_id}/{asset_device_id}/extended"
+        };
+    }
     // UpdateAsset updates an asset from the inventory
     rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset) {
         option (google.api.http) = {
