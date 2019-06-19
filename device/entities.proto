@@ -136,4 +136,8 @@ message UpdateDeviceRequest {
     bool remove_labels = 5;
     // Labels for the device.
     map <string, string> labels = 6;
+    // Update location flag to check if the location needs to be updated
+    bool update_location = 7;
+    // New Location for the device
+    inventory.InventoryLocation location = 8;
 }
