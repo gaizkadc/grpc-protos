@@ -47,6 +47,8 @@ message InventoryOps {
     oneof Operation{
         // AgentOpResponse with the result of an operation executed by an agent.
         inventory_manager.AgentOpResponse agent_op_response = 1;
+        // EdgeControllerOpResponse with the result of an operation executed by an edge controller.
+        inventory_manager.EdgeControllerOpResponse edge_controller_op_response = 2;
     }
 }
 
