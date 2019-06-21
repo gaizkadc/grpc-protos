@@ -24,7 +24,6 @@ message InventoryLocation {
     string geolocation = 1;
     // geohash defines the location using a short alphanumeric string
     string geohash = 2;
-
 }
 
 // OperatingSystemInfo contains information about the operating system of an asset. Notice that no
@@ -89,8 +88,8 @@ message AssetInfo {
     repeated StorageHardwareInfo storage = 3;
 }
 
-// AgentOpStatus contains the status of the execution of a given agent operation.
-enum AgentOpStatus{
+// OpStatus contains the status of the execution of a given agent operation.
+enum OpStatus{
     SCHEDULED = 0;
     SUCCESS = 1;
     FAIL = 2;
@@ -104,7 +103,7 @@ message AgentOpSummary{
     // Timestamp of the response.
     int64 timestamp = 5;
     // Status indicates if the operation was successful
-    AgentOpStatus status = 6;
+    OpStatus status = 6;
     // Info with additional information for an operation.
     string info = 7;
 }
@@ -217,13 +216,6 @@ message UpdateAssetRequest{
 // Controller
 //
 
-// EdgeControllerOpStatus with the status of an async operation executed by the edge controller.
-enum EdgeControllerOpStatus{
-    SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
-}
-
 // EdgeControllerId with the EIC identifier on a given organization.
 message EdgeControllerId{
     // OrganizationId with the organization identifier.
@@ -239,7 +231,7 @@ message ECOpSummary{
     // Timestamp of the response.
     int64 timestamp = 2;
     // Status indicates if the operation was successful
-    EdgeControllerOpStatus status = 3;
+    OpStatus status = 3;
     // Info with additional information for an operation.
     string info = 4;
 }
