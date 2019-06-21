@@ -353,13 +353,6 @@ message AgentOpRequest{
     map<string, string> params = 7;
 }
 
-// EdgeControllerOpStatus with the status of an async operation executed by the edge controller.
-enum EdgeControllerOpStatus{
-    SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
-}
-
 // EdgeControllerOpResponse with a message representing the output of an asynchronous operation
 // performed by the edge controller.
 message EdgeControllerOpResponse{
@@ -372,17 +365,9 @@ message EdgeControllerOpResponse{
     // Timestamp of the response.
     int64 timestamp = 4;
     // Status of the operation
-    EdgeControllerOpStatus status = 5;
+    inventory.OpStatus status = 5;
     // Info with additional information about the result.
     string info = 6;
-}
-
-// AgentOpStatus contains the status of the execution of a given agent operation.
-enum AgentOpStatus{
-    SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
-    CANCELED = 3;
 }
 
 message AgentOpResponse{
@@ -397,7 +382,7 @@ message AgentOpResponse{
     // Timestamp of the response.
     int64 timestamp = 5;
     // Status indicates if the operation was successfull
-    AgentOpStatus status = 6;
+    inventory.OpStatus status = 6;
     // Info with additional information for an operation.
     string info = 7;
 }

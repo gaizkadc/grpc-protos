@@ -93,6 +93,7 @@ enum OpStatus{
     SCHEDULED = 0;
     SUCCESS = 1;
     FAIL = 2;
+    CANCELED = 3;
 }
 
 // AgentOpSummary contains the result of an asset operation
