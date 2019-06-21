@@ -376,6 +376,13 @@ service UnifiedLogging{
 
 // EdgeControllers related operations.
 service EdgeControllers {
+    // InstallAgent triggers the installation of an agent.
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){
+        option (google.api.http) = {
+            post: "/v1/ec/{organization_id}/agent/install"
+            body: "*"
+        };
+    }
     // CreateEICToken creates a new token for an EIC to join the platform.
     rpc CreateEICToken (organization.OrganizationId) returns (inventory_manager.EICJoinToken) {
         option (google.api.http) = {

@@ -285,6 +285,8 @@ message EdgeController{
     ConnectedStatus status = 8;
     // location with the EC location
     inventory.InventoryLocation location = 9;
+    // ECOpSummary contains the result of the last operation for this edge controller
+    inventory.ECOpSummary last_op_result = 10;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
@@ -349,6 +351,30 @@ message AgentOpRequest{
     string plugin = 6;
     // Params for the operation.
     map<string, string> params = 7;
+}
+
+// EdgeControllerOpStatus with the status of an async operation executed by the edge controller.
+enum EdgeControllerOpStatus{
+    SCHEDULED = 0;
+    SUCCESS = 1;
+    FAIL = 2;
+}
+
+// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
+// performed by the edge controller.
+message EdgeControllerOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status of the operation
+    EdgeControllerOpStatus status = 5;
+    // Info with additional information about the result.
+    string info = 6;
 }
 
 // AgentOpStatus contains the status of the execution of a given agent operation.
@@ -435,8 +461,8 @@ message InstallAgentResponse{
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
-    // InstallRequestId with the identifier.
-    string install_request_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
 }
 
 // AgentJoinRequest message sent by the EIC upon receiving an AgentJoinRequest from an agent.

@@ -513,6 +513,8 @@ message EdgeController{
     string status_name = 9;
     // location with the EC location
     inventory.InventoryLocation location = 10;
+    // ECOpSummary contains the result of the last operation for this edge controller
+    inventory.ECOpSummary last_op_result = 11;
 }
 
 // --------------------------------

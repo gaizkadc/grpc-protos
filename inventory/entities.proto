@@ -217,12 +217,31 @@ message UpdateAssetRequest{
 // Controller
 //
 
+// EdgeControllerOpStatus with the status of an async operation executed by the edge controller.
+enum EdgeControllerOpStatus{
+    SCHEDULED = 0;
+    SUCCESS = 1;
+    FAIL = 2;
+}
+
 // EdgeControllerId with the EIC identifier on a given organization.
 message EdgeControllerId{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
+}
+
+// ECOpSummary contains the result of an edge controller operation
+message ECOpSummary{
+    // OperationId with the operation identifier.
+    string operation_id = 1;
+    // Timestamp of the response.
+    int64 timestamp = 2;
+    // Status indicates if the operation was successful
+    EdgeControllerOpStatus status = 3;
+    // Info with additional information for an operation.
+    string info = 4;
 }
 
 // EdgeController entity.
@@ -244,6 +263,8 @@ message EdgeController{
     int64 last_alive_timestamp = 7;
     // location with the EC location
     InventoryLocation location = 8;
+    // ECOpSummary contains the result of the last operation for this edge controller
+    ECOpSummary last_op_result = 9;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -263,6 +284,7 @@ message AddEdgeControllerRequest{
     string geolocation = 4;
 }
 
+// UpdateEdgeControllerRequest with the collection of fields that can be updated from an EC.
 message UpdateEdgeControllerRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -282,4 +304,8 @@ message UpdateEdgeControllerRequest{
     bool update_geolocation = 8;
     // location with the EC geolocation
     string geolocation = 9;
+    // UpdateLastOpSummary flag to indicate that last op summary need to be updated
+    bool update_last_op_summary = 10;
+    // LastOpSummary contains the result of the last operation for this edge controller
+    ECOpSummary last_op_summary = 11;
 }
