@@ -59,6 +59,9 @@ service EIC{
     rpc UpdateECGeolocation (UpdateGeolocationRequest) returns (inventory.EdgeController) {}
     // CallbackECOperation is called by an EC upon executing an asynchronous operation.
     rpc CallbackECOperation(EdgeControllerOpResponse) returns (common.Success){}
+    // UpdateEC updates an Edge Controller
+    rpc UpdateEC (inventory.UpdateEdgeControllerRequest) returns (inventory.EdgeController) {}
+
 }
 
 // Agent operations.
