@@ -462,6 +462,13 @@ service Inventory {
             body: "*"
         };
     }
+    // UpdateEdgeController updates an EC from the inventory
+    rpc UpdateEdgeController (inventory.UpdateEdgeControllerRequest) returns (EdgeController) {
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/ec/{edge_controller_id}/update"
+            body: "*"
+        };
+    }
     // UpdateDeviceLocation updates the location of a device on the inventory view
     rpc UpdateDeviceLocation (inventory_manager.UpdateDeviceLocationRequest) returns (Device) {
         option (google.api.http) = {

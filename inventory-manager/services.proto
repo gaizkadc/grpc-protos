@@ -30,6 +30,10 @@ service Inventory{
     rpc UpdateAsset (inventory.UpdateAssetRequest) returns (inventory.Asset){}
     // UpdateDevice updates a device in the inventory.
     rpc UpdateDevice (UpdateDeviceLocationRequest) returns (Device){}
+    // AddLabelToAsset allows update the asset adding labels
+    rpc AddLabelToDevice (AssetLabelRequest) returns (common.Success){}
+    // RemoveLabelFromAsset allows update the asset removing labels
+    rpc RemoveLabelFromAsset (AssetLabelRequest) returns (common.Success){}
 }
 
 // Inventory Monitoring related operations
@@ -59,6 +63,10 @@ service EIC{
     rpc UpdateECGeolocation (UpdateGeolocationRequest) returns (inventory.EdgeController) {}
     // CallbackECOperation is called by an EC upon executing an asynchronous operation.
     rpc CallbackECOperation(EdgeControllerOpResponse) returns (common.Success){}
+    // AddLabelToEC allows update the EC adding labels
+    rpc AddLabelToEC (ECLabelRequest) returns (common.Success){}
+    // RemoveLabelFromEC allows update the EC removing labels
+    rpc RemoveLabelFromEC (ECLabelRequest) returns (common.Success){}
 }
 
 // Agent operations.

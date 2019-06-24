@@ -63,6 +63,16 @@ message AssetList{
     repeated Asset assets = 1;
 }
 
+// AssetLabelRequest allows adding or removing labels from an asset
+message AssetLabelRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string asset_id = 2;
+    // Labels to be added or removed
+    map<string, string> labels = 3;
+}
+
 // InventorySummary with information that will be shown on the UI.
 message InventorySummary{
     // OrganizationId with the organization identifier.
@@ -287,6 +297,16 @@ message EdgeController{
     inventory.InventoryLocation location = 9;
     // ECOpSummary contains the result of the last operation for this edge controller
     inventory.ECOpSummary last_op_result = 10;
+}
+
+// ECLabelRequest allows adding or removing labels from an EC
+message ECLabelRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // DeviceGroupId with the device group identifier.
+    string edge_controller_id = 2;
+    // Labels to be added or removed
+    map<string, string> labels = 3;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
