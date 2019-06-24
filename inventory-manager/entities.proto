@@ -102,6 +102,15 @@ message MetricsList{
     repeated string metrics = 1;
 }
 
+// QueryAggregationType indicates if and how the results should be aggregated
+// over the selected assets (aggregation over time range is specified by
+// resolution and is always averaged)
+enum AggregationType{
+    NONE = 0;
+    SUM = 1;
+    AVG = 2;
+}
+
 // QueryMetricsRequest describes a query to retrieve specific metrics, either
 // individual data points, vectors or matrices; not aggregated, aggregated
 // over time, and/or aggregated over asset
@@ -130,14 +139,6 @@ message QueryMetricsRequest{
     }
     TimeRange time_range = 3;
 
-    // AggregationType indicates if and how the results should be aggregated
-    // over the selected assets (aggregation over time range is specified by
-    // resolution and is always averaged)
-    enum AggregationType{
-        NONE = 0;
-        SUM = 1;
-        AVG = 2;
-    }
     AggregationType aggregation = 4;
 }
 
@@ -152,18 +153,25 @@ message QueryMetricsResult{
     message Value{
         int64 timestamp = 1;
         int64 value = 2;
+	// Number of assets used to calculate the value. Only relevant if the
+	// value is part of an aggregation - otherwise set to 1.
+	int64 asset_count = 3;
     }
     // AssetMetricValues is a list of values for a specific asset. This will
     // be linked to a specific metric.
     message AssetMetricValues{
-        // AssetId is the asset identifier these values relate to. If we are
-        // returning a result that is aggregated over assets, this will indicate
-        // what aggregation is used ("_sum", or "_avg")
+        // AssetId is the asset identifier these values relate to. If the
+	// result is an aggregation over more than one asset, asset_id is
+	// empty and aggregation is set.
         string asset_id = 1;
         repeated Value values = 2;
+	AggregationType aggregation = 3;
     }
     // AssetMetrics is a list of assets with their values; This will be linked
     // to a specific metric.
+    // Although the metrics message is repeated, in current scenarios we will
+    // always have a single AssetMetricValue. The capability of including
+    // metrics for more than one individual asset is for future use.
     message AssetMetrics{
         repeated AssetMetricValues metrics = 1;
     }
