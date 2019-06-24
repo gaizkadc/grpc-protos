@@ -463,7 +463,7 @@ service Inventory {
         };
     }
     // UpdateEdgeController updates an EC from the inventory
-    rpc UpdateEdgeController (inventory.UpdateEdgeControllerRequest) returns (EdgeController) {
+    rpc UpdateEdgeController (inventory.UpdateEdgeControllerRequest) returns (inventory.EdgeController) {
         option (google.api.http) = {
             post: "/v1/inventory/{organization_id}/ec/{edge_controller_id}/update"
             body: "*"
