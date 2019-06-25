@@ -220,6 +220,8 @@ message EICJoinRequest{
     string geolocation= 4;
     // IP where the edge controller accepts agent connections.
     repeated string ips = 5;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 6;
 }
 
 // EICJoinResponse with the information returned to an EIC on successfull join.
@@ -287,6 +289,8 @@ message EdgeController{
     inventory.InventoryLocation location = 9;
     // ECOpSummary contains the result of the last operation for this edge controller
     inventory.ECOpSummary last_op_result = 10;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 11;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.

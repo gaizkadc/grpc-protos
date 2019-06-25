@@ -258,6 +258,8 @@ message EdgeController{
     InventoryLocation location = 8;
     // ECOpSummary contains the result of the last operation for this edge controller
     ECOpSummary last_op_result = 9;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 10;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -275,6 +277,8 @@ message AddEdgeControllerRequest{
     map<string, string> labels = 3;
     // location with the EC location
     string geolocation = 4;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 5;
 }
 
 // UpdateEdgeControllerRequest with the collection of fields that can be updated from an EC.
