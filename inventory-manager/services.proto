@@ -11,8 +11,6 @@ import "organization/entities.proto";
 import "common/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
-import "device/entities.proto";
-
 
 // Inventory services.
 service Inventory{
