@@ -88,12 +88,18 @@ message AssetInfo {
     repeated StorageHardwareInfo storage = 3;
 }
 
-// OpStatus contains the status of the execution of a given agent operation.
+// OpStatus contains the status of the execution of a given operation.
 enum OpStatus{
+    // Scheduled to represent that the operation is on the queue pending execution.
     SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
-    CANCELED = 3;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
 }
 
 // AgentOpSummary contains the result of an asset operation

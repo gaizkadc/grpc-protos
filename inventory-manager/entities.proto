@@ -442,6 +442,9 @@ message InstallAgentRequest {
     SSHCredentials credentials = 4;
     // TargetHost to be installed.
     string target_host = 5;
+    // CACert used by the agent to authenticate the edge controller it connects to. This value is set by the
+    // inventory manager.
+    string ca_cert = 6;
 }
 
 // InstallAgentResponse with the response for an agent install process.
