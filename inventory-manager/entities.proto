@@ -69,9 +69,9 @@ message InventorySummary{
     string organization_id = 1;
     // TotalNumCPU with the total number of CPU among all assets.
     int64 total_num_cpu = 2;
-    // TotalStorage with the total capacity in MB among all assets.
+    // TotalStorage with the total capacity in GB among all assets.
     int64 total_storage = 3;
-    // TotalRam with the total RAM in MB among all assets.
+    // TotalRam with the total RAM in GB among all assets.
     int64 total_ram = 4;
 }
 

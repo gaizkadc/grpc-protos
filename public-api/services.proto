@@ -476,4 +476,11 @@ service Inventory {
             body: "*"
         };
     }
+    // Summary retrieves a summary of the assets in the inventory.
+    rpc Summary(organization.OrganizationId) returns (inventory_manager.InventorySummary){
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/summary"
+            body: "*"
+        };
+    }
 }
