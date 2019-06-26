@@ -407,14 +407,16 @@ message AgentOpResponseList{
 
 // AgentType defining the type of supported agent to be installed.
 enum AgentType{
-    // Linux agent on x86
-    LINUX_X86 = 0;
+    // Linux agent on 64 bits
+    LINUX_AMD64 = 0;
     // Linux agent on ARM 32 bits
     LINUX_ARM32 = 1;
     // Linux agent on ARM 64 bits
     LINUX_ARM64 = 2;
     // Windows agent
-    WINDOWS = 3;
+    WINDOWS_AMD64 = 3;
+    // Darwin on 64 bits
+    DARWIN_AMD64 = 4;
 }
 
 // SSHCredentials to connect to the remote machine to install the agent.
