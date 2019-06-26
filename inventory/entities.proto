@@ -24,7 +24,6 @@ message InventoryLocation {
     string geolocation = 1;
     // geohash defines the location using a short alphanumeric string
     string geohash = 2;
-
 }
 
 // OperatingSystemInfo contains information about the operating system of an asset. Notice that no
@@ -89,11 +88,18 @@ message AssetInfo {
     repeated StorageHardwareInfo storage = 3;
 }
 
-// AgentOpStatus contains the status of the execution of a given agent operation.
-enum AgentOpStatus{
+// OpStatus contains the status of the execution of a given operation.
+enum OpStatus{
+    // Scheduled to represent that the operation is on the queue pending execution.
     SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
 }
 
 // AgentOpSummary contains the result of an asset operation
@@ -104,7 +110,7 @@ message AgentOpSummary{
     // Timestamp of the response.
     int64 timestamp = 5;
     // Status indicates if the operation was successful
-    AgentOpStatus status = 6;
+    OpStatus status = 6;
     // Info with additional information for an operation.
     string info = 7;
 }
@@ -225,6 +231,18 @@ message EdgeControllerId{
     string edge_controller_id = 2;
 }
 
+// ECOpSummary contains the result of an edge controller operation
+message ECOpSummary{
+    // OperationId with the operation identifier.
+    string operation_id = 1;
+    // Timestamp of the response.
+    int64 timestamp = 2;
+    // Status indicates if the operation was successful
+    OpStatus status = 3;
+    // Info with additional information for an operation.
+    string info = 4;
+}
+
 // EdgeController entity.
 message EdgeController{
     // OrganizationId with the organization identifier.
@@ -244,6 +262,10 @@ message EdgeController{
     int64 last_alive_timestamp = 7;
     // location with the EC location
     InventoryLocation location = 8;
+    // ECOpSummary contains the result of the last operation for this edge controller
+    ECOpSummary last_op_result = 9;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 10;
 }
 
 // EdgeControllerList with a list of controllers.
@@ -261,8 +283,11 @@ message AddEdgeControllerRequest{
     map<string, string> labels = 3;
     // location with the EC location
     string geolocation = 4;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 5;
 }
 
+// UpdateEdgeControllerRequest with the collection of fields that can be updated from an EC.
 message UpdateEdgeControllerRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -282,4 +307,8 @@ message UpdateEdgeControllerRequest{
     bool update_geolocation = 8;
     // location with the EC geolocation
     string geolocation = 9;
+    // UpdateLastOpSummary flag to indicate that last op summary need to be updated
+    bool update_last_op_summary = 10;
+    // LastOpSummary contains the result of the last operation for this edge controller
+    ECOpSummary last_op_summary = 11;
 }

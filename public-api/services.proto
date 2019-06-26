@@ -149,6 +149,12 @@ service Devices {
             get: "/v1/device/{organization_id}/{device_group_id}/list"
         };
     }
+    // GetDevice retrieves a device from a device ID
+    rpc GetDevice (device.DeviceId) returns (Device){
+        option (google.api.http) = {
+            get: "/v1/device/{organization_id}/{device_group_id}/{device_id}/get"
+        };
+    }
     // AddLabelToDevice allows the user to add labels to a device
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
@@ -376,6 +382,13 @@ service UnifiedLogging{
 
 // EdgeControllers related operations.
 service EdgeControllers {
+    // InstallAgent triggers the installation of an agent.
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){
+        option (google.api.http) = {
+            post: "/v1/ec/{organization_id}/agent/install"
+            body: "*"
+        };
+    }
     // CreateEICToken creates a new token for an EIC to join the platform.
     rpc CreateEICToken (organization.OrganizationId) returns (inventory_manager.EICJoinToken) {
         option (google.api.http) = {
@@ -455,10 +468,24 @@ service Inventory {
             body: "*"
         };
     }
+    // UpdateEdgeController updates an EC from the inventory
+    rpc UpdateEdgeController (inventory.UpdateEdgeControllerRequest) returns (inventory.EdgeController) {
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/ec/{edge_controller_id}/update"
+            body: "*"
+        };
+    }
     // UpdateDeviceLocation updates the location of a device on the inventory view
     rpc UpdateDeviceLocation (inventory_manager.UpdateDeviceLocationRequest) returns (Device) {
         option (google.api.http) = {
             post: "/v1/inventory/{organization_id}/device/{asset_device_id}/update"
+            body: "*"
+        };
+    }
+    // Summary retrieves a summary of the assets in the inventory.
+    rpc Summary(organization.OrganizationId) returns (inventory_manager.InventorySummary){
+        option (google.api.http) = {
+            post: "/v1/inventory/{organization_id}/summary"
             body: "*"
         };
     }

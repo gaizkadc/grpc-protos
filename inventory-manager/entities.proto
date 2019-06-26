@@ -69,9 +69,9 @@ message InventorySummary{
     string organization_id = 1;
     // TotalNumCPU with the total number of CPU among all assets.
     int64 total_num_cpu = 2;
-    // TotalStorage with the total capacity in MB among all assets.
+    // TotalStorage with the total capacity in GB among all assets.
     int64 total_storage = 3;
-    // TotalRam with the total RAM in MB among all assets.
+    // TotalRam with the total RAM in GB among all assets.
     int64 total_ram = 4;
 }
 
@@ -228,6 +228,8 @@ message EICJoinRequest{
     string geolocation= 4;
     // IP where the edge controller accepts agent connections.
     repeated string ips = 5;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 6;
 }
 
 // EICJoinResponse with the information returned to an EIC on successfull join.
@@ -293,6 +295,10 @@ message EdgeController{
     ConnectedStatus status = 8;
     // location with the EC location
     inventory.InventoryLocation location = 9;
+    // ECOpSummary contains the result of the last operation for this edge controller
+    inventory.ECOpSummary last_op_result = 10;
+    // AssetInfo with the information related to Hw, Storage and OS
+    inventory.AssetInfo asset_info = 11;
 }
 
 // EdgeOperation enumeration with the list of possible pending operations to be performed by an EIC.
@@ -359,12 +365,21 @@ message AgentOpRequest{
     map<string, string> params = 7;
 }
 
-// AgentOpStatus contains the status of the execution of a given agent operation.
-enum AgentOpStatus{
-    SCHEDULED = 0;
-    SUCCESS = 1;
-    FAIL = 2;
-    CANCELED = 3;
+// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
+// performed by the edge controller.
+message EdgeControllerOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status of the operation
+    inventory.OpStatus status = 5;
+    // Info with additional information about the result.
+    string info = 6;
 }
 
 message AgentOpResponse{
@@ -379,7 +394,7 @@ message AgentOpResponse{
     // Timestamp of the response.
     int64 timestamp = 5;
     // Status indicates if the operation was successfull
-    AgentOpStatus status = 6;
+    inventory.OpStatus status = 6;
     // Info with additional information for an operation.
     string info = 7;
 }
@@ -400,14 +415,16 @@ message AgentOpResponseList{
 
 // AgentType defining the type of supported agent to be installed.
 enum AgentType{
-    // Linux agent on x86
-    LINUX_X86 = 0;
+    // Linux agent on 64 bits
+    LINUX_AMD64 = 0;
     // Linux agent on ARM 32 bits
     LINUX_ARM32 = 1;
     // Linux agent on ARM 64 bits
     LINUX_ARM64 = 2;
     // Windows agent
-    WINDOWS = 3;
+    WINDOWS_AMD64 = 3;
+    // Darwin on 64 bits
+    DARWIN_AMD64 = 4;
 }
 
 // SSHCredentials to connect to the remote machine to install the agent.
@@ -435,6 +452,9 @@ message InstallAgentRequest {
     SSHCredentials credentials = 4;
     // TargetHost to be installed.
     string target_host = 5;
+    // CACert used by the agent to authenticate the edge controller it connects to. This value is set by the
+    // inventory manager.
+    string ca_cert = 6;
 }
 
 // InstallAgentResponse with the response for an agent install process.
@@ -443,8 +463,8 @@ message InstallAgentResponse{
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
-    // InstallRequestId with the identifier.
-    string install_request_id = 3;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
 }
 
 // AgentJoinRequest message sent by the EIC upon receiving an AgentJoinRequest from an agent.

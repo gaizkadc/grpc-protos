@@ -29,6 +29,8 @@ service EIC {
     rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
     // CreateAgentJoinToken generates a JoinToken to allow an agent to join to a controller
     rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
+    // InstallAgent triggers the installation of an agent.
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){}
     // UninstallAgent operation to uninstall an agent
     rpc UninstallAgent (inventory_manager.FullAssetId) returns (common.Success){}
 }
