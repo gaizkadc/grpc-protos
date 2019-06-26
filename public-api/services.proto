@@ -149,6 +149,12 @@ service Devices {
             get: "/v1/device/{organization_id}/{device_group_id}/list"
         };
     }
+    // GetDevice retrieves a device from a device ID
+    rpc GetDevice (device.DeviceId) returns (Device){
+        option (google.api.http) = {
+            get: "/v1/device/{organization_id}/{device_group_id}/{device_id}/get"
+        };
+    }
     // AddLabelToDevice allows the user to add labels to a device
     rpc AddLabelToDevice(device_manager.DeviceLabelRequest) returns (common.Success){
         option (google.api.http) = {
