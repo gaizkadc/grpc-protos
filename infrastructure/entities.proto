@@ -74,6 +74,13 @@ message ClusterId {
     string cluster_id = 2;
 }
 
+message SetClusterStatusRequest {
+    // ClusterId
+    ClusterId cluster_id = 1;
+    // True to be cordon, false otherwise
+    bool cordon = 2;
+}
+
 message AddClusterRequest {
     string request_id = 1;
     // OrganizationId with the organization identifier.
