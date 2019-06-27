@@ -106,13 +106,13 @@ enum OpStatus{
 // this is a provisional result!
 message AgentOpSummary{
     // OperationId with the operation identifier.
-    string operation_id = 4;
+    string operation_id = 1;
     // Timestamp of the response.
-    int64 timestamp = 5;
+    int64 timestamp = 2;
     // Status indicates if the operation was successful
-    OpStatus status = 6;
+    OpStatus status = 3;
     // Info with additional information for an operation.
-    string info = 7;
+    string info = 4;
 }
 
 // Asset represents an element in the network from which we register some type of information. Example of
