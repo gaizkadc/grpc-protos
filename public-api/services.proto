@@ -427,7 +427,7 @@ service Agent {
         };
     }
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory.AssetId) returns (common.Success){
+    rpc UninstallAgent (inventory_manager.UninstallAgentRequest) returns (common.Success){
         option (google.api.http) = {
            post: "/v1/agent/{organization_id}/{asset_id}/uninstall"
            body: "*"

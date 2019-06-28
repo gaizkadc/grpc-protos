@@ -459,6 +459,16 @@ message InstallAgentResponse{
     string operation_id = 3;
 }
 
+// UninstallAgentRequest with the request sent by the user to uninstall an agent
+message UninstallAgentRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // Force flag to indicate a force uninstallation
+    bool force = 3;
+}
+
 // AgentJoinRequest message sent by the EIC upon receiving an AgentJoinRequest from an agent.
 message AgentJoinRequest{
     // OrganizationId with the organization identifier.
@@ -548,14 +558,16 @@ message EdgeControllerExtendedInfo{
     repeated Asset managed_assets = 2;
 }
 
-// FullAssetId
-message FullAssetId{
+// FullUninstallAgentRequest
+message FullUninstallAgentRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
     // AssetId with the asset identifier.
     string asset_id = 3;
+    // Force flag to indicate a force uninstallation
+    bool force = 4;
 }
 
 // Device in inventory
