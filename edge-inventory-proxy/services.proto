@@ -50,5 +50,5 @@ service EdgeControllerProxy {
     // UnlinkEC operation to remove/uninstall an EIC.
     rpc UnlinkEC(inventory.EdgeControllerId) returns (common.Success){}
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory_manager.FullAssetId) returns (common.Success){}
+    rpc UninstallAgent (inventory_manager.FullUninstallAgentRequest) returns (common.Success){}
 }

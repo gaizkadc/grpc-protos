@@ -81,7 +81,7 @@ service Agent{
     // DeleteAgentOperation deletes an agent operation from the history.
     rpc DeleteAgentOperation(AgentOperationId) returns (common.Success){}
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory.AssetId) returns (common.Success){}
+    rpc UninstallAgent (UninstallAgentRequest) returns (common.Success){}
     // UninstalledAgent operation to notify an agent has been uninstalled
     rpc UninstalledAgent (inventory.AssetUninstalledId) returns (common.Success) {}
 }
