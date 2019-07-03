@@ -32,7 +32,7 @@ service EIC {
     // InstallAgent triggers the installation of an agent.
     rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory_manager.FullUninstallAgentRequest) returns (common.Success){}
+    rpc UninstallAgent (inventory_manager.FullUninstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
 }
 // Agent service - for communication for agents to Edge Controller
 service Agent{
