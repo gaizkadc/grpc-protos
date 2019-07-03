@@ -33,7 +33,7 @@ service EdgeInventoryProxy {
 // Edge Controller Proxy service - for communication for Inventory Manager to Edge Controller
 service EdgeControllerProxy {
     // InstallAgent triggers the installation of an agent.
-    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){}
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
     // TriggerAgentOperation registers the operation in the EIC so that the agent will be notified on the
     // next connection.
     rpc TriggerAgentOperation(inventory_manager.AgentOpRequest) returns (inventory_manager.AgentOpResponse){}
