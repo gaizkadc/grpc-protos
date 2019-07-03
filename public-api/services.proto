@@ -397,7 +397,7 @@ service EdgeControllers {
         };
     }
     // UnlinkEIC operation to remove/uninstall an EIC.
-    rpc UnlinkEIC (inventory.EdgeControllerId) returns (common.Success) {
+    rpc UnlinkEIC (inventory_manager.UnlinkECRequest) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/ec/{organization_id}/unlink"
             body: "*"
