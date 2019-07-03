@@ -328,6 +328,33 @@ message UpdateGeolocationRequest {
     string geolocation = 3;
 }
 
+// UnlinkECRequest with the request sent by the user to unlink an edge-controller
+message UnlinkECRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // Force flag to indicate a force unlink
+    bool force = 3;
+}
+
+// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
+// performed by the edge controller.
+message EdgeControllerOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status of the operation
+    inventory.OpStatus status = 5;
+    // Info with additional information about the result.
+    string info = 6;
+}
+
 
 //
 // Agents
@@ -357,22 +384,6 @@ message AgentOpRequest{
     map<string, string> params = 7;
 }
 
-// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
-// performed by the edge controller.
-message EdgeControllerOpResponse{
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // EdgeControllerId with the EIC identifier that facilitated the operation.
-    string edge_controller_id = 2;
-    // OperationId with the operation identifier.
-    string operation_id = 3;
-    // Timestamp of the response.
-    int64 timestamp = 4;
-    // Status of the operation
-    inventory.OpStatus status = 5;
-    // Info with additional information about the result.
-    string info = 6;
-}
 
 message AgentOpResponse{
     // OrganizationId with the organization identifier.
