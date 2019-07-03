@@ -533,6 +533,21 @@ message EdgeController{
     AssetInfo asset_info = 12;
 }
 
+message ECOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status indicates if the operation was successful
+    string status = 5;
+    // Info with additional information for an operation.
+    string info = 6;
+}
+
 // --------------------------------
 // Assets
 // --------------------------------

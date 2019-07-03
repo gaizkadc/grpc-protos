@@ -460,16 +460,6 @@ message InstallAgentRequest {
     string ca_cert = 6;
 }
 
-// InstallAgentResponse with the response for an agent install process.
-message InstallAgentResponse{
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // EdgeControllerId with the EIC identifier.
-    string edge_controller_id = 2;
-    // OperationId with the operation identifier.
-    string operation_id = 3;
-}
-
 // UninstallAgentRequest with the request sent by the user to uninstall an agent
 message UninstallAgentRequest {
     // OrganizationId with the organization identifier.
