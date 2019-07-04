@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-device-api-go";
 
 import "device/entities.proto";
 import "device-api/entities.proto";
+import "device-controller/entities.proto";
 import "application-manager/entities.proto";
 import "common/entities.proto";
 import "google/api/annotations.proto";
@@ -21,6 +22,20 @@ service Device {
             body: "*"
         };
     }
+    // Ping is an operation triggered by the SDK
+    rpc Ping (common.Empty) returns (common.Success) {
+        option (google.api.http) = {
+            get: "/v0/ping"
+        };
+    }
+    // RegisterLatency Operation that is called by the SDK to inform the target cluster of the last latency measurement
+    rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (device_controller.RegisterLatencyResult) {
+        option (google.api.http) = {
+            post: "/v0/registerlatency"
+            body: "*"
+        };
+    }
+
 }
 
 service Applications {
