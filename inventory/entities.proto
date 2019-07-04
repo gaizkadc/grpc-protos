@@ -181,8 +181,13 @@ message AssetId{
 message AssetUninstalledId {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // EdgeControllerId with the EIC identifier.
+    string edge_controller_id = 2;
     // AssetId with the asset identifier.
-    string asset_id = 2;
+    string asset_id = 3;
+    // OperationId with the uninstall operation identifier.
+    string operation_id = 4;
+
 }
 // AssetList with a list of assets.
 message AssetList{
