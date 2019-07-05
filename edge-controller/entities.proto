@@ -25,6 +25,8 @@ message AgentJoinRequest{
     inventory.HardwareInfo hardware = 4;
     // Storage information.
     repeated inventory.StorageHardwareInfo storage = 5;
+    // Geolocation with the agent geolocation
+    string geolocation = 6;
 }
 
 

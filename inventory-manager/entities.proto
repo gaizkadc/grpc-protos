@@ -487,6 +487,8 @@ message AgentJoinRequest{
     inventory.HardwareInfo hardware = 6;
     // Storage information.
     repeated inventory.StorageHardwareInfo storage = 7;
+    // Geolocation with the geolocation of the agent
+    string geolocation = 8;
 }
 
 // AgentJoinResponse with the information created by the system model upon creating o a new asset.
