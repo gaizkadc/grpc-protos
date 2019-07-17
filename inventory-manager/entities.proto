@@ -441,6 +441,8 @@ message SSHCredentials{
         // ClientCertificate embedded.
         string client_certificate = 3;
     }
+    // IsSudoer indicates if the user has sudo permissions
+    bool is_sudoer = 4;
 }
 
 // InstallAgentRequest with the request send by the user to install an agent.
