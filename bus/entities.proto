@@ -39,6 +39,8 @@ message InfrastructureEvents {
     oneof Event {
         // Update cluster
         infrastructure.UpdateClusterRequest update_cluster_request = 1;
+        // Cordon cluster
+        infrastructure.SetClusterStatusRequest set_cluster_status_request = 2;
     }
 }
 

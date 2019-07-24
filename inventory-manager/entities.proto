@@ -336,6 +336,33 @@ message UpdateGeolocationRequest {
     string geolocation = 3;
 }
 
+// UnlinkECRequest with the request sent by the user to unlink an edge-controller
+message UnlinkECRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that will receive the operation.
+    string edge_controller_id = 2;
+    // Force flag to indicate a force unlink
+    bool force = 3;
+}
+
+// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
+// performed by the edge controller.
+message EdgeControllerOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status of the operation
+    inventory.OpStatus status = 5;
+    // Info with additional information about the result.
+    string info = 6;
+}
+
 
 //
 // Agents
@@ -365,22 +392,6 @@ message AgentOpRequest{
     map<string, string> params = 7;
 }
 
-// EdgeControllerOpResponse with a message representing the output of an asynchronous operation
-// performed by the edge controller.
-message EdgeControllerOpResponse{
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // EdgeControllerId with the EIC identifier that facilitated the operation.
-    string edge_controller_id = 2;
-    // OperationId with the operation identifier.
-    string operation_id = 3;
-    // Timestamp of the response.
-    int64 timestamp = 4;
-    // Status of the operation
-    inventory.OpStatus status = 5;
-    // Info with additional information about the result.
-    string info = 6;
-}
 
 message AgentOpResponse{
     // OrganizationId with the organization identifier.
@@ -438,6 +449,8 @@ message SSHCredentials{
         // ClientCertificate embedded.
         string client_certificate = 3;
     }
+    // IsSudoer indicates if the user has sudo permissions
+    bool is_sudoer = 4;
 }
 
 // InstallAgentRequest with the request send by the user to install an agent.
@@ -457,14 +470,14 @@ message InstallAgentRequest {
     string ca_cert = 6;
 }
 
-// InstallAgentResponse with the response for an agent install process.
-message InstallAgentResponse{
+// UninstallAgentRequest with the request sent by the user to uninstall an agent
+message UninstallAgentRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // EdgeControllerId with the EIC identifier.
-    string edge_controller_id = 2;
-    // OperationId with the operation identifier.
-    string operation_id = 3;
+    // AssetId with the asset identifier.
+    string asset_id = 2;
+    // Force flag to indicate a force uninstallation
+    bool force = 3;
 }
 
 // AgentJoinRequest message sent by the EIC upon receiving an AgentJoinRequest from an agent.
@@ -484,6 +497,8 @@ message AgentJoinRequest{
     inventory.HardwareInfo hardware = 6;
     // Storage information.
     repeated inventory.StorageHardwareInfo storage = 7;
+    // Geolocation with the geolocation of the agent
+    string geolocation = 8;
 }
 
 // AgentJoinResponse with the information created by the system model upon creating o a new asset.
@@ -556,14 +571,16 @@ message EdgeControllerExtendedInfo{
     repeated Asset managed_assets = 2;
 }
 
-// FullAssetId
-message FullAssetId{
+// FullUninstallAgentRequest
+message FullUninstallAgentRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
     string edge_controller_id = 2;
     // AssetId with the asset identifier.
     string asset_id = 3;
+    // Force flag to indicate a force uninstallation
+    bool force = 4;
 }
 
 // Device in inventory

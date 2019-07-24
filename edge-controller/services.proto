@@ -30,9 +30,9 @@ service EIC {
     // CreateAgentJoinToken generates a JoinToken to allow an agent to join to a controller
     rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
     // InstallAgent triggers the installation of an agent.
-    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){}
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory_manager.FullAssetId) returns (common.Success){}
+    rpc UninstallAgent (inventory_manager.FullUninstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
 }
 // Agent service - for communication for agents to Edge Controller
 service Agent{

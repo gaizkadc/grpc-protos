@@ -383,7 +383,7 @@ service UnifiedLogging{
 // EdgeControllers related operations.
 service EdgeControllers {
     // InstallAgent triggers the installation of an agent.
-    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.InstallAgentResponse){
+    rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (ECOpResponse){
         option (google.api.http) = {
             post: "/v1/ec/{organization_id}/agent/install"
             body: "*"
@@ -397,7 +397,7 @@ service EdgeControllers {
         };
     }
     // UnlinkEIC operation to remove/uninstall an EIC.
-    rpc UnlinkEIC (inventory.EdgeControllerId) returns (common.Success) {
+    rpc UnlinkEIC (inventory_manager.UnlinkECRequest) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/ec/{organization_id}/unlink"
             body: "*"
@@ -427,7 +427,7 @@ service Agent {
         };
     }
     // UninstallAgent operation to uninstall an agent
-    rpc UninstallAgent (inventory.AssetId) returns (common.Success){
+    rpc UninstallAgent (inventory_manager.UninstallAgentRequest) returns (ECOpResponse){
         option (google.api.http) = {
            post: "/v1/agent/{organization_id}/{asset_id}/uninstall"
            body: "*"
@@ -485,8 +485,7 @@ service Inventory {
     // Summary retrieves a summary of the assets in the inventory.
     rpc Summary(organization.OrganizationId) returns (inventory_manager.InventorySummary){
         option (google.api.http) = {
-            post: "/v1/inventory/{organization_id}/summary"
-            body: "*"
+            get: "/v1/inventory/{organization_id}/summary"
         };
     }
 }

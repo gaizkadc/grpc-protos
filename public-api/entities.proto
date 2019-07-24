@@ -490,6 +490,20 @@ message DeviceList{
 // Controllers
 // --------------------------------
 
+// ECOpSummary contains the result of an edge controller operation
+message ECOpSummary{
+    // OperationId with the operation identifier.
+    string operation_id = 1;
+    // Timestamp of the response.
+    int64 timestamp = 2;
+    // Status indicates if the operation was successful
+    inventory.OpStatus status = 3;
+    // OpStatusName with the status of the last operation.
+    string op_status_name = 4;
+    // Info with additional information for an operation.
+    string info = 5;
+}
+
 // EdgeController entity.
 message EdgeController{
     // OrganizationId with the organization identifier.
@@ -514,9 +528,24 @@ message EdgeController{
     // location with the EC location
     inventory.InventoryLocation location = 10;
     // ECOpSummary contains the result of the last operation for this edge controller
-    inventory.ECOpSummary last_op_result = 11;
+    ECOpSummary last_op_result = 11;
     // AssetInfo with the information related to Hw, Storage and OS
     AssetInfo asset_info = 12;
+}
+
+message ECOpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the EIC identifier that facilitated the operation.
+    string edge_controller_id = 2;
+    // OperationId with the operation identifier.
+    string operation_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status indicates if the operation was successful
+    string status = 5;
+    // Info with additional information for an operation.
+    string info = 6;
 }
 
 // --------------------------------
@@ -537,6 +566,21 @@ message OperatingSystemInfo{
     string class_name = 4;
     // Architecture of the OS.
     string architecture = 5;
+}
+
+// AgentOpSummary contains the result of an asset operation
+// this is a provisional result!
+message AgentOpSummary{
+    // OperationId with the operation identifier.
+    string operation_id = 1;
+    // Timestamp of the response.
+    int64 timestamp = 2;
+    // Status indicates if the operation was successful
+    inventory.OpStatus status = 3;
+    // OpStatusName with the status of the last operation.
+    string op_status_name = 4;
+    // Info with additional information for an operation.
+    string info = 5;
 }
 
 // Asset represents an element in the network from which we register some type of information. Example of
@@ -566,7 +610,7 @@ message Asset{
     // EicNetIp contains the current IP address that connects the asset to the EIC.
     string eic_net_ip = 11;
     // LastOpSummary contains the result of the last operation fr this asset
-    inventory.AgentOpSummary last_op_summary = 12;
+    AgentOpSummary last_op_summary = 12;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 13;
     // Status of the agent.
