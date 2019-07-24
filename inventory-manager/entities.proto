@@ -161,11 +161,11 @@ message QueryMetricsResult{
     // be linked to a specific metric.
     message AssetMetricValues{
         // AssetId is the asset identifier these values relate to. If the
-	// result is an aggregation over more than one asset, asset_id is
-	// empty and aggregation is set.
+        // result is an aggregation over more than one asset, asset_id is
+        // empty and aggregation is set.
         string asset_id = 1;
         repeated Value values = 2;
-	AggregationType aggregation = 3;
+        AggregationType aggregation = 3;
     }
     // AssetMetrics is a list of assets with their values; This will be linked
     // to a specific metric.
