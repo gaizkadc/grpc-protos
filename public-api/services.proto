@@ -19,7 +19,7 @@ import "user-manager/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
 import "unified-logging/entities.proto";
-import "infrastructure-monitor/entities.proto";
+import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
@@ -67,7 +67,7 @@ service Clusters {
     }
 
     // Retrieve a summary of high level cluster resource availability
-    rpc Monitor(infrastructure_monitor.ClusterSummaryRequest) returns(infrastructure_monitor.ClusterSummary) {
+    rpc Monitor(monitoring.ClusterSummaryRequest) returns(monitoring.ClusterSummary) {
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/monitor"
             body: "*"

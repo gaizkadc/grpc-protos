@@ -4,8 +4,8 @@
 
 syntax = "proto3";
 
-package infrastructure_monitor;
-option go_package = "github.com/nalej/grpc-infrastructure-monitor-go";
+package monitoring;
+option go_package = "github.com/nalej/grpc-monitoring-go";
 
 import "google/protobuf/timestamp.proto";
 
