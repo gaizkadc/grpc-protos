@@ -20,7 +20,7 @@ enum AccountState {
 message AccountBillingInfo {
     // AccountId with the account identifier
     string account_id = 1;
-    // FullName with the extended name of the account
+    // FullName with the name of a person that receives the invoice
     string full_name = 2;
     // CompanyName with the name of the company
     string company_name = 3;
@@ -32,11 +32,11 @@ message AccountBillingInfo {
 
 // Account model with the information related to a given account
 message Account {
-    // AccountId with the account identifier
+    // AccountId with the account identifier. This value is created by the system
     string account_id = 1;
-    // Name with the name of the account. The name of the account must be unique
+    // Name of the account. The name of the account must be unique
     string name = 2;
-    // Created timestamp this entry was created
+    // Created timestamp
     int64 created = 3;
     // BillingInfo with the billing information of the account
     AccountBillingInfo billing_info= 4;
@@ -57,7 +57,7 @@ message AccountId {
 message AddAccountRequest {
     // Name with the name of the account
     string name = 1;
-    // FullName with the extended name of the account
+    // FullName with the name of a person that receives the invoice
     string full_name = 2;
     // CompanyName with the name of the company
     string company_name = 3;
@@ -78,29 +78,32 @@ message UpdateAccountRequest {
     bool update_name = 1;
     // Name with the account new name. The name can be modified, but it must be unique
     string name = 2;
-    // UpdateFullName flag to indicate that FullName must be updated
-    bool update_full_name = 3;
-    // FullName with the account new full name
-    string full_name = 4;
-    // UpdateCompanyName flag to indicate that CompanyName must be updated
-    bool update_company_name = 5;
-    // CompanyName with the account new company name
-    string company_name = 6;
-    // UpdateAddress flag to indicate that Address must be updated
-    bool update_address = 7;
-    // Address with the new address of the account billing information
-    string address = 8;
-    // UpdateAdditionalInfo flag to indicate that the additional information must be updated
-    bool update_additional_info = 9;
-    // AdditionalInfo with the new addition info of the account billing information
-    string additional_info = 10;
     // UpdateState flag to indicate that the State of the account must be updated
-    bool update_state = 11;
+    bool update_state = 3;
     // State with the new State of the account
-    AccountState state = 12;
+    AccountState state = 4;
     // UpdateStateInfo flag to indicate that the State info must be updated
-    bool update_state_info = 13;
+    bool update_state_info = 5;
     // StateInfo with the new state info of the account
-    string state_info = 14;
+    string state_info = 6;
 
+}
+
+message UpdateAccountBillingInfoRequest{
+    // UpdateFullName flag to indicate that FullName must be updated
+    bool update_full_name = 1;
+    // FullName with the account new full name
+    string full_name = 2;
+    // UpdateCompanyName flag to indicate that CompanyName must be updated
+    bool update_company_name = 3;
+    // CompanyName with the account new company name
+    string company_name = 4;
+    // UpdateAddress flag to indicate that Address must be updated
+    bool update_address = 5;
+    // Address with the new address of the account billing information
+    string address = 6;
+    // UpdateAdditionalInfo flag to indicate that the additional information must be updated
+    bool update_additional_info = 7;
+    // AdditionalInfo with the new addition info of the account billing information
+    string additional_info = 8;
 }

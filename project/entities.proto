@@ -24,7 +24,7 @@ message Project {
     string owner_account_id = 2;
     // Name with the name of the project
     string name = 3;
-    // Created timestamp this entry was created
+    // Created timestamp
     int64 created = 4;
     // State with the state of the project
     ProjectState state = 5;
@@ -36,18 +36,18 @@ message Project {
 // AddProjectRequest structure to add new project
 // the new project will be created ACTIVE
 message AddProjectRequest {
-    // OwnerAccountId with the account identifier of the owner of the project
-    string owner_account_id = 1;
+    // AccountId with the account identifier of the owner of the project
+    string account_id = 1;
     // Name with the name of the project
     string name = 2;
 }
 
 // ProjectId with the project identifier
 message ProjectId {
-    // ProjectId with the project identifier
+    // ProjectId with the project identifier. This value is created by the system
     string project_id = 1;
-    // OwnerAccountId with the account identifier of the owner of the project
-    string owner_account_id = 2;
+    // AccountId with the account identifier of the owner of the project
+    string account_id = 2;
 }
 
 // ProjectList list of projects
@@ -57,21 +57,17 @@ message ProjectList {
 
 // UpdateProjectRequest
 message UpdateProjectRequest {
-    // UpdateOwnerAccountId flag to indicate that the owner_account_id must be updated
-    bool update_owner_account_id = 1;
-    // OwnerAccountId with the account identifier of the new owner of the project
-    string owner_account_id = 2;
     // UpdateName flag to indicate that the Name must be updated
-    bool update_name = 3;
+    bool update_name = 1;
     // Name with the new name of the project. The name can be updated, but it must remain unique
-    string name = 4;
+    string name = 2;
     // UpdateState flag to indicate that the state of the project must be updated
-    bool update_state = 5;
+    bool update_state = 3;
     // State with the new state of the project
-    ProjectState state = 6;
+    ProjectState state = 4;
     // UpateStateInfo flag to indicate that the state info field must be updated
-    bool update_state_info = 7;
+    bool update_state_info = 5;
     // StateInfo with the reason of the new state
-    string state_info = 8;
+    string state_info = 6;
 }
 

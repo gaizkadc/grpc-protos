@@ -16,9 +16,12 @@ service Accounts{
     rpc AddAccount(AddAccountRequest) returns (Account) {}
     // GetAccount retrieves a given account
     rpc GetAccount(AccountId) returns (Account) {}
-    // ListAccounts retrieves a list of all the accounts in the system
+    // ListAccounts retrieves a list of all the accounts in the system. This method is only intended to be used by
+    // management API as the users will not be able to list other accounts
     rpc ListAccounts (common.Empty) returns (AccountList) {}
     // UpdateAccount updates the information of an account
     rpc UpdateAccount(UpdateAccountRequest) returns (common.Success) {}
+    // UpdateAccountBillingInfo updates the billing info of an account
+    rpc UpdateAccountBillingInfo(UpdateAccountBillingInfoRequest) returns (common.Success){}
 
 }
