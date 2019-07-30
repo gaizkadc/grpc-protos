@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+syntax = "proto3";
+
+package project;
+option go_package = "github.com/nalej/grpc-project-go";
+
+import "account/entities.proto";
+import "common/entities.proto";
+import "project/entities.proto";
+
+// Projects service exposing organization level functionality related to projects.
+service Projects {
+    // AddProject adds a new project to a given account
+    rpc AddProject (AddProjectRequest) returns (Project) {}
+    // GetProject retrieves a given project
+    rpc GetProject (ProjectId) returns (Project) {}
+    // RemoveProject removes a given project
+    rpc RemoveProject (ProjectId) returns (common.Success) {}
+    // ListAccountProjects list the projects of a given account
+    rpc ListAccountProjects (account.AccountId) returns (ProjectList) {}
+    // UpdateProject updates the project information
+    rpc UpdateProject (UpdateProjectRequest) returns (common.Success) {}
+}
