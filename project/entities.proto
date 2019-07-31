@@ -57,17 +57,21 @@ message ProjectList {
 
 // UpdateProjectRequest
 message UpdateProjectRequest {
+    // ProjectId with the project identifier.
+    string project_id = 1;
+    // AccountId with the account identifier of the owner of the project
+    string account_id = 2;
     // UpdateName flag to indicate that the Name must be updated
-    bool update_name = 1;
+    bool update_name = 3;
     // Name with the new name of the project. The name can be updated, but it must remain unique
-    string name = 2;
+    string name = 4;
     // UpdateState flag to indicate that the state of the project must be updated
-    bool update_state = 3;
+    bool update_state = 5;
     // State with the new state of the project
-    ProjectState state = 4;
+    ProjectState state = 6;
     // UpateStateInfo flag to indicate that the state info field must be updated
-    bool update_state_info = 5;
+    bool update_state_info = 7;
     // StateInfo with the reason of the new state
-    string state_info = 6;
+    string state_info = 8;
 }
 
