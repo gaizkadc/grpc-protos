@@ -4,13 +4,13 @@
 
 syntax = "proto3";
 
-package infrastructure_monitor;
-option go_package = "github.com/nalej/grpc-infrastructure-monitor-go";
+package monitoring;
+option go_package = "github.com/nalej/grpc-monitoring-go";
 
-import "infrastructure-monitor/entities.proto";
+import "monitoring/entities.proto";
 
 // Coordinator service with the operations offered by the monitoring coordinator.
-service Coordinator {
+service MonitoringManager {
     // Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary(ClusterSummaryRequest) returns(ClusterSummary) {}
     // Retrieve statistics on cluster with respect to platform resources
@@ -22,7 +22,7 @@ service Coordinator {
 // Slave services for quering monitoring information on a specific cluster
 // The request messages are reused from the Coordinator. The organization ID
 // and cluster ID can either be blank, or must match the current cluster.
-service Slave {
+service MetricsCollector {
     // Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary(ClusterSummaryRequest) returns(ClusterSummary) {}
     // Retrieve statistics on cluster with respect to platform resources
