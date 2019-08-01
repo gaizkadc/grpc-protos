@@ -7,21 +7,50 @@ syntax = "proto3";
 package user;
 option go_package = "github.com/nalej/grpc-user-go";
 
+import "account/entities.proto";
 import "common/entities.proto";
 import "organization/entities.proto";
+import "project/entities.proto";
 import "user/entities.proto";
 
 
 // Users service exposing user related functionality.
 service Users {
     // AddUser adds a new user to a given organization.
-    rpc AddUser(AddUserRequest) returns (User) {}
+    rpc AddUser (AddUserRequest) returns (User) {}
     // GetUser returns an existing user.
-    rpc GetUser(UserId) returns (User) {}
+    rpc GetUser (UserId) returns (User) {}
     // GetUsers retrieves the list of users of a given organization.
-    rpc GetUsers(organization.OrganizationId) returns (UserList) {}
+    rpc GetUsers (organization.OrganizationId) returns (UserList) {}
     // RemoveUser removes a given user from an organization.
-    rpc RemoveUser(RemoveUserRequest) returns (common.Success) {}
+    rpc RemoveUser (RemoveUserRequest) returns (common.Success) {}
     // Update the user information.
-    rpc Update(UpdateUserRequest) returns (common.Success) {}
+    rpc Update (UpdateUserRequest) returns (common.Success) {}
+    // UpdateContactInfo updates the contact info of a user
+    rpc UpdateContactInfo (UpdateContactInfoRequest) returns (common.Success) {}
+
+    // Account User
+    rpc AddAccountUser(AddAccountUserRequest) returns  (AccountUser) {}
+    rpc RemoveAccountUser(AccountUserId) returns (common.Success) {}
+    rpc UpdateAccountUser(AccountUserUpdateRequest) returns (AccountUser) {}
+    rpc ListAccountsUser(account.AccountId) returns (AccountUserList) {}
+
+    // Account User Invite
+    rpc AddAccountUserInvite(addAccountInviteRequest) returns (AccountUserInvite) {}
+    rpc GetAccountUserInvite(AccountUserInviteId) returns ( AccountUserInvite) {}
+    rpc RemoveAccountUserInvite(AccountUserInviteId) returns (common.Success) {}
+    rpc ListAccountUserInvites(UserId) returns (AccountInviteList) {}
+
+    // Project User
+    rpc AddProjectUser(AddProjectUserRequest) returns (ProjectUser) {}
+    rpc RemoveProjectUser(ProjectUserId) returns (common.Success) {}
+    rpc UpdateProjectUser(ProjectUserUpdateRequest) returns (ProjectUser) {}
+    rpc ListProjectsUser(project.ProjectId) returns (ProjectUserList) {}
+
+    // Project User Invite
+    rpc AddProjectUserInvite(addProjectInviteRequest) returns (ProjectUserInvite){}
+    rpc GetProjectUserInvite(ProjectUserInviteId) returns (ProjectUserInvite){}
+    rpc RemoveProjectUserInvite(ProjectUserInviteId) returns (common.Success){}
+    rpc ListProjectUserInvites(UserId) returns (ProjectInviteList){}
+
 }
