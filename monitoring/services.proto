@@ -8,6 +8,7 @@ package monitoring;
 option go_package = "github.com/nalej/grpc-monitoring-go";
 
 import "monitoring/entities.proto";
+import "inventory/entities.proto";
 
 // Coordinator service with the operations offered by the monitoring coordinator.
 service MonitoringManager {
@@ -29,4 +30,13 @@ service MetricsCollector {
     rpc GetClusterStats(ClusterStatsRequest) returns(ClusterStats) {}
     // Execute a query directly on the monitoring storage backend
     rpc Query(QueryRequest) returns(QueryResponse) {}
+}
+
+// Asset Monitoring related operations - collecting metrics from Edge Controller
+service AssetMonitoring{
+    // List available metrics for a specific Edge Controller or
+    // asset selector
+    rpc ListMetrics(inventory.AssetSelector) returns (MetricsList) {}
+    // Query monitoring metrics
+    rpc QueryMetrics(QueryMetricsRequest) returns (QueryMetricsResult) {}
 }

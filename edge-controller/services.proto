@@ -11,6 +11,7 @@ import "common/entities.proto";
 import "edge-controller/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
+import "monitoring/entities.proto";
 
 // EIC service - for communication from Management cluster to Edge Controller
 service EIC {
@@ -22,17 +23,17 @@ service EIC {
     // Configure changes specific configuration options of the Edge Controller
     // and/or Edge Controller plugins
     rpc Configure(inventory_manager.ConfigureEICRequest) returns (common.Success){}
-    // ListMetrics returns available metrics for a certain selection of assets
-    rpc ListMetrics(inventory_manager.AssetSelector) returns (inventory_manager.MetricsList){}
-    // QueryMetrics retrieves the monitoring data of assets local to this
-    // Edge Controller
-    rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){}
     // CreateAgentJoinToken generates a JoinToken to allow an agent to join to a controller
     rpc CreateAgentJoinToken(inventory.EdgeControllerId) returns (inventory_manager.AgentJoinToken) {}
     // InstallAgent triggers the installation of an agent.
     rpc InstallAgent(inventory_manager.InstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
     // UninstallAgent operation to uninstall an agent
     rpc UninstallAgent (inventory_manager.FullUninstallAgentRequest) returns (inventory_manager.EdgeControllerOpResponse){}
+    // ListMetrics returns available metrics for a certain selection of assets
+    rpc ListMetrics(inventory.AssetSelector) returns (monitoring.MetricsList){}
+    // QueryMetrics retrieves the monitoring data of assets local to this
+    // Edge Controller
+    rpc QueryMetrics(monitoring.QueryMetricsRequest) returns (monitoring.QueryMetricsResult){}
 }
 // Agent service - for communication for agents to Edge Controller
 service Agent{

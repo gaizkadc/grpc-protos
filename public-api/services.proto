@@ -198,14 +198,14 @@ service Resources {
 // Inventory monitoring
 service InventoryMonitoring {
     // ListMetrics returns available metrics for a certain selection of assets
-    rpc ListMetrics(inventory_manager.AssetSelector) returns (inventory_manager.MetricsList){
+    rpc ListMetrics(inventory.AssetSelector) returns (monitoring.MetricsList){
         option (google.api.http) = {
             post: "/v1/inventory/{organization_id}/metrics/list"
             body: "*"
         };
     }
     // QueryMetrics retrieves the monitoring data of selected assets
-    rpc QueryMetrics(inventory_manager.QueryMetricsRequest) returns (inventory_manager.QueryMetricsResult){
+    rpc QueryMetrics(monitoring.QueryMetricsRequest) returns (monitoring.QueryMetricsResult){
         option (google.api.http) = {
             post: "/v1/inventory/{assets.organization_id}/metrics/query"
             body: "*"

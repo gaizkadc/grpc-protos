@@ -9,6 +9,7 @@ package monitoring;
 option go_package = "github.com/nalej/grpc-monitoring-go";
 
 import "google/protobuf/timestamp.proto";
+import "inventory/entities.proto";
 
 // Request a summary of cluster resource information. If the range is omitted,
 // the current point-results are returned; otherwise, an average over the
@@ -157,4 +158,93 @@ message QueryResponse {
     oneof result {
         PrometheusResponse prometheus_result = 16;
     }
+}
+
+//
+// Inventory monitoring through Edge Controller
+//
+
+// MetricsList is used to communicate what metrics are available for a group
+// of assets
+message MetricsList{
+    repeated string metrics = 1;
+}
+
+// QueryAggregationType indicates if and how the results should be aggregated
+// over the selected assets (aggregation over time range is specified by
+// resolution and is always averaged)
+enum AggregationType{
+    NONE = 0;
+    SUM = 1;
+    AVG = 2;
+}
+
+// QueryMetricsRequest describes a query to retrieve specific metrics, either
+// individual data points, vectors or matrices; not aggregated, aggregated
+// over time, and/or aggregated over asset
+message QueryMetricsRequest{
+    // Assets identifies the assets for which we want metrics
+    inventory.AssetSelector assets = 1;
+    // Metrics is the list of metrics to retrieve; if emtpy, return all
+    repeated string metrics = 2;
+
+    // TimeRange describes the time range for which we want metrics
+    message TimeRange{
+        // Either timestamp != 0 && (time_start == time_end == resolution == 0),
+        // or timestamp == 00 && (time_start != 0 || time_end != 0)
+
+        // Timestamp is set to request single data point
+        int64 timestamp = 1;
+        // TimeStart indicates the start of the time range;
+        // time_start == 0 means starting from oldest data available
+        int64 time_start = 2;
+        // TimeEnd indicates the end of the time range;
+        // time_end == 0 means ending at newest data available
+        int64 time_end = 3;
+        // Resolution indicates the seconds between returned data points;
+        // If resolution == 0, return a single, aggregated data point
+        int64 resolution = 4;
+    }
+    TimeRange time_range = 3;
+
+    AggregationType aggregation = 4;
+}
+
+// QueryMetricsResult contains the result of a metrics query. This can
+// encapsulate a single value per metric, a vector or a matrix; this depends
+// on whether a single point in time or a time range is requested, whether
+// a single asset or asset group is requested and what, if any, aggregation
+// is requested.
+message QueryMetricsResult{
+    // Value is a tuple of (timestamp, value). This will be linked
+    // to a specific asset and a specific metric.
+    message Value{
+        int64 timestamp = 1;
+        int64 value = 2;
+	// Number of assets used to calculate the value. Only relevant if the
+	// value is part of an aggregation - otherwise set to 1.
+	int64 asset_count = 3;
+    }
+    // AssetMetricValues is a list of values for a specific asset. This will
+    // be linked to a specific metric.
+    message AssetMetricValues{
+        // AssetId is the asset identifier these values relate to. If the
+        // result is an aggregation over more than one asset, asset_id is
+        // empty and aggregation is set.
+        string asset_id = 1;
+        repeated Value values = 2;
+        AggregationType aggregation = 3;
+    }
+    // AssetMetrics is a list of assets with their values; This will be linked
+    // to a specific metric.
+    // Although the metrics message is repeated, in current scenarios we will
+    // always have a single AssetMetricValue. The capability of including
+    // metrics for more than one individual asset is for future use.
+    message AssetMetrics{
+        repeated AssetMetricValues metrics = 1;
+    }
+
+    // Metrics is the mapping of metrics to a list of assets, each with a list
+    // of values
+    map<string, AssetMetrics> metrics = 1;
 }
