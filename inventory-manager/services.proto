@@ -30,15 +30,6 @@ service Inventory{
     rpc UpdateDevice (UpdateDeviceLocationRequest) returns (Device){}
 }
 
-// Inventory Monitoring related operations
-service InventoryMonitoring{
-    // List available metrics for a specific Edge Controller or
-    // asset selector
-    rpc ListMetrics(AssetSelector) returns (MetricsList){}
-    // Query monitoring metrics
-    rpc QueryMetrics(QueryMetricsRequest) returns (QueryMetricsResult){}
-}
-
 // EIC related operations.
 service EIC{
     // CreateEICToken creates a new token for an EIC to join the platform.

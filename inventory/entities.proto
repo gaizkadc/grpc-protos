@@ -195,6 +195,22 @@ message AssetList{
     repeated Asset assets = 1;
 }
 
+// AssetSelector is used to identify a group of assets. This group consists
+// of the assets that match the intersection of all the message fields.
+message AssetSelector{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // EdgeControllerId with the edge controller identifier.
+    string edge_controller_id = 2;
+    // AssetIds is a list of specific asset IDs. Note that all other
+    // non-zero fields should still match, too
+    repeated string asset_ids = 3;
+    // GroupIds is a list of asset groups
+    repeated string group_ids = 4;
+    // User-defined labels, key-value
+    map<string, string> labels = 5;
+}
+
 message UpdateAssetRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
