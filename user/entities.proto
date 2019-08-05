@@ -7,28 +7,48 @@ syntax = "proto3";
 package user;
 option go_package = "github.com/nalej/grpc-user-go";
 
+import "authx/entities.proto";
+
 // User model the information available regarding a User of an organization
 message User {
-    string organization_id = 1;
+    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    string organization_id = 1 [deprecated=true];
     string email = 2;
     string name = 3;
     string photo_url = 4;
     int64 member_since = 5;
+    ContactInfo contact_info = 6;
+}
+
+// ContactInfo with the contact info of a user
+message ContactInfo {
+    string full_name = 1;
+    string address = 2;
+    map <string, string> phone = 3;
+    string alt_email = 4;
+    string company_name = 5;
+    string title = 6;
 }
 
 // UserId with the email identifying a user.
 message UserId {
-    string organization_id = 1;
+    string organization_id = 1 [deprecated=true];
     string email = 2;
 }
 
 // AddUserRequest message with the information required to add a user to the platform.
 message AddUserRequest {
-    string organization_id = 1;
+    string organization_id = 1 [deprecated=true];
     string email = 2;
     string password = 3;
     string name = 4;
     string photo_url = 5;
+    string full_name = 6;
+    string address = 7;
+    map <string, string> phone = 8;
+    string alt_email = 9;
+    string company_name = 10;
+    string title = 11;
 }
 
 // RemoveUserRequest message with the information required to remove a user from the platform.
@@ -44,9 +64,229 @@ message UserList {
 
 // UpdateUserRequest message with the information required for updating an user.
 message UpdateUserRequest {
-    string organization_id = 1;
+    string organization_id = 1 [deprecated=true];
     string email = 2;
     string name = 3;
     string photo_url = 4;
 }
 
+// UpdateContactInfoRequest message with the information required for updating the contact info of a user
+message UpdateContactInfoRequest {
+    string email = 1;
+    string full_name = 2;
+    string address = 3;
+    map <string, string> phone = 4;
+    string alt_email = 5;
+    string company_name = 6;
+    string title = 7;
+}
+
+
+// --------------------
+// AccountUser
+
+// AccountUser message with the information of the status of a user in an account
+message AccountUser {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 3;
+    bool internal = 4;
+    // Status determines the state of the user in the account (invited, active...)
+    authx.UserStatus status = 5;
+}
+
+message AddAccountUserRequest {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 3;
+    bool internal = 4;
+    // Status determines the state of the user in the account (invited, active...)
+    authx.UserStatus status = 5;
+}
+
+message AccountUserId {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+}
+
+message AccountUserList {
+    repeated AccountUser accounts_user = 1;
+}
+
+message AccountUserUpdateRequest {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+    // UpdateRoleId flag to indicate the role_id will be updated
+    bool update_role_id = 3;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 4;
+    // UpdateStatus flag to indicate the status will be updated
+    bool update_status = 5;
+    // Status determines the state of the user in the account (invited, active...)
+    authx.UserStatus status = 6;
+}
+
+// --------------------
+// AccountUserInvite
+
+message AccountUserInvite {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 3;
+    // Invited by user email who send the invitation
+    string invited_by = 4;
+    // Msg message the user sent to invite
+    string msg = 5;
+    // Expires time when the invitation expires
+    int64 expires = 6;
+}
+
+message AccountInviteList {
+    repeated AccountUserInvite account_user_invites = 1;
+}
+
+message AddAccountInviteRequest {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 3;
+    // Invited by user email who send the invitation
+    string invited_by = 4;
+    // Msg message the user sent to invite
+    string msg = 5;
+    // Expires time when the invitation expires
+    int64 expires = 6;
+}
+
+message AccountUserInviteId {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // Email user identifier
+    string email = 2;
+}
+
+// --------------------
+// ProjectUser
+
+message ProjectUser {
+    // AccountId with the identifier of the account to which the project belongs
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+    // RoleId with identifier of the rol the user has in this project
+    string role_id = 4;
+    bool internal = 5;
+    // Status determines the state of the user in the project (invited, active...)
+    authx.UserStatus status = 6;
+}
+
+message AddProjectUserRequest{
+    // AccountId with the identifier of the account to which the project belongs
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+    // RoleId with identifier of the rol the user has in this project
+    string role_id = 4;
+    bool internal = 5;
+    // Status determines the state of the user in the project (invited, active...)
+    authx.UserStatus status = 6;
+}
+
+message ProjectUserList {
+    repeated ProjectUser projects_user = 1;
+
+}
+
+message ProjectUserId {
+    // AccountId with the identifier of the account to which the project belongs
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+}
+
+message ProjectUserUpdateRequest {
+    // AccountId with the identifier of the account to which the project belongs
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+    // UpdateRoleId flag to indicate if RoleId will be updated
+    bool update_role_id = 4;
+    // RoleId with identifier of the rol the user has in this project
+    string role_id = 5;
+    // UpdateStatus flag to indicate if Status will be updated
+    bool update_status = 6;
+    // Status determines the state of the user in the project (invited, active...)
+    authx.UserStatus status = 7;
+}
+
+// --------------------
+// ProjectUserInvites
+message ProjectUserInvite {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 4;
+    // Invited by user email who send the invitation
+    string invited_by = 5;
+    // Msg message the user sent to invite
+    string msg = 6;
+    // Expires time when the invitation expires
+    int64 expires = 7;
+}
+
+message AddProjectInviteRequest {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+    // RoleId with identifier of the rol the user has in this account
+    string role_id = 4;
+    // Invited by user email who send the invitation
+    string invited_by = 5;
+    // Msg message the user sent to invite
+    string msg = 6;
+    // Expires time when the invitation expires
+    int64 expires = 7;
+}
+
+message ProjectUserInviteId {
+    // AccountId with the identifier of the account
+    string account_id = 1;
+    // ProjectId with the project identifier
+    string project_id = 2;
+    // Email user identifier
+    string email = 3;
+}
+
+message ProjectInviteList {
+    repeated ProjectUserInvite project_user_invites = 1;
+}

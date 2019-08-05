@@ -11,6 +11,21 @@ option go_package = "github.com/nalej/grpc-authx-go";
 // Users
 //
 
+// UserStatus define a set of status of a user in an account
+enum UserStatus {
+    PENDING_ACTIVATION = 0;
+    // the user accepts the invitation and he is active on it
+    ACTIVE = 1;
+    // the user receives an invitation to belong/operate into an account
+    INVITED = 2;
+    // the invitation has expired and the user has not accept/declined it
+    INVITE_EXPIRED = 3;
+    // the user has no accept the invitation
+    DECLINE_INVITE = 4;
+    // the user has been deactivated of an account by nalej user
+    DEACTIVATED = 5;
+}
+
 // AccessPrimitives define a set of capabilities a role may access.
 enum AccessPrimitive {
     // Access to all organization related functionality.
