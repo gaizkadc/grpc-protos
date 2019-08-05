@@ -7,8 +7,6 @@ syntax = "proto3";
 package user;
 option go_package = "github.com/nalej/grpc-user-go";
 
-import "authx/entities.proto";
-
 // User model the information available regarding a User of an organization
 message User {
     // OrganizationID deprecated, in v.0.5.0 this field will be deleted
@@ -85,6 +83,22 @@ message UpdateContactInfoRequest {
 // --------------------
 // AccountUser
 
+// UserStatus define a set of status of a user in an account
+// This enum is copied as to avoid conflicts with Authx and cross references
+enum UserStatus {
+    PENDING_ACTIVATION = 0;
+    // the user accepts the invitation and he is active on it
+    ACTIVE = 1;
+    // the user receives an invitation to belong/operate into an account
+    INVITED = 2;
+    // the invitation has expired and the user has not accept/declined it
+    INVITE_EXPIRED = 3;
+    // the user has no accept the invitation
+    DECLINE_INVITE = 4;
+    // the user has been deactivated of an account by nalej user
+    DEACTIVATED = 5;
+}
+
 // AccountUser message with the information of the status of a user in an account
 message AccountUser {
     // AccountId with the identifier of the account
@@ -95,7 +109,7 @@ message AccountUser {
     string role_id = 3;
     bool internal = 4;
     // Status determines the state of the user in the account (invited, active...)
-    authx.UserStatus status = 5;
+    UserStatus status = 5;
 }
 
 message AddAccountUserRequest {
@@ -107,7 +121,7 @@ message AddAccountUserRequest {
     string role_id = 3;
     bool internal = 4;
     // Status determines the state of the user in the account (invited, active...)
-    authx.UserStatus status = 5;
+    UserStatus status = 5;
 }
 
 message AccountUserId {
@@ -133,7 +147,7 @@ message AccountUserUpdateRequest {
     // UpdateStatus flag to indicate the status will be updated
     bool update_status = 5;
     // Status determines the state of the user in the account (invited, active...)
-    authx.UserStatus status = 6;
+    UserStatus status = 6;
 }
 
 // --------------------
@@ -144,14 +158,16 @@ message AccountUserInvite {
     string account_id = 1;
     // Email user identifier
     string email = 2;
-    // RoleId with identifier of the rol the user has in this account
+    // RoleId with identifier of the role the user has in this account
     string role_id = 3;
+    // RoleName with the name of the Role
+    string role_name = 4;
     // Invited by user email who send the invitation
-    string invited_by = 4;
+    string invited_by = 5;
     // Msg message the user sent to invite
-    string msg = 5;
+    string msg = 6;
     // Expires time when the invitation expires
-    int64 expires = 6;
+    int64 expires = 7;
 }
 
 message AccountInviteList {
@@ -165,12 +181,14 @@ message AddAccountInviteRequest {
     string email = 2;
     // RoleId with identifier of the rol the user has in this account
     string role_id = 3;
+    // RoleName with the name of the Role
+    string role_name = 4;
     // Invited by user email who send the invitation
-    string invited_by = 4;
+    string invited_by = 5;
     // Msg message the user sent to invite
-    string msg = 5;
+    string msg = 6;
     // Expires time when the invitation expires
-    int64 expires = 6;
+    int64 expires = 7;
 }
 
 message AccountUserInviteId {
@@ -194,7 +212,7 @@ message ProjectUser {
     string role_id = 4;
     bool internal = 5;
     // Status determines the state of the user in the project (invited, active...)
-    authx.UserStatus status = 6;
+    UserStatus status = 6;
 }
 
 message AddProjectUserRequest{
@@ -206,9 +224,11 @@ message AddProjectUserRequest{
     string email = 3;
     // RoleId with identifier of the rol the user has in this project
     string role_id = 4;
-    bool internal = 5;
+    // RoleName with the name of the Role
+    string role_name = 5;
+    bool internal = 6;
     // Status determines the state of the user in the project (invited, active...)
-    authx.UserStatus status = 6;
+    UserStatus status = 7;
 }
 
 message ProjectUserList {
@@ -239,7 +259,7 @@ message ProjectUserUpdateRequest {
     // UpdateStatus flag to indicate if Status will be updated
     bool update_status = 6;
     // Status determines the state of the user in the project (invited, active...)
-    authx.UserStatus status = 7;
+    UserStatus status = 7;
 }
 
 // --------------------
@@ -253,12 +273,14 @@ message ProjectUserInvite {
     string email = 3;
     // RoleId with identifier of the rol the user has in this account
     string role_id = 4;
+    // RoleName with the name of the Role
+    string role_name = 5;
     // Invited by user email who send the invitation
-    string invited_by = 5;
+    string invited_by = 6;
     // Msg message the user sent to invite
-    string msg = 6;
+    string msg = 7;
     // Expires time when the invitation expires
-    int64 expires = 7;
+    int64 expires = 8;
 }
 
 message AddProjectInviteRequest {
