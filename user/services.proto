@@ -30,25 +30,29 @@ service Users {
     rpc UpdateContactInfo (UpdateContactInfoRequest) returns (common.Success) {}
 
     // Account User
+
     rpc AddAccountUser(AddAccountUserRequest) returns  (AccountUser) {}
     rpc RemoveAccountUser(AccountUserId) returns (common.Success) {}
     rpc UpdateAccountUser(AccountUserUpdateRequest) returns (AccountUser) {}
     rpc ListAccountsUser(account.AccountId) returns (AccountUserList) {}
 
     // Account User Invite
-    rpc AddAccountUserInvite(addAccountInviteRequest) returns (AccountUserInvite) {}
+
+    rpc AddAccountUserInvite(AddAccountInviteRequest) returns (AccountUserInvite) {}
     rpc GetAccountUserInvite(AccountUserInviteId) returns ( AccountUserInvite) {}
     rpc RemoveAccountUserInvite(AccountUserInviteId) returns (common.Success) {}
     rpc ListAccountUserInvites(UserId) returns (AccountInviteList) {}
 
     // Project User
+
     rpc AddProjectUser(AddProjectUserRequest) returns (ProjectUser) {}
     rpc RemoveProjectUser(ProjectUserId) returns (common.Success) {}
     rpc UpdateProjectUser(ProjectUserUpdateRequest) returns (ProjectUser) {}
     rpc ListProjectsUser(project.ProjectId) returns (ProjectUserList) {}
 
     // Project User Invite
-    rpc AddProjectUserInvite(addProjectInviteRequest) returns (ProjectUserInvite){}
+    
+    rpc AddProjectUserInvite(AddProjectInviteRequest) returns (ProjectUserInvite){}
     rpc GetProjectUserInvite(ProjectUserInviteId) returns (ProjectUserInvite){}
     rpc RemoveProjectUserInvite(ProjectUserInviteId) returns (common.Success){}
     rpc ListProjectUserInvites(UserId) returns (ProjectInviteList){}

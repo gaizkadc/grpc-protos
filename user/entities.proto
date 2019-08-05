@@ -158,7 +158,7 @@ message AccountInviteList {
     repeated AccountUserInvite account_user_invites = 1;
 }
 
-message addAccountInviteRequest {
+message AddAccountInviteRequest {
     // AccountId with the identifier of the account
     string account_id = 1;
     // Email user identifier
@@ -261,7 +261,7 @@ message ProjectUserInvite {
     int64 expires = 7;
 }
 
-message addProjectInviteRequest {
+message AddProjectInviteRequest {
     // AccountId with the identifier of the account
     string account_id = 1;
     // ProjectId with the project identifier
