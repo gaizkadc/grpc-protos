@@ -1,0 +1,15 @@
+/*
+ * Copyright (C) 2019 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package notification_manager;
+option go_package = "github.com/nalej/grpc-notification-manager-go";
+
+import "common/entities.proto";
+
+service Notification {
+    // SendNotification sends a notification (email.)
+    rpc SendNotification (SendNotificationRequest) returns (common.Success){}
+}

@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package notification_manager;
+option go_package = "github.com/nalej/grpc-notification-manager-go";
+
+message SendNotificationRequest {
+    // Recipient will receive the notification.
+    string recipient = 1;
+    // Subject of the notification.
+    string subject = 2;
+    // Content of the notification.
+    string content = 3;
+}
