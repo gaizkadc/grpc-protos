@@ -11,5 +11,5 @@ import "common/entities.proto";
 
 service Notification {
     // SendNotification sends a notification (email.)
-    rpc SendNotification (SendNotificationRequest) returns (common.Success){}
+    rpc SendRawNotification (SendRawNotificationRequest) returns (common.Success){}
 }
