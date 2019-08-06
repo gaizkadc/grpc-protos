@@ -43,6 +43,9 @@ message ClusterSummary {
     // i.e., the amount of total bytes from all block devices present in the
     // cluster. This does not mean all is usable for user applications.
     ClusterStat storage_bytes = 5;
+    // Largest available usable storage space - currently just looking
+    // at the largest block device
+    ClusterStat usable_storage_bytes = 6;
 }
 
 // PlatformStatsField Enum of all statistics available that are relevant for the platform
