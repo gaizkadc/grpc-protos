@@ -8,8 +8,9 @@ package notification_manager;
 option go_package = "github.com/nalej/grpc-notification-manager-go";
 
 import "common/entities.proto";
+import "notification-manager/entities.proto";
 
 service Notification {
-    // SendNotification sends a notification (email.)
+    // SendRawNotification sends a notification (email.)
     rpc SendRawNotification (SendRawNotificationRequest) returns (common.Success){}
 }
