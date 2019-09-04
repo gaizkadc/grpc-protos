@@ -9,7 +9,6 @@ option go_package = "github.com/nalej/grpc-signup-go";
 
 import "signup/entities.proto";
 import "common/entities.proto";
-import "organization/entities.proto";
 
 // Signup service exposing organization creation functionality.
 service Signup {
