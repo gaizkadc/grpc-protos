@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Nalej - All Rights Reserved
+ * Copyright (C) 2019 Nalej - All Rights Reserved
  */
 
 syntax = "proto3";
@@ -16,6 +16,10 @@ message SignupOrganizationRequest{
     string owner_name = 3;
     string owner_password = 4;
     string preshared_secret = 5;
+    // Credentials for the Nalej Admin
+    string nalejadmin_email = 6;
+    string nalejadmin_name = 7;
+    string nalejadmin_password = 8;
 }
 
 message SignupOrganizationResponse{

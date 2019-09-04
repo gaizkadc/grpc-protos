@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Nalej - All Rights Reserved
+ * Copyright (C) 2019 Nalej - All Rights Reserved
  */
 
 syntax = "proto3";
@@ -42,6 +42,10 @@ enum AccessPrimitive {
     DEVICE = 5;
     // DevMngr is a user capable of managing device groups and devices
     DEVMNGR = 6;
+    // OrgMngt For organization management tasks such as role management, user creation...
+    ORGMNGT = 7;
+    // ResourcesMngt For resource management tasks like provisioning and installing clusters, installing an agent...
+    RESOURCESMNGT = 8;
 }
 
 // Role defines a role for users of an organization with the associated capabilities
