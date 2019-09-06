@@ -43,9 +43,9 @@ enum AccessPrimitive {
     // DevMngr is a user capable of managing device groups and devices
     DEVMNGR = 6;
     // OrgMngt For organization management tasks such as role management, user creation...
-    ORGMNGT = 7;
+    ORG_MNGT = 7;
     // ResourcesMngt For resource management tasks like provisioning and installing clusters, installing an agent...
-    RESOURCESMNGT = 8;
+    RESOURCES_MNGT = 8;
 }
 
 // Role defines a role for users of an organization with the associated capabilities
