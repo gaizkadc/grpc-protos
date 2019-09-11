@@ -7,7 +7,8 @@ syntax = "proto3";
 package application_manager;
 option go_package = "github.com/nalej/grpc-application-manager-go";
 
-import public "application/entities.proto";
+import "application/entities.proto";
+import "appnet/entities.proto";
 
 // DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
@@ -19,6 +20,7 @@ message DeployRequest{
     string name = 3;
     // Parameters with a list of values ​​that the parameters in this deployment will take
     application.InstanceParameterList parameters = 4;
+    repeated appnet.ConnectionInstance outbound_connections = 5;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
@@ -77,4 +79,26 @@ message DeploymentResponse {
     string app_instance_id = 2;
     // Status for this application. The first request will probably return a QUEUED status.
     application.ApplicationStatus status = 3;
+}
+
+message AvailableInstanceInbound{
+    string organization_id = 1;
+    string app_instance_id = 2;
+    string instance_name = 3;
+    string inbound_name = 4;
+}
+
+message AvailableInstanceInboundList {
+    repeated AvailableInstanceInbound instance_inbounds = 1;
+}
+
+message AvailableInstanceOutbound{
+    string organization_id = 1;
+    string app_instance_id = 2;
+    string instance_name = 3;
+    string outbound_name = 4;
+}
+
+message AvailableInstanceOutboundList {
+    repeated AvailableInstanceOutbound instance_outbounds = 1;
 }

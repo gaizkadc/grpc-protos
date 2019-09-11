@@ -489,3 +489,27 @@ service Inventory {
         };
     }
 }
+
+service Appnet {
+    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceInboundList) {
+        option (google.api.http) = {
+            get: "/v1/appnet/inbound/{organization_id}/list_available"
+        };
+
+    }
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceOutboundList){
+        option (google.api.http) = {
+            get: "/v1/appnet/outbound/{organization_id}/list_available"
+        };
+
+    }
+
+    rpc AddConnection (appnet.AddConnectionRequest) returns (appnet.ConnectionInstance) {
+        option (google.api.http) = {
+            post: "/v1/appnet/connection/{organization_id}/add"
+            body: "*"
+        };
+    }
+    rpc RemoveConnection (appnet.RemoveConnectionRequest) returns (common.Success) {}
+    rpc ListConnections(organization.OrganizationId) returns (appnet.ConnectionInstanceList) {}
+}

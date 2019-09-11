@@ -7,6 +7,14 @@ syntax = "proto3";
 package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
+message InboundNetworkInterface {
+    string name = 1;
+}
+
+message OutboundNetworkInterface {
+    string name = 1;
+    bool required = 2;
+}
 
 // AppDescriptor structure defines the top level abstraction for an application and all the associated services.
 message AppDescriptor {
@@ -29,6 +37,8 @@ message AppDescriptor {
     repeated ServiceGroup groups = 8;
     // AppParameter with the parameters definition of an application
     repeated AppParameter parameters = 9;
+    repeated InboundNetworkInterface inbound_net_interfaces = 10;
+    repeated OutboundNetworkInterface outbound_net_interfaces = 11;
 }
 
 // SecurityRule structure defining which element can access a given application service.
@@ -57,6 +67,8 @@ message SecurityRule {
     repeated string device_group_ids = 11;
     // DeviceGroupNames defining a list of device groups names that can access the port.
     repeated string device_group_names = 12;
+    string inbound_net_interface = 13;
+    string outbound_net_interface = 14;
 }
 
 // PortAccess enumeration defining the actor with access to a given port.
@@ -69,6 +81,8 @@ enum PortAccess {
     PUBLIC = 2;
     // DeviceGroup to indicate that the port will be accessed by a set of device groups.
     DEVICE_GROUP = 3;
+    INBOUND_APPNET = 4;
+    OUTBOUND_APPNET = 5;
 }
 
 
@@ -272,6 +286,8 @@ message AddAppDescriptorRequest {
     repeated ServiceGroup groups = 8;
     // Parameters with the parameters definition
     repeated AppParameter parameters = 9;
+    repeated InboundNetworkInterface inbound_net_interfaces = 10;
+    repeated OutboundNetworkInterface outbound_net_interfaces = 11;
 }
 // AppDescriptorList is a list of application descriptors
 message AppDescriptorList {
@@ -344,6 +360,8 @@ message AppInstance {
     repeated InstanceMetadata metadata = 11;
     // Textual information about this particular application instance
     string info = 12;
+    repeated InboundNetworkInterface inbound_net_interfaces = 13;
+    repeated OutboundNetworkInterface outbound_net_interfaces = 14;
 }
 
 // InstanceMetadata is a common metadata entity that collects information for a deployed instance. This instance can be a
@@ -535,6 +553,8 @@ message AddAppInstanceRequest {
     string name = 3;
     // Parameters with a list of values that the parameters in this deployment will take
     InstanceParameterList parameters = 4;
+    repeated InboundNetworkInterface inbound_net_interfaces = 5;
+    repeated OutboundNetworkInterface outbound_net_interfaces = 6;
 }
 // AppInstanceId contains an Application Instance Identifier
 message AppInstanceId {
