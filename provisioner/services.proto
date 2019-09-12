@@ -5,7 +5,7 @@
 syntax = "proto3";
 
 package provisioner;
-option go_package = "github.com/nalej/grpc-installer-go";
+option go_package = "github.com/nalej/grpc-provisioner-go";
 
 import "common/entities.proto";
 import "provisioner/entities.proto";
