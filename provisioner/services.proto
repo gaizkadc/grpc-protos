@@ -1,0 +1,41 @@
+/*
+ * Copyright (C) 2018 Nalej - All Rights Reserved
+ */
+
+syntax = "proto3";
+
+package provisioner;
+option go_package = "github.com/nalej/grpc-installer-go";
+
+import "common/entities.proto";
+import "provisioner/entities.proto";
+
+// Provision service to create clusters.
+service Provision {
+    // ProvisionCluster triggers the provisioning operation on a given cloud infrastructure provider.
+    rpc ProvisionCluster(ProvisionClusterRequest) returns (ProvisionClusterResponse){}
+    // CheckProgress gets an updated state of a provisioning request.
+    rpc CheckProgress(common.RequestId) returns(ProvisionClusterResponse){}
+    // RemoveProvision cancels an ongoing provisioning or removes the information of an already processed provision operation.
+    rpc RemoveProvision(common.RequestId) returns(common.Success){}
+}
+
+// Decomission service offering methods to free infrastructure.
+service Decomission {
+    // DecomissionCluster frees the resources of a given cluster.
+    rpc DecomissionCluster(DecomissionClusterRequest) returns (DecomissionClusterResponse){}
+    // CheckProgress gets an updated state of a decomission request.
+    rpc CheckProgress(common.RequestId) returns (DecomissionClusterResponse){}
+    // RemoveDecomission cancels an ongoing decomissioning or removes the information of an already processed decomissioning operation.
+    rpc RemoveDecomission(common.RequestId) returns (common.Success){}
+}
+
+// Scale service offering a method to dynamically change the capacity of a provisioned cluster.
+service Scale {
+    // ScaleCluster triggers the rescaling of a given cluster by adding or removing nodes.
+    rpc ScaleCluster(ScaleClusterRequest) returns (ScaleClusterResponse){}
+    // CheckProgress gets an updated state of a scale request.
+    rpc CheckProgress(common.RequestId) returns (ScaleClusterResponse){}
+    // RemoveScale cancels an ongoing scale process or removes the information of an already processed one.
+    rpc RemoveScale(common.RequestId) returns (common.Success){}
+}
