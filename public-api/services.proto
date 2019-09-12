@@ -14,6 +14,7 @@ import "common/entities.proto";
 import "infrastructure/entities.proto";
 import "application/entities.proto";
 import "application-manager/entities.proto";
+import "application-network/entities.proto";
 import "infrastructure-manager/entities.proto";
 import "user-manager/entities.proto";
 import "device-manager/entities.proto";
@@ -486,6 +487,44 @@ service Inventory {
     rpc Summary(organization.OrganizationId) returns (inventory_manager.InventorySummary){
         option (google.api.http) = {
             get: "/v1/inventory/{organization_id}/summary"
+        };
+    }
+}
+
+// application network related operations
+service ApplicationNetwork {
+    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
+    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceInboundList) {
+        option (google.api.http) = {
+            get: "/v1/appnet/inbound/{organization_id}/available"
+        };
+
+    }
+    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceOutboundList){
+        option (google.api.http) = {
+            get: "/v1/appnet/outbound/{organization_id}/available"
+        };
+
+    }
+    // AddConnection adds a new connection between one outbound and one inbound
+    rpc AddConnection (application_network.AddConnectionRequest) returns (application_network.ConnectionInstance) {
+        option (google.api.http) = {
+            post: "/v1/appnet/connection/{organization_id}/add"
+            body: "*"
+        };
+    }
+    // RemoveConnection removes a connection
+    rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/appnet/connection/{organization_id}/remove"
+            body: "*"
+        };
+    }
+    // ListConnections retrieves a list all the established connections of an organization
+    rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {
+        option (google.api.http) = {
+            get: "/v1/appnet/connection/{organization_id}/list"
         };
     }
 }

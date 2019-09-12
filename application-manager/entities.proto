@@ -7,7 +7,8 @@ syntax = "proto3";
 package application_manager;
 option go_package = "github.com/nalej/grpc-application-manager-go";
 
-import public "application/entities.proto";
+import "application/entities.proto";
+import "application-network/entities.proto";
 
 // DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
@@ -19,6 +20,8 @@ message DeployRequest{
     string name = 3;
     // Parameters with a list of values ​​that the parameters in this deployment will take
     application.InstanceParameterList parameters = 4;
+    // OutboundConnections with a list of connections to be established in the deployment
+    repeated application_network.ConnectionInstance outbound_connections = 5;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
@@ -77,4 +80,38 @@ message DeploymentResponse {
     string app_instance_id = 2;
     // Status for this application. The first request will probably return a QUEUED status.
     application.ApplicationStatus status = 3;
+}
+
+// AvailableInstanceInbound represent an available inbound
+message AvailableInstanceInbound{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // appInstanceId with the instance identifier
+    string app_instance_id = 2;
+    // InstanceName withe the name of the instance
+    string instance_name = 3;
+    // InboundName with the name of the inbound interface
+    string inbound_name = 4;
+}
+
+// AvailableInstanceInboundList list of AvailableInstanceInbound
+message AvailableInstanceInboundList {
+    repeated AvailableInstanceInbound instance_inbounds = 1;
+}
+
+// AvailableInstanceOutbound represent an available outbound
+message AvailableInstanceOutbound{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // appInstanceId with the instance identifier
+    string app_instance_id = 2;
+    // InstanceName withe the name of the instance
+    string instance_name = 3;
+    // OutboundName with the name of the outbound interface
+    string outbound_name = 4;
+}
+
+// AvailableInstanceOutboundList list of AvailableInstanceOutbound
+message AvailableInstanceOutboundList {
+    repeated AvailableInstanceOutbound instance_outbounds = 1;
 }

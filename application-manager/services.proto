@@ -10,6 +10,7 @@ option go_package = "github.com/nalej/grpc-application-manager-go";
 import "application/entities.proto";
 import "organization/entities.proto";
 import "application-manager/entities.proto";
+import "application-network/entities.proto";
 import "common/entities.proto";
 
 service ApplicationManager {
@@ -45,5 +46,20 @@ service ApplicationManager {
     rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList){}
     // RetrieveEndpoints retrieves the endpoints associated with a given application.
     rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints){}
+
+    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
+    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
+    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList){}
+}
+
+// ApplicationNetwork related operations
+service ApplicationNetwork{
+    // AddConnection adds a new connection between one outbound and one inbound
+    rpc AddConnection (application_network.AddConnectionRequest) returns (application_network.ConnectionInstance) {}
+    // RemoveConnection removes a connection
+    rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.Success) {}
+    // ListConnections retrieves a list all the established connections of an organization
+    rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
 
 }

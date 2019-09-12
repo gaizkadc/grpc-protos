@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package application_network;
+option go_package = "github.com/nalej/grpc-application-network-go";
+
+import "application-network/entities.proto";
+import "common/entities.proto";
+import "organization/entities.proto";
+
+service ApplicationNetwork {
+
+    // AddConnection adds a new connection between one outbound and one inbound
+    rpc AddConnection (AddConnectionRequest) returns (ConnectionInstance) {}
+    // RemoveConnection removes a connection
+    rpc RemoveConnection (RemoveConnectionRequest) returns (common.Success) {}
+    // ListConnections retrieves a list all the established connections of an organization
+    rpc ListConnections(organization.OrganizationId) returns (ConnectionInstanceList) {}
+}

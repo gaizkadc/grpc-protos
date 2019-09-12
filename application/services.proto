@@ -25,7 +25,7 @@ service Applications {
 
     // AddAppInstance adds a new application instance to a given organization.
     rpc AddAppInstance(AddAppInstanceRequest) returns (AppInstance){}
-    // ListAppInstances retieves a list of application instances.
+    // ListAppInstances retrieves a list of application instances.
     rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}
     // GetAppInstance retrieves a given application instance.
     rpc GetAppInstance(AppInstanceId) returns (AppInstance) {}
