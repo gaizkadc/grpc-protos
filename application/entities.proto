@@ -343,6 +343,10 @@ message ParametrizedDescriptor {
     repeated SecurityRule rules = 8;
     // Groups with the Service collocation strategies.
     repeated ServiceGroup groups = 9;
+    // InboundNetInterfaces with a list of inbounds
+    repeated InboundNetworkInterface inbound_net_interfaces = 10;
+    // OutboundNetInterfaces with a list of outbounds
+    repeated OutboundNetworkInterface outbound_net_interfaces = 11;
 }
 
 
