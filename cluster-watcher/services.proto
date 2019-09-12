@@ -5,7 +5,7 @@
 
 syntax = "proto3";
 
-package conductor;
+package cluster_watcher;
 option go_package = "github.com/nalej/grpc-cluster-watcher-go";
 
 import "cluster-watcher/entities.proto";
