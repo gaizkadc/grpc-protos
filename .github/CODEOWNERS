@@ -1,0 +1,7 @@
+# Main owner of this repo
+#· *       owner@nalej.com
+
+# DevOps
+#Makefile devops@nalej.com owner@nalej.com
+#·/scripts/Makefile* devops@nalej.com owner@nalej.com
+#/ci/ devops@nalej.com owner@nalej.com
