@@ -7,12 +7,17 @@ syntax = "proto3";
 package application;
 option go_package = "github.com/nalej/grpc-application-go";
 
+// InboundNetworkInterface defines an inbound
 message InboundNetworkInterface {
+    // Name of the inbound
     string name = 1;
 }
 
+// OutboundNetworkInterface defines an outbound
 message OutboundNetworkInterface {
+    // Name of the outbound
     string name = 1;
+    // Required is a flag to indicate if the outbound should be defined when deploying an instance
     bool required = 2;
 }
 

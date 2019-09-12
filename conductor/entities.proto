@@ -127,8 +127,8 @@ message DeploymentRequest {
    // Time last retry
    // Internal field. Only conductor modifies this value.
    google.protobuf.Timestamp time_retry = 5;
-
-   repeated appnet.ConnectionInstance outbound_connections = 5;
+   // OutboundConnections with a list of connections to be established in the deployment
+   repeated appnet.ConnectionInstance outbound_connections = 6;
 }
 
 
