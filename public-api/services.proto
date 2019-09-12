@@ -490,26 +490,40 @@ service Inventory {
     }
 }
 
+// application network related operations
 service Appnet {
+    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
     rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceInboundList) {
         option (google.api.http) = {
-            get: "/v1/appnet/inbound/{organization_id}/list_available"
+            get: "/v1/appnet/inbound/{organization_id}/available"
         };
 
     }
+    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
     rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceOutboundList){
         option (google.api.http) = {
-            get: "/v1/appnet/outbound/{organization_id}/list_available"
+            get: "/v1/appnet/outbound/{organization_id}/available"
         };
 
     }
-
+    // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (appnet.AddConnectionRequest) returns (appnet.ConnectionInstance) {
         option (google.api.http) = {
             post: "/v1/appnet/connection/{organization_id}/add"
             body: "*"
         };
     }
-    rpc RemoveConnection (appnet.RemoveConnectionRequest) returns (common.Success) {}
-    rpc ListConnections(organization.OrganizationId) returns (appnet.ConnectionInstanceList) {}
+    // RemoveConnection removes a connection
+    rpc RemoveConnection (appnet.RemoveConnectionRequest) returns (common.Success) {
+        option (google.api.http) = {
+            post: "/v1/appnet/connection/{organization_id}/remove"
+            body: "*"
+        };
+    }
+    // ListConnections retrieves a list all the established connections of an organization
+    rpc ListConnections(organization.OrganizationId) returns (appnet.ConnectionInstanceList) {
+        option (google.api.http) = {
+            get: "/v1/appnet/connection/{organization_id}/list"
+        };
+    }
 }

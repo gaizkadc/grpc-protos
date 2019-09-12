@@ -46,12 +46,16 @@ service ApplicationManager {
     // RetrieveEndpoints retrieves the endpoints associated with a given application.
     rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints){}
 
+    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
     rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
+    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
     rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList){}
 
-
+    // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (appnet.AddConnectionRequest) returns (appnet.ConnectionInstance) {}
+    // RemoveConnection removes a connection
     rpc RemoveConnection (appnet.RemoveConnectionRequest) returns (common.Success) {}
+    // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (appnet.ConnectionInstanceList) {}
 
 }

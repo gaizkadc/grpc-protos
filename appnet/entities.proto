@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package appnet;
+option go_package = "github.com/nalej/grpc-appnet-go";
+
+// ConnectionInstance structure to represent a connection between two services of different instances (outbound - inbound)
+message ConnectionInstance{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // ConnectionId with the connection identifier
+    string connection_id = 2;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 3;
+    // SourceInstanceId with the name of the outbound instance
+    string source_instance_name = 4;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 5;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_name = 6;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 7;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 8;
+    // OutboundRequired is a flag that indicates if the outbound connection should be informed when deploying an instance
+    bool outbound_required = 9;
+}
+// ConnectionInstanceList is a list of ConnectionInstance
+message ConnectionInstanceList {
+    repeated ConnectionInstance connections = 1;
+}
+
+// ConnectionInstanceLink represents a single connection between two fragments on two clusters.
+// When multiplicity is applied we must expected several links per instance
+message ConnectionInstanceLink{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // ConnectionId with the connection identifier
+    string connection_id = 2;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 3;
+    // SourceClusterId with the identifier of the cluster where the outbound instance is deployed
+    string source_cluster_id = 4;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 5;
+    // TargetClusterId with the identifier of the cluster where the inbound instance is deployed
+    string target_cluster_id = 6;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 7;
+    // OutnboundName with the name of the outbound identifier
+    string outbound_name = 8;
+}
+
+// AddConnectionRequest structure to add a new connection
+message AddConnectionRequest {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 2;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 3;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 4;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 5;
+}
+
+// RemoveConnectionRequest contains the information required to remove a connection
+message RemoveConnectionRequest {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 2;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 3;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 4;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 5;
+    // UserConfirmation is a flag required to remove a connection between and inbound and a required outbound
+    bool user_confirmation = 6;
+}
