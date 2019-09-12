@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2018 Nalej Group - All Rights Reserved
+ */
+
+
+syntax = "proto3";
+
+package conductor;
+option go_package = "github.com/nalej/grpc-cluster-watcher-go";
+
+import "cluster-watcher/entities.proto";
+import "common/entities.proto";
+
+// Cluster watcher service running in the management cluster.
+service ClusterWatcherMaster {
+    // Request an application deployment to be done on top of Nalej.
+    rpc AddClusterInfo(ClusterWatchInfo) returns (common.Success) {}
+}
+
+// Cluster watcher service running in the application clusters.
+service ClusterWatcherSlave {
+    // Request to score an application
+    rpc UpdateClusters(ListClustersWatchInfo) returns (common.Success) {}
+}
