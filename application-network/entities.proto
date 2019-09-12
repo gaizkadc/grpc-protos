@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package appnet;
-option go_package = "github.com/nalej/grpc-appnet-go";
+package application_network;
+option go_package = "github.com/nalej/grpc-application-network-go";
 
 // ConnectionInstance structure to represent a connection between two services of different instances (outbound - inbound)
 message ConnectionInstance{

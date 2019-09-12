@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package appnet;
-option go_package = "github.com/nalej/grpc-appnet-go";
+package application_network;
+option go_package = "github.com/nalej/grpc-application-network-go";
 
-import "organization/entities.proto";
-import "appnet/entities.proto";
+import "application-network/entities.proto";
 import "common/entities.proto";
+import "organization/entities.proto";
 
-service Appnet {
+service ApplicationNetwork {
 
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (AddConnectionRequest) returns (ConnectionInstance) {}

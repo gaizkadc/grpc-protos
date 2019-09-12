@@ -8,7 +8,7 @@ package application_manager;
 option go_package = "github.com/nalej/grpc-application-manager-go";
 
 import "application/entities.proto";
-import "appnet/entities.proto";
+import "application-network/entities.proto";
 
 // DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
@@ -21,7 +21,7 @@ message DeployRequest{
     // Parameters with a list of values ​​that the parameters in this deployment will take
     application.InstanceParameterList parameters = 4;
     // OutboundConnections with a list of connections to be established in the deployment
-    repeated appnet.ConnectionInstance outbound_connections = 5;
+    repeated application_network.ConnectionInstance outbound_connections = 5;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.

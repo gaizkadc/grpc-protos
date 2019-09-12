@@ -9,7 +9,7 @@ package conductor;
 option go_package = "github.com/nalej/grpc-conductor-go";
 
 import "application/entities.proto";
-import "appnet/entities.proto";
+import "application-network/entities.proto";
 import "infrastructure/entities.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -128,7 +128,7 @@ message DeploymentRequest {
    // Internal field. Only conductor modifies this value.
    google.protobuf.Timestamp time_retry = 5;
    // OutboundConnections with a list of connections to be established in the deployment
-   repeated appnet.ConnectionInstance outbound_connections = 6;
+   repeated application_network.ConnectionInstance outbound_connections = 6;
 }
 
 
