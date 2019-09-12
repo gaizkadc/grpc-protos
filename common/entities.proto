@@ -19,3 +19,8 @@ message Empty{
 message Labels{
     map <string, string> labels = 1;
 }
+
+// RequestId message to perform operations on returned operation identifiers.
+message RequestId{
+    string request_id = 1;
+}
