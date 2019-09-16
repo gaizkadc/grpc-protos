@@ -10,6 +10,15 @@ option go_package = "github.com/nalej/grpc-application-manager-go";
 import "application/entities.proto";
 import "application-network/entities.proto";
 
+message ConnectionRequest {
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 1;
+    // TargetInboundName with the name of the inbound identifier
+    string target_inbound_name = 2;
+    // SourceOutboundName with the name of the outbound identifier
+    string source_outbound_name = 3;
+}
+
 // DeployRequest contains a message to deploy an application descriptor
 message DeployRequest{
     // OrganizationID with the organization identifier
@@ -21,7 +30,7 @@ message DeployRequest{
     // Parameters with a list of values ​​that the parameters in this deployment will take
     application.InstanceParameterList parameters = 4;
     // OutboundConnections with a list of connections to be established in the deployment
-    repeated application_network.ConnectionInstance outbound_connections = 5;
+    repeated ConnectionRequest outbound_connections = 5;
 }
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
