@@ -13,6 +13,7 @@ import "network/entities.proto";
 import "authx/entities.proto";
 import "device/entities.proto";
 import "device-controller/entities.proto";
+import "infrastructure/entities.proto";
 
 // Conductor operations.
 service Conductor{
@@ -40,4 +41,10 @@ service DeviceManager {
     rpc RegisterLatency (device_controller.RegisterLatencyRequest) returns (common.Success) {}
     // GetDeviceGroupSecret retrieves the secret associated with a device group
     rpc GetDeviceGroupSecret (device.DeviceGroupId) returns (authx.DeviceGroupSecret){}
+}
+
+// Connectivity-checker operations
+service ConnectivityChecker {
+    // ClusterAlive checks if a cluster is alive and returns a success if it is
+    rpc ClusterAlive (infrastructure.ClusterId) returns (common.Success) {}
 }
