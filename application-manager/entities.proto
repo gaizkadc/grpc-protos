@@ -124,3 +124,46 @@ message AvailableInstanceOutbound{
 message AvailableInstanceOutboundList {
     repeated AvailableInstanceOutbound instance_outbounds = 1;
 }
+
+// AppInstance represents an instance of the application in the system.
+message AppInstance {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 3;
+    // Name of the application.
+    string name = 4;
+    // ConfigurationOptions defines a key-value map of configuration options.
+    map<string, string> configuration_options = 5;
+    // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+    // running services.
+    map<string, string> environment_variables = 6;
+    // Labels defined by the user.
+    map<string, string> labels = 7;
+    // Rules that define the connectivity between the elements of an application.
+    repeated application.SecurityRule rules = 8;
+    // Groups with the Service collocation strategies.
+    repeated application.ServiceGroupInstance groups = 9;
+    // Status of the deployed instance.
+    application.ApplicationStatus status = 10;
+    // Metadata descriptor for the instances triggered by this app
+    repeated application.InstanceMetadata metadata = 11;
+    // Textual information about this particular application instance
+    string info = 12;
+    // InboundNetInterfaces with a list of inbounds
+    repeated application.InboundNetworkInterface inbound_net_interfaces = 13;
+    // OutboundNetInterfaces with a list of outbounds
+    repeated application.OutboundNetworkInterface outbound_net_interfaces = 14;
+    // InboundConnections with a list of connections where the instance is the target
+    repeated application_network.ConnectionInstanceList inbound_connections = 15;
+    // OutboundConnections with a list of connections where the instance is the source
+    repeated application_network.ConnectionInstanceList outbound_connections = 16;
+
+}
+
+// list of application instances
+message AppInstanceList {
+    repeated AppInstance instances = 1;
+}

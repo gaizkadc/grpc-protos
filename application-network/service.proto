@@ -4,6 +4,7 @@ package application_network;
 option go_package = "github.com/nalej/grpc-application-network-go";
 
 import "application-network/entities.proto";
+import "application/entities.proto";
 import "common/entities.proto";
 import "organization/entities.proto";
 
@@ -15,4 +16,8 @@ service ApplicationNetwork {
     rpc RemoveConnection (RemoveConnectionRequest) returns (common.Success) {}
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (ConnectionInstanceList) {}
+    // ListInboundConnections retrieves a list with all the connections where the appInstanceId is the target
+    rpc ListInboundConnections(application.AppInstanceId)returns (ConnectionInstanceList) {}
+    // ListOutboundConnections retrieves a list with all the connections where the appInstanceId is the source
+    rpc ListOutboundConnections(application.AppInstanceId)returns (ConnectionInstanceList) {}
 }

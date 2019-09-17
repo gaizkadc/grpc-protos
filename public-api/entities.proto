@@ -9,6 +9,7 @@ option go_package = "github.com/nalej/grpc-public-api-go";
 
 import "infrastructure/entities.proto";
 import "application/entities.proto";
+import "application-network/entities.proto";
 import "installer/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
@@ -416,6 +417,14 @@ message AppInstance {
     repeated InstanceMetadata metadata = 11;
     // Textual information about this particular application instance
     string info = 12;
+    // InboundNetInterfaces with a list of inbounds
+    repeated application.InboundNetworkInterface inbound_net_interfaces = 13;
+    // OutboundNetInterfaces with a list of outbounds
+    repeated application.OutboundNetworkInterface outbound_net_interfaces = 14;
+    // InboundConnections with a list of connections where the instance is the target
+    repeated application_network.ConnectionInstanceList inbound_connections = 15;
+    // OutboundConnections with a list of connections where the instance is the source
+    repeated application_network.ConnectionInstanceList outbound_connections = 16;
 }
 
 message AppInstanceList {
