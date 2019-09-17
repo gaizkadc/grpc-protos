@@ -17,10 +17,12 @@ message ClusterWatchInfo {
     string ip = 3;
     // CiliumId Id for the node
     string cilium_id = 4;
-    // Cilium client-ca certification authority to be used
-    string cilium_ca = 5;
+    // Cilium etcd-client-ca.crt certification authority to be used
+    string cilium_etcd_ca_crt = 5;
+    // Cilium etcd-client.crt certificate
+    string cilium_etcd_crt = 6;
     // Cilium client public key
-    string cilium_key = 6;
+    string cilium_etcd_key = 7;
 }
 
 message ListClustersWatchInfo {
