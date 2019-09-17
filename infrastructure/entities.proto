@@ -7,6 +7,8 @@ syntax = "proto3";
 package infrastructure;
 option go_package = "github.com/nalej/grpc-infrastructure-go";
 
+import "cluster-watcher/entities.proto";
+
 // ClusterType enumeration with the types of clusters supported to manage application deployments.
 enum ClusterType {
     KUBERNETES = 0;
@@ -65,6 +67,8 @@ message Cluster {
     map <string, string> labels = 9;
     // Cordon flags to signal conductor not to schedule apps in the cluster.
     bool cordon = 10;
+    // Information used by the cluster watcher to control this cluster
+    ClusterWatchInfo cluster_watch = 11;
 }
 
 message ClusterId {
