@@ -38,9 +38,9 @@ service ApplicationManager {
     rpc Undeploy(application.AppInstanceId) returns (common.Success){}
 
     // ListAppInstances retrieves a list of application descriptors.
-    rpc ListAppInstances(organization.OrganizationId) returns (application.AppInstanceList){}
+    rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}
     // GetAppDescriptor retrieves a given application descriptor.
-    rpc GetAppInstance(application.AppInstanceId) returns (application.AppInstance) {}
+    rpc GetAppInstance(application.AppInstanceId) returns (AppInstance) {}
 
     // RetrieveTargetApplications retrieves a list of applications that matches a set of filters.
     rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList){}
