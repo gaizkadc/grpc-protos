@@ -14,6 +14,7 @@ import "authx/entities.proto";
 import "device/entities.proto";
 import "device-controller/entities.proto";
 import "infrastructure/entities.proto";
+import "cluster-watcher/entities.proto";
 
 // Conductor operations.
 service Conductor{
@@ -47,4 +48,10 @@ service DeviceManager {
 service ConnectivityChecker {
     // ClusterAlive checks if a cluster is alive and returns a success if it is
     rpc ClusterAlive (infrastructure.ClusterId) returns (common.Success) {}
+}
+
+// Cluster watcher service running in the management cluster.
+service ClusterWatcherMaster {
+    // Request an application deployment to be done on top of Nalej.
+    rpc AddClusterInfo(cluster_watcher.ClusterWatchInfo) returns (common.Success) {}
 }

@@ -12,6 +12,7 @@ import "conductor/entities.proto";
 import "deployment-manager/entities.proto";
 import "monitoring/entities.proto";
 import "unified-logging/entities.proto";
+import "cluster-watcher/entities.proto";
 
 // Service deployed in local clusters to score locally available resources.
 service Musician {
@@ -47,4 +48,10 @@ service MetricsCollector {
     rpc GetClusterStats(monitoring.ClusterStatsRequest) returns(monitoring.ClusterStats) {}
     // Execute a query directly on the monitoring storage backend
     rpc Query(monitoring.QueryRequest) returns(monitoring.QueryResponse) {}
+}
+
+// Cluster watcher service running in the application clusters.
+service ClusterWatcherSlave {
+    // Request to score an application
+    rpc UpdateClusters(cluster_watcher.ListClustersWatchInfo) returns (common.Success) {}
 }
