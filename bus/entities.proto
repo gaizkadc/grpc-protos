@@ -83,5 +83,9 @@ message NetworkOps {
         network.InboundServiceProxy inbound_app_service_proxy = 5;
         // OutboundAppService message sent by a sidecar when its created.
         network.OutboundService outbound_app_service = 6;
+        // AddConnectionRequest message sent by an application manager to add a connection between instances
+        application_network.AddConnectionRequest add_connection_request = 8;
+        // RemoveConnectionRequest message sent by an application manager to remoce a connection between instances
+        application_network.RemoveConnectionRequest remove_connection_request = 9;
     }
 }

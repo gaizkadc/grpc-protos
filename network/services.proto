@@ -7,6 +7,7 @@ syntax = "proto3";
 package network;
 option go_package = "github.com/nalej/grpc-network-go";
 
+import "application-network/entities.proto";
 import "common/entities.proto";
 import "network/entities.proto";
 import "organization/entities.proto";
@@ -51,4 +52,8 @@ service ApplicationNetwork{
     rpc RegisterInboundServiceProxy(InboundServiceProxy) returns (common.Success){}
     // RegisterOutboundProxy operation to retrieve existing networking rules.
     rpc RegisterOutboundProxy(OutboundService) returns (common.Success){}
+    // AddConnection adds a new connection between one outbound and one inbound
+    rpc AddConnection (application_network.AddConnectionRequest) returns (common.Success) {}
+    // RemoveConnection removes a connection
+    rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.Success) {}
 }
