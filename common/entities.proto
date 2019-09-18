@@ -24,3 +24,16 @@ message Labels{
 message RequestId{
     string request_id = 1;
 }
+
+message OpResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // OperationId with the operation identifier.
+    string request_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status indicates if the operation was successful
+    string status = 5;
+    // Info with additional information for an operation.
+    string info = 6;
+}
