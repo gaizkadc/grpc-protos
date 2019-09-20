@@ -62,7 +62,7 @@ service ApplicationNetwork{
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
     // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
-    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceInboundList) {}
+    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
     // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
-    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceOutboundList) {}
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList) {}
 }
