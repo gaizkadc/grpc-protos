@@ -9,20 +9,22 @@ option go_package = "github.com/nalej/grpc-cluster-watcher-go";
 
 // Information required to maintain connectivity between clusters.
 message ClusterWatchInfo {
+    // Organization id
+    string organization_id = 1;
     // Name of the cluster
-    string name = 1;
+    string name = 2;
     // Id of the cluster
-    string id = 2;
+    string cluster_id = 3;
     // IP of the cluster
-    string ip = 3;
+    string ip = 4;
     // CiliumId Id for the node
-    string cilium_id = 4;
+    string cilium_id = 5;
     // Cilium etcd-client-ca.crt certification authority to be used
-    string cilium_etcd_ca_crt = 5;
+    string cilium_etcd_ca_crt = 6;
     // Cilium etcd-client.crt certificate
-    string cilium_etcd_crt = 6;
+    string cilium_etcd_crt = 7;
     // Cilium client public key
-    string cilium_etcd_key = 7;
+    string cilium_etcd_key = 8;
 }
 
 message ListClustersWatchInfo {
