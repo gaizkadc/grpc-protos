@@ -65,5 +65,4 @@ service ApplicationNetwork{
     rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceInboundList) {}
     // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
     rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (application_manager.AvailableInstanceOutboundList) {}
-
 }
