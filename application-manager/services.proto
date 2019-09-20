@@ -61,5 +61,8 @@ service ApplicationNetwork{
     rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.OpResponse) {}
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
-
+    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
+    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
+    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList) {}
 }
