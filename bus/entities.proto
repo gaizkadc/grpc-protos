@@ -90,3 +90,10 @@ message NetworkOps {
         application_network.RemoveConnectionRequest remove_connection_request = 9;
     }
 }
+
+message ClusterConnectivityEvents {
+    oneof event {
+        // Cluster Id
+        infrastructure.ClusterId cluster_id = 3;
+    }
+}
