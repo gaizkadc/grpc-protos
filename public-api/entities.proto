@@ -673,9 +673,37 @@ message InventoryList{
 }
 
 // EdgeControllerExtendedInfo with the information of the controller and the associated assets.
-message EdgeControllerExtendedInfo{
+message EdgeControllerExtendedInfo {
     // Controller information
     EdgeController controller = 1;
     // ManagedAssets with the assets managed by the controller
     repeated Asset managed_assets = 2;
+}
+
+message OpResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // RequestId with the request identifier.
+    string request_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status indicates if the operation was successful
+    OpStatus status = 5;
+    // StatusName name that indicates if the operation was successful
+    string status_name = 6;
+    // Info with additional information for an operation.
+    string info = 7;
+}
+
+enum OpStatus {
+    // Scheduled to represent that the operation is on the queue pending execution.
+    SCHEDULED = 0;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
 }

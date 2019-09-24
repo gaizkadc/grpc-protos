@@ -12,20 +12,33 @@ message Success {
 }
 
 // Empty message to be reused for rpc calls without parameters.
-message Empty{
+message Empty {
 }
 
 // Message to be used on add/remove operations on labels.
-message Labels{
-    map <string, string> labels = 1;
+message Labels {
+    map<string, string> labels = 1;
 }
 
 // RequestId message to perform operations on returned operation identifiers.
-message RequestId{
+message RequestId {
     string request_id = 1;
 }
 
-message OpResponse{
+enum OpStatus {
+    // Scheduled to represent that the operation is on the queue pending execution.
+    SCHEDULED = 0;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
+}
+
+message OpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // OperationId with the operation identifier.
@@ -33,7 +46,7 @@ message OpResponse{
     // Timestamp of the response.
     int64 timestamp = 4;
     // Status indicates if the operation was successful
-    string status = 5;
+    OpStatus status = 5;
     // Info with additional information for an operation.
     string info = 6;
 }
