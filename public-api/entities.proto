@@ -683,14 +683,14 @@ message EdgeControllerExtendedInfo{
 message OpResponse{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // OperationId with the operation identifier.
+    // RequestId with the request identifier.
     string request_id = 3;
     // Timestamp of the response.
     int64 timestamp = 4;
     // Status indicates if the operation was successful
     Status status = 5;
-    // Status indicates if the operation was successful
-    string statusName = 6;
+    // StatusName name that indicates if the operation was successful
+    string status_name = 6;
     // Info with additional information for an operation.
     string info = 7;
 }
