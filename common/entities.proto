@@ -25,6 +25,19 @@ message RequestId{
     string request_id = 1;
 }
 
+enum Status {
+    // Scheduled to represent that the operation is on the queue pending execution.
+    SCHEDULED = 0;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
+}
+
 message OpResponse{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -33,7 +46,7 @@ message OpResponse{
     // Timestamp of the response.
     int64 timestamp = 4;
     // Status indicates if the operation was successful
-    string status = 5;
+    Status status = 5;
     // Info with additional information for an operation.
     string info = 6;
 }
