@@ -42,7 +42,7 @@ message Cluster {
     // StatusName with the name if the status of the cluster based on monitoring information.
     string status_name = 6;
     // Labels for the cluster.
-    map <string, string> labels = 7;
+    map<string, string> labels = 7;
     // TotalNodes contains the total number of nodes in the cluster.
     int64 total_nodes = 8;
     // RunningNodes contains the number of nodes in the system that are currently working.
@@ -69,7 +69,7 @@ message UpdateClusterRequest {
     // Remove label flag to indicate that the set of labels need to be removed.
     bool remove_labels = 6;
     // Labels for the cluster.
-    map <string, string> labels = 7;
+    map<string, string> labels = 7;
 }
 
 // Type of platform targetting this install request
@@ -146,7 +146,7 @@ message UpdateNodeRequest {
     // Remove label flag to indicate that the set of labels need to be removed.
     bool remove_labels = 4;
     // Labels for the cluster.
-    map <string, string> labels = 5;
+    map<string, string> labels = 5;
 }
 
 // --------------------------------
@@ -343,7 +343,7 @@ message InstanceMetadata {
     // Number of unavailable replicas for this descriptor
     int32 unavailable_replicas = 9;
     // Status of every item monitored by this metadata entry
-    map<string,string> status_name = 10;
+    map<string, string> status_name = 10;
     // Relevant information for every monitored instance
     map<string, string> info = 11;
 }
@@ -467,7 +467,7 @@ message AssetInfo {
     // Storage information.
     repeated inventory.StorageHardwareInfo storage = 3;
 }
-message Device{
+message Device {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // DeviceGroupId with the device group identifier.
@@ -490,17 +490,16 @@ message Device{
     AssetInfo asset_info = 10;
 }
 
-message DeviceList{
+message DeviceList {
     repeated Device devices = 1;
 }
-
 
 // --------------------------------
 // Controllers
 // --------------------------------
 
 // ECOpSummary contains the result of an edge controller operation
-message ECOpSummary{
+message ECOpSummary {
     // OperationId with the operation identifier.
     string operation_id = 1;
     // Timestamp of the response.
@@ -514,7 +513,7 @@ message ECOpSummary{
 }
 
 // EdgeController entity.
-message EdgeController{
+message EdgeController {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
@@ -542,7 +541,7 @@ message EdgeController{
     AssetInfo asset_info = 12;
 }
 
-message ECOpResponse{
+message ECOpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier that facilitated the operation.
@@ -564,7 +563,7 @@ message ECOpResponse{
 // OperatingSystemInfo contains information about the operating system of an asset. Notice that no
 // enums have been used for either the name or the version as to no constraint the elements of the
 // inventory even if we do not have an agent running supporting those.
-message OperatingSystemInfo{
+message OperatingSystemInfo {
     // Name of the operating system. Expecting full name.
     string name = 1;
     // Version installed.
@@ -579,7 +578,7 @@ message OperatingSystemInfo{
 
 // AgentOpSummary contains the result of an asset operation
 // this is a provisional result!
-message AgentOpSummary{
+message AgentOpSummary {
     // OperationId with the operation identifier.
     string operation_id = 1;
     // Timestamp of the response.
@@ -594,7 +593,7 @@ message AgentOpSummary{
 
 // Asset represents an element in the network from which we register some type of information. Example of
 // assets could be workstations, nodes in a cluster, or other type of hardware.
-message Asset{
+message Asset {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
@@ -630,7 +629,7 @@ message Asset{
     inventory.InventoryLocation location = 16;
 }
 
-message AssetMonitoringRequest{
+message AssetMonitoringRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier.
@@ -641,7 +640,7 @@ message AssetMonitoringRequest{
     bool activate = 4;
 }
 
-message AgentOpResponse{
+message AgentOpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // EdgeControllerId with the EIC identifier that facilitated the operation.
@@ -663,7 +662,7 @@ message AgentOpResponse{
 // --------------------------------
 
 // InventoryList message with a collection of all elements in the inventory
-message InventoryList{
+message InventoryList {
     // Devices
     repeated Device devices = 1;
     // Assets
@@ -673,9 +672,37 @@ message InventoryList{
 }
 
 // EdgeControllerExtendedInfo with the information of the controller and the associated assets.
-message EdgeControllerExtendedInfo{
+message EdgeControllerExtendedInfo {
     // Controller information
     EdgeController controller = 1;
     // ManagedAssets with the assets managed by the controller
     repeated Asset managed_assets = 2;
+}
+
+message OpResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // RequestId with the request identifier.
+    string request_id = 3;
+    // Timestamp of the response.
+    int64 timestamp = 4;
+    // Status indicates if the operation was successful
+    OpStatus status = 5;
+    // StatusName name that indicates if the operation was successful
+    string status_name = 6;
+    // Info with additional information for an operation.
+    string info = 7;
+}
+
+enum OpStatus {
+    // Scheduled to represent that the operation is on the queue pending execution.
+    SCHEDULED = 0;
+    // Inprogress to represent that the operation is being executed.
+    INPROGRESS = 1;
+    // Success to indicate that the operation was successfully executed.
+    SUCCESS = 2;
+    // Fail to indicate that the operation failed.
+    FAIL = 3;
+    // Canceled to indicate that the operation was canceled by the user
+    CANCELED = 4;
 }
