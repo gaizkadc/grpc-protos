@@ -42,8 +42,6 @@ message InfrastructureEvents {
         infrastructure.UpdateClusterRequest update_cluster_request = 1;
         // Cordon cluster
         infrastructure.SetClusterStatusRequest set_cluster_status_request = 2;
-        // Cluster Id
-        infrastructure.ClusterId cluster_id = 3;
     }
 }
 
@@ -90,5 +88,13 @@ message NetworkOps {
         application_network.AddConnectionRequest add_connection_request = 8;
         // RemoveConnectionRequest message sent by an application manager to remoce a connection between instances
         application_network.RemoveConnectionRequest remove_connection_request = 9;
+    }
+}
+
+// ClusterAlive message to be consumed by the connectivity-manager
+message ClusterAlive {
+    oneof Event {
+        // Cluster Id
+        infrastructure.ClusterId cluster_id = 1;
     }
 }
