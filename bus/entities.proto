@@ -44,7 +44,7 @@ message InfrastructureEvents {
         // Cordon cluster
         infrastructure.SetClusterStatusRequest set_cluster_status_request = 2;
         // Cluster alive
-        connectivity_manager.ClusterAlive cluster_alive_request = 3;
+        connectivity_manager.ClusterAlive cluster_alive = 3;
     }
 }
 
@@ -88,8 +88,8 @@ message NetworkOps {
         // OutboundAppService message sent by a sidecar when its created.
         network.OutboundService outbound_app_service = 6;
         // AddConnectionRequest message sent by an application manager to add a connection between instances
-        application_network.AddConnectionRequest add_connection_request = 8;
+        application_network.AddConnectionRequest add_connection_request = 7;
         // RemoveConnectionRequest message sent by an application manager to remoce a connection between instances
-        application_network.RemoveConnectionRequest remove_connection_request = 9;
+        application_network.RemoveConnectionRequest remove_connection_request = 8;
     }
 }
