@@ -1,0 +1,19 @@
+/*
+ * Copyright (C) 2019 Nalej Group - All Rights Reserved
+ */
+
+
+syntax = "proto3";
+
+package connectivity_manager;
+option go_package = "github.com/nalej/grpc-connectivity-manager-go";
+
+// Message to check whether a cluster is alive or not
+message ClusterAlive {
+    // Organization id
+    string organization_id = 1;
+    // Cluster id
+    string cluster_id = 2;
+    // Timestamp
+    int64 timestamp = 3;
+}

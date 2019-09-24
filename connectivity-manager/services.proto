@@ -1,0 +1,9 @@
+/*
+ * Copyright (C) 2019 Nalej Group - All Rights Reserved
+ */
+
+
+syntax = "proto3";
+
+package connectivity_manager;
+option go_package = "github.com/nalej/grpc-connectivity-manager-go";

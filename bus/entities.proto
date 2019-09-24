@@ -13,6 +13,7 @@ import "infrastructure/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 import "network/entities.proto";
+import "connectivity-manager/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
@@ -42,6 +43,8 @@ message InfrastructureEvents {
         infrastructure.UpdateClusterRequest update_cluster_request = 1;
         // Cordon cluster
         infrastructure.SetClusterStatusRequest set_cluster_status_request = 2;
+        // Cluster alive
+        connectivity_manager.ClusterAlive cluster_alive_request = 3;
     }
 }
 
