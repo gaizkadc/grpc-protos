@@ -102,3 +102,15 @@ message ServiceRoute{
     // Drop to decide if the target route should be disabled for the given pod.
     bool drop =7;
 }
+
+// Message to authorize an instance in a zt network
+message AuthorizeZTConnectionRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // Network to join
+    string network_id = 3;
+    // MemberId  to join the network
+    string member_id = 4;
+}
