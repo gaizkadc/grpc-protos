@@ -54,7 +54,7 @@ service ApplicationManager {
 }
 
 // ApplicationNetwork related operations
-service ApplicationNetwork{
+service ApplicationNetwork {
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (application_network.AddConnectionRequest) returns (common.OpResponse) {}
     // RemoveConnection removes a connection
