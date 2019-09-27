@@ -29,6 +29,8 @@ service DeploymentManagerNetwork {
     rpc AuthorizeNetworkMembership(AuthorizeNetworkMembershipRequest) returns(common.Success) {}
     // SetServiceRoute setups an iptables DNAT for a given service
     rpc SetServiceRoute(ServiceRoute) returns (common.Success){}
+    // AuthorizeZTConnection A pod requests authorization to join a secondary ZT Network
+    rpc AuthorizeZTConnection(network.AuthorizeZTConnectionRequest) returns(common.Success) {}
 }
 
 // Services controlling the declaration of new proxies for an application. The information will be forwarded
@@ -38,4 +40,6 @@ service ApplicationProxy{
     rpc RegisterInboundServiceProxy(network.InboundServiceProxy) returns (common.Success){}
     // RegisterOutboundProxy operation to retrieve existing networking rules.
     rpc RegisterOutboundProxy(network.OutboundService) returns (common.Success){}
+    // RegisterZTConnection operation to indicate that the inbound or outbound  are within the ztNetwork
+    rpc RegisterZTConnection(network.RegisterZTConnectionRequest) returns (common.Success){}
 }

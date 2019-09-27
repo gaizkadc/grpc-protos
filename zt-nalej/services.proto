@@ -15,3 +15,9 @@ service Sidecar{
     // Request to update a fragment plan status with all the corresponding services
     rpc SetRoute(Route) returns(common.Success) {}
 }
+
+// Application Network operations
+service ApplicationNetwork{
+    //JoinZTNetwork to join into a ZTNetwork
+    rpc JoinZTNetwork(JoinZTNetworkRequest) returns(common.Success) {}
+}
