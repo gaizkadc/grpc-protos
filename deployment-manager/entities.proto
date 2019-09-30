@@ -103,7 +103,7 @@ message RegisterNetworkEntryRequest {
     string service_group_instance_id = 7;
     // Service App Instance Id
     string service_app_instance_id = 8;
-}∫
+}
 
 message ServiceRoute{
     // Organization id
