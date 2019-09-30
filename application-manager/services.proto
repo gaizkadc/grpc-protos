@@ -35,7 +35,7 @@ service ApplicationManager {
     // Deploy an application descriptor.
     rpc Deploy(DeployRequest) returns (DeploymentResponse){}
     // Undeploy a running application instance, removing the instance.
-    rpc Undeploy(application.AppInstanceId) returns (common.Success){}
+    rpc Undeploy(application.AppInstanceId) returns (common.Success) {}
 
     // ListAppInstances retrieves a list of application descriptors.
     rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}
@@ -43,26 +43,22 @@ service ApplicationManager {
     rpc GetAppInstance(application.AppInstanceId) returns (AppInstance) {}
 
     // RetrieveTargetApplications retrieves a list of applications that matches a set of filters.
-    rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList){}
+    rpc RetrieveTargetApplications(ApplicationFilter) returns(TargetApplicationList) {}
     // RetrieveEndpoints retrieves the endpoints associated with a given application.
-    rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints){}
+    rpc RetrieveEndpoints(RetrieveEndpointsRequest) returns(ApplicationEndpoints) {}
 
     // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
     rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
     // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
-    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList){}
+    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList) {}
 }
 
 // ApplicationNetwork related operations
-service ApplicationNetwork{
+service ApplicationNetwork {
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (application_network.AddConnectionRequest) returns (common.OpResponse) {}
     // RemoveConnection removes a connection
     rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.OpResponse) {}
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
-    // ListAvailableInstanceInbounds retrieves a list of available inbounds of an organization
-    rpc ListAvailableInstanceInbounds(organization.OrganizationId) returns (AvailableInstanceInboundList) {}
-    // ListAvailableInstanceOutbounds retrieves a list of available outbounds of an organization
-    rpc ListAvailableInstanceOutbounds(organization.OrganizationId) returns (AvailableInstanceOutboundList) {}
 }

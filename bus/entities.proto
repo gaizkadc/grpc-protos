@@ -89,7 +89,11 @@ message NetworkOps {
         network.OutboundService outbound_app_service = 6;
         // AddConnectionRequest message sent by an application manager to add a connection between instances
         application_network.AddConnectionRequest add_connection_request = 7;
-        // RemoveConnectionRequest message sent by an application manager to remoce a connection between instances
+        // RemoveConnectionRequest message sent by an application manager to remove a connection between instances
         application_network.RemoveConnectionRequest remove_connection_request = 8;
+        // AuthorizeZTConnectionRequest give permission to a member to join a secondary ztNetwork
+        network.AuthorizeZTConnectionRequest authorize_zt_connection = 9;
+        // RegisterZTConnection message sent by zt-agent operation to indicate that the inbound or outbound  are within the ztNetwork
+        network.RegisterZTConnectionRequest register_zt_connection = 10;
     }
 }
