@@ -3,6 +3,12 @@ syntax = "proto3";
 package application_network;
 option go_package = "github.com/nalej/grpc-application-network-go";
 
+enum ConnectionStatus {
+    WAITING = 0;
+    ESTABLISHED = 1;
+    TERMINATED = 2;
+    FAILED = 3;
+}
 // ConnectionInstance structure to represent a connection between two services of different instances (outbound - inbound)
 message ConnectionInstance{
     // OrganizationId with the organization identifier
@@ -23,7 +29,12 @@ message ConnectionInstance{
     string outbound_name = 8;
     // OutboundRequired is a flag that indicates if the outbound connection should be informed when deploying an instance
     bool outbound_required = 9;
+    // Status Status of the connection
+    ConnectionStatus status = 10;
+    // IpRange The range of IPs associated to the network where the peers are connected
+    string ip_range = 11;
 }
+
 // ConnectionInstanceList is a list of ConnectionInstance
 message ConnectionInstanceList {
     repeated ConnectionInstance connections = 1;
@@ -48,6 +59,8 @@ message ConnectionInstanceLink{
     string inbound_name = 7;
     // OutnboundName with the name of the outbound identifier
     string outbound_name = 8;
+    // Status Status of the connection
+    ConnectionStatus status = 10;
 }
 
 // AddConnectionRequest structure to add a new connection
@@ -64,6 +77,28 @@ message AddConnectionRequest {
     string outbound_name = 5;
 }
 
+// UpdateConnectionRequest contains the information required to update the volatile fields of a connection
+message UpdateConnectionRequest {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 2;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 3;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 4;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 5;
+    // UpdateStatus flag to allow status update
+    bool update_status = 6;
+    // Status the new status for the connection
+    ConnectionStatus status = 7;
+    // UpdateIpRange flag to allow IpRange update
+    bool update_ip_range = 8;
+    // IpRange the new IpRange for the connection
+    string ip_range = 9;
+}
+
 // RemoveConnectionRequest contains the information required to remove a connection
 message RemoveConnectionRequest {
     // OrganizationId with the organization identifier
@@ -78,4 +113,61 @@ message RemoveConnectionRequest {
     string outbound_name = 5;
     // UserConfirmation is a flag required to remove a connection between and inbound and a required outbound
     bool user_confirmation = 6;
+}
+
+// ----------------------
+// AddZTNetworkConnection
+// ----------------------
+enum ConnectionSide {
+    SIDE_INBOUND = 0;
+    SIDE_OUTBOUND = 1;
+}
+
+message ZTNetworkConnection {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+    // Application instance identifier
+    string app_instance_id = 3;
+    // ZtMember zero tier member identifier
+    string zt_member = 4;
+    // ZtIp
+    string zt_ip = 5;
+    // ClusterId with the cluster identifier
+    string cluster_id = 6;
+    // Side to indicate if the instance is the inbound or the outbound in the connection
+    ConnectionSide side = 7;
+}
+
+message ZTNetworkConnectionList {
+    repeated ZTNetworkConnection connections = 1;
+}
+
+message ZTNetworkConnectionId {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+}
+
+message UpdateZTNetworkConnectionRequest {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+    // Application instance identifier
+    string app_instance_id = 3;
+    // ZtMember zero tier member identifier
+    string zt_member = 4;
+    //UpdateZtIp flag to indicate zt_ip is going to be updated
+    bool update_zt_ip = 5;
+    // ZtIp
+    string zt_ip = 6;
+    // UpdateClusterId flag to indicate custer_id is going to be updated
+    bool update_cluster_id = 7;
+    // ClusterId with the cluster identifier
+    string cluster_id = 8;
+    // Side to indicate if the instance is the inbound or the outbound in the connection
+    ConnectionSide side = 9;
 }

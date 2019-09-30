@@ -24,6 +24,8 @@ service Networks {
     rpc ListNetworks(organization.OrganizationId) returns (NetworkList){}
     // Authorize member
     rpc AuthorizeMember(AuthorizeMemberRequest) returns (common.Success){}
+    // AuthorizeZTConnection A pod requests authorization to join a secondary ZT Network
+    rpc AuthorizeZTConnection(AuthorizeZTConnectionRequest) returns(common.Success) {}
 }
 
 // DNS service definition
@@ -56,4 +58,6 @@ service ApplicationNetwork{
     rpc AddConnection (application_network.AddConnectionRequest) returns (common.Success) {}
     // RemoveConnection removes a connection
     rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.Success) {}
+    // RegisterZTConnection operation to indicate that the inbound or outbound  are within the ztNetwork
+    rpc RegisterZTConnection(RegisterZTConnectionRequest) returns (common.Success){}
 }
