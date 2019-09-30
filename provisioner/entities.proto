@@ -49,6 +49,8 @@ message ProvisionClusterRequest {
 message AzureProvisioningOptions{
     // ResourceGroup where the cluster will be provisioned.
     string resource_group = 1;
+    // DnsZoneName with the name of the target DNS zone onto which the new cluster entries will be added.
+    string dns_zone_name = 2;
 }
 
 // AzureCredentials contains the credentials required to perform provisioning operations in Azure.
