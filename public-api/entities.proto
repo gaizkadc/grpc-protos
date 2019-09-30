@@ -13,6 +13,7 @@ import "application-network/entities.proto";
 import "installer/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
+import "connectivity-manager/entities.proto";
 
 // --------------------------------
 // Organization related entities.
@@ -39,8 +40,8 @@ message Cluster {
     string cluster_type_name = 4;
     // MultitenantSupport contains the type of support definition.
     string multitenant_support = 5;
-    // StatusName with the name if the status of the cluster based on monitoring information.
-    string status_name = 6;
+    // StatusName with the name of the status of the cluster based on monitoring information.
+    connectivity_manager.ClusterStatus status_name = 6;
     // Labels for the cluster.
     map<string, string> labels = 7;
     // TotalNodes contains the total number of nodes in the cluster.

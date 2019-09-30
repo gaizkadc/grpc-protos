@@ -24,7 +24,6 @@ import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
-import "connectivity-manager/entities.proto";
 
 // Organization related information.
 service Organizations {
@@ -527,12 +526,6 @@ service ApplicationNetwork {
         option (google.api.http) = {
             post: "/v1/appnet/connection/{organization_id}/remove"
             body: "*"
-        };
-    }
-    // ListConnections retrieves a list all the established connections of an organization
-    rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {
-        option (google.api.http) = {
-            get: "/v1/appnet/connection/{organization_id}/list"
         };
     }
 }
