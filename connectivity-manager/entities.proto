@@ -20,9 +20,14 @@ message ClusterAlive {
 
 // ClusterStatus defines a set of status of a cluster
 enum ClusterStatus {
+    // Initial status of a cluster
     UNKNOWN = 0;
+    // A cluster didn't send an alive signal for the threshold period
     OFFLINE = 1;
+    // A cluster is working normally
     ONLINE = 2;
+    // A cluster's grace period expired and is now
     OFFLINE_CORDON = 3;
+    // A cluster is alive but the user sent a cordon request
     ONLINE_CORDON = 4;
 }
