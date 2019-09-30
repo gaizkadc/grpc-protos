@@ -22,4 +22,14 @@ service ApplicationNetwork {
     rpc ListInboundConnections(application.AppInstanceId)returns (ConnectionInstanceList) {}
     // ListOutboundConnections retrieves a list with all the connections where the appInstanceId is the source
     rpc ListOutboundConnections(application.AppInstanceId)returns (ConnectionInstanceList) {}
+
+
+    // AddZTNetworkConnection adds a new zt Connection (one per an inbound and one per the inbound)
+    rpc AddZTNetworkConnection (ZTNetworkConnection) returns (ZTNetworkConnection) {}
+    // ListZTNetworkConnection lists the connections in one zt network (one inbound and one outbound)
+    rpc ListZTNetworkConnection (ZTNetworkConnectionId) returns (ZTNetworkConnectionList) {}
+    // UpdateZTNetworkConnection updates an existing zt connection
+    rpc UpdateZTNetworkConnection (UpdateZTNetworkConnectionRequest) returns (common.Success) {}
+    // Remove ZTNetwork removes the ztNetworkConnection (the inbound and the outbound)
+    rpc RemoveZTNetworkConnection (ZTNetworkConnectionId) returns (common.Success) {}
 }

@@ -114,3 +114,60 @@ message RemoveConnectionRequest {
     // UserConfirmation is a flag required to remove a connection between and inbound and a required outbound
     bool user_confirmation = 6;
 }
+
+// ----------------------
+// AddZTNetworkConnection
+// ----------------------
+enum ConnectionSide {
+    SIDE_INBOUND = 0;
+    SIDE_OUTBOUND = 1;
+}
+
+message ZTNetworkConnection {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+    // Application instance identifier
+    string app_instance_id = 3;
+    // ZtMember zero tier member identifier
+    string zt_member = 4;
+    // ZtIp
+    string zt_ip = 5;
+    // ClusterId with the cluster identifier
+    string cluster_id = 6;
+    // Side to indicate if the instance is the inbound or the outbound in the connection
+    ConnectionSide side = 7;
+}
+
+message ZTNetworkConnectionList {
+    repeated ZTNetworkConnection connections = 1;
+}
+
+message ZTNetworkConnectionId {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+}
+
+message UpdateZTNetworkConnectionRequest {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+    // Application instance identifier
+    string app_instance_id = 3;
+    // ZtMember zero tier member identifier
+    string zt_member = 4;
+    //UpdateZtIp flag to indicate zt_ip is going to be updated
+    bool update_zt_ip = 5;
+    // ZtIp
+    string zt_ip = 6;
+    // UpdateClusterId flag to indicate custer_id is going to be updated
+    bool update_cluster_id = 7;
+    // ClusterId with the cluster identifier
+    string cluster_id = 8;
+    // Side to indicate if the instance is the inbound or the outbound in the connection
+    ConnectionSide side = 9;
+}
