@@ -27,6 +27,8 @@ service DeploymentManager {
 service DeploymentManagerNetwork {
     // A pod requests authorization to join a ZT Network
     rpc AuthorizeNetworkMembership(AuthorizeNetworkMembershipRequest) returns(common.Success) {}
+    // Request the creation of a new network entry
+    rpc RegisterNetworkEntry(RegisterNetworkEntryRequest) returns(common.Success) {}
     // SetServiceRoute setups an iptables DNAT for a given service
     rpc SetServiceRoute(ServiceRoute) returns (common.Success){}
     // AuthorizeZTConnection A pod requests authorization to join a secondary ZT Network
