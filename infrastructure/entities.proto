@@ -62,16 +62,14 @@ message Cluster {
     string control_plane_hostname = 6;
     // Multitenant support definition.
     MultitenantSupport multitenant = 7;
-    // Status of the cluster based on monitoring information.
-    InfraStatus infra_status = 8;
     // Labels for the cluster.
-    map <string, string> labels = 9;
+    map <string, string> labels = 8;
     // Information used by the cluster watcher to control this cluster
-    cluster_watcher.ClusterWatchInfo cluster_watch = 10;
+    cluster_watcher.ClusterWatchInfo cluster_watch = 9;
     // Grace period from which a cluster that doesn't seem to be alive will switch to Offline_Cordon status
-    int64 grace_period = 11;
+    int64 grace_period = 10;
     // Status with the status of the cluster based on cluster alive signals sent between connectivity manager and checker
-    connectivity_manager.ClusterStatus cluster_status = 7;
+    connectivity_manager.ClusterStatus cluster_status = 11;
 }
 
 message ClusterId {
