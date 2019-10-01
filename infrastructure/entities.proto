@@ -8,6 +8,7 @@ package infrastructure;
 option go_package = "github.com/nalej/grpc-infrastructure-go";
 
 import "cluster-watcher/entities.proto";
+import "connectivity-manager/entities.proto";
 
 // ClusterType enumeration with the types of clusters supported to manage application deployments.
 enum ClusterType {
@@ -61,14 +62,14 @@ message Cluster {
     string control_plane_hostname = 6;
     // Multitenant support definition.
     MultitenantSupport multitenant = 7;
-    // Status of the cluster based on monitoring information.
-    InfraStatus status = 8;
     // Labels for the cluster.
-    map <string, string> labels = 9;
-    // Cordon flags to signal conductor not to schedule apps in the cluster.
-    bool cordon = 10;
+    map <string, string> labels = 8;
     // Information used by the cluster watcher to control this cluster
-    cluster_watcher.ClusterWatchInfo cluster_watch = 11;
+    cluster_watcher.ClusterWatchInfo cluster_watch = 9;
+    // Grace period from which a cluster that doesn't seem to be alive will switch to Offline_Cordon status
+    int64 grace_period = 10;
+    // Status with the status of the cluster based on cluster alive signals sent between connectivity manager and checker
+    connectivity_manager.ClusterStatus cluster_status = 11;
 }
 
 message ClusterId {
