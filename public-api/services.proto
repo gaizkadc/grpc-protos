@@ -24,7 +24,6 @@ import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
-import "connectivity-manager/entities.proto";
 
 // Organization related information.
 service Organizations {
@@ -96,14 +95,6 @@ service Clusters {
             body: "*"
         };
     }
-
-    rpc Status (infrastructure.ClusterId) returns (connectivity_manager.ClusterStatus) {
-        option (google.api.http) = {
-            post: "/v1/clusters/{organization_id}/{cluster_id}/status"
-            body: "*"
-        };
-    }
-    
 }
 
 // Node related information.

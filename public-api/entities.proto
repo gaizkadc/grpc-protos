@@ -42,15 +42,15 @@ message Cluster {
     // MultitenantSupport contains the type of support definition.
     string multitenant_support = 5;
     // StatusName with the name of the status of the cluster based on monitoring information.
-    connectivity_manager.ClusterStatus status_name = 6;
+    string status_name = 6;
+    // Status with the status of the cluster based on cluster alive signals sent between connectivity manager and checker
+    connectivity_manager.ClusterStatus status = 7;
     // Labels for the cluster.
-    map<string, string> labels = 7;
+    map<string, string> labels = 8;
     // TotalNodes contains the total number of nodes in the cluster.
-    int64 total_nodes = 8;
+    int64 total_nodes = 9;
     // RunningNodes contains the number of nodes in the system that are currently working.
-    int64 running_nodes = 9;
-    // Boolean indicating if this cluster is set as cordon
-    bool cordon = 10;
+    int64 running_nodes = 10;
 }
 
 message ClusterList {
