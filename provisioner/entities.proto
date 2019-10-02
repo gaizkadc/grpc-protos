@@ -39,10 +39,13 @@ message ProvisionClusterRequest {
     bool is_management_cluster = 10;
     // TargetPlatform with the infrastructure provider to be used.
     installer.Platform target_platform = 11;
+    // IsProduction determines if the cluster to be provisioned is for production or staging. This flag
+    // will affect the provisioned cluster in options such as who is the signer of the certificate.
+    bool is_production = 12;
     // AzureCredentials with the credentials required to provision a cluster in Azure.
-    AzureCredentials azure_credentials = 12;
+    AzureCredentials azure_credentials = 13;
     // AzureOptions with the provisioning specific options.
-    AzureProvisioningOptions azure_options = 13;
+    AzureProvisioningOptions azure_options = 14;
 }
 
 // AzureProvisioningOptions with the specific options for Azure provisioning operations.
