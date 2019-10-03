@@ -140,6 +140,10 @@ message UpdateClusterRequest {
     bool update_cluster_watch = 12;
     // ClusterWatchInformation to be updated
     cluster_watcher.ClusterWatchInfo clusterWatchInfo = 13;
+    // UpdateLastClusterTimestamp indicates that the timestamp should be updated.
+    bool update_last_cluster_timestamp = 14;
+    // LastClusterTimestamp with the new timestamp value.
+    int64 last_cluster_timestamp = 15;
 }
 
 message ClusterList {
