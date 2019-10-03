@@ -30,6 +30,8 @@ service DeploymentManager {
     rpc UndeployFragment(deployment_manager.UndeployFragmentRequest) returns (common.Success) {}
     // SetServiceRoute setups an iptables DNAT for a given service
     rpc SetServiceRoute(deployment_manager.ServiceRoute) returns (common.Success){}
+    // JoinZTNetwork message to Request a zt-agent to join into a new Network
+    rpc JoinZTNetwork(deployment_manager.JoinZTNetworkRequest) returns (common.Success) {}
 }
 
 // Slave services for localling retrieving a set of logs.
