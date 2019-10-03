@@ -70,6 +70,8 @@ message Cluster {
     int64 grace_period = 10;
     // Status with the status of the cluster based on cluster alive signals sent between connectivity manager and checker
     connectivity_manager.ClusterStatus cluster_status = 11;
+    // Last alive timestamp
+    int64 last_alive_timestamp = 12;
 }
 
 message ClusterId {
