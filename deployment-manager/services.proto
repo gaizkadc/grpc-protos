@@ -24,6 +24,7 @@ service DeploymentManager {
 
 // Services regarding network management on the pods side. In particular, these services are designed to be
 // invoked by zt-agents.
+// It also includes services related to the appnet, messages that will be sent to the zt-agents
 service DeploymentManagerNetwork {
     // A pod requests authorization to join a ZT Network
     rpc AuthorizeNetworkMembership(AuthorizeNetworkMembershipRequest) returns(common.Success) {}
@@ -33,6 +34,8 @@ service DeploymentManagerNetwork {
     rpc SetServiceRoute(ServiceRoute) returns (common.Success){}
     // AuthorizeZTConnection A pod requests authorization to join a secondary ZT Network
     rpc AuthorizeZTConnection(network.AuthorizeZTConnectionRequest) returns(common.Success) {}
+    // JoinZTNetwork message to Request a zt-agent to join into a new Network
+    rpc JoinZTNetwork(JoinZTNetworkRequest) returns (common.Success) {}
 }
 
 // Services controlling the declaration of new proxies for an application. The information will be forwarded

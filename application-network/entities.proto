@@ -75,6 +75,8 @@ message AddConnectionRequest {
     string inbound_name = 4;
     // OutboundName with the name of the outbound identifier
     string outbound_name = 5;
+    // IpRange the IpRange for the connection
+    string ip_range = 6;
 }
 
 // UpdateConnectionRequest contains the information required to update the volatile fields of a connection
