@@ -243,4 +243,8 @@ message RegisterZTConnectionRequest {
     string member_id = 5;
     // Flag to indicate if role of the instance in the connection (inbound or outbound)
     bool is_inbound = 6;
+    // ClusterID with the cluster identifier where the pod is deployed on
+    string cluster_id = 7;
+    // ServiceID
+    string service_id = 8;
 }

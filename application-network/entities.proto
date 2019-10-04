@@ -132,14 +132,16 @@ message ZTNetworkConnection {
     string zt_network_id = 2;
     // Application instance identifier
     string app_instance_id = 3;
+    // ServiceId with the service identifier
+    string service_id = 4;
     // ZtMember zero tier member identifier
-    string zt_member = 4;
+    string zt_member = 5;
     // ZtIp
-    string zt_ip = 5;
+    string zt_ip = 6;
     // ClusterId with the cluster identifier
-    string cluster_id = 6;
+    string cluster_id = 7;
     // Side to indicate if the instance is the inbound or the outbound in the connection
-    ConnectionSide side = 7;
+    ConnectionSide side = 8;
 }
 
 message ZTNetworkConnectionList {
@@ -160,16 +162,18 @@ message UpdateZTNetworkConnectionRequest {
     string zt_network_id = 2;
     // Application instance identifier
     string app_instance_id = 3;
+    // ServiceId with the service identifier
+    string service_id = 4;
     // ZtMember zero tier member identifier
-    string zt_member = 4;
+    string zt_member = 5;
     //UpdateZtIp flag to indicate zt_ip is going to be updated
-    bool update_zt_ip = 5;
+    bool update_zt_ip = 6;
     // ZtIp
-    string zt_ip = 6;
+    string zt_ip = 7;
     // UpdateClusterId flag to indicate custer_id is going to be updated
-    bool update_cluster_id = 7;
+    bool update_cluster_id = 8;
     // ClusterId with the cluster identifier
-    string cluster_id = 8;
+    string cluster_id = 9;
     // Side to indicate if the instance is the inbound or the outbound in the connection
-    ConnectionSide side = 9;
+    ConnectionSide side =10;
 }
