@@ -33,6 +33,8 @@ message ConnectionInstance{
     ConnectionStatus status = 10;
     // IpRange The range of IPs associated to the network where the peers are connected
     string ip_range = 11;
+    // ZtNetworkId A link to the zt network created for the connection
+    string zt_network_id = 12;
 }
 
 // ConnectionInstanceList is a list of ConnectionInstance
@@ -77,6 +79,8 @@ message AddConnectionRequest {
     string outbound_name = 5;
     // IpRange the IpRange for the connection
     string ip_range = 6;
+    // ZtNetworkId A link to the zt network created for the connection
+    string zt_network_id = 7;
 }
 
 // UpdateConnectionRequest contains the information required to update the volatile fields of a connection
