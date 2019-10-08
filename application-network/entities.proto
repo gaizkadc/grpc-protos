@@ -104,7 +104,7 @@ message UpdateConnectionRequest {
     // IpRange the new IpRange for the connection
     string ip_range = 9;
     // UpdateZtNetworkId flag to allow ZtNetworkId update
-    string update_zt_network_id = 10;
+    bool update_zt_network_id = 10;
     // ZtNetworkId A link to the zt network created for the connection
     string zt_network_id = 11;
 }
