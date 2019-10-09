@@ -12,7 +12,10 @@ service ApplicationNetwork {
 
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (AddConnectionRequest) returns (ConnectionInstance) {}
+    // GetConnection retrieves a connection using its composite PK
     rpc GetConnection (ConnectionInstanceId) returns (ConnectionInstance) {}
+    // GetConnectionByZtNetworkId retrieves a connection using its ztNetwork id
+    rpc GetConnectionByZtNetworkId (ZTNetworkConnectionId) returns (ConnectionInstance) {}
     // UpdateConnection updates an existing connection
     rpc UpdateConnection (UpdateConnectionRequest) returns (common.Success) {}
     // RemoveConnection removes a connection
