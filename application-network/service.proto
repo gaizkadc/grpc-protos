@@ -12,6 +12,7 @@ service ApplicationNetwork {
 
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (AddConnectionRequest) returns (ConnectionInstance) {}
+    rpc GetConnection (ConnectionInstanceId) returns (ConnectionInstance) {}
     // UpdateConnection updates an existing connection
     rpc UpdateConnection (UpdateConnectionRequest) returns (common.Success) {}
     // RemoveConnection removes a connection

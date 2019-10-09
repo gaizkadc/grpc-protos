@@ -37,6 +37,17 @@ message ConnectionInstance{
     string zt_network_id = 12;
 }
 
+message ConnectionInstanceId{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // ConnectionId with the connection identifier
+    string connection_id = 2;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 3;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 4;
+}
+
 // ConnectionInstanceList is a list of ConnectionInstance
 message ConnectionInstanceList {
     repeated ConnectionInstance connections = 1;
