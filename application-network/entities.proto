@@ -46,6 +46,10 @@ message ConnectionInstanceId{
     string source_instance_id = 3;
     // TargetInstanceId with the identifier of the inbound instance
     string target_instance_id = 4;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 5;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 6;
 }
 
 // ConnectionInstanceList is a list of ConnectionInstance
