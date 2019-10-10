@@ -216,3 +216,35 @@ message OutboundService{
     // Service application instance id
     string service_instance_id = 5;
 }
+
+
+// Message to authorize an instance in a zt network
+message AuthorizeZTConnectionRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // Network to join
+    string network_id = 3;
+    // MemberId  to join the network
+    string member_id = 4;
+}
+
+message RegisterZTConnectionRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ZtIp with the ZT IP in the ZT network
+    string zt_ip = 3;
+    // Network ZT network identifier
+    string network_id = 4;
+    // MemberId
+    string member_id = 5;
+    // Flag to indicate if role of the instance in the connection (inbound or outbound)
+    bool is_inbound = 6;
+    // ClusterID with the cluster identifier where the pod is deployed on
+    string cluster_id = 7;
+    // ServiceID
+    string service_id = 8;
+}

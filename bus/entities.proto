@@ -13,6 +13,7 @@ import "infrastructure/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 import "network/entities.proto";
+import "connectivity-manager/entities.proto";
 
 
 // This protobuff file defines type structures available per topic in the Nalej bus
@@ -42,6 +43,8 @@ message InfrastructureEvents {
         infrastructure.UpdateClusterRequest update_cluster_request = 1;
         // Cordon cluster
         infrastructure.SetClusterStatusRequest set_cluster_status_request = 2;
+        // Cluster alive
+        connectivity_manager.ClusterAlive cluster_alive = 3;
     }
 }
 
@@ -85,8 +88,12 @@ message NetworkOps {
         // OutboundAppService message sent by a sidecar when its created.
         network.OutboundService outbound_app_service = 6;
         // AddConnectionRequest message sent by an application manager to add a connection between instances
-        application_network.AddConnectionRequest add_connection_request = 8;
-        // RemoveConnectionRequest message sent by an application manager to remoce a connection between instances
-        application_network.RemoveConnectionRequest remove_connection_request = 9;
+        application_network.AddConnectionRequest add_connection_request = 7;
+        // RemoveConnectionRequest message sent by an application manager to remove a connection between instances
+        application_network.RemoveConnectionRequest remove_connection_request = 8;
+        // AuthorizeZTConnectionRequest give permission to a member to join a secondary ztNetwork
+        network.AuthorizeZTConnectionRequest authorize_zt_connection = 9;
+        // RegisterZTConnection message sent by zt-agent operation to indicate that the inbound or outbound  are within the ztNetwork
+        network.RegisterZTConnectionRequest register_zt_connection = 10;
     }
 }

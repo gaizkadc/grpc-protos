@@ -34,6 +34,10 @@ service NetworkManager {
     rpc RegisterInboundServiceProxy(network.InboundServiceProxy) returns (common.Success){}
     // RegisterOutboundProxy operation to retrieve existing networking rules.
     rpc RegisterOutboundProxy(network.OutboundService) returns (common.Success){}
+    // AuthorizeZTConnection A pod requests authorization to join a secondary ZT Network
+    rpc AuthorizeZTConnection(network.AuthorizeZTConnectionRequest) returns(common.Success) {}
+    // RegisterZTConnection operation to indicate that the inbound or outbound  are within the ztNetwork
+    rpc RegisterZTConnection(network.RegisterZTConnectionRequest) returns (common.Success){}
 }
 
 // DeviceManager operations

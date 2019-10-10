@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Nalej - All Rights Reserved
+ * Copyright (C) 2019 Nalej - All Rights Reserved
  */
 
 syntax = "proto3";
@@ -96,7 +96,6 @@ service Clusters {
             body: "*"
         };
     }
-    
 }
 
 // Node related information.
@@ -509,14 +508,14 @@ service ApplicationNetwork {
 
     }
     // AddConnection adds a new connection between one outbound and one inbound
-    rpc AddConnection (application_network.AddConnectionRequest) returns (common.OpResponse) {
+    rpc AddConnection (application_network.AddConnectionRequest) returns (OpResponse) {
         option (google.api.http) = {
             post: "/v1/appnet/connection/{organization_id}/add"
             body: "*"
         };
     }
     // RemoveConnection removes a connection
-    rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.OpResponse) {
+    rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (OpResponse) {
         option (google.api.http) = {
             post: "/v1/appnet/connection/{organization_id}/remove"
             body: "*"

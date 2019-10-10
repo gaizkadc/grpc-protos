@@ -85,6 +85,26 @@ message AuthorizeNetworkMembershipRequest {
     bool is_proxy = 9;
 }
 
+// Message to register a new network entry
+message RegisterNetworkEntryRequest {
+    // Organization id
+    string organization_id = 1;
+    // Organization name
+    string organization_name = 2;
+    // Application instance
+    string app_instance_id = 3;
+    // Service name
+    string service_name = 4;
+    // Service IP
+    string service_ip = 5;
+    // Network id
+    string network_id = 6;
+    // ServiceGroupInstanceId
+    string service_group_instance_id = 7;
+    // Service App Instance Id
+    string service_app_instance_id = 8;
+}
+
 message ServiceRoute{
     // Organization id
     string organization_id = 1;
@@ -101,4 +121,29 @@ message ServiceRoute{
     string redirect_to_vpn = 6;
     // Drop to decide if the target route should be disabled for the given pod.
     bool drop =7;
+}
+
+// Message to authorize an instance in a zt network
+message AuthorizeZTConnectionRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // Network to join
+    string network_id = 3;
+    // MemberId  to join the network
+    string member_id = 4;
+}
+
+message JoinZTNetworkRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ServiceId with the service identifier
+    string service_id = 3;
+    // IsInbound flag to indicate if the pod is the connection inbound
+    bool is_inbound = 4;
+    // Network to join
+    string network_id = 5;
 }

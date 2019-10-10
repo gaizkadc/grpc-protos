@@ -24,18 +24,36 @@ message ProvisionClusterRequest {
     string cluster_id = 3;
     // Type of cluster.
     infrastructure.ClusterType cluster_type = 4;
+    // ClusterName with the name of the cluster to be created
+    string cluster_name = 5;
+    // Kubernetes version with the version of Kubernetes to be installed. This version may not be available on all
+    // providers.
+    string kubernetes_version = 6;
     // NumNodes with the number of nodes of the cluster to be created.
-    int64 num_nodes = 5;
+    int64 num_nodes = 7;
     // NodeType with the type of node to be used. This value must exist in the target infrastructure provider.
-    string node_type = 6;
+    string node_type = 8;
     // Zone where the cluster will be provisioned. This value must exist in the target infrastructure provider.
-    string zone = 7;
+    string zone = 9;
     // IsManagementCluster to determine if the provisioning is for a management or application cluster.
-    bool is_management_cluster = 8;
+    bool is_management_cluster = 10;
     // TargetPlatform with the infrastructure provider to be used.
-    installer.Platform target_platform = 9;
+    installer.Platform target_platform = 11;
+    // IsProduction determines if the cluster to be provisioned is for production or staging. This flag
+    // will affect the provisioned cluster in options such as who is the signer of the certificate.
+    bool is_production = 12;
     // AzureCredentials with the credentials required to provision a cluster in Azure.
-    AzureCredentials azure_credentials = 10;
+    AzureCredentials azure_credentials = 13;
+    // AzureOptions with the provisioning specific options.
+    AzureProvisioningOptions azure_options = 14;
+}
+
+// AzureProvisioningOptions with the specific options for Azure provisioning operations.
+message AzureProvisioningOptions{
+    // ResourceGroup where the cluster will be provisioned.
+    string resource_group = 1;
+    // DnsZoneName with the name of the target DNS zone onto which the new cluster entries will be added.
+    string dns_zone_name = 2;
 }
 
 // AzureCredentials contains the credentials required to perform provisioning operations in Azure.
