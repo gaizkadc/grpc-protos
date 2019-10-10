@@ -24,6 +24,7 @@ import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
+import "provisioner/entities.proto";
 
 // Organization related information.
 service Organizations {
@@ -524,6 +525,32 @@ service ApplicationNetwork {
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {
         option (google.api.http) = {
             get: "/v1/appnet/connection/{organization_id}/list"
+        };
+    }
+}
+
+
+// Provisioner related methods
+// Provision service to create clusters.
+service Provision {
+    // ProvisionCluster triggers the provisioning operation on a given cloud infrastructure provider.
+    rpc ProvisionCluster(provisioner.ProvisionClusterRequest) returns (provisioner.ProvisionClusterResponse) {
+        option (google.api.http) = {
+            post: "/v1/provisioner/cluster/add"
+            body: "*"
+        };
+    }
+    // CheckProgress gets an updated state of a provisioning request.
+    rpc CheckProgress(common.RequestId) returns (provisioner.ProvisionClusterResponse) {
+        option (google.api.http) = {
+            get: "/v1/provisioner/check/{request_id}"
+        };
+    }
+    // RemoveProvision cancels an ongoing provisioning or removes the information of an already processed provision operation.
+    rpc RemoveProvision(common.RequestId) returns (common.Success){
+        option (google.api.http) = {
+            post: "/v1/provisioner/remove/{request_id}"
+            body: "*"
         };
     }
 }
