@@ -543,7 +543,7 @@ service Provision {
     }
     // CheckProgress gets an updated state of a provisioning request.
     rpc CheckProgress(common.RequestId) returns (provisioner.ProvisionClusterResponse) {
-        option (ggogle.api.http) = {
+        option (google.api.http) = {
             get: "/v1/provisioner/check/{request_id}"
         };
     }
