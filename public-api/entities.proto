@@ -321,6 +321,10 @@ message SecurityRule {
     repeated string device_group_ids = 11;
     // DeviceGroupNames defining a list of device groups names that can access the port.
     repeated string device_group_names = 12;
+    // inbound_net_interface_name The name of the inbound net interface linked to the security rule
+    string inbound_net_interface_name = 13;
+    // outbound_net_interface_name The name of the outbound net interface linked to the security rule
+    string outbound_net_interface_name = 14;
 }
 
 // This is a common metadata entity that collects information for a deployed instance. This instance can be a
