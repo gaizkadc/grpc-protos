@@ -365,7 +365,7 @@ service Applications {
     // ListInstanceParameters retrieves a list of parameters of an instance (deployment parameters)
     rpc ListInstanceParameters (application.AppInstanceId) returns (application.InstanceParameterList) {
         option (google.api.http) = {
-            get: "/v1/apps/desc/{organization_id}/{app_instance_id}/parameters"
+            get: "/v1/apps/inst/{organization_id}/{app_instance_id}/parameters"
         };
     }
 
