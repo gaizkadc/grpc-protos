@@ -522,7 +522,7 @@ service ApplicationNetwork {
         };
     }
     // ListConnections retrieves a list all the established connections of an organization
-    rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {
+    rpc ListConnections(organization.OrganizationId) returns (ConnectionInstanceList) {
         option (google.api.http) = {
             get: "/v1/appnet/connection/{organization_id}/list"
         };
