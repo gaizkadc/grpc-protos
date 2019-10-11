@@ -36,6 +36,9 @@ service DeploymentManagerNetwork {
     rpc AuthorizeZTConnection(network.AuthorizeZTConnectionRequest) returns(common.Success) {}
     // JoinZTNetwork message to Request a zt-agent to join into a new Network
     rpc JoinZTNetwork(JoinZTNetworkRequest) returns (common.Success) {}
+    // LeaveZTNetwork message to request a zt-agent to leave a zero tier network
+    rpc LeaveZTNetwork(LeaveZTNetworkRequest) returns(common.Success) {}
+
 }
 
 // Services controlling the declaration of new proxies for an application. The information will be forwarded

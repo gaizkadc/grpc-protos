@@ -23,3 +23,8 @@ message JoinZTNetworkRequest{
     // IsInboundConnection a flag to indicate if the pod is the inbound or the outbound of the connection
     bool is_inbound_connection = 2;
 }
+
+message ZTNetworkId {
+    // NetworkId with the ZT network identifier
+    string network_id = 1;
+}
