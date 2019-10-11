@@ -147,3 +147,17 @@ message JoinZTNetworkRequest {
     // Network to join
     string network_id = 5;
 }
+
+// LeaveZTNetworkRequest message to leave a zero-tier network
+message LeaveZTNetworkRequest {
+    // organization id
+    string organization_id = 1;
+    // Application instance
+    string app_instance_id = 2;
+    // ServiceId with the service identifier
+    string service_id = 3;
+    // IsInbound flag to indicate if the pod is the connection inbound
+    bool is_inbound = 4;
+    // Network to join
+    string network_id = 5;
+}

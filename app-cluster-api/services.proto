@@ -32,6 +32,9 @@ service DeploymentManager {
     rpc SetServiceRoute(deployment_manager.ServiceRoute) returns (common.Success){}
     // JoinZTNetwork message to Request a zt-agent to join into a new Network
     rpc JoinZTNetwork(deployment_manager.JoinZTNetworkRequest) returns (common.Success) {}
+    // LeaveZTNetwork message to Request a zt-agent to leave a zero tier network
+    rpc LeaveZTNetwork(deployment_manager.LeaveZTNetworkRequest) returns (common.Success) {}
+
 }
 
 // Slave services for localling retrieving a set of logs.
