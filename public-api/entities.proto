@@ -461,6 +461,41 @@ message AppParameterList {
 }
 
 // --------------------------------
+// Applications - Application-network
+// --------------------------------
+
+message ConnectionInstance{
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // ConnectionId with the connection identifier
+    string connection_id = 2;
+    // SourceInstanceId with the identifier of the outbound instance
+    string source_instance_id = 3;
+    // SourceInstanceId with the name of the outbound instance
+    string source_instance_name = 4;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_id = 5;
+    // TargetInstanceId with the identifier of the inbound instance
+    string target_instance_name = 6;
+    // InboundName with the name of the inbound identifier
+    string inbound_name = 7;
+    // OutboundName with the name of the outbound identifier
+    string outbound_name = 8;
+    // OutboundRequired is a flag that indicates if the outbound connection should be informed when deploying an instance
+    bool outbound_required = 9;
+    // Status Status of the connection
+    string status_name = 10;
+    // IpRange The range of IPs associated to the network where the peers are connected
+    string ip_range = 11;
+    // ZtNetworkId A link to the zt network created for the connection
+    string zt_network_id = 12;
+}
+
+message ConnectionInstanceList{
+    repeated ConnectionInstance list = 1;
+}
+
+// --------------------------------
 // Devices
 // --------------------------------
 
