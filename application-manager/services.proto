@@ -35,7 +35,7 @@ service ApplicationManager {
     // Deploy an application descriptor.
     rpc Deploy(DeployRequest) returns (DeploymentResponse){}
     // Undeploy a running application instance, removing the instance.
-    rpc Undeploy(application.AppInstanceId) returns (common.Success) {}
+    rpc Undeploy(UndeployRequest) returns (common.Success) {}
 
     // ListAppInstances retrieves a list of application descriptors.
     rpc ListAppInstances(organization.OrganizationId) returns (AppInstanceList){}

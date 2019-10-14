@@ -32,6 +32,15 @@ message DeployRequest{
     // OutboundConnections with a list of connections to be established in the deployment
     repeated ConnectionRequest outbound_connections = 5;
 }
+// Undeploy
+message UndeployRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 2;
+    // UserConfirmation is a flag required to undeploy an instance that has inbounds connections
+    bool user_confirmation = 3;
+}
 
 // ApplicationFilter allows the device to request the set of available application setting filters.
 message ApplicationFilter{
