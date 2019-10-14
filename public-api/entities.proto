@@ -51,6 +51,8 @@ message Cluster {
     int64 total_nodes = 9;
     // RunningNodes contains the number of nodes in the system that are currently working.
     int64 running_nodes = 10;
+    // LastAliveTimestamp contains the last alive message received
+    int64 last_alive_timestamp = 11;
 }
 
 message ClusterList {
