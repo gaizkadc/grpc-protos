@@ -335,7 +335,7 @@ service Applications {
         };
     }
     // Undeploy a running application instance.
-    rpc Undeploy(application.AppInstanceId) returns (common.Success){
+    rpc Undeploy(application_manager.UndeployRequest) returns (common.Success){
         option (google.api.http) = {
             post: "/v1/apps/inst/{organization_id}/{app_instance_id}/undeploy"
             body: "*"
