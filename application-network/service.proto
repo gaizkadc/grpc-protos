@@ -31,9 +31,11 @@ service ApplicationNetwork {
     // AddZTNetworkConnection adds a new zt Connection (one per an inbound and one per the inbound)
     rpc AddZTNetworkConnection (ZTNetworkConnection) returns (ZTNetworkConnection) {}
     // ListZTNetworkConnection lists the connections in one zt network (one inbound and one outbound)
-    rpc ListZTNetworkConnection (ZTNetworkConnectionId) returns (ZTNetworkConnectionList) {}
+    rpc ListZTNetworkConnection (ZTNetworkId) returns (ZTNetworkConnectionList) {}
     // UpdateZTNetworkConnection updates an existing zt connection
     rpc UpdateZTNetworkConnection (UpdateZTNetworkConnectionRequest) returns (common.Success) {}
-    // Remove ZTNetwork removes the ztNetworkConnection (the inbound and the outbound)
+    // RemoveZTNetworkConnection removes the ztNetworkConnection
     rpc RemoveZTNetworkConnection (ZTNetworkConnectionId) returns (common.Success) {}
+    // RemoveZTNetworkConnectionByNetworkId removes the ztNetworkConnection (all the inbounds and the outbounds)
+    rpc RemoveZTNetworkConnectionByNetworkId (ZTNetworkId) returns (common.Success) {}
 }

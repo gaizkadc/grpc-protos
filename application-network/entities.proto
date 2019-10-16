@@ -171,11 +171,24 @@ message ZTNetworkConnectionList {
     repeated ZTNetworkConnection connections = 1;
 }
 
+message ZTNetworkId {
+    // Organization ID
+    string organization_id = 1;
+    // ZtNetworkId zero tier network identifier
+    string zt_network_id = 2;
+}
+
 message ZTNetworkConnectionId {
     // Organization ID
     string organization_id = 1;
     // ZtNetworkId zero tier network identifier
     string zt_network_id = 2;
+    // Application instance identifier
+    string app_instance_id = 3;
+    // ServiceId with the service identifier
+    string service_id = 4;
+    // ClusterId with the cluster identifier
+    string cluster_id = 5;
 }
 
 message UpdateZTNetworkConnectionRequest {
@@ -187,16 +200,10 @@ message UpdateZTNetworkConnectionRequest {
     string app_instance_id = 3;
     // ServiceId with the service identifier
     string service_id = 4;
-    // ZtMember zero tier member identifier
-    string zt_member = 5;
+    // ClusterId with the cluster identifier
+    string cluster_id = 5;
     //UpdateZtIp flag to indicate zt_ip is going to be updated
     bool update_zt_ip = 6;
     // ZtIp
     string zt_ip = 7;
-    // UpdateClusterId flag to indicate custer_id is going to be updated
-    bool update_cluster_id = 8;
-    // ClusterId with the cluster identifier
-    string cluster_id = 9;
-    // Side to indicate if the instance is the inbound or the outbound in the connection
-    ConnectionSide side =10;
 }
