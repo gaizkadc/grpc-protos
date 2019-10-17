@@ -50,3 +50,8 @@ message OpResponse {
     // Info with additional information for an operation.
     string info = 6;
 }
+
+// Message used to return in Exists... operations
+message Exists {
+    bool exists = 1;
+}

@@ -12,6 +12,8 @@ service ApplicationNetwork {
 
     // AddConnection adds a new connection between one outbound and one inbound
     rpc AddConnection (AddConnectionRequest) returns (ConnectionInstance) {}
+    // ExistsConnection checks if a connection exits
+    rpc ExistsConnection (ConnectionInstanceId) returns (common.Exists) {}
     // GetConnection retrieves a connection using its composite PK
     rpc GetConnection (ConnectionInstanceId) returns (ConnectionInstance) {}
     // GetConnectionByZtNetworkId retrieves a connection using its ztNetwork id
