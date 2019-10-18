@@ -27,6 +27,13 @@ message ApplicationOps {
         conductor.UndeployRequest undeploy_request = 2;
     }
 }
+// Message for application events containing one of the following messages.
+message ApplicationEvents {
+    oneof Event {
+        // DeploymentServiceUpdateRequest
+        conductor.DeploymentServiceUpdateRequest deployment_service_status_update_request = 1;
+    }
+}
 
 // Message for an infrastructure ops message containing one of the following messages.
 message InfrastructureOps {
