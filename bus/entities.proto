@@ -28,7 +28,7 @@ message ApplicationOps {
     }
 }
 // Message for application events containing one of the following messages.
-message ApplicationOps {
+message ApplicationEvents {
     oneof Event {
         // DeploymentServiceUpdateRequest
         conductor.DeploymentServiceUpdateRequest deployment_service_status_update_request = 1;
