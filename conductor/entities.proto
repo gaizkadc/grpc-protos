@@ -263,4 +263,6 @@ message DeploymentServiceUpdateRequest {
 message DrainClusterRequest {
    // ClusterID
    infrastructure.ClusterId cluster_id = 1;
+   // ClusterOffline will be set to true when a Cluster's status is Offline or OfflineCordon
+   bool ClusterOffline = 2;
 }
