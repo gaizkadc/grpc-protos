@@ -31,3 +31,11 @@ enum ClusterStatus {
     // A cluster is alive but the user sent a cordon request
     ONLINE_CORDON = 4;
 }
+
+// OfflinePolicy defines a set of policies to be triggered when a cluster is Offline or OfflineCordon
+enum OfflinePolicy {
+    // No policy is triggered
+    NONE = 0;
+    // Drain cluster
+    DRAIN = 1;
+}
