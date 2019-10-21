@@ -45,6 +45,24 @@ enum NodeState {
     ASSIGNED = 2;
 }
 
+// ClusterState defines the different states of a cluster regarding its provisioning and installation.
+enum ClusterState {
+    // Provisioning indicates that the cluster is now being provisioned in a cloud provider or through baremetal provisioning.
+    PROVISIONING = 0;
+    // Installing indicates that the Nalej platform is being installed on the target cluster.
+    INSTALLING = 1;
+    // Installed indicates that the Nalej platform has been successfully deployed on the target cluster.
+    INSTALLED = 2;
+    // Scaling indicates that the cluster is now being modified in terms of number of available nodes.
+    SCALING = 3;
+    // Error indicates that a process related to provisioning or installation has failed.
+    ERROR = 4;
+    // Uninstalling indicates that the cluster is now being uninstalled and the platform is being undeployed.
+    UNINSTALLING = 5;
+    // Decomisioning indicates that the hardware resources are being freed.
+    DECOMISIONING = 6;
+}
+
 // Cluster entity representing a collection of nodes that supports applicaiton orchestration. This
 // abstraction is used for monitoring and orchestration purposes.
 message Cluster {
@@ -72,6 +90,8 @@ message Cluster {
     connectivity_manager.ClusterStatus cluster_status = 11;
     // Last alive timestamp
     int64 last_alive_timestamp = 12;
+    // State of the cluster with respect to provisioning and installation.
+    ClusterState state = 13;
 }
 
 message ClusterId {
@@ -144,6 +164,10 @@ message UpdateClusterRequest {
     bool update_last_cluster_timestamp = 14;
     // LastClusterTimestamp with the new timestamp value.
     int64 last_cluster_timestamp = 15;
+    // UpdateClusterState indicates that the state of the cluster should be updated.
+    bool update_cluster_state = 16;
+    // State of the cluster.
+    ClusterState state = 17;
 }
 
 message ClusterList {
