@@ -22,7 +22,9 @@ import "common/entities.proto";
 
 // OrganizationInfo contains public organization information.
 message OrganizationInfo {
+    // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // Name of the organization as set by the user during install.
     string name = 2;
 }
 
@@ -30,6 +32,7 @@ message OrganizationInfo {
 // Clusters
 // --------------------------------
 
+// Cluster entity contains all information related to an application cluster in the system.
 message Cluster {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -53,12 +56,19 @@ message Cluster {
     int64 running_nodes = 10;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 11;
+    // State of the cluster with respect to provisioning and installation.
+    infrastructure.ClusterState state = 13;
+    // StateName contains the name of the cluster state.
+    string state_name = 14;
 }
 
+// ClusterList with a list of clusters.
 message ClusterList {
+    // Clusters contains the list of clusters.
     repeated Cluster clusters = 1;
 }
 
+// UpdateClusterRequest message with the elements of a cluster that can be modified through public api.
 message UpdateClusterRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
