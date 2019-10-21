@@ -440,9 +440,9 @@ message AppInstance {
     // OutboundNetInterfaces with a list of outbounds
     repeated application.OutboundNetworkInterface outbound_net_interfaces = 14;
     // InboundConnections with a list of connections where the instance is the target
-    repeated application_network.ConnectionInstance inbound_connections = 15;
+    repeated ConnectionInstance inbound_connections = 15;
     // OutboundConnections with a list of connections where the instance is the source
-    repeated application_network.ConnectionInstance outbound_connections = 16;
+    repeated ConnectionInstance outbound_connections = 16;
 }
 
 message AppInstanceList {
