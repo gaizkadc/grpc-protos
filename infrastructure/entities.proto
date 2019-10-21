@@ -49,14 +49,14 @@ enum NodeState {
 enum ClusterState {
     // Provisioning indicates that the cluster is now being provisioned in a cloud provider or through baremetal provisioning.
     PROVISIONING = 0;
-    // Installing indicates that the Nalej platform is being installed on the target cluster.
-    INSTALLING = 1;
+    // InstallInProgress indicates that the Nalej platform is being installed on the target cluster.
+    INSTALL_IN_PROGRESS = 1;
     // Installed indicates that the Nalej platform has been successfully deployed on the target cluster.
     INSTALLED = 2;
     // Scaling indicates that the cluster is now being modified in terms of number of available nodes.
     SCALING = 3;
-    // Error indicates that a process related to provisioning or installation has failed.
-    ERROR = 4;
+    // Failure indicates that a process related to provisioning or installation has failed.
+    FAILURE = 4;
     // Uninstalling indicates that the cluster is now being uninstalled and the platform is being undeployed.
     UNINSTALLING = 5;
     // Decomisioning indicates that the hardware resources are being freed.
