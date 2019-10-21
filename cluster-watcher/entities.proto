@@ -7,6 +7,13 @@ syntax = "proto3";
 package cluster_watcher;
 option go_package = "github.com/nalej/grpc-cluster-watcher-go";
 
+// Type of supported networks
+enum NetworkType {
+    ISTIO = 0;
+    CILIUM = 1;
+}
+
+
 // Information required to maintain connectivity between clusters.
 message ClusterWatchInfo {
     // Organization id
@@ -17,17 +24,46 @@ message ClusterWatchInfo {
     string cluster_id = 3;
     // IP of the cluster
     string ip = 4;
-    // CiliumId Id for the node
-    string cilium_id = 5;
-    // Cilium etcd-client-ca.crt certification authority to be used
-    string cilium_etcd_ca_crt = 6;
-    // Cilium etcd-client.crt certificate
-    string cilium_etcd_crt = 7;
-    // Cilium client public key
-    string cilium_etcd_key = 8;
+    // Type of cluster we are watching
+    NetworkType network_type = 5;
+    // Certificates for authentication
+    oneof Security {
+        // Cilium certs
+        CiliumCerts cilium = 6;
+        // Istio certs
+        IstioCerts  istio = 7;
+    }
 }
+
 
 message ListClustersWatchInfo {
     // List of information about clusters
     repeated ClusterWatchInfo clusters = 1;
 }
+
+// Cilium related certificates
+message CiliumCerts {
+    // CiliumId Id for the node
+    string cilium_id = 1;
+    // Cilium etcd-client-ca.crt certification authority to be used
+    string cilium_etcd_ca_crt = 2;
+    // Cilium etcd-client.crt certificate
+    string cilium_etcd_crt = 3;
+    // Cilium client public key
+    string cilium_etcd_key = 4;
+}
+
+// Istio certificates
+message IstioCerts {
+    // CA certificate
+    string ca_cert = 1;
+    // CA public key
+    string ca_key = 2;
+    // Shared root certificate
+    string root_cert = 3;
+    // Certificate chain
+    string cert_chain = 4;
+}
+
+
+
