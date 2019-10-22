@@ -206,4 +206,8 @@ message UpdateZTNetworkConnectionRequest {
     bool update_zt_ip = 6;
     // ZtIp
     string zt_ip = 7;
+    // UpdateZtMember flag to indicate zt_member is going to be updated
+    bool update_zt_member = 8;
+    // ZtMember 
+    string zt_member = 9;
 }
