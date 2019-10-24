@@ -51,3 +51,9 @@ service ApplicationProxy{
     // RegisterZTConnection operation to indicate that the inbound or outbound  are within the ztNetwork
     rpc RegisterZTConnection(network.RegisterZTConnectionRequest) returns (common.Success){}
 }
+
+// These services will be used when a cluster goes offline and a policy is triggered
+service OfflinePolicy {
+    // Operation to remove all the instances in an application cluster regardless of Conductor
+    rpc RemoveAll (common.Empty) returns (common.Success) {}
+}
