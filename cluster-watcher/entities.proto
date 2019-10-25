@@ -55,15 +55,12 @@ message CiliumCerts {
 
 // Istio certificates
 message IstioCerts {
-    // CA certificate
-    string ca_cert = 1;
-    // CA public key
-    string ca_key = 2;
-    // Shared root certificate
-    string root_cert = 3;
-    // Certificate chain
-    string cert_chain = 4;
+    // Cluster name
+    string cluster_name = 1;
+    // Server name
+    string server_name = 2;
+    // CA used by Istio
+    string ca_cert = 3;
+    // Authentication token
+    string token = 4;
 }
-
-
-
