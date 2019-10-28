@@ -47,20 +47,24 @@ enum NodeState {
 
 // ClusterState defines the different states of a cluster regarding its provisioning and installation.
 enum ClusterState {
+    // Unknown indicates that the cluster has just been created in system model and no provisioning or install operation has taken place.
+    UNKNOWN = 0;
     // Provisioning indicates that the cluster is now being provisioned in a cloud provider or through baremetal provisioning.
-    PROVISIONING = 0;
+    PROVISIONING = 1;
+    // Provisioned indicates that the cluster has been successfully provisioned and it is ready to be installed.
+    PROVISIONED = 2;
     // InstallInProgress indicates that the Nalej platform is being installed on the target cluster.
-    INSTALL_IN_PROGRESS = 1;
+    INSTALL_IN_PROGRESS = 3;
     // Installed indicates that the Nalej platform has been successfully deployed on the target cluster.
-    INSTALLED = 2;
+    INSTALLED = 4;
     // Scaling indicates that the cluster is now being modified in terms of number of available nodes.
-    SCALING = 3;
+    SCALING = 5;
     // Failure indicates that a process related to provisioning or installation has failed.
-    FAILURE = 4;
+    FAILURE = 6;
     // Uninstalling indicates that the cluster is now being uninstalled and the platform is being undeployed.
-    UNINSTALLING = 5;
+    UNINSTALLING = 7;
     // Decomisioning indicates that the hardware resources are being freed.
-    DECOMISIONING = 6;
+    DECOMISIONING = 8;
 }
 
 // Cluster entity representing a collection of nodes that supports applicaiton orchestration. This
