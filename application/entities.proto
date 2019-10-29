@@ -900,3 +900,13 @@ message RemoveAuthorizedZtNetworkMemberRequest {
     // ZtNetworkId
     string zt_network_id = 5;
 }
+
+// ListAuthorizedZtNetworkMemberRequest list all the authorizeMembers of an network
+message ListAuthorizedZtNetworkMemberRequest{
+    // Organization ID
+    string organization_id = 1;
+    // Application instance id for this app
+    string app_instance_id = 2;
+    // ZtNetworkId
+    string zt_network_id = 3;
+}
