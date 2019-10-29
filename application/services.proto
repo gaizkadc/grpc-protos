@@ -74,6 +74,8 @@ service Applications {
     rpc RemoveAuthorizedZtNetworkMember(RemoveAuthorizedZtNetworkMemberRequest) returns (common.Success) {}
     // Get the Zt authorized members
     rpc GetAuthorizedZtNetworkMember(GetAuthorizedZtNetworkMemberRequest) returns (ZtNetworkMembers) {}
+    // ListAuthorizedZTNetworkMembers retrieves a list of ztMembers in a zero tier network
+    rpc ListAuthorizedZTNetworkMembers(ListAuthorizedZtNetworkMemberRequest) returns (ZtNetworkMembers) {}
 
 
     // GetDescriptorAppParameters retrieves a list of application parameters of a descriptor
