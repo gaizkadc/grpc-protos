@@ -102,7 +102,7 @@ message ProvisionClusterResponse {
     installer.StaticIPAddresses static_ip_addresses = 6;
     // ClusterName with the name of the cluster to be created
     string cluster_name = 7;
-    // Cluster with the full hostname of the provisioned cluster
+    // Hostname with the full hostname of the provisioned cluster
     string hostname = 8;
 }
 
