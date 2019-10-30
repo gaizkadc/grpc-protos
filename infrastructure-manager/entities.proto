@@ -8,6 +8,7 @@ package infrastructure_manager;
 option go_package = "github.com/nalej/grpc-infrastructure-manager-go";
 
 import "installer/entities.proto";
+import "provisioner/entities.proto";
 
 // InstallResponse message with the progress of the install.
 message InstallResponse {
@@ -20,5 +21,19 @@ message InstallResponse {
     // State of the install.
     installer.InstallProgress state = 4;
     // Error message in case the install failed.
+    string error = 5;
+}
+
+// ProvisionerResponse message with the progress of the install.
+message ProvisionerResponse {
+    // ProvisionId associated with the information.
+    string provision_id = 1;
+    // OrganizationId with the organization identifier.
+    string organization_id = 2;
+    // ClusterId with the identifier of the cluster being provisioned.
+    string cluster_id = 3;
+    // State of the provision.
+    provisioner.ProvisionProgress state = 4;
+    // Error message in case the provision failed.
     string error = 5;
 }
