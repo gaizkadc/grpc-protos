@@ -172,6 +172,10 @@ message UpdateClusterRequest {
     bool update_cluster_state = 16;
     // State of the cluster.
     ClusterState state = 17;
+    // UpdateControlPlaneHostname to determine if the control plane hostname needs to be updated
+    bool update_control_plane_hostname = 18;
+    // Hostname of the control plane
+    string control_plane_hostname = 19;
 }
 
 message ClusterList {
