@@ -26,8 +26,8 @@ message InstallResponse {
 
 // ProvisionerResponse message with the progress of the install.
 message ProvisionerResponse {
-    // ProvisionId associated with the information.
-    string provision_id = 1;
+    // RequestId associated with the information.
+    string request_id = 1;
     // OrganizationId with the organization identifier.
     string organization_id = 2;
     // ClusterId with the identifier of the cluster being provisioned.
