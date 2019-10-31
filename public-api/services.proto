@@ -47,6 +47,14 @@ service Clusters {
         };
     }
 
+    // Install a new cluster adding it to the system.
+    rpc ProvisionAndInstall(provisioner.ProvisionClusterRequest) returns (infrastructure_manager.ProvisionerResponse){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/provision-and-install"
+            body: "*"
+        };
+    }
+
     // Info retrieves the cluster information.
     rpc Info(infrastructure.ClusterId) returns (Cluster) {
         option (google.api.http) = {
