@@ -261,6 +261,8 @@ enum StorageType {
     CLUSTER_LOCAL = 1;
     CLUSTER_REPLICA = 2;
     CLOUD_PERSISTENT = 3;
+    // ExperimentalClusterReplica
+    EXPERIMENTAL_CLUSTER_REPLICA = 4;
 }
 
 message DeploySpecs {

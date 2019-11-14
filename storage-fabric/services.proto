@@ -34,4 +34,7 @@ service StorageClass {
     rpc Remove(StorageClass) returns (common.Success) {}
     // Stats returns general statistics on a storage class.
     rpc Stats(StorageClass) returns (StorageClassStats) {}
+    // Available checks if a storage request can be satisfied. This method will be called
+    // by the musician to determine if a service instance can be deployed in this cluster.
+    rpc Available(StorageRequest) returns (common.Success) {}
 }
