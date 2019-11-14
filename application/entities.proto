@@ -261,7 +261,7 @@ enum StorageType {
     CLUSTER_LOCAL = 1;
     CLUSTER_REPLICA = 2;
     CLOUD_PERSISTENT = 3;
-    // ExperimentalClusterReplica
+    // ExperimentalClusterReplica to use the storage fabric with cluster replicas.
     EXPERIMENTAL_CLUSTER_REPLICA = 4;
 }
 
