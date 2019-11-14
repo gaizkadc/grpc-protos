@@ -31,9 +31,9 @@ service StorageClass {
     // Update an existing storage class (e.g., replication factor).
     rpc Update(UpdateStorageClassRequest) returns (common.Success) {}
     // Remove a storage class. This operation will delete all persistent data.
-    rpc Remove(StorageClass) returns (common.Success) {}
+    rpc Remove(StorageClassId) returns (common.Success) {}
     // Stats returns general statistics on a storage class.
-    rpc Stats(StorageClass) returns (StorageClassStats) {}
+    rpc Stats(StorageClassId) returns (StorageClassStats) {}
     // Available checks if a storage request can be satisfied. This method will be called
     // by the musician to determine if a service instance can be deployed in this cluster.
     rpc Available(StorageRequest) returns (common.Success) {}
