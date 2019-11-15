@@ -586,3 +586,19 @@ service Provision {
         };
     }
 }
+
+// Monitoring service to retrieve monitoring stats from the platform.
+service Monitoring {
+    // GetClusterStats retrieve stats from a cluster.
+    rpc GetClusterStats(monitoring.ClusterStatsRequest) returns (monitoring.ClusterStats) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/stats"
+        };
+    }
+    // GetClusterSummary retrieve a stats summary from a cluster.
+    rpc GetClusterSummary(monitoring.ClusterSummaryRequest) returns (monitoring.ClusterSummary) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/summary"
+        };
+    }
+}
