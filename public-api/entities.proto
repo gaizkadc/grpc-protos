@@ -759,3 +759,45 @@ message OpResponse {
     // Info with additional information for an operation.
     string info = 7;
 }
+
+// --------------------------------
+// Unified Logging
+// --------------------------------
+
+message AvailableLogRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AvailableFrom contains the timestamp from which a service instance was available
+    int64 available_from = 2;
+    // AvailableFrom contains the timestamp to which a service instance was available
+    int64 available_to = 3;
+}
+
+message AvailableLogResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    //
+    repeated AppDescriptorLogSummary app_descriptor_log_summary = 2;
+    //
+    repeated AppInstanceLogSummary app_instance_log_summary = 3;
+    // AvailableFrom contains the timestamp from which a service instance was available
+    int64 available_from = 4;
+    // AvailableFrom contains the timestamp to which a service instance was available
+    int64 available_to = 5;
+}
+
+message AppDescriptorLogSummary {
+
+}
+
+message AppInstanceLogSummary {
+
+}
+
+message ServiceGroupInstanceLogSummary {
+
+}
+
+message ServiceInstanceLogSummary {
+
+}
