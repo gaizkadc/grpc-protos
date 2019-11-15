@@ -97,14 +97,6 @@ service Clusters {
         };
     }
 
-    // Retrieve a summary of high level cluster resource availability
-    rpc Monitor(monitoring.ClusterSummaryRequest) returns(monitoring.ClusterSummary) {
-        option (google.api.http) = {
-            post: "/v1/clusters/{organization_id}/{cluster_id}/monitor"
-            body: "*"
-        };
-    }
-
     // Cordon prevents the scheduler to deploy user applications on the target cluster.
     rpc Cordon(infrastructure.ClusterId) returns (common.Success) {
         option (google.api.http) = {
@@ -595,7 +587,7 @@ service Monitoring {
             get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/stats"
         };
     }
-    // GetClusterSummary retrieve a stats summary from a cluster.
+    // GetClusterSummary Retrieve a summary of high level cluster resource availability.
     rpc GetClusterSummary(monitoring.ClusterSummaryRequest) returns (monitoring.ClusterSummary) {
         option (google.api.http) = {
             get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/summary"
