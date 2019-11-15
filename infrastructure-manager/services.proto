@@ -33,6 +33,8 @@ service InfrastructureManager {
     rpc InstallCluster(installer.InstallRequest) returns (infrastructure_manager.InstallResponse){}
     // Provision and install a new cluster adding it to the system.
     rpc ProvisionAndInstallCluster(provisioner.ProvisionClusterRequest) returns (infrastructure_manager.ProvisionerResponse){}
+    // Scale the number of nodes in the cluster.
+    rpc Scale(provisioner.ScaleClusterRequest) returns (infrastructure_manager.ProvisionerResponse){}
     // GetCluster retrieves the cluster information.
     rpc GetCluster(infrastructure.ClusterId) returns (infrastructure.Cluster) {}
     // ListClusters obtains a list of the clusters in the organization.
