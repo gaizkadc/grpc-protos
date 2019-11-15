@@ -68,6 +68,14 @@ service Clusters {
         };
     }
 
+    // Scale the number of nodes in the cluster.
+    rpc Scale(provisioner.ScaleClusterRequest) returns (infrastructure_manager.ProvisionerResponse){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/scale"
+            body: "*"
+        };
+    }
+
     // Info retrieves the cluster information.
     rpc Info(infrastructure.ClusterId) returns (Cluster) {
         option (google.api.http) = {
@@ -97,6 +105,7 @@ service Clusters {
         };
     }
 
+    // Cordon prevents the scheduler to deploy user applications on the target cluster.
     rpc Cordon(infrastructure.ClusterId) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/cordon"
@@ -104,6 +113,7 @@ service Clusters {
         };
     }
 
+    // Uncordon enables the scheduler to deploy user applications on the target cluster.
     rpc Uncordon(infrastructure.ClusterId) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/uncordon"
@@ -111,6 +121,7 @@ service Clusters {
         };
     }
 
+    // Drain operation to reschedule all applications deployed in a given cluster.
     rpc Drain(infrastructure.ClusterId) returns (common.Success) {
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/drain"
