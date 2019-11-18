@@ -75,3 +75,7 @@ service ApplicationNetwork {
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
 }
+
+service UnifiedLogging {
+    rpc Search (SearchRequest) returns (LogResponse) {}
+}

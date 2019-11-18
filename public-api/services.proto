@@ -32,7 +32,6 @@ import "infrastructure-manager/entities.proto";
 import "user-manager/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
-import "unified-logging/entities.proto";
 import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
@@ -397,7 +396,7 @@ service Applications {
 
 service UnifiedLogging{
     // Search for log entries matching a query.
-    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {
+    rpc Search(SearchRequest) returns(LogResponse) {
         option (google.api.http) = {
             post: "/v1/apps/inst/{organization_id}/{app_instance_id}/logs"
             body: "*"
