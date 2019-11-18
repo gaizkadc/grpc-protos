@@ -32,7 +32,6 @@ import "infrastructure-manager/entities.proto";
 import "user-manager/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
-import "unified-logging/entities.proto";
 import "monitoring/entities.proto";
 import "google/api/annotations.proto";
 import "inventory-manager/entities.proto";
@@ -93,14 +92,6 @@ service Clusters {
     rpc Update(UpdateClusterRequest) returns (Cluster){
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/{cluster_id}/update"
-            body: "*"
-        };
-    }
-
-    // Retrieve a summary of high level cluster resource availability
-    rpc Monitor(monitoring.ClusterSummaryRequest) returns(monitoring.ClusterSummary) {
-        option (google.api.http) = {
-            post: "/v1/clusters/{organization_id}/{cluster_id}/monitor"
             body: "*"
         };
     }
@@ -406,7 +397,7 @@ service Applications {
 // UnifiedLogging related operations.
 service UnifiedLogging{
     // Search for log entries matching a query.
-    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {
+    rpc Search(SearchRequest) returns(LogResponse) {
         option (google.api.http) = {
             post: "/v1/apps/inst/{organization_id}/{app_instance_id}/logs"
             body: "*"
@@ -590,6 +581,22 @@ service Provision {
         option (google.api.http) = {
             post: "/v1/provisioner/remove/{request_id}"
             body: "*"
+        };
+    }
+}
+
+// Monitoring service to retrieve monitoring stats from the platform.
+service Monitoring {
+    // GetClusterStats retrieve stats from a cluster.
+    rpc GetClusterStats(monitoring.ClusterStatsRequest) returns (monitoring.ClusterStats) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/stats"
+        };
+    }
+    // GetClusterSummary Retrieve a summary of high level cluster resource availability.
+    rpc GetClusterSummary(monitoring.ClusterSummaryRequest) returns (monitoring.ClusterSummary) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/summary"
         };
     }
 }
