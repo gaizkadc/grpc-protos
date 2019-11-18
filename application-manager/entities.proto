@@ -189,3 +189,91 @@ message AppInstance {
 message AppInstanceList {
     repeated AppInstance instances = 1;
 }
+
+// --------------------------------
+// Unified Logging
+// --------------------------------
+
+// Request containing the information required to populate the table used by Catalog
+message AddLogRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ApplicationInstanceId
+    string app_instance_id = 2;
+    // ApplicationDescriptorId
+    string app_descriptor_id = 3;
+    // ServiceGroupId
+    string service_group_id = 4;
+    // ServiceGroupInstanceId
+    string service_group_instance_id = 5;
+    // ServiceId
+    string service_id = 6;
+    // ServiceInstanceId
+    string service_instance_id = 7;
+    // Timestamp when the information of when this service instance was created
+    int64 created = 8;
+}
+
+// Request to remove an entry from the table used by Catalog
+message RemoveLogsRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ApplicationInstanceId
+    string app_instance_id = 2;
+}
+
+// Request to update an entry from the table used by Catalog
+message UpdateLogRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ApplicationInstanceId
+    string app_instance_id = 2;
+    // ServiceInstanceId
+    string service_instance_id = 3;
+    // Timestamp when the information of when this service instance was terminated
+    int64 terminated = 4;
+}
+
+// Request to search in the table used by Catalog
+message SearchLogRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AvailableFrom contains the timestamp from which a service instance was available
+    int64 available_from = 2;
+    // AvailableTo contains the timestamp to which a service instance was available
+    int64 available_to = 3;
+}
+
+// Response to the Add and Search operations in Unified Logging
+message LogResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AvailableFrom contains the timestamp from which a service instance was available
+    int64 available_from = 2;
+    // AvailableTo contains the timestamp to which a service instance was available
+    int64 available_to = 3;
+    // Array of ServiceInstanceLogs
+    repeated ServiceInstanceLog events = 4;
+}
+
+// Contains the information of an entry in the Catalog table
+message ServiceInstanceLog {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ApplicationDescriptorId
+    string app_descriptor_id = 2;
+    // ApplicationInstanceId
+    string app_instance_id = 3;
+    // ServiceGroupId
+    string service_group_id = 4;
+    // ServiceGroupInstanceId
+    string service_group_instance_id = 5;
+    // ServiceId
+    string service_id = 6;
+    // ServiceInstanceId
+    string service_instance_id = 7;
+    // Timestamp when the information of when this service instance was created
+    int64 created = 8;
+    // Timestamp when the information of when this service instance was terminated
+    int64 terminated = 9;
+}

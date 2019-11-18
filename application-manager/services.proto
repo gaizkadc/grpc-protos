@@ -25,6 +25,7 @@ import "organization/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
 import "common/entities.proto";
+import "public-api/entities.proto";
 
 service ApplicationManager {
 
@@ -74,4 +75,16 @@ service ApplicationNetwork {
     rpc RemoveConnection (application_network.RemoveConnectionRequest) returns (common.OpResponse) {}
     // ListConnections retrieves a list all the established connections of an organization
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
+}
+
+// UnifiedLogging related operations
+service UnifiedLogging {
+    // Add a new entry to the Catalog table
+    rpc Add (AddLogRequest) returns (common.Success) {}
+    // Update an entry in the Catalog table
+    rpc Update (UpdateLogRequest) returns (common.Success) {}
+    // Search for an entry in the Catalog table
+    rpc Search (SearchLogRequest) returns (LogResponse) {}
+    // Remove an entry from the Catalog table
+    rpc Remove (RemoveLogsRequest) returns (common.Success) {}
 }

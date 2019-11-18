@@ -764,15 +764,17 @@ message OpResponse {
 // Unified Logging
 // --------------------------------
 
+// Request to be send to get the Catalog
 message AvailableLogRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AvailableFrom contains the timestamp from which a service instance was available
     int64 available_from = 2;
-    // AvailableFrom contains the timestamp to which a service instance was available
+    // AvailableTo contains the timestamp to which a service instance was available
     int64 available_to = 3;
 }
 
+// Response to a Catalog request
 message AvailableLogResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -786,6 +788,7 @@ message AvailableLogResponse {
     int64 available_to = 5;
 }
 
+// AppDescriptorLogSummary contains a summary of the logs by app descriptor
 message AppDescriptorLogSummary {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -799,6 +802,7 @@ message AppDescriptorLogSummary {
     repeated AppInstanceLogSummary instances = 5;
 }
 
+// AppInstanceLogSummary contains a summary of the logs by app instance
 message AppInstanceLogSummary {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -816,10 +820,11 @@ message AppInstanceLogSummary {
     repeated ServiceGroupInstanceLogSummary groups = 7;
 }
 
+// ServiceGroupInstanceLogSummary contains a summary of the logs by service group instance
 message ServiceGroupInstanceLogSummary {
-    // Service Group ID
+    // ServiceGroupId
     string service_group_id = 1;
-    // Service Group Instance ID
+    // ServiceGroupInstanceId
     string service_group_instance_id = 2;
     // Name of this service group instance log summary
     string name = 3;
@@ -827,11 +832,12 @@ message ServiceGroupInstanceLogSummary {
     repeated ServiceInstanceLogSummary service_instances = 4;
 }
 
+// ServiceInstanceLogSummary contains a summary of the logs by service instance
 message ServiceInstanceLogSummary {
-    // Service ID
+    // ServiceId
     string service_id = 1;
-    // Service Instance ID
+    // ServiceInstanceId
     string service_instance_id = 2;
-    // Name of this service instance log summary
+    // Name of the service instance log summary
     string name = 3;
 }
