@@ -77,18 +77,6 @@ service ApplicationNetwork {
 }
 
 // UnifiedLogging related operations
-service ServiceInstanceHistory {
-    // Add a new entry to the Catalog table
-    rpc Add (AddLogRequest) returns (common.Success) {}
-    // Update an entry in the Catalog table
-    rpc Update (UpdateLogRequest) returns (common.Success) {}
-    // Search for an entry in the Catalog table
-    rpc Search (SearchLogRequest) returns (LogResponse) {}
-    // Remove an entry from the Catalog table
-    rpc Remove (RemoveLogsRequest) returns (common.Success) {}
-}
-
-// UnifiedLogging related operations
 service UnifiedLogging {
     rpc Search (SearchRequest) returns (LogResponse) {}
 }
