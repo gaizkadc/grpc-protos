@@ -189,3 +189,71 @@ message AppInstance {
 message AppInstanceList {
     repeated AppInstance instances = 1;
 }
+
+// SearchRequest message with the query to be resolved.
+message SearchRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the descriptor identifier
+    string app_descriptor_id = 2;
+    // AppInstanceId with the identifier of the target application instance.
+    string app_instance_id = 3;
+    // ServiceGroupId with the service group identifier we asked for
+    string service_group_id = 4;
+    // ServiceGroupInstanceId with the target group instance. If not set, the response will contain all groups in
+    // the application instance.
+    string service_group_instance_id = 5;
+    // ServiceId with the service identifier we asked for
+    string service_id = 6;
+    // ServiceInstanceId with the service instance identifier we asked for
+    string service_instance_id = 7;
+    // MsgQueryFilter contains a text query on the log entry.
+    string msg_query_filter = 8;
+    // From specifies the minimal timestamp of the expected entries.
+    int64 from = 9;
+    // To specifies the maximum timestamp of the expected entries.
+    int64 to = 10;
+    // IncludeMetadata  flag to indicate if the result should not be augmented by adding names, etc.
+    bool include_metadata = 11;
+}
+
+message LogResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // From with the minimal timestamp of the returned results.
+    int64 from = 2;
+    // To with the maximum timestamp of the returned results.
+    int64 to = 3;
+    // Entries with the captured log entries.
+    repeated LogEntryResponse entries = 4;
+}
+
+message LogEntryResponse {
+    // AppDescriptorId with the descriptor identifier
+    string app_descriptor_id = 1;
+    // AppDescriptorName with the descriptor name
+    string app_descriptor_name = 2;
+    // AppInstanceId with the identifier of the target application instance.
+    string app_instance_id = 3;
+    // AppInstanceName wit the name of the instance
+    string app_instance_name = 4;
+    // ServiceGroupId with the service group identifier
+    string service_group_id = 5;
+    // ServiceGroupInstanceId with the target group instance. If not set, the response will contain all groups in
+    // the application instance.
+    string service_group_instance_id = 6;
+    // ServiceGroupName withe the name of the service group
+    string service_group_name = 7;
+    // ServiceId with the service identifier
+    string service_id = 8;
+    // ServiceInstanceId with the service instance identifier
+    string service_instance_id = 9;
+    // ServiceName with the name of the service
+    string service_name = 10;
+    // Timestamp
+    int64 timestamp = 11;
+    // Msg contains the log entry.
+    string msg = 12;
+    // IsDead means that the service is not longer deployed
+    bool is_dead =13;
+}

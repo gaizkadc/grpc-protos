@@ -21,31 +21,28 @@ package unified_logging;
 option go_package = "github.com/nalej/grpc-unified-logging-go";
 import "google/protobuf/timestamp.proto";
 
-// SortOrder is used to define the ordering of search results
-enum SortOrder {
-    // Ascending order
-    ASC = 0;
-    // Descending order
-    DESC = 1;
-}
-
 // SearchRequest message with the query to be resolved.
 message SearchRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the identifier of the target application instance.
     string app_instance_id = 2;
+    // ServiceGroupId with the service group identifier
+    string service_group_id = 3;
     // ServiceGroupInstanceId with the target group instance. If not set, the response will contain all groups in
     // the application instance.
-    string service_group_instance_id = 3;
+    string service_group_instance_id = 4;
+    // ServiceId with the service identifier
+    string service_id = 5;
+    // ServiceInstanceId with the service instance identifier
+    string service_instance_id = 6;
     // MsgQueryFilter contains a text query on the log entry.
-    string msg_query_filter = 4;
+    string msg_query_filter = 7;
     // From specifies the minimal timestamp of the expected entries.
-    google.protobuf.Timestamp from = 5;
+    int64 from = 8;
     // To specifies the maximum timestamp of the expected entries.
-    google.protobuf.Timestamp to = 6;
-    // Order specifies the sort order of the entries (on timestamp)
-    SortOrder order = 7;
+    int64 to = 9;
+
 }
 
 // ExpirationRequest to remove entries from the index.
@@ -62,18 +59,26 @@ message LogResponse{
     string organization_id = 1;
     // AppInstanceId with the identifier of the target application instance.
     string app_instance_id = 2;
+    // ServiceGroupId with the service group identifier
+    string service_group_id = 3;
+    // ServiceGroupInstanceId with the service group instance identifier
+    string service_group_instance_id = 4;
+    // ServiceId with the service identifier
+    string service_id = 5;
+    // ServiceInstanceId with the service instance identifier
+    string service_instance_id = 6;
     // From with the minimal timestamp of the returned results.
-    google.protobuf.Timestamp from = 3;
+    int64 from = 7;
     // To with the maximum timestamp of the returned results.
-    google.protobuf.Timestamp to = 4;
+    int64 to = 8;
     // Entries with the captured log entries.
-    repeated LogEntry entries = 5;
+    repeated LogEntry entries = 9;
 }
 
 // LogEntry containing a single line of text captured from a given log.
 message LogEntry {
     // Timestamp of the entry.
-    google.protobuf.Timestamp timestamp = 1;
+    int64 timestamp = 1;
     // Msg with the captured content.
     string msg = 2;
 }
