@@ -309,17 +309,6 @@ message SearchRequest {
     bool include_metadata = 11;
 }
 
-message LogResponse {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // From with the minimal timestamp of the returned results.
-    int64 from = 2;
-    // To with the maximum timestamp of the returned results.
-    int64 to = 3;
-    // Entries with the captured log entries.
-    repeated LogEntryResponse entries = 4;
-}
-
 message LogEntryResponse {
     // AppDescriptorId with the descriptor identifier
     string app_descriptor_id = 1;
