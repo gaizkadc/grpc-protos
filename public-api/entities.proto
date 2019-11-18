@@ -776,9 +776,9 @@ message AvailableLogRequest {
 message AvailableLogResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    //
+    // AppDescriptorLogSummary contains an array with the log summary of an app descriptor
     repeated AppDescriptorLogSummary app_descriptor_log_summary = 2;
-    //
+    // AppInstanceLogSummary contains an array with the log summary of an app instance
     repeated AppInstanceLogSummary app_instance_log_summary = 3;
     // AvailableFrom contains the timestamp from which a service instance was available
     int64 available_from = 4;
@@ -787,17 +787,51 @@ message AvailableLogResponse {
 }
 
 message AppDescriptorLogSummary {
-
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Application descriptor id
+    string app_descriptor_id = 2;
+    // Application descriptor name
+    string app_descriptor_name = 3;
+    // Labels defined by the user.
+    map<string, string> current_labels = 4;
+    // Array of instances created from this descriptor
+    repeated AppInstanceLogSummary instances = 5;
 }
 
 message AppInstanceLogSummary {
-
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Application instance id
+    string app_instance_id = 2;
+    // Application instance name
+    string app_instance_name = 3;
+    // Application descriptor id
+    string app_descriptor_id = 4;
+    // Application descriptor name
+    string app_descriptor_name = 5;
+    // Labels defined by the user.
+    map<string, string> current_labels = 6;
+    // Array of service group instance log summaries
+    repeated ServiceGroupInstanceLogSummary groups = 7;
 }
 
 message ServiceGroupInstanceLogSummary {
-
+    // Service Group ID
+    string service_group_id = 1;
+    // Service Group Instance ID
+    string service_group_instance_id = 2;
+    // Name of this service group instance log summary
+    string name = 3;
+    // Array of service instance log summaries
+    repeated ServiceInstanceLogSummary service_instances = 4;
 }
 
 message ServiceInstanceLogSummary {
-
+    // Service ID
+    string service_id = 1;
+    // Service Instance ID
+    string service_instance_id = 2;
+    // Name of this service instance log summary
+    string name = 3;
 }
