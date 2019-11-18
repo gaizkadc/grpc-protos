@@ -856,7 +856,7 @@ message ServiceInstanceLogSummary {
     string service_instance_id = 2;
     // Name of the service instance log summary
     string name = 3;
-
+}
 
 
 // -------------------
