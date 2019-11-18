@@ -762,6 +762,20 @@ message OpResponse {
     string info = 7;
 }
 
+// Order is used to define the ordering of search results
+enum Order {
+    // Ascending order
+    ASC = 0;
+    // Descending order
+    DESC = 1;
+}
+
+// OrderOptions is used to indicate by which field it is going to be ordered and if the order is asc or des
+message OrderOptions {
+    string field = 1;
+    Order order = 2;
+}
+
 // --------------------------------
 // Service Instance History
 // --------------------------------
@@ -843,23 +857,11 @@ message ServiceInstanceLogSummary {
     // Name of the service instance log summary
     string name = 3;
 
+
+
 // -------------------
 // Unified-logging
 // -------------------
-
-// Order is used to define the ordering of search results
-enum Order {
-    // Ascending order
-    ASC = 0;
-    // Descending order
-    DESC = 1;
-}
-
-// OrderOptions is used to indicate by which field it is going to be ordered and if the order is asc or des
-message OrderOptions {
-    string field = 1;
-    Order order = 2;
-}
 
 // SearchRequest message with the query to be resolved.
 message SearchRequest {

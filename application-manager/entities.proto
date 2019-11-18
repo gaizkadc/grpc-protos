@@ -276,6 +276,7 @@ message ServiceInstanceLog {
     int64 created = 8;
     // Timestamp when the information of when this service instance was terminated
     int64 terminated = 9;
+}
 
 // --------------------------------
 // Unified Logging

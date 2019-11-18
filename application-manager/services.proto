@@ -25,7 +25,6 @@ import "organization/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
 import "common/entities.proto";
-import "public-api/entities.proto";
 
 service ApplicationManager {
 
