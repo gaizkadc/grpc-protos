@@ -762,10 +762,6 @@ message OpResponse {
     string info = 7;
 }
 
-// -------------------
-// Unified-logging
-// -------------------
-
 // Order is used to define the ordering of search results
 enum Order {
     // Ascending order
@@ -779,6 +775,10 @@ message OrderOptions {
     string field = 1;
     Order order = 2;
 }
+
+// -------------------
+// Unified-logging
+// -------------------
 
 // SearchRequest message with the query to be resolved.
 message SearchRequest {
