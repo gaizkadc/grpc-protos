@@ -25,7 +25,6 @@ import "organization/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
 import "common/entities.proto";
-import "public-api/entities.proto";
 
 service ApplicationManager {
 
@@ -82,5 +81,5 @@ service UnifiedLogging {
     // Search for logs
     rpc Search (SearchRequest) returns (LogResponse) {}
     // Retrieve a Catalog of service instances
-    rpc Catalog (public_api.AvailableLogRequest) returns (public_api.AvailableLogResponse)
+    rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse)
 }
