@@ -217,6 +217,7 @@ message SearchRequest {
     bool include_metadata = 11;
 }
 
+// LogResponse message containing the results of a query.
 message LogResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -228,6 +229,7 @@ message LogResponse {
     repeated LogEntryResponse entries = 4;
 }
 
+// LogEntryResponse message containing a log entry
 message LogEntryResponse {
     // AppDescriptorId with the descriptor identifier
     string app_descriptor_id = 1;
