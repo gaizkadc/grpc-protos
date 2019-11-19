@@ -81,5 +81,5 @@ service UnifiedLogging {
     // Search for logs
     rpc Search (SearchRequest) returns (LogResponse) {}
     // Retrieve a Catalog of service instances
-    rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse)
+    rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse) {}
 }
