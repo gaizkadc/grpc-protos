@@ -80,6 +80,6 @@ service ApplicationNetwork {
 service UnifiedLogging {
     // Search for logs
     rpc Search (SearchRequest) returns (LogResponse) {}
-    // Retrieve a Catalog of service instances
+    // Catalog of service instances
     rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse) {}
 }

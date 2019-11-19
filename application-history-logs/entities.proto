@@ -26,21 +26,21 @@ option go_package = "github.com/nalej/grpc-application-history-logs-go";
 
 // Request containing the information required to populate the table used by Catalog
 message AddLogRequest {
-    // OrganizationId with the organization identifier.
+    // OrganizationId with the organization identifier
     string organization_id = 1;
-    // ApplicationInstanceId
+    // AppInstanceId with the application instance identifier
     string app_instance_id = 2;
-    // ApplicationDescriptorId
+    // AppDescriptorId with the application descriptor identifier
     string app_descriptor_id = 3;
-    // ServiceGroupId
+    // ServiceGroupId with the service group identifier
     string service_group_id = 4;
-    // ServiceGroupInstanceId
+    // ServiceGroupInstanceId with the service group instance identifier
     string service_group_instance_id = 5;
-    // ServiceId
+    // ServiceId with the service identifier
     string service_id = 6;
-    // ServiceInstanceId
+    // ServiceInstanceId with the service instance identifier
     string service_instance_id = 7;
-    // Timestamp when the information of when this service instance was created
+    // Created contains a timestamp with the information of when this service instance was created
     int64 created = 8;
 }
 
@@ -48,7 +48,7 @@ message AddLogRequest {
 message RemoveLogsRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // ApplicationInstanceId
+    // AppInstanceId with the application instance identifier
     string app_instance_id = 2;
 }
 
@@ -56,11 +56,11 @@ message RemoveLogsRequest {
 message UpdateLogRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // ApplicationInstanceId
+    // ApplicationInstanceId with the application instance identifier
     string app_instance_id = 2;
-    // ServiceInstanceId
+    // ServiceInstanceId with the service instance identifier
     string service_instance_id = 3;
-    // Timestamp when the information of when this service instance was terminated
+    // Terminated contains the timestamp when the information of when this service instance was terminated
     int64 terminated = 4;
 }
 
@@ -68,21 +68,21 @@ message UpdateLogRequest {
 message SearchLogRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AvailableFrom contains the timestamp from which a service instance was available
-    int64 available_from = 2;
-    // AvailableTo contains the timestamp to which a service instance was available
-    int64 available_to = 3;
+    // From contains the timestamp from which a service instance was available
+    int64 from = 2;
+    // To contains the timestamp to which a service instance was available
+    int64 to = 3;
 }
 
 // Response to the Add and Search operations in Unified Logging
 message LogResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // AvailableFrom contains the timestamp from which a service instance was available
-    int64 available_from = 2;
-    // AvailableTo contains the timestamp to which a service instance was available
-    int64 available_to = 3;
-    // Array of ServiceInstanceLogs
+    // From contains the timestamp from which a service instance was available
+    int64 from = 2;
+    // To contains the timestamp to which a service instance was available
+    int64 to = 3;
+    // Events contains a list of ServiceInstanceLogs
     repeated ServiceInstanceLog events = 4;
 }
 
