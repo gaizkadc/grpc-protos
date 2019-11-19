@@ -406,7 +406,8 @@ service UnifiedLogging{
     // Catalog of the service instances available in a defined period of time
     rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse) {
         option (google.api.http) = {
-            get: "/v1/apps/inst/{organization_id}/catalog"
+            post: "/v1/apps/inst/{organization_id}/catalog"
+            body: "*"
         };
     }
 }

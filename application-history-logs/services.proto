@@ -24,7 +24,7 @@ import "application-history-logs/entities.proto";
 import "common/entities.proto";
 
 // Catalog related operations
-service Catalog {
+service ApplicationHistoryLogs {
     // Add a new entry to the Catalog table
     rpc Add (AddLogRequest) returns (common.Success) {}
     // Update an entry in the Catalog table
