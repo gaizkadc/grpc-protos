@@ -112,3 +112,7 @@ message StaticIPAddresses {
     // VPN Server static IP address
     string vpn_server = 6;
 }
+
+message UninstallClusterRequest {
+
+}
