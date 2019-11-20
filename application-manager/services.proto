@@ -78,7 +78,7 @@ service ApplicationNetwork {
 
 // UnifiedLogging related operations
 service UnifiedLogging {
-    // Search for logs
+    // Search for log entries matching a query.
     rpc Search (SearchRequest) returns (LogResponse) {}
     // Catalog of service instances
     rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse) {}
