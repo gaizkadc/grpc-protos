@@ -76,6 +76,10 @@ service ApplicationNetwork {
     rpc ListConnections(organization.OrganizationId) returns (application_network.ConnectionInstanceList) {}
 }
 
+// UnifiedLogging related operations
 service UnifiedLogging {
+    // Search for log entries matching a query.
     rpc Search (SearchRequest) returns (LogResponse) {}
+    // Catalog of service instances
+    rpc Catalog (AvailableLogRequest) returns (AvailableLogResponse) {}
 }

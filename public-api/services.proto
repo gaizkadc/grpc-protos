@@ -394,11 +394,19 @@ service Applications {
 
 }
 
+// UnifiedLogging related operations.
 service UnifiedLogging{
     // Search for log entries matching a query.
     rpc Search(SearchRequest) returns(LogResponse) {
         option (google.api.http) = {
-            post: "/v1/apps/inst/{organization_id}/{app_instance_id}/logs"
+            post: "/v1/apps/inst/{organization_id}/logs"
+            body: "*"
+        };
+    }
+    // Catalog of the service instances available in a defined period of time
+    rpc Catalog (application_manager.AvailableLogRequest) returns (application_manager.AvailableLogResponse) {
+        option (google.api.http) = {
+            post: "/v1/apps/inst/{organization_id}/catalog"
             body: "*"
         };
     }
