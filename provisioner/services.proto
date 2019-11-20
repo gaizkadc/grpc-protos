@@ -52,3 +52,9 @@ service Scale {
     // RemoveScale cancels an ongoing scale process or removes the information of an already processed one.
     rpc RemoveScale(common.RequestId) returns (common.Success){}
 }
+
+// Management operations on a cluster.
+service Management {
+    // GetKubeConfig retrieves the KubeConfig file to access the management layer of Kubernetes.
+    rpc GetKubeConfig(ClusterRequest) returns (KubeConfigResponse){}
+}

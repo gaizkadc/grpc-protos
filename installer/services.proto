@@ -29,7 +29,7 @@ service Installer {
     rpc InstallCluster(InstallRequest) returns(InstallResponse){}
 
     // UninstallCluster proceeds to remove all Nalej created elements in that cluster.
-    rpc UninstallCluster(UninstallClusterRequest) returns(UninstallClusterResponse){}
+    rpc UninstallCluster(UninstallClusterRequest) returns(common.OpResponse){}
 
     // CheckProgress gets an updated state of an install request.
     rpc CheckProgress(InstallId) returns(InstallResponse){}
