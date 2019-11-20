@@ -54,14 +54,18 @@ enum OpStatus {
 message OpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
-    // OperationId with the operation identifier.
+    // RequestId with the request identifier.
     string request_id = 3;
+    // ElapsedTime since the request was sent.
+    int64 elapsed_time = 4;
     // Timestamp of the response.
-    int64 timestamp = 4;
+    int64 timestamp = 5;
     // Status indicates if the operation was successful
-    OpStatus status = 5;
+    OpStatus status = 6;
     // Info with additional information for an operation.
-    string info = 6;
+    string info = 7;
+    // Error message in case the operation failed.
+    string error = 8;
 }
 
 // Message used to return in Exists... operations
