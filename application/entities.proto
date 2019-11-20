@@ -925,3 +925,49 @@ message ListAuthorizedZtNetworkMemberRequest{
     // ZtNetworkId
     string zt_network_id = 3;
 }
+
+
+// -------------------------
+// Instance Reduced Summary
+// -------------------------
+// ServiceReducedSummary is a structure with the identifier and the name of a service
+message ServiceReducedSummary {
+    // ServiceId with the service identifier.
+    string service_id = 1;
+    // Unique identifier for this instance
+    string service_instance_id = 2;
+    // Name of the service.
+    string service_name = 3;
+}
+
+// ServiceGroupReducedSummary is a structure with the identifiers and names of service group
+message ServiceGroupReducedSummary {
+    // ServiceGroupId with the group identifier.
+    string service_group_id = 1;
+    // Unique identifier for this instance
+    string service_group_instance_id = 2;
+    // ServiceGroupName with the name of the service group
+    string service_group_name = 3;
+    // ServiceReducedSummary with a list of services identifiers and names
+    repeated ServiceReducedSummary service_instances = 4;
+}
+
+// AppInstanceSchema is a structure with the identifiers and names of an instance
+message AppInstanceReducedSummary {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // AppDescriptorId with the application descriptor identifier.
+    string app_descriptor_id = 2;
+    // AppDescriptorName with the name of the application descriptor.
+    string app_descriptor_name = 3;
+    // AppInstanceId with the application instance identifier.
+    string app_instance_id = 4;
+    // Name of the application.
+    string app_instance_name = 5;
+    // ServiceGroupReducedSummary with a list of service groups identifiers and names
+    repeated ServiceGroupReducedSummary groups = 6;
+}
+// AppInstanceReducedSummaryList list of instance schemas
+message AppInstanceReducedSummaryList {
+    repeated AppInstanceReducedSummary instances = 1;
+}
