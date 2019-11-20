@@ -51,6 +51,8 @@ service Applications {
     // RemoveAppInstance removes an application instance
     rpc RemoveAppInstance(AppInstanceId) returns (common.Success){}
 
+    // GetAppInstanceReducedSummary retrieves the reduced summary of a given application instance.
+    rpc GetAppInstanceReducedSummary(AppInstanceId) returns (AppInstanceReducedSummary) {}
     // ListAppInstancesReducedSummary retrieves a list of a reduced summary of application instances.
     rpc ListAppInstancesReducedSummary(organization.OrganizationId) returns (AppInstanceReducedSummaryList){}
 
