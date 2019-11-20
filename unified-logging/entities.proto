@@ -25,23 +25,25 @@ import "google/protobuf/timestamp.proto";
 message SearchRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // AppDescriptorId with the descriptor identifier
+    string app_descriptor_id = 2;
     // AppInstanceId with the identifier of the target application instance.
-    string app_instance_id = 2;
+    string app_instance_id = 3;
     // ServiceGroupId with the service group identifier
-    string service_group_id = 3;
+    string service_group_id = 4;
     // ServiceGroupInstanceId with the target group instance. If not set, the response will contain all groups in
     // the application instance.
-    string service_group_instance_id = 4;
+    string service_group_instance_id = 5;
     // ServiceId with the service identifier
-    string service_id = 5;
+    string service_id = 6;
     // ServiceInstanceId with the service instance identifier
-    string service_instance_id = 6;
+    string service_instance_id = 7;
     // MsgQueryFilter contains a text query on the log entry.
-    string msg_query_filter = 7;
+    string msg_query_filter = 8;
     // From specifies the minimal timestamp of the expected entries.
-    int64 from = 8;
+    int64 from = 9;
     // To specifies the maximum timestamp of the expected entries.
-    int64 to = 9;
+    int64 to = 10;
 
 }
 
@@ -57,22 +59,24 @@ message ExpirationRequest{
 message LogResponse{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // AppDescriptorId with the descriptor identifier
+    string app_descriptor_id = 2;
     // AppInstanceId with the identifier of the target application instance.
-    string app_instance_id = 2;
+    string app_instance_id = 3;
     // ServiceGroupId with the service group identifier
-    string service_group_id = 3;
+    string service_group_id = 4;
     // ServiceGroupInstanceId with the service group instance identifier
-    string service_group_instance_id = 4;
+    string service_group_instance_id = 5;
     // ServiceId with the service identifier
-    string service_id = 5;
+    string service_id = 6;
     // ServiceInstanceId with the service instance identifier
-    string service_instance_id = 6;
+    string service_instance_id = 7;
     // From with the minimal timestamp of the returned results.
-    int64 from = 7;
+    int64 from = 8;
     // To with the maximum timestamp of the returned results.
-    int64 to = 8;
+    int64 to = 9;
     // Entries with the captured log entries.
-    repeated LogEntry entries = 9;
+    repeated LogEntry entries = 10;
 }
 
 // LogEntry containing a single line of text captured from a given log.
