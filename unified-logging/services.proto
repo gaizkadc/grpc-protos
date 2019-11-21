@@ -26,7 +26,7 @@ import "common/entities.proto";
 // Coordinator service with the operations offered by the query coordinator.
 service Coordinator {
     // Search for log entries matching a query.
-    rpc Search(SearchRequest) returns (LogResponse) {}
+    rpc Search(SearchRequest) returns (LogResponseList) {}
     // Expire the logs of a given application.
     rpc Expire(ExpirationRequest) returns(common.Success) {}
 }
@@ -34,7 +34,7 @@ service Coordinator {
 // Slave services for localling retrieving a set of logs.
 service Slave {
     // Search for log entries matching a query.
-    rpc Search(SearchRequest) returns(LogResponse) {}
+    rpc Search(SearchRequest) returns(LogResponseList) {}
     // Expire the logs of a given application.
     rpc Expire(ExpirationRequest) returns(common.Success) {}
 }

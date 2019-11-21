@@ -55,10 +55,21 @@ message ExpirationRequest{
     string app_instance_id = 2;
 }
 
-// LogResponse message containing the results of a query.
-message LogResponse{
+
+// LogResponseList message with a list of LogResponses
+message LogResponseList {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
+    // From with the minimal timestamp of the returned results.
+    int64 from = 2;
+    // To with the maximum timestamp of the returned results.
+    int64 to = 3;
+    // Responses with a list of log responses
+    repeated LogResponse responses = 4;
+}
+
+// LogResponse message containing the results of a query.
+message LogResponse{
     // AppDescriptorId with the descriptor identifier
     string app_descriptor_id = 2;
     // AppInstanceId with the identifier of the target application instance.
@@ -71,10 +82,6 @@ message LogResponse{
     string service_id = 6;
     // ServiceInstanceId with the service instance identifier
     string service_instance_id = 7;
-    // From with the minimal timestamp of the returned results.
-    int64 from = 8;
-    // To with the maximum timestamp of the returned results.
-    int64 to = 9;
     // Entries with the captured log entries.
     repeated LogEntry entries = 10;
 }
