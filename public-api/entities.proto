@@ -71,6 +71,8 @@ message Cluster {
     int64 running_nodes = 10;
     // LastAliveTimestamp contains the last alive message received
     int64 last_alive_timestamp = 11;
+    // MillicoresConversionFactor Contains a conversion factor for the millicores measurement that k8s exposes as it is platform dependent.
+    double millicores_conversion_factor = 12;
     // State of the cluster with respect to provisioning and installation.
     infrastructure.ClusterState state = 13;
     // StateName contains the name of the cluster state.
@@ -99,6 +101,10 @@ message UpdateClusterRequest {
     bool remove_labels = 6;
     // Labels for the cluster.
     map<string, string> labels = 7;
+    // UpdateMillicoresConversionFactor flag to determine if the MillicoresConversionFactor property must be changed.
+    bool update_millicores_conversion_factor = 8;
+    // MillicoresConversionFactor The new value for MillicoresConversionFactor.
+    double millicores_conversion_factor = 9;
 }
 
 // Type of platform targetting this install request

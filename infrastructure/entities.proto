@@ -109,6 +109,8 @@ message Cluster {
     int64 last_alive_timestamp = 12;
     // State of the cluster with respect to provisioning and installation.
     ClusterState state = 13;
+    // MillicoresConversionFactor Contains a conversion factor for the millicores measurement that k8s exposes as it is platform dependent.
+    double millicores_conversion_factor = 14;
 }
 
 message ClusterId {
@@ -189,6 +191,10 @@ message UpdateClusterRequest {
     bool update_control_plane_hostname = 18;
     // Hostname of the control plane
     string control_plane_hostname = 19;
+    // UpdateMillicoresConversionFactor flag to determine if the MillicoresConversionFactor property must be changed.
+    bool update_millicores_conversion_factor = 20;
+    // MillicoresConversionFactor The new value for MillicoresConversionFactor.
+    double millicores_conversion_factor = 21;
 }
 
 message ClusterList {
