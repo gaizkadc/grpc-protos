@@ -35,22 +35,27 @@ message Labels {
 
 // RequestId message to perform operations on returned operation identifiers.
 message RequestId {
+    // RequestId with the request identifier.
     string request_id = 1;
 }
 
+// OpStatus defines the different stages of an operation.
 enum OpStatus {
+    // INIT represents an operation that has been defined but not yet scheduled.
+    INIT = 0;
     // Scheduled to represent that the operation is on the queue pending execution.
-    SCHEDULED = 0;
+    SCHEDULED = 1;
     // Inprogress to represent that the operation is being executed.
-    INPROGRESS = 1;
+    INPROGRESS = 2;
     // Success to indicate that the operation was successfully executed.
-    SUCCESS = 2;
+    SUCCESS = 3;
     // Fail to indicate that the operation failed.
-    FAIL = 3;
+    FAILED = 4;
     // Canceled to indicate that the operation was canceled by the user
-    CANCELED = 4;
+    CANCELED = 5;
 }
 
+// OpResponse message representing the state of a given operation.
 message OpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
@@ -58,7 +63,7 @@ message OpResponse {
     string request_id = 3;
     // ElapsedTime since the request was sent.
     int64 elapsed_time = 4;
-    // Timestamp of the response.
+    // Timestamp of the response. This value is useful in case we receive response from async sources.
     int64 timestamp = 5;
     // Status indicates if the operation was successful
     OpStatus status = 6;
