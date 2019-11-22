@@ -53,7 +53,7 @@ service DeploymentManager {
 // Slave services for localling retrieving a set of logs.
 service UnifiedLogging {
     // Search for log entries matching a query.
-    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponse) {}
+    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponseList) {}
     // Expire the logs of a given application.
     rpc Expire(unified_logging.ExpirationRequest) returns(common.Success) {}
 }
