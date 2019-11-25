@@ -805,21 +805,6 @@ message EdgeControllerExtendedInfo {
     repeated Asset managed_assets = 2;
 }
 
-message OpResponse {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // RequestId with the request identifier.
-    string request_id = 3;
-    // Timestamp of the response.
-    int64 timestamp = 4;
-    // Status indicates if the operation was successful
-    common.OpStatus status = 5;
-    // StatusName name that indicates if the operation was successful
-    string status_name = 6;
-    // Info with additional information for an operation.
-    string info = 7;
-}
-
 // Order is used to define the ordering of search results
 enum Order {
     // Ascending order
