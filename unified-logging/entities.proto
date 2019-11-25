@@ -21,6 +21,7 @@ package unified_logging;
 option go_package = "github.com/nalej/grpc-unified-logging-go";
 import "google/protobuf/timestamp.proto";
 
+
 // SearchRequest message with the query to be resolved.
 message SearchRequest{
     // OrganizationId with the organization identifier.
@@ -38,13 +39,20 @@ message SearchRequest{
     string service_id = 6;
     // ServiceInstanceId with the service instance identifier
     string service_instance_id = 7;
+    // k8sIdQueryFilter contains a map associating kubernetes labels with possible ids that should be matched with an OR.
+    map<string, IdsList> k8s_id_query_filter = 8;
     // MsgQueryFilter contains a text query on the log entry.
-    string msg_query_filter = 8;
+    string msg_query_filter = 9;
     // From specifies the minimal timestamp of the expected entries.
-    int64 from = 9;
+    int64 from = 10;
     // To specifies the maximum timestamp of the expected entries.
-    int64 to = 10;
+    int64 to = 11;
 
+}
+
+message IdsList {
+    // Ids with a list of identifiers
+    repeated string ids = 1;
 }
 
 // ExpirationRequest to remove entries from the index.
