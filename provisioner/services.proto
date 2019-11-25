@@ -36,9 +36,9 @@ service Provision {
 // Decomission service offering methods to free infrastructure.
 service Decomission {
     // DecomissionCluster frees the resources of a given cluster.
-    rpc DecomissionCluster(DecomissionClusterRequest) returns (DecomissionClusterResponse){}
+    rpc DecomissionCluster(DecomissionClusterRequest) returns (common.OpResponse){}
     // CheckProgress gets an updated state of a decomission request.
-    rpc CheckProgress(common.RequestId) returns (DecomissionClusterResponse){}
+    rpc CheckProgress(common.RequestId) returns (common.OpResponse){}
     // RemoveDecomission cancels an ongoing decomissioning or removes the information of an already processed decomissioning operation.
     rpc RemoveDecomission(common.RequestId) returns (common.Success){}
 }

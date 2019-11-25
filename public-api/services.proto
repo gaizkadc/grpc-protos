@@ -75,6 +75,24 @@ service Clusters {
         };
     }
 
+    // Uninstall a existing cluster. This process will uninstall the nalej platform and
+    // remove the cluster from the list.
+    rpc Uninstall(UninstallClusterRequest) returns (OpResponse){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/uninstall"
+            body: "*"
+        };
+    }
+
+    // Decomission an application cluster. This process will uninstall the nalej platform,
+    // decomission the cluster from the infrastructure provider, and remove the cluster from the list.
+    rpc Decomission(DecomissionClusterRequest) returns (OpResponse){
+        option (google.api.http) = {
+            post: "/v1/clusters/{organization_id}/decomission"
+            body: "*"
+        };
+    }
+
     // Info retrieves the cluster information.
     rpc Info(infrastructure.ClusterId) returns (Cluster) {
         option (google.api.http) = {
@@ -88,6 +106,7 @@ service Clusters {
             get: "/v1/clusters/{organization_id}/list"
         };
     }
+
     // Update the cluster information.
     rpc Update(UpdateClusterRequest) returns (Cluster){
         option (google.api.http) = {
