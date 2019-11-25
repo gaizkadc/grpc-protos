@@ -24,11 +24,33 @@ import "infrastructure/entities.proto";
 import "application/entities.proto";
 import "application-network/entities.proto";
 import "installer/entities.proto";
+import "provisioner/entities.proto";
 import "inventory-manager/entities.proto";
 import "inventory/entities.proto";
 import "connectivity-manager/entities.proto";
 import "common/entities.proto";
 import "unified-logging/entities.proto";
+
+
+// OpResponse message representing the state of a given operation.
+message OpResponse {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // RequestId with the request identifier.
+    string request_id = 3;
+    // ElapsedTime since the request was sent.
+    int64 elapsed_time = 4;
+    // Timestamp of the response. This value is useful in case we receive response from async sources.
+    int64 timestamp = 5;
+    // Status indicates if the operation was successful
+    common.OpStatus status = 6;
+    // StatusName indicates the name of the enum for front-end compatibility.
+    string status_name = 7;
+    // Info with additional information for an operation.
+    string info = 8;
+    // Error message in case the operation failed.
+    string error = 9;
+}
 
 
 // --------------------------------
@@ -143,6 +165,36 @@ message InstallRequest {
     Platform target_platform = 12;
     // Static IP addresses
     installer.StaticIPAddresses static_ip_addresses = 13;
+}
+
+// UninstallClusterRequest message with the information required to uninstall a cluster.
+message UninstallClusterRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Type of cluster.
+    infrastructure.ClusterType cluster_type = 3;
+    // KubeConfigRaw contains the required data to connect to a Kubernetes cluster in case it is already installed.
+    string kube_config_raw = 4;
+    // Target platform
+    Platform target_platform = 5;
+}
+
+// DecomisionClusterRequest message with the information required to uninstall and decomission a cluster.
+message DecomissionClusterRequest {
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // ClusterId with the cluster identifier.
+    string cluster_id = 2;
+    // Type of cluster.
+    infrastructure.ClusterType cluster_type = 3;
+    // Target platform
+    Platform target_platform = 4;
+    // AzureCredentials with the credentials required to decomission a cluster in Azure.
+    provisioner.AzureCredentials azure_credentials = 5;
+    // AzureOptions with the provisioning specific options.
+    provisioner.AzureProvisioningOptions azure_options = 6;
 }
 
 // --------------------------------
@@ -751,21 +803,6 @@ message EdgeControllerExtendedInfo {
     EdgeController controller = 1;
     // ManagedAssets with the assets managed by the controller
     repeated Asset managed_assets = 2;
-}
-
-message OpResponse {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // RequestId with the request identifier.
-    string request_id = 3;
-    // Timestamp of the response.
-    int64 timestamp = 4;
-    // Status indicates if the operation was successful
-    common.OpStatus status = 5;
-    // StatusName name that indicates if the operation was successful
-    string status_name = 6;
-    // Info with additional information for an operation.
-    string info = 7;
 }
 
 // Order is used to define the ordering of search results

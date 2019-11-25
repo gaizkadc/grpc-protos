@@ -54,4 +54,8 @@ service InfrastructureManager {
     rpc UncordonCluster(infrastructure.ClusterId) returns (common.Success) {}
     // Drain a cluster.
     rpc DrainCluster(infrastructure.ClusterId) returns (common.Success) {}
+    // UninstallCluster proceeds to remove all Nalej created elements in that cluster.
+    rpc Uninstall(installer.UninstallClusterRequest) returns (common.OpResponse){}
+    // DecomissionCluster frees the resources of a given cluster.
+    rpc DecomissionCluster(provisioner.DecomissionClusterRequest) returns (common.OpResponse){}
 }

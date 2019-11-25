@@ -143,18 +143,6 @@ message DecomissionClusterRequest{
     AzureProvisioningOptions azure_options = 8;
 }
 
-// DecomissionClusterResponse with the progress of a decomission operation.
-message DecomissionClusterResponse{
-    // RequestId associated with the information.
-    string request_id = 1;
-    // State of the provisioning.
-    ProvisionProgress state = 2;
-    // ElapsedTime since the request was sent.
-    int64 elapsed_time = 3;
-    // Error message in case the install failed.
-    string error = 4;
-}
-
 //
 // Scale
 //
