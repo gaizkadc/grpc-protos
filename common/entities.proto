@@ -60,7 +60,9 @@ message OpResponse {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // RequestId with the request identifier.
-    string request_id = 3;
+    string request_id = 2;
+    // OperationName with the name of the operation being executed.
+    string operation_name = 3;
     // ElapsedTime since the request was sent.
     int64 elapsed_time = 4;
     // Timestamp of the response. This value is useful in case we receive response from async sources.
