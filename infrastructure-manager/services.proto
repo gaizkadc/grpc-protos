@@ -30,7 +30,7 @@ import "infrastructure-manager/entities.proto";
 // Infrastructure Manager service
 service InfrastructureManager {
     // Install a new cluster adding it to the system.
-    rpc InstallCluster(installer.InstallRequest) returns (infrastructure_manager.InstallResponse){}
+    rpc InstallCluster(installer.InstallRequest) returns (common.OpResponse){}
     // Provision and install a new cluster adding it to the system.
     rpc ProvisionAndInstallCluster(provisioner.ProvisionClusterRequest) returns (infrastructure_manager.ProvisionerResponse){}
     // Scale the number of nodes in the cluster.

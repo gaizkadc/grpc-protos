@@ -52,7 +52,7 @@ service Organizations {
 // TODO Migrate InstallResponse response to user friendly enums for the front.
 service Clusters {
     // Install a new cluster adding it to the system.
-    rpc Install(InstallRequest) returns (infrastructure_manager.InstallResponse){
+    rpc Install(InstallRequest) returns (OpResponse){
         option (google.api.http) = {
             post: "/v1/clusters/{organization_id}/install"
             body: "*"

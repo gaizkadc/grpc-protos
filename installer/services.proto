@@ -26,14 +26,14 @@ import "common/entities.proto";
 // Installer service definition.
 service Installer {
     // InstallCluster triggers the installation of a new application cluster.
-    rpc InstallCluster(InstallRequest) returns(InstallResponse){}
+    rpc InstallCluster(InstallRequest) returns(common.OpResponse){}
 
     // UninstallCluster proceeds to remove all Nalej created elements in that cluster.
     rpc UninstallCluster(UninstallClusterRequest) returns(common.OpResponse){}
 
     // CheckProgress gets an updated state of an install request.
-    rpc CheckProgress(InstallId) returns(InstallResponse){}
+    rpc CheckProgress(common.RequestId) returns(common.OpResponse){}
 
     // RemoveInstall cancels and ongoing install or removes the information of an already processed install.
-    rpc RemoveInstall(RemoveInstallRequest) returns(common.Success){}
+    rpc RemoveInstall(common.RequestId) returns(common.Success){}
 }
