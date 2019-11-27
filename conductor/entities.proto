@@ -51,20 +51,77 @@ message DeploymentFragment {
    string organization_name = 2;
    // Application descriptor id
    string app_descriptor_id = 3;
+   // AppDescriptorName with the name of the descriptor
+   string app_descriptor_name = 4;
    // Application instance
-   string app_instance_id = 4;
+   string app_instance_id = 5;
    // Application name for human-readable instances
-   string app_name = 5;
+   string app_instance_name = 6;
    // Id of the plan this fragment belongs to
-   string deployment_id = 6;
+   string deployment_id = 7;
    // Id of this fragment
-   string fragment_id = 7;
+   string fragment_id = 8;
    // Cluster Id of the cluster to deploy this fragment
-   string cluster_id = 8;
+   string cluster_id = 9;
    // Nalej variables for this deployment
-   map<string,string> nalej_variables = 9;
+   map<string,string> nalej_variables = 10;
    // Stages to be deployed
-   repeated DeploymentStage stages = 10;
+   repeated DeploymentStage stages = 11;
+}
+
+// ServiceInstance contains the information of an instance of a service
+// This message is an extension of the application.service
+// Contains fields for the names of service_group, service, etc.
+message ServiceInstance {
+   // OrganizationId with the organization identifier.
+   string organization_id = 1;
+   // AppDescriptorId with the application descriptor identifier.
+   string app_descriptor_id = 2;
+   // AppInstanceId with the application instance identifier.
+   string app_instance_id = 3;
+   // ServiceGroupId with the group identifier.
+   string service_group_id = 4;
+   // ServiceGroupName with the name of the service_group
+   string service_group_name = 5;
+   // ServiceGroupInstanceId with the service group instance identifier.
+   string service_group_instance_id = 6;
+   // ServiceId with the service identifier.
+   string service_id = 7;
+   // ServiceName with the name of the service
+   string service_name = 8;
+   // Unique identifier for this instance
+   string service_instance_id = 9;
+   // ServiceType represents the underlying technology of the service to be launched.
+   application.ServiceType type = 10;
+   // Image contains the URL/name of the image to be executed.
+   string image = 11;
+   // ImageCredentials with the data required to access the repository the image is available at.
+   application.ImageCredentials credentials = 12;
+   // DeploySpecs with the resource specs required by the service.
+   application.DeploySpecs specs = 13;
+   // Storage restrictions
+   repeated application.Storage storage = 14;
+   // ExposedPorts contains the list of ports exposed by the current service.
+   repeated application.Port exposed_ports = 15;
+   // EnvironmentVariables defines a key-value map of environment variables and values that will be passed to all
+   // running services.
+   map<string, string> environment_variables = 16;
+   // Configs contains the configuration files required by the service.
+   repeated application.ConfigFile configs = 17;
+   // Labels with the user defined labels.
+   map<string, string> labels = 18;
+   // DeployAfter contains the list of services that must be running before launching a service.
+   repeated string deploy_after = 19;
+   // Status of the deployed service
+   application.ServiceStatus status = 20;
+   // Endpoints instances exposing content to the users in his service.
+   repeated application.EndpointInstance endpoints = 21;
+   // DeployedOnClusterId specifies which is the cluster where the service is running.
+   string deployed_on_cluster_id = 22;
+   // Run arguments
+   repeated string run_arguments = 23;
+   // Relevant information about this instance
+   string info = 24;
 }
 
 // A stage represents a collection of services and related components that can be deployed
@@ -75,7 +132,7 @@ message DeploymentStage {
    // Id for this stage
    string stage_id = 2;
    // Collection of services that can be simultaneously deployed
-   repeated application.ServiceInstance services = 3;
+   repeated ServiceInstance services = 3;
    // DeviceGroupRules with the security rules affecting device group access.
    repeated DeviceGroupSecurityRuleInstance device_group_rules = 4;
    // PublicRules with the security rules related to public access of a given endpoint.
