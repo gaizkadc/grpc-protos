@@ -27,19 +27,19 @@ import "monitoring/entities.proto";
 import "unified-logging/entities.proto";
 import "cluster-watcher/entities.proto";
 
-// Service deployed in local clusters to score locally available resources.
+// Musician Service deployed in local clusters to score locally available resources.
 service Musician {
-    // Request to score an application
+    // Score Request to score an application
     rpc Score(conductor.ClusterScoreRequest) returns (conductor.ClusterScoreResponse) {}
 }
 
-// service deployed in local cluster to manage deploy and undeploy
+// DeploymentManager service deployed in local cluster to manage deploy and undeploy
 service DeploymentManager {
-    // Request a deployment plan to be executed.
+    // Execute Request a deployment plan to be executed.
     rpc Execute(deployment_manager.DeploymentFragmentRequest) returns (deployment_manager.DeploymentFragmentResponse) {}
-    // Request to undeploy an application
+    // Undeploy Request to undeploy an application
     rpc Undeploy(deployment_manager.UndeployRequest) returns (common.Success) {}
-    // Request to undeploy a fragment
+    // UndeployFragment Request to undeploy a fragment
     rpc UndeployFragment(deployment_manager.UndeployFragmentRequest) returns (common.Success) {}
     // SetServiceRoute setups an iptables DNAT for a given service
     rpc SetServiceRoute(deployment_manager.ServiceRoute) returns (common.Success){}
@@ -50,7 +50,7 @@ service DeploymentManager {
 
 }
 
-// Slave services for localling retrieving a set of logs.
+// UnifiedLogging Slave services for localling retrieving a set of logs.
 service UnifiedLogging {
     // Search for log entries matching a query.
     rpc Search(unified_logging.SearchRequest) returns (unified_logging.LogResponseList) {}
@@ -58,20 +58,20 @@ service UnifiedLogging {
     rpc Expire(unified_logging.ExpirationRequest) returns (common.Success) {}
 }
 
-// Collector services for monitoring information
+// MetricsCollector Collector services for monitoring information
 service MetricsCollector {
-    // Retrieve a summary of high level cluster resource availability
+    // GetClusterSummary Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary (monitoring.ClusterSummaryRequest) returns (monitoring.ClusterSummary) {}
-    // Retrieve statistics on cluster with respect to platform resources
+    // GetClusterStats Retrieve statistics on cluster with respect to platform resources
     rpc GetClusterStats (monitoring.ClusterStatsRequest) returns (monitoring.ClusterStats) {}
-    // Execute a query directly on the monitoring storage backend
+    // Query Execute a query directly on the monitoring storage backend
     rpc Query (monitoring.QueryRequest) returns (monitoring.QueryResponse) {}
     // GetContainerStats Retrieve the stats of the service containers in the cluster.
     rpc GetContainerStats (common.Empty) returns (monitoring.ContainerStatsResponse) {}
 }
 
-// Cluster watcher service running in the application clusters.
+// ClusterWatcherSlave Cluster watcher service running in the application clusters.
 service ClusterWatcherSlave {
-    // Request to score an application
+    //  UpdateClustersRequest to score an application
     rpc UpdateClusters(cluster_watcher.ListClustersWatchInfo) returns (common.Success) {}
 }

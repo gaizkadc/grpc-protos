@@ -24,37 +24,37 @@ import "monitoring/entities.proto";
 import "inventory/entities.proto";
 import "common/entities.proto";
 
-// Coordinator service with the operations offered by the monitoring coordinator.
+// MonitoringManager Coordinator service with the operations offered by the monitoring coordinator.
 service MonitoringManager {
-    // Retrieve a summary of high level cluster resource availability
+    // GetClusterSummary Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary (ClusterSummaryRequest) returns (ClusterSummary) {}
-    // Retrieve statistics on cluster with respect to platform resources
+    // GetClusterStats Retrieve statistics on cluster with respect to platform resources
     rpc GetClusterStats (ClusterStatsRequest) returns (ClusterStats) {}
-    // Execute a query directly on the monitoring storage backend
+    // Query Execute a query directly on the monitoring storage backend
     rpc Query (QueryRequest) returns (QueryResponse) {}
     // GetOrganizationApplicationStats Retrieve an aggregation of the service instances of an organization.
     rpc GetOrganizationApplicationStats (OrganizationApplicationStatsRequest) returns (OrganizationApplicationStatsResponse) {}
 }
 
-// Slave services for quering monitoring information on a specific cluster
+// MetricsCollector Client services for quering monitoring information on a specific cluster
 // The request messages are reused from the Coordinator. The organization ID
 // and cluster ID can either be blank, or must match the current cluster.
 service MetricsCollector {
-    // Retrieve a summary of high level cluster resource availability
+    // GetClusterSummary Retrieve a summary of high level cluster resource availability
     rpc GetClusterSummary (ClusterSummaryRequest) returns (ClusterSummary) {}
-    // Retrieve statistics on cluster with respect to platform resources
+    // GetClusterStats Retrieve statistics on cluster with respect to platform resources
     rpc GetClusterStats (ClusterStatsRequest) returns (ClusterStats) {}
-    // Execute a query directly on the monitoring storage backend
+    // Query Execute a query directly on the monitoring storage backend
     rpc Query (QueryRequest) returns (QueryResponse) {}
     // GetContainerStats Retrieve the stats of the service containers in the cluster.
     rpc GetContainerStats (common.Empty) returns (ContainerStatsResponse) {}
 }
 
-// Asset Monitoring related operations - collecting metrics from Edge Controller
+// AssetMonitoring Asset Monitoring related operations - collecting metrics from Edge Controller
 service AssetMonitoring {
-    // List available metrics for a specific Edge Controller or
+    // ListMetrics List available metrics for a specific Edge Controller or
     // asset selector
     rpc ListMetrics (inventory.AssetSelector) returns (MetricsList) {}
-    // Query monitoring metrics
+    // QueryMetrics Query monitoring metrics
     rpc QueryMetrics (QueryMetricsRequest) returns (QueryMetricsResult) {}
 }
