@@ -235,7 +235,7 @@ message LogResponse {
     repeated AppDescriptorLogSummary app_descriptor_log_summary = 5;
     // AppInstanceLogSummary contains an array with the log summary of an app instance
     repeated AppInstanceLogSummary app_instance_log_summary = 6;
-    // FailedClusterIds with a list with the identifiers of the clusters that failed to request the logs
+    // FailedClusterIds with a list of cluster identifiers ∫that failed to request the logs
     repeated string failed_cluster_ids = 7;
 }
 
