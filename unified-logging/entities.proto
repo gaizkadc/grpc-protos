@@ -79,19 +79,27 @@ message LogResponseList {
 // LogResponse message containing the results of a query.
 message LogResponse{
     // AppDescriptorId with the descriptor identifier
-    string app_descriptor_id = 2;
+    string app_descriptor_id = 1;
+    // AppDescriptorName with the name of the descriptor
+    string app_descriptor_name = 2;
     // AppInstanceId with the identifier of the target application instance.
     string app_instance_id = 3;
+    // AppInstanceName with the name of the instance
+    string app_instance_name = 4;
     // ServiceGroupId with the service group identifier
-    string service_group_id = 4;
+    string service_group_id = 5;
+    // ServiceGroupName with the name of the service group
+    string service_group_name = 6;
     // ServiceGroupInstanceId with the service group instance identifier
-    string service_group_instance_id = 5;
+    string service_group_instance_id = 7;
     // ServiceId with the service identifier
-    string service_id = 6;
+    string service_id = 8;
+    // ServiceName with the name of the service
+    string service_name = 9;
     // ServiceInstanceId with the service instance identifier
-    string service_instance_id = 7;
+    string service_instance_id = 10;
     // Entries with the captured log entries.
-    repeated LogEntry entries = 10;
+    repeated LogEntry entries = 11;
 }
 
 // LogEntry containing a single line of text captured from a given log.
