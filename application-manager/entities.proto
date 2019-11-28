@@ -231,6 +231,12 @@ message LogResponse {
     int64 to = 3;
     // Entries with the captured log entries.
     repeated LogEntryResponse entries = 4;
+    // AppDescriptorLogSummary contains an array with the log summary of an app descriptor
+    repeated AppDescriptorLogSummary app_descriptor_log_summary = 5;
+    // AppInstanceLogSummary contains an array with the log summary of an app instance
+    repeated AppInstanceLogSummary app_instance_log_summary = 6;
+    // FailedClusterIds with a list of cluster identifiers ∫that failed to request the logs
+    repeated string failed_cluster_ids = 7;
 }
 
 // LogEntryResponse message containing a log entry
