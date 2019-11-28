@@ -53,19 +53,21 @@ service DeploymentManager {
 // Slave services for localling retrieving a set of logs.
 service UnifiedLogging {
     // Search for log entries matching a query.
-    rpc Search(unified_logging.SearchRequest) returns(unified_logging.LogResponseList) {}
+    rpc Search(unified_logging.SearchRequest) returns (unified_logging.LogResponseList) {}
     // Expire the logs of a given application.
-    rpc Expire(unified_logging.ExpirationRequest) returns(common.Success) {}
+    rpc Expire(unified_logging.ExpirationRequest) returns (common.Success) {}
 }
 
 // Collector services for monitoring information
 service MetricsCollector {
     // Retrieve a summary of high level cluster resource availability
-    rpc GetClusterSummary(monitoring.ClusterSummaryRequest) returns(monitoring.ClusterSummary) {}
+    rpc GetClusterSummary (monitoring.ClusterSummaryRequest) returns (monitoring.ClusterSummary) {}
     // Retrieve statistics on cluster with respect to platform resources
-    rpc GetClusterStats(monitoring.ClusterStatsRequest) returns(monitoring.ClusterStats) {}
+    rpc GetClusterStats (monitoring.ClusterStatsRequest) returns (monitoring.ClusterStats) {}
     // Execute a query directly on the monitoring storage backend
-    rpc Query(monitoring.QueryRequest) returns(monitoring.QueryResponse) {}
+    rpc Query (monitoring.QueryRequest) returns (monitoring.QueryResponse) {}
+    // GetContainerStats Retrieve the stats of the service containers in the cluster.
+    rpc GetContainerStats (common.Empty) returns (monitoring.ContainerStatsResponse) {}
 }
 
 // Cluster watcher service running in the application clusters.
