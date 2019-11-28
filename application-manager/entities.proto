@@ -231,6 +231,10 @@ message LogResponse {
     int64 to = 3;
     // Entries with the captured log entries.
     repeated LogEntryResponse entries = 4;
+    // AppDescriptors with a list of descriptors available at the time of the logs
+    repeated AppDescriptorLogSummary app_descriptors= 5;
+    // FailedClusterIds with a list with the identifiers of the clusters that failed to request the logs
+    repeated string failed_cluster_ids = 6;
 }
 
 // LogEntryResponse message containing a log entry
