@@ -156,6 +156,8 @@ message PublicSecurityRuleInstance {
    string target_service_instance_id = 7;
    // TargetPort defining the port that is affected by the current rule.
    int32 target_port = 8;
+   // ServiceName name of the service that is linked
+   string service_name = 9;
 }
 
 // DeviceGroupSecurityRuleInstance defining which device groups may access a given service.
