@@ -67,6 +67,8 @@ message LogResponseList {
     int64 to = 3;
     // Responses with a list of log responses
     repeated LogResponse responses = 4;
+    // FailedClusterIds with a list og cluster identifiers whose call failed
+    repeated string failed_cluster_ids = 5;
 }
 
 // LogResponse message containing the results of a query.
