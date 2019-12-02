@@ -297,7 +297,9 @@ message ContainerStats {
     string namespace = 1;
     string pod = 2;
     string container = 3;
-    double cpu_millicore = 4;
-    double memory_byte = 5;
-    double storage_byte = 6;
+    string appInstanceId = 4;
+    string image = 5;
+    double cpu_millicore = 6;
+    double memory_byte = 7;
+    double storage_byte = 8;
 }
