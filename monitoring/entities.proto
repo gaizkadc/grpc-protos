@@ -299,9 +299,12 @@ message ContainerStats {
     string container = 3;
     string image = 4;
     string app_instance_id = 5;
-    string service_group_instance_id = 6;
-    string service_instance_id = 7;
-    double cpu_millicore = 8;
-    double memory_byte = 9;
-    double storage_byte = 10;
+    string app_instance_name = 6;
+    string service_group_instance_id = 7;
+    string service_group_instance_name = 8;
+    string service_instance_id = 9;
+    string service_instance_name = 10;
+    double cpu_millicore = 11;
+    double memory_byte = 12;
+    double storage_byte = 13;
 }
