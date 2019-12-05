@@ -612,4 +612,10 @@ service Monitoring {
             get: "/v1/monitoring/{organization_id}/cluster/{cluster_id}/summary"
         };
     }
+    // GetOrganizationApplicationStats retrieves an aggregated organization stats grouped by serviceInstance.
+    rpc GetOrganizationApplicationStats(monitoring.OrganizationApplicationStatsRequest) returns (monitoring.OrganizationApplicationStatsResponse) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/stats"
+        };
+    }
 }
