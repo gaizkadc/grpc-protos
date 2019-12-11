@@ -23,6 +23,8 @@ option go_package = "github.com/nalej/grpc-monitoring-go";
 import "monitoring/entities.proto";
 import "inventory/entities.proto";
 import "common/entities.proto";
+import "google/api/httpbody.proto";
+import "google/api/annotations.proto";
 
 // MonitoringManager Coordinator service with the operations offered by the monitoring coordinator.
 service MonitoringManager {
@@ -57,4 +59,12 @@ service AssetMonitoring {
     rpc ListMetrics (inventory.AssetSelector) returns (MetricsList) {}
     // QueryMetrics Query monitoring metrics
     rpc QueryMetrics (QueryMetricsRequest) returns (QueryMetricsResult) {}
+}
+
+service MonitoringApi {
+    rpc Metrics (OrganizationApplicationStatsRequest) returns (google.api.HttpBody) {
+        option (google.api.http) = {
+            get: "/metrics"
+        };
+    }
 }
