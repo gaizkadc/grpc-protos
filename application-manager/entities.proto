@@ -219,6 +219,9 @@ message SearchRequest {
     int64 to = 10;
     // IncludeMetadata  flag to indicate if the result should not be augmented by adding names, etc.
     bool include_metadata = 11;
+    // NFirst is a flag that identifies whether the user expects to receive the first n results or not
+    // if the search must be sorted ascending or descending
+    bool n_first = 12;
 }
 
 // LogResponse message containing the results of a query.
