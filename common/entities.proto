@@ -79,3 +79,17 @@ message OpResponse {
 message Exists {
     bool exists = 1;
 }
+
+// Order is used to define the ordering of the results
+enum Order {
+    // Ascending order
+    ASC = 0;
+    // Descending order
+    DESC = 1;
+}
+
+// OrderOptions is used to indicate by which field it is going to be ordered and if the order is asc or des
+message OrderOptions {
+    string field = 1;
+    Order order = 2;
+}

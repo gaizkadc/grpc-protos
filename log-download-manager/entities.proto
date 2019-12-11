@@ -1,0 +1,87 @@
+/*
+ * Copyright 2019 Nalej
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+syntax = "proto3";
+
+package log_download_manager;
+option go_package = "github.com/nalej/grpc-log-download-manager-go";
+
+import "common/entities.proto";
+
+// DownloadLogRequest contains a message to request to download logs
+message DownloadLogRequest {
+    // OrganizationId, if only organization id is set, this returns all logs
+    string organization_id = 1;
+    // AppDescriptorId with a descriptor identifier to filter logs
+    string app_descriptor_id = 2;
+    // AppInstanceId with a instance identifier to filter logs
+    string app_instance_id = 3;
+    // ServiceGroupId with a service group identifier to filter logs
+    string service_group_id = 4;
+    // ServiceGroupInstanceId with a service group instance identifier to filter logs
+    string service_group_instance_id = 5;
+    // ServiceId with a service identifier to filter logs
+    string service_id = 6;
+    // ServiceInstanceId with a service instance identifier to filter logs
+    string service_instance_id = 7;
+    // MsgQueryFilter contains a text query on the log entry.
+    string msg_query_filter = 8;
+    // From specifies the minimal timestamp of the expected entries.
+    int64 from = 9;
+    // To specifies the maximum timestamp of the expected entries.
+    int64 to = 10;
+    // Order specifies the sort order of the entries (on timestamp)
+    common.OrderOptions order = 11;
+    // IncludeMetadata  flag to indicate if the result should not be augmented by adding names, etc.
+    bool include_metadata = 12;
+}
+
+// DownloadLogState with the state of a download operation
+enum DownloadLogState{
+    QUEUED = 0;
+    GENERATING = 1;
+    READY = 2;
+    ERROR = 3;
+}
+
+// DownloadLogResponse with a response of a download/check operation
+message DownloadLogResponse {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // RequestId contains a request identifier
+    string request_id = 2;
+    // From specifies the minimal timestamp of the log entries.
+    int64 from = 3;
+    // To specifies the maximum timestamp of the log entries.
+    int64 to = 4;
+    // State with the state of the operation
+    DownloadLogState state = 5;
+    // URL is send only if the log is ready to be downloaded
+    string url = 6;
+    // Expiration with timestamp until the file can be downloaded
+    int64 expiration = 7;
+    // Info contains additional information on the status of the operation
+    string info = 8;
+}
+
+// DownloadRequestId contains the identifier of an operation
+message DownloadRequestId {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // RequestId contains a request identifier
+    string request_id = 2;
+}
