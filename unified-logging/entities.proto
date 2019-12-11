@@ -45,6 +45,9 @@ message SearchRequest{
     int64 from = 9;
     // To specifies the maximum timestamp of the expected entries.
     int64 to = 10;
+    // NFirst is a flag that identifies whether the user expects to receive the first n results or not
+    // if the search must be sorted ascending or descending
+    bool n_first = 11;
 
 }
 
