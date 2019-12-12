@@ -79,6 +79,11 @@ message UpdateUserRequest {
     string email = 2;
     string name = 3;
     string photo_url = 4;
+    string last_name = 5;
+    string title = 6;
+    string phone = 7;
+    string location = 8;
+    string photo_base64 = 9;
 }
 
 // UpdateContactInfoRequest message with the information required for updating the contact info of a user
