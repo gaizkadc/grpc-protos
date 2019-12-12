@@ -850,5 +850,7 @@ message SearchRequest {
     int64 to = 10;
     // Order specifies the sort order of the entries (on timestamp)
     OrderOptions order = 11;
+    // NFirst is a flag that identifies whether the user expects to receive the first n results or not
+    bool n_first = 12;
 }
 
