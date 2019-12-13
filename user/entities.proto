@@ -85,7 +85,7 @@ message UpdateUserRequest {
     string last_name = 8;
     bool update_title = 9;
     string title = 10;
-    bool uodate_phone = 11;
+    bool update_phone = 11;
     string phone = 12;
     bool update_location = 13;
     string location = 14;
