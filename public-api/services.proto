@@ -431,7 +431,7 @@ service UnifiedLogging{
         };
     }
     // DownloadLog ask for log entries and store them into a zip file
-    rpc DownloadLog(log_download_manager.DownloadLogRequest) returns ()DownloadLogResponse) {
+    rpc DownloadLog(log_download_manager.DownloadLogRequest) returns (DownloadLogResponse) {
         option (google.api.http) = {
             post: "/v1/log/{organization_id}/download"
             body: "*"
