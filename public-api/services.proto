@@ -419,21 +419,21 @@ service UnifiedLogging{
     // Search for log entries matching a query.
     rpc Search(SearchRequest) returns(application_manager.LogResponse) {
         option (google.api.http) = {
-            post: "/v1/logs/{organization_id}/search"
+            post: "/v1/log/{organization_id}/search"
             body: "*"
         };
     }
     // Check checks the state of the download operation
     rpc Check(log_download_manager.DownloadRequestId) returns (DownloadLogResponse) {
         option (google.api.http) = {
-            post: "/v1/logs/{organization_id}/check"
+            post: "/v1/log/{organization_id}/check"
             body: "*"
         };
     }
     // DownloadLog ask for log entries and store them into a zip file
     rpc DownloadLog(log_download_manager.DownloadLogRequest) returns ()DownloadLogResponse) {
         option (google.api.http) = {
-            post: "/v1/logs/{organization_id}/download"
+            post: "/v1/log/{organization_id}/download"
             body: "*"
         };
     }
