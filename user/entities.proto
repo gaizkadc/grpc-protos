@@ -77,13 +77,19 @@ message UserList {
 message UpdateUserRequest {
     string organization_id = 1 [deprecated=true];
     string email = 2;
-    string name = 3;
-    string photo_url = 4;
-    string last_name = 5;
-    string title = 6;
-    string phone = 7;
-    string location = 8;
-    string photo_base64 = 9;
+    bool update_name = 3;
+    string name = 4;
+    bool update_photo_url = 5;
+    string photo_url = 6;
+    bool update_last_name = 7;
+    string last_name = 8;
+    bool update_title = 9;
+    string title = 10;
+    bool update_phone = 11;
+    string phone = 12;
+    bool update_location = 13;
+    string location = 14;
+    string photo_base64 = 15;
 }
 
 // UpdateContactInfoRequest message with the information required for updating the contact info of a user
