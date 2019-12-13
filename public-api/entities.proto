@@ -30,6 +30,7 @@ import "inventory/entities.proto";
 import "connectivity-manager/entities.proto";
 import "common/entities.proto";
 import "unified-logging/entities.proto";
+import "log-download-manager/entities.proto";
 
 
 // OpResponse message representing the state of a given operation.
@@ -854,3 +855,24 @@ message SearchRequest {
     bool n_first = 12;
 }
 
+// DownloadLogResponse with a response of a download/check operation
+message DownloadLogResponse {
+    // OrganizationId with the organization identifier
+    string organization_id = 1;
+    // RequestId contains a request identifier
+    string request_id = 2;
+    // From specifies the minimal timestamp of the log entries.
+    int64 from = 3;
+    // To specifies the maximum timestamp of the log entries.
+    int64 to = 4;
+    // State with the state of the operation
+    log_download_manager.DownloadLogState state = 5;
+    // StateName with the name of the state
+    string state_name = 6;
+    // URL is send only if the log is ready to be downloaded
+    string url = 7;
+    // Expiration with timestamp until the file can be downloaded
+    int64 expiration = 8;
+    // Info contains additional information on the status of the operation
+    string info = 9;
+}
