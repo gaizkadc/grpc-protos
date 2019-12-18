@@ -64,7 +64,7 @@ service AssetMonitoring {
 service MonitoringApi {
     rpc Metrics (OrganizationApplicationStatsRequest) returns (google.api.HttpBody) {
         option (google.api.http) = {
-            get: "/metrics"
+            get: "/metrics/{organization_id}"
         };
     }
 }
