@@ -65,6 +65,9 @@ service MonitoringApi {
     rpc Metrics (OrganizationApplicationStatsRequest) returns (google.api.HttpBody) {
         option (google.api.http) = {
             get: "/metrics/{organization_id}"
+            additional_bindings {
+                post: "/metrics/{organization_id}"
+            }
         };
     }
 }
