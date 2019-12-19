@@ -876,3 +876,9 @@ message DownloadLogResponse {
     // Info contains additional information on the status of the operation
     string info = 9;
 }
+
+// DownloadLogResponse with a list of DownloadLogResponses
+message DownloadLogResponseList {
+    // DownloadLogResponse list of responses
+    repeated DownloadLogResponse responses = 1;
+}
