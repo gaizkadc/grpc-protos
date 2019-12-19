@@ -437,7 +437,7 @@ service UnifiedLogging{
         };
     }
     // List retrieve a list of requests
-    rpc List(log_download_manager.DownloadRequestId) returns (DownloadLogResponseList) {
+    rpc List(organization.OrganizationId) returns (DownloadLogResponseList) {
         option (google.api.http) = {
             get: "/v1/log/{organization_id}/download/list"
         };
