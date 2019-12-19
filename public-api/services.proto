@@ -423,13 +423,6 @@ service UnifiedLogging{
             body: "*"
         };
     }
-    // Check checks the state of the download operation
-    rpc Check(log_download_manager.DownloadRequestId) returns (DownloadLogResponse) {
-        option (google.api.http) = {
-            post: "/v1/log/{organization_id}/check"
-            body: "*"
-        };
-    }
     // DownloadLog ask for log entries and store them into a zip file
     rpc DownloadLog(log_download_manager.DownloadLogRequest) returns (DownloadLogResponse) {
         option (google.api.http) = {
@@ -437,6 +430,19 @@ service UnifiedLogging{
             body: "*"
         };
     }
+    // Check checks the state of the download operation
+    rpc Check(log_download_manager.DownloadRequestId) returns (DownloadLogResponse) {
+        option (google.api.http) = {
+            get: "/v1/log/{organization_id}/download/{request_id}/check"
+        };
+    }
+    // List retrieve a list of requests
+    rpc List(organization.OrganizationId) returns (DownloadLogResponseList) {
+        option (google.api.http) = {
+            get: "/v1/log/{organization_id}/download/list"
+        };
+    }
+
 }
 
 // EdgeControllers related operations.

@@ -22,10 +22,13 @@ option go_package = "github.com/nalej/grpc-log-download-manager-go";
 
 import "common/entities.proto";
 import "log-download-manager/entities.proto";
+import "organization/entities.proto";
 
 service LogDownloadManager {
     // DownloadLog asks for a logs download operation. These logs are going to be stored in a zip file
-    rpc DownloadLog(DownloadLogRequest) returns (DownloadLogResponse) {}
+    rpc DownloadLog (DownloadLogRequest) returns (DownloadLogResponse) {}
     // Check asks for a download operation state
-    rpc Check(DownloadRequestId) returns (DownloadLogResponse) {}
+    rpc Check (DownloadRequestId) returns (DownloadLogResponse) {}
+    // List retrieves a list of responses
+    rpc List (organization.OrganizationId) returns (DownloadLogResponseList) {}
 }

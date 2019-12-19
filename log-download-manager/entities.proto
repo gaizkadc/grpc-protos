@@ -55,7 +55,8 @@ enum DownloadLogState{
     QUEUED = 0;
     GENERATING = 1;
     READY = 2;
-    ERROR = 3;
+    DOWNLOADED = 3;
+    ERROR = 4;
 }
 
 // DownloadLogResponse with a response of a download/check operation
@@ -76,6 +77,12 @@ message DownloadLogResponse {
     int64 expiration = 7;
     // Info contains additional information on the status of the operation
     string info = 8;
+}
+
+//DownloadLogResponseList with a list of responses
+message DownloadLogResponseList {
+    // responses with a list of responses
+    repeated DownloadLogResponse responses = 1;
 }
 
 // DownloadRequestId contains the identifier of an operation
