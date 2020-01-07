@@ -317,6 +317,9 @@ message RoleList {
 message Endpoint {
     string type_name = 1;
     string path = 2;
+    // Options a map with EndpointOptions and their values
+    // the allowed values are in application.EndpointOptions
+    map<string, string> options = 3;
 }
 
 message Port {
