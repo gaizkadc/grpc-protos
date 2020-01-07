@@ -245,10 +245,22 @@ enum EndpointType {
     INGESTION = 4;
 }
 
+// EndpointOptions is an enumerate with ingress configuration options
+// This enum helps us to know what values ​​we will allow in the options of the endpoints
+enum EndpointOptions {
+    // value to configure the  max body size accepted
+    CLIENT_MAX_BODY_SIZE = 0;
+    // value to accept different values of the host
+    HOST_HEADER_CONFIGURATION = 1;
+}
+
 message Endpoint {
     EndpointType type = 1;
     string path = 2;
+    // Options a map with EndpointOptions and their values
+    map<string, string> options = 3;
 }
+
 // Storage restrictions
 message Storage {
     int64 size = 1;
