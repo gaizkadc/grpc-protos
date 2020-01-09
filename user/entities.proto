@@ -22,7 +22,7 @@ option go_package = "github.com/nalej/grpc-user-go";
 
 // User model the information available regarding a User of an organization
 message User {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
     // Email address of the user
     string email = 2;
@@ -44,7 +44,7 @@ message User {
 
 // UserId with the email identifying a user.
 message UserId {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
     // Email address of the user
     string email = 2;
@@ -52,7 +52,7 @@ message UserId {
 
 // AddUserRequest message with the information required to add a user to the platform.
 message AddUserRequest {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
     // Email address of the user
     string email = 2;
@@ -74,7 +74,7 @@ message AddUserRequest {
 
 // RemoveUserRequest message with the information required to remove a user from the platform.
 message RemoveUserRequest {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1;
     // Email address of the user to be removed
     string email = 2;
@@ -88,7 +88,7 @@ message UserList {
 
 // UpdateUserRequest message with the information required for updating an user.
 message UpdateUserRequest {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
     // Email address of the user
     string email = 2;
