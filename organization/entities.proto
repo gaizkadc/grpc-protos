@@ -24,17 +24,41 @@ option go_package = "github.com/nalej/grpc-organization-go";
 message Organization {
     string organization_id = 1;
     string name = 2;
-    string logo_url = 3;
-    int64 created = 4;
+    string full_address = 3;
+    string city = 4;
+    string state = 5;
+    string country = 6;
+    string zip_code = 7;
+    string photo_base64 = 8;
+    int64 created = 9;
 }
 
 message AddOrganizationRequest {
-    string name = 2;
+    string name = 1;
+    string full_address = 2;
+    string city = 3;
+    string state = 4;
+    string country = 5;
+    string zip_code = 6;
+    string photo_base64 = 7;
 }
 
 message UpdateOrganizationRequest {
-    string organization_id = 2;
-    bytes photo = 3;
+    string organization_id = 1;
+    string update_name = 2;
+    string name = 3;
+    string update_full_address = 4;
+    string full_address = 5;
+    string update_city = 6;
+    string city = 7;
+    string update_state = 8;
+    string state = 9;
+    string update_country = 10;
+    string country = 11;
+    string update_zip_code = 12;
+    string zip_code = 13;
+    string update_photo = 14;
+    string photo_base64 = 15;
 }
 
 // OrganizationId message with the organization identifier.
