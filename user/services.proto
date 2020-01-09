@@ -39,8 +39,6 @@ service Users {
     rpc RemoveUser (RemoveUserRequest) returns (common.Success) {}
     // Update the user information.
     rpc Update (UpdateUserRequest) returns (common.Success) {}
-    // UpdateContactInfo updates the contact info of a user
-    rpc UpdateContactInfo (UpdateContactInfoRequest) returns (common.Success) {}
 
     // Account User
 
