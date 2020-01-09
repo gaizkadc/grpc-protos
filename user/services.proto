@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Nalej
+ * Copyright 2020 Nalej
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,6 @@ service Users {
     rpc RemoveUser (RemoveUserRequest) returns (common.Success) {}
     // Update the user information.
     rpc Update (UpdateUserRequest) returns (common.Success) {}
-    // UpdateContactInfo updates the contact info of a user
-    rpc UpdateContactInfo (UpdateContactInfoRequest) returns (common.Success) {}
 
     // Account User
 

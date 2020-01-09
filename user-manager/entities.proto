@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Nalej
+ * Copyright 2020 Nalej
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,51 +24,96 @@ import "authx/entities.proto";
 
 // User model the information available regarding a User of an organization
 message User {
+    // OrganizationID with the organization id
     string organization_id = 1;
+    // Email address of the user
     string email = 2;
+    // Name of the user
     string name = 3;
-    string photo_url = 4;
+    // PhotoBase64 with the base64 encoded photo of the user
+    string photo_base64 = 4;
+    // MemberSince with the date in which the user was registered in the organization
     int64 member_since = 5;
+    // RoleId with the id of the role of the user
     string role_id = 6;
+    // RoleName with the name of the role of the user
     string role_name = 7;
-    bool internal = 8;
+    // InternalRole defines if a role is internal or not
+    bool internal_role = 8;
+    // LastName of the user
+    string last_name = 9;
+    // Title of the user
+    string title = 10;
+    // LastLogin with the timestamp of the last time the user logged in
+    int64 last_login = 11;
+    // Phone number of the user
+    string phone = 12;
+    // Location of the user
+    string location = 13;
 }
 
 // UserList with a list of users.
 message UserList {
+    // Users contains a list of users
     repeated User users = 1;
 }
 
 // AddUserRequest message with the information required to add a user to the platform.
 message AddUserRequest {
-    string organization_id = 1;
+    // OrganizationID with the organization id
+    string organization_id = 1 [deprecated=true];
+    // Email address of the user
     string email = 2;
+    // Password for the new user
     string password = 3;
+    // Name of the user
     string name = 4;
-    string photo_url = 5;
-    string role_id = 6;
+    // PhotoBase64 with the base64 encoded photo of the user
+    string photo_base64 = 5;
+    // LastName of the user
+    string last_name = 6;
+    // Location of the user
+    string location = 7;
+    // Phone number of the user
+    string phone = 8;
+    // Title of the user
+    string title = 9;
+    // RoleId with the id of the role of the user
+    string role_id = 10;
 }
 
 // AddRoleRequest message with the information required to create a new role in an organization.
 message AddRoleRequest{
+    // OrganizationID with the organization id
     string organization_id = 1;
+    // Name of the role to be added
     string name = 2;
+    // Description of the role to be added
     string description = 3;
+    // Internal defines if the role is internal or not
     bool internal = 4;
+    // Primitives is a list of access primitives from authx
     repeated authx.AccessPrimitive primitives = 5;
 }
 
 // AssignRoleRequest message with the information required to assign an existing role to an existing user.
 message AssignRoleRequest{
+    // OrganizationID with the organization id
     string organization_id = 1;
+    // Email address of the user
     string email = 2;
+    // RoleId with the id of the role of the user
     string role_id = 3;
 }
 
 // Message for change the user password.
 message ChangePasswordRequest {
+    // OrganizationID with the organization id
     string organization_id = 1;
+    // Email address of the user
     string email = 2;
+    // Password contains the old password
     string password = 3;
+    // NewPassword contains the new password
     string new_password = 4;
 }

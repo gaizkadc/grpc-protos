@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Nalej
+ * Copyright 2020 Nalej
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,90 +22,101 @@ option go_package = "github.com/nalej/grpc-user-go";
 
 // User model the information available regarding a User of an organization
 message User {
-    // OrganizationID deprecated, in v.0.5.0 this field will be deleted
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
     // Email address of the user
     string email = 2;
     // Name of the user
     string name = 3;
-    // PhotoUrl with the path of the photo
-    string photo_url = 4;
     // MemberSince with the date in which the user was registered in the organization
-    int64 member_since = 5;
+    int64 member_since = 4;
     // LastName of the user
-    string last_name = 6;
+    string last_name = 5;
     // Title of the user
-    string title = 7;
+    string title = 6;
     // Phone number of the user
-    string phone = 8;
+    string phone = 7;
     // Location of the user
-    string location = 9;
+    string location = 8;
     // PhotoBase64 with the base64 encoded photo of the user
-    string photo_base64 = 10;
+    string photo_base64 = 9;
 }
 
 // UserId with the email identifying a user.
 message UserId {
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
+    // Email address of the user
     string email = 2;
 }
 
 // AddUserRequest message with the information required to add a user to the platform.
 message AddUserRequest {
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
+    // Email address of the user
     string email = 2;
+    // Password for the new user
     string password = 3;
+    // Name of the user
     string name = 4;
-    string photo_url = 5;
-    string full_name = 6;
-    string address = 7;
-    map <string, string> phone = 8;
-    string alt_email = 9;
-    string company_name = 10;
-    string title = 11;
+    // PhotoBase64 with the base64 encoded photo of the user
+    string photo_base64 = 5;
+    // LastName of the user
+    string last_name = 6;
+    // Location of the user
+    string location = 7;
+    // Phone number of the user
+    string phone = 8;
+    // Title of the user
+    string title = 9;
 }
 
 // RemoveUserRequest message with the information required to remove a user from the platform.
 message RemoveUserRequest {
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1;
+    // Email address of the user to be removed
     string email = 2;
 }
 
 // UserList message with a list of users.
 message UserList {
+    // Users contains a list of users
     repeated User users = 1;
 }
 
 // UpdateUserRequest message with the information required for updating an user.
 message UpdateUserRequest {
+    // OrganizationID deprecated, in v.0.n.0 this field will be deleted
     string organization_id = 1 [deprecated=true];
+    // Email address of the user
     string email = 2;
+    // UpdateName if the name is to be updated
     bool update_name = 3;
+    // Name of the user
     string name = 4;
-    bool update_photo_url = 5;
-    string photo_url = 6;
+    // UpdatePhotoBase64 if the photo encoded in base64 is to be updated
+    bool update_photo_base64 = 5;
+    // PhotoBase64 with the base64 encoded photo of the user
+    string photo_base64 = 6;
+    // UpdateLastName if the last name is to be updated
     bool update_last_name = 7;
+    // LastName of the user
     string last_name = 8;
+    // UpdateTitle if the title is to be updated
     bool update_title = 9;
+    // Title of the user
     string title = 10;
+    // UpdatePhone if the phone is to be updated
     bool update_phone = 11;
+    // Phone number of the user
     string phone = 12;
+    // UpdateLocation if the location is to be updated
     bool update_location = 13;
+    // Location of the user
     string location = 14;
-    string photo_base64 = 15;
 }
-
-// UpdateContactInfoRequest message with the information required for updating the contact info of a user
-message UpdateContactInfoRequest {
-    string email = 1;
-    string full_name = 2;
-    string address = 3;
-    map <string, string> phone = 4;
-    string alt_email = 5;
-    string company_name = 6;
-    string title = 7;
-}
-
 
 // --------------------
 // AccountUser
