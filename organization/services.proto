@@ -39,6 +39,8 @@ service Organizations {
     rpc GetSetting(SettingKey) returns (OrganizationSetting) {}
     // ListSettings returns a list of settings of an organization
     rpc ListSettings (OrganizationId)  returns (OrganizationSettingList) {}
+    // UpdateSetting update the value and/or the description of a setting
+    rpc UpdateSetting (UpdateSettingRequest) returns (common.Success) {}
     // RemoveSetting removes a given setting of an organization
     rpc RemoveSetting (SettingKey) returns (common.Success) {}
 }
