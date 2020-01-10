@@ -17,31 +17,32 @@
 
 syntax = "proto3";
 
-package organization;
-option go_package = "github.com/nalej/grpc-organization-go";
+package organization_manager;
+option go_package = "github.com/nalej/grpc-organization-manager-go";
 
 import "common/entities.proto";
 import "organization/entities.proto";
+import "organization-manager/entities.proto";
 
 // Organization service exposing organization level functionality related to organization.
 service Organizations {
-    rpc AddOrganization(AddOrganizationRequest) returns (Organization) {}
+    rpc AddOrganization(organization.AddOrganizationRequest) returns (Organization) {}
     // GetOrganization retrieves the profile information of a given organization.
-    rpc GetOrganization(OrganizationId) returns (Organization) {}
+    rpc GetOrganization(organization.OrganizationId) returns (Organization) {}
     // ListOrganizations returns the list of organizations in the system.
     rpc ListOrganizations (common.Empty) returns (OrganizationList) {}
     // UpdateOrganization updates the public information of an organization.
-    rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+    rpc UpdateOrganization(organization.UpdateOrganizationRequest) returns (common.Success) {}
 
     // AddSetting adds a new setting for the organization
-    rpc AddSetting(AddSettingRequest) returns (OrganizationSetting) {}
+    rpc AddSetting(organization.AddSettingRequest) returns (organization.OrganizationSetting) {}
     // GetSetting returns an OrganizationSetting
-    rpc GetSetting(SettingKey) returns (OrganizationSetting) {}
+    rpc GetSetting(organization.SettingKey) returns (Setting) {}
     // ListSettings returns a list of settings of an organization
-    rpc ListSettings (OrganizationId)  returns (OrganizationSettingList) {}
+    rpc ListSettings (organization.OrganizationId)  returns (SettingList) {}
     // UpdateSetting update the value and/or the description of a setting
-    rpc UpdateSetting (UpdateSettingRequest) returns (common.Success) {}
+    rpc UpdateSettings (organization.UpdateSettingRequest) returns (common.Success) {}
     // RemoveSetting removes a given setting of an organization
-    rpc RemoveSetting (SettingKey) returns (common.Success) {}
+    rpc RemoveSetting (organization.SettingKey) returns (common.Success) {}
 }
 
