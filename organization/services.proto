@@ -32,5 +32,14 @@ service Organizations {
     rpc ListOrganizations (common.Empty) returns (OrganizationList) {}
     // UpdateOrganization updates the public information of an organization.
     rpc UpdateOrganization(UpdateOrganizationRequest) returns (common.Success) {}
+
+    // AddSetting adds a new setting for the organization
+    rpc AddSetting(AddSettingRequest) returns (OrganizationSetting) {}
+    // GetSetting returns an OrganizationSetting
+    rpc GetSetting(SettingKey) returns (OrganizationSetting) {}
+    // ListSettings returns a list of settings of an organization
+    rpc ListSettings (OrganizationId)  returns (OrganizationSettingList) {}
+    // RemoveSetting removes a given setting of an organization
+    rpc RemoveSetting (SettingKey) returns (common.Success) {}
 }
 

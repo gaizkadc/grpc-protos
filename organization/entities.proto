@@ -69,3 +69,38 @@ message OrganizationId {
 message OrganizationList {
     repeated Organization organizations = 1;
 }
+
+// OrganizationSetting message with a setting defined for an organization
+message OrganizationSetting {
+    // OrganizationId organization identifier
+    string organization_id = 1;
+    // Key of the setting
+    string key = 2;
+    // Value of the key
+    string value = 3;
+    // Description of the setting
+    string description = 4;
+}
+
+// OrganizationSettingList with a list of organization settings
+message OrganizationSettingList {
+    repeated OrganizationSetting settings = 1;
+}
+
+// SettingKey with the key of an OrganizationSetting
+message SettingKey {
+    string organization_id = 1;
+    string key = 2;
+}
+
+// AddSettingRequest message to add a new setting
+message AddSettingRequest {
+    // OrganizationId organization identifier
+    string organization_id = 1;
+    // Key of the setting
+    string key = 2;
+    // Value of the key
+    string value = 3;
+    // Description of the setting (is no required)
+    string description = 4;
+}
