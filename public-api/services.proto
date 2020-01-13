@@ -29,6 +29,7 @@ import "application/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
 import "infrastructure-manager/entities.proto";
+import "organization-manager/entities.proto";
 import "user-manager/entities.proto";
 import "device-manager/entities.proto";
 import "device/entities.proto";
@@ -42,9 +43,15 @@ import "log-download-manager/entities.proto";
 // Organization related information.
 service Organizations {
     // Info returns the information about a given organization.
-    rpc Info(organization.OrganizationId) returns(OrganizationInfo){
+    rpc Info(organization.OrganizationId) returns(organization_manager.Organization){
         option (google.api.http) = {
             get: "/v1/organization/{organization_id}"
+        };
+    }
+    rpc Update(organization.UpdateOrganizationRequest) returns(common.Success) {
+        option (google.api.http) = {
+            post: "/v1/organization/{organization_id}/update"
+            body: "*"
         };
     }
 }
