@@ -37,7 +37,7 @@ service Organizations {
     // AddSetting adds a new setting for the organization
     rpc AddSetting(organization.AddSettingRequest) returns (organization.OrganizationSetting) {}
     // GetSetting returns an OrganizationSetting
-    rpc GetSetting(organization.SettingKey) returns (Setting) {}
+    rpc GetSetting(organization.SettingKey) returns (organization.OrganizationSetting) {}
     // ListSettings returns a list of settings of an organization
     rpc ListSettings (organization.OrganizationId)  returns (SettingList) {}
     // UpdateSetting update the value and/or the description of a setting
