@@ -61,13 +61,13 @@ service OrganizationSettings {
 
     rpc Update(UpdateSettingRequest) returns(common.Success){
         option (google.api.http) = {
-            post: "/v1/organization/{organization_id}/setting/{key}/update"
+            post: "/v1/settings/{organization_id}/{key}/update"
             body: "*"
         };
     }
     rpc List(organization.OrganizationId) returns(organization_manager.SettingList) {
         option (google.api.http) = {
-            get: "/v1/organization/{organization_id}/setting/list"
+            get: "/v1/settings/{organization_id}/list"
         };
     }
 }
