@@ -56,6 +56,22 @@ service Organizations {
     }
 }
 
+// Organization settings related information.
+service OrganizationSettings {
+
+    rpc Update(UpdateSettingRequest) returns(common.Success){
+        option (google.api.http) = {
+            post: "/v1/organization/{organization_id}/setting/{key}/update"
+            body: "*"
+        };
+    }
+    rpc List(organization.OrganizationId) returns(organization_manager.SettingList) {
+        option (google.api.http) = {
+            get: "/v1/organization/{organization_id}/setting/list"
+        };
+    }
+}
+
 // Cluster related information.
 // TODO Migrate InstallResponse response to user friendly enums for the front.
 service Clusters {
