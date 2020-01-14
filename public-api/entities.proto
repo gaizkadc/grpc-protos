@@ -284,8 +284,8 @@ message AddUserRequest {
     string phone = 8;
     // Title of the user
     string title = 9;
-    // RoleId with the id of the role of the user
-    string role_id = 10;
+    // RoleName with the name of the role of the user
+    string role_name = 10;
 }
 
 // User model the information available regarding a User of an organization
