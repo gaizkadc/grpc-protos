@@ -76,10 +76,8 @@ message UpdateSettingRequest {
     string organization_id = 1;
     // Key of the setting
     string key = 2;
-    // UpdateValue flag to indicate if the value will be updated
-    bool update_value = 3;
     // Value of the key
-    string value = 4;
+    string value = 3;
 }
 
 // --------------------------------
