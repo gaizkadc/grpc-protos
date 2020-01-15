@@ -44,6 +44,8 @@ message Organization {
     int32 num_roles = 10;
     // NumSettings defined in the organization
     int32 num_settings = 11;
+    // Timestamp of the organization creation
+    int64 created = 12;
 }
 // OrganizationList with a list of organizations
 message OrganizationList {
