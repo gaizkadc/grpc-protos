@@ -87,6 +87,11 @@ message OrganizationSettingList {
     repeated OrganizationSetting settings = 1;
 }
 
+enum AllowedSettingKey {
+    DEFAULT_STORAGE_SIZE = 0;
+    DEFAULT_CORES = 1;
+}
+
 // SettingKey with the key of an OrganizationSetting
 message SettingKey {
     string organization_id = 1;
