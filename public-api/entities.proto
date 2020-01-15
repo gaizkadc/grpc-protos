@@ -68,6 +68,18 @@ message OrganizationInfo {
     string name = 2;
 }
 
+// ----------------------------------------
+// Organization Settings related entities.
+// ----------------------------------------
+message UpdateSettingRequest {
+    // OrganizationId organization identifier
+    string organization_id = 1;
+    // Key of the setting
+    string key = 2;
+    // Value of the key
+    string value = 3;
+}
+
 // --------------------------------
 // Clusters
 // --------------------------------
