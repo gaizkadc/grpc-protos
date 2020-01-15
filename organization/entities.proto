@@ -87,6 +87,9 @@ message OrganizationSettingList {
     repeated OrganizationSetting settings = 1;
 }
 
+// AllowedSettingKey is an enum to define the allowed organization Settings
+// This enum is not used in any internal message, but allows all the components
+// know them and validate that the keys are correct
 enum AllowedSettingKey {
     DEFAULT_STORAGE_SIZE = 0;
     DEFAULT_CORES = 1;
