@@ -88,11 +88,12 @@ message OrganizationSettingList {
 }
 
 // AllowedSettingKey is an enum to define the allowed organization Settings
-// This enum is not used in any internal message, but allows all the components
-// know them and validate that the keys are correct
+// This enum is not used in any internal grpc-message,
+// The keys of the organization setting must be strings called as the values ​​of this enumerated
+// This allows to the components to use and validate that the keys are correct
 enum AllowedSettingKey {
+    // Default Storage Size is the default storage size when it is not filled in a descriptor
     DEFAULT_STORAGE_SIZE = 0;
-    DEFAULT_CORES = 1;
 }
 
 // SettingKey with the key of an OrganizationSetting
