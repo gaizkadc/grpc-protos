@@ -80,6 +80,14 @@ message UpdateSettingRequest {
     string value = 3;
 }
 
+// SettingListRequest contains the request for the listing of the settings of an organization
+message SettingListRequest {
+    // OrganizationId organization identifier
+    string organization_id = 1;
+    // Order specifies the sort order of the settings (key)
+    common.OrderOptions order = 11;
+}
+
 // --------------------------------
 // Clusters
 // --------------------------------
