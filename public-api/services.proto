@@ -65,7 +65,7 @@ service OrganizationSettings {
             body: "*"
         };
     }
-    rpc List(organization.OrganizationId) returns(organization_manager.SettingList) {
+    rpc List(ListRequest) returns(organization_manager.SettingList) {
         option (google.api.http) = {
             get: "/v1/settings/{organization_id}/list"
         };
