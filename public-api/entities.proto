@@ -60,7 +60,7 @@ message ListRequest {
     // OrganizationId organization identifier
     string organization_id = 1;
     // Order specifies the sort order of the settings (key)
-    common.OrderOptions order = 11;
+    common.OrderOptions order = 2;
 }
 
 
