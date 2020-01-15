@@ -55,6 +55,14 @@ message OpResponse {
     string error = 9;
 }
 
+// ListRequest contains a generic request for listing
+message ListRequest {
+    // OrganizationId organization identifier
+    string organization_id = 1;
+    // Order specifies the sort order of the settings (key)
+    common.OrderOptions order = 11;
+}
+
 
 // --------------------------------
 // Organization related entities.
@@ -78,14 +86,6 @@ message UpdateSettingRequest {
     string key = 2;
     // Value of the key
     string value = 3;
-}
-
-// SettingListRequest contains the request for the listing of the settings of an organization
-message SettingListRequest {
-    // OrganizationId organization identifier
-    string organization_id = 1;
-    // Order specifies the sort order of the settings (key)
-    common.OrderOptions order = 11;
 }
 
 // --------------------------------
