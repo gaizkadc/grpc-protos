@@ -62,6 +62,9 @@ service Authx {
     // Retrieve the role associated with a user.
     rpc GetUserRole(user.UserId) returns (Role){}
 
+    // GetUserAuthxInfo gets authx related info from a user
+    rpc GetUserAuthxInfo (user.UserId) returns (UserAuthxInfo){}
+
 
     // AddDeviceCredentials adds a device in the system
     rpc AddDeviceCredentials (AddDeviceCredentialsRequest) returns (DeviceCredentials) {}
