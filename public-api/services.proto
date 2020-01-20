@@ -108,11 +108,11 @@ service Clusters {
         };
     }
 
-    // Decomission an application cluster. This process will uninstall the nalej platform,
-    // decomission the cluster from the infrastructure provider, and remove the cluster from the list.
-    rpc Decomission(DecomissionClusterRequest) returns (OpResponse){
+    // Decommission an application cluster. This process will uninstall the nalej platform,
+    // decommission the cluster from the infrastructure provider, and remove the cluster from the list.
+    rpc Decommission(DecommissionClusterRequest) returns (OpResponse){
         option (google.api.http) = {
-            post: "/v1/clusters/{organization_id}/decomission"
+            post: "/v1/clusters/{organization_id}/decommission"
             body: "*"
         };
     }
