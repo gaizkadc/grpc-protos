@@ -33,14 +33,14 @@ service Provision {
     rpc RemoveProvision(common.RequestId) returns(common.Success){}
 }
 
-// Decomission service offering methods to free infrastructure.
-service Decomission {
-    // DecomissionCluster frees the resources of a given cluster.
-    rpc DecomissionCluster(DecomissionClusterRequest) returns (common.OpResponse){}
-    // CheckProgress gets an updated state of a decomission request.
+// Decommission service offering methods to free infrastructure.
+service Decommission {
+    // DecommissionCluster frees the resources of a given cluster.
+    rpc DecommissionCluster(DecommissionClusterRequest) returns (common.OpResponse){}
+    // CheckProgress gets an updated state of a decommission request.
     rpc CheckProgress(common.RequestId) returns (common.OpResponse){}
-    // RemoveDecomission cancels an ongoing decomissioning or removes the information of an already processed decomissioning operation.
-    rpc RemoveDecomission(common.RequestId) returns (common.Success){}
+    // RemoveDecommission cancels an ongoing decommissioning or removes the information of an already processed decommissioning operation.
+    rpc RemoveDecommission(common.RequestId) returns (common.Success){}
 }
 
 // Scale service offering a method to dynamically change the capacity of a provisioned cluster.

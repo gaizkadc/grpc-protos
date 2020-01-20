@@ -204,8 +204,8 @@ message UninstallClusterRequest {
     Platform target_platform = 5;
 }
 
-// DecomisionClusterRequest message with the information required to uninstall and decomission a cluster.
-message DecomissionClusterRequest {
+// DecomisionClusterRequest message with the information required to uninstall and decommission a cluster.
+message DecommissionClusterRequest {
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // ClusterId with the cluster identifier.
@@ -214,7 +214,7 @@ message DecomissionClusterRequest {
     infrastructure.ClusterType cluster_type = 3;
     // Target platform
     Platform target_platform = 4;
-    // AzureCredentials with the credentials required to decomission a cluster in Azure.
+    // AzureCredentials with the credentials required to decommission a cluster in Azure.
     provisioner.AzureCredentials azure_credentials = 5;
     // AzureOptions with the provisioning specific options.
     provisioner.AzureProvisioningOptions azure_options = 6;
