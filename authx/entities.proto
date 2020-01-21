@@ -317,12 +317,10 @@ message UserAuthxInfo{
     string organization_id = 1;
     // RoleId with the id of the role
     string role_id = 2;
-    // RoleName with the name of the role
-    string role_name = 3;
     // InternalRole if it is an internal role
-    bool internal_role = 4;
+    bool internal_role = 3;
     // RolePrimitives with a list of the access primitives
-    repeated AccessPrimitive role_primitives = 5;
+    repeated AccessPrimitive role_primitives = 4;
     // LastLogin with the timestamp of the last login of the user
-    int64 last_login = 6;
+    int64 last_login = 5;
 }
