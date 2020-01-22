@@ -60,17 +60,24 @@ message ExpirationRequest{
 }
 
 // RangeExpirationRequest to remove entries from the index.
-// The slaves use this message because it needs a to field to
-// expired the logs until a timestamp
 message RangeExpirationRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // AppInstanceId with the identifier of the target application instance.
     string app_instance_id = 2;
-    // To with the maximum timestamp of the expired logs.
-    int64 to = 3;
 }
 
+
+message RangeExpirationRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // To with the maximum timestamp of the expired logs.
+    int64 to = 2;
+}
+
+message ExpirationListRequest{
+    RangeExpirationRequest expiration_requests = 1;
+}
 
 // LogResponseList message with a list of LogResponses
 message LogResponseList {

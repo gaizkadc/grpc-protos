@@ -36,5 +36,7 @@ service Slave {
     // Search for log entries matching a query.
     rpc Search(SearchRequest) returns(LogResponseList) {}
     // Expire the logs of a given application.
-    rpc Expire(RangeExpirationRequest) returns(common.Success) {}
+    rpc Expire(ExpirationRequest) returns(common.Success) {}
+    // Expires logs before a timestamp by organization
+    rpc ExpireOldLogs(ExpirationListRequest) returns (common.Success) {}
 }
