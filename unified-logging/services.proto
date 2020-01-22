@@ -31,10 +31,10 @@ service Coordinator {
     rpc Expire(ExpirationRequest) returns(common.Success) {}
 }
 
-// Slave services for localling retrieving a set of logs.
+// Slave services for localing retrieving a set of logs.
 service Slave {
     // Search for log entries matching a query.
     rpc Search(SearchRequest) returns(LogResponseList) {}
     // Expire the logs of a given application.
-    rpc Expire(ExpirationRequest) returns(common.Success) {}
+    rpc Expire(RangeExpirationRequest) returns(common.Success) {}
 }

@@ -94,6 +94,8 @@ message OrganizationSettingList {
 enum AllowedSettingKey {
     // Default Storage Size is the default storage size when it is not filled in a descriptor
     DEFAULT_STORAGE_SIZE = 0;
+    // LOG_EXPIRATION_TIME is the number of days the logs will be maintained until their expiration
+    LOG_EXPIRATION_TIME = 1;
 }
 
 // SettingKey with the key of an OrganizationSetting
