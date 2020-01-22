@@ -59,15 +59,6 @@ message ExpirationRequest{
     string app_instance_id = 2;
 }
 
-// RangeExpirationRequest to remove entries from the index.
-message RangeExpirationRequest{
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // AppInstanceId with the identifier of the target application instance.
-    string app_instance_id = 2;
-}
-
-
 message RangeExpirationRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
