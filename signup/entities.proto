@@ -24,15 +24,20 @@ option go_package = "github.com/nalej/grpc-signup-go";
 message SignupOrganizationRequest{
     // organizationName name of the organization
     string organization_name = 1;
+    string organization_full_address = 2;
+    string organization_city = 3;
+    string organization_state = 4;
+    string organization_country = 5;
+    string organization_zip_code = 6;
     // Credentials user of the new organization
-    string owner_email = 2;
-    string owner_name = 3;
-    string owner_password = 4;
-    string preshared_secret = 5;
+    string owner_email = 7;
+    string owner_name = 8;
+    string owner_password = 9;
+    string preshared_secret = 10;
     // Credentials for the Nalej Admin
-    string nalejadmin_email = 6;
-    string nalejadmin_name = 7;
-    string nalejadmin_password = 8;
+    string nalejadmin_email = 11;
+    string nalejadmin_name = 12;
+    string nalejadmin_password = 13;
 }
 
 message SignupOrganizationResponse{
@@ -51,16 +56,21 @@ message OrganizationInfo{
     string organization_id = 1;
     // Name of the organization
     string name = 2;
+    string full_address = 3;
+    string city = 4;
+    string state = 5;
+    string country = 6;
+    string zip_code = 7;
     // creation time
-    int64 created = 3;
+    int64 created = 8;
     // Number of users in the organization
-    int32 number_users = 4;
+    int32 number_users = 9;
     // Number of clusters the organization has
-    int32 number_clusters = 5;
+    int32 number_clusters = 10;
     // Number of descriptors
-    int32 number_descriptors = 6;
+    int32 number_descriptors = 11;
     // Number of instances deployed
-    int32 number_instances = 7;
+    int32 number_instances = 12;
 }
 
 message OrganizationsList{
