@@ -63,19 +63,6 @@ message ListRequest {
     common.OrderOptions order = 2;
 }
 
-
-// --------------------------------
-// Organization related entities.
-// --------------------------------
-
-// OrganizationInfo contains public organization information.
-message OrganizationInfo {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // Name of the organization as set by the user during install.
-    string name = 2;
-}
-
 // ----------------------------------------
 // Organization Settings related entities.
 // ----------------------------------------
