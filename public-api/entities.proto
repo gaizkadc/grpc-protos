@@ -74,6 +74,16 @@ message OrganizationInfo {
     string organization_id = 1;
     // Name of the organization as set by the user during install.
     string name = 2;
+    // FullAddress of the organization.
+    string full_address = 3;
+    // City of the organization.
+    string city = 4;
+    // State of the organization (geographical state).
+    string state = 5;
+    // Country of the organization.
+    string country = 6;
+    // ZipCode of the organization.
+    string zip_code = 7;
 }
 
 // ----------------------------------------
