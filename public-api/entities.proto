@@ -63,29 +63,6 @@ message ListRequest {
     common.OrderOptions order = 2;
 }
 
-
-// --------------------------------
-// Organization related entities.
-// --------------------------------
-
-// OrganizationInfo contains public organization information.
-message OrganizationInfo {
-    // OrganizationId with the organization identifier.
-    string organization_id = 1;
-    // Name of the organization as set by the user during install.
-    string name = 2;
-    // FullAddress of the organization.
-    string full_address = 3;
-    // City of the organization.
-    string city = 4;
-    // State of the organization (geographical state).
-    string state = 5;
-    // Country of the organization.
-    string country = 6;
-    // ZipCode of the organization.
-    string zip_code = 7;
-}
-
 // ----------------------------------------
 // Organization Settings related entities.
 // ----------------------------------------
