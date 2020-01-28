@@ -30,15 +30,16 @@ message SignupOrganizationRequest{
     string organization_country = 5;
     string organization_zip_code = 6;
     string organization_photo_base64 = 7;
+    string organization_email = 8;
     // Credentials user of the new organization
-    string owner_email = 8;
-    string owner_name = 9;
-    string owner_password = 10;
-    string preshared_secret = 11;
+    string owner_email = 9;
+    string owner_name = 10;
+    string owner_password = 11;
+    string preshared_secret = 12;
     // Credentials for the Nalej Admin
-    string nalejadmin_email = 12;
-    string nalejadmin_name = 13;
-    string nalejadmin_password = 14;
+    string nalejadmin_email = 13;
+    string nalejadmin_name = 14;
+    string nalejadmin_password = 15;
 }
 
 message SignupOrganizationResponse{

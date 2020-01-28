@@ -30,7 +30,8 @@ message Organization {
     string country = 6;
     string zip_code = 7;
     string photo_base64 = 8;
-    int64 created = 9;
+    string email = 9;
+    int64 created = 10;
 }
 
 message AddOrganizationRequest {
@@ -41,6 +42,7 @@ message AddOrganizationRequest {
     string country = 5;
     string zip_code = 6;
     string photo_base64 = 7;
+    string email = 8;
 }
 
 message UpdateOrganizationRequest {
@@ -59,6 +61,8 @@ message UpdateOrganizationRequest {
     string zip_code = 13;
     bool   update_photo = 14;
     string photo_base64 = 15;
+    bool   update_email = 16;
+    string email = 17;
 }
 
 // OrganizationId message with the organization identifier.
