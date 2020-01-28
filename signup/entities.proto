@@ -29,7 +29,7 @@ message SignupOrganizationRequest{
     string organization_state = 4;
     string organization_country = 5;
     string organization_zip_code = 6;
-    string organization_photo = 7;
+    string organization_photo_base64 = 7;
     // Credentials user of the new organization
     string owner_email = 8;
     string owner_name = 9;
