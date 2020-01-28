@@ -38,14 +38,16 @@ message Organization {
     string zip_code = 7;
     // PhotoBase64 organization logo base64
     string photo_base64 = 8;
+    // Email of the organization.
+    string email = 9;
     // NumUsers with the number of the users of the organization
-    int32 num_users = 9;
+    int32 num_users = 10;
     // NumRoles with the number of the roles defined in the organization
-    int32 num_roles = 10;
+    int32 num_roles = 11;
     // NumSettings defined in the organization
-    int32 num_settings = 11;
+    int32 num_settings = 12;
     // Timestamp of the organization creation
-    int64 created = 12;
+    int64 created = 13;
 }
 // OrganizationList with a list of organizations
 message OrganizationList {
