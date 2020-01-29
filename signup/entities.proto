@@ -34,12 +34,16 @@ message SignupOrganizationRequest{
     // Credentials user of the new organization
     string owner_email = 9;
     string owner_name = 10;
-    string owner_password = 11;
-    string preshared_secret = 12;
+    string owner_last_name = 11;
+    string owner_title = 12;
+    string owner_password = 13;
+    string preshared_secret = 14;
     // Credentials for the Nalej Admin
-    string nalejadmin_email = 13;
-    string nalejadmin_name = 14;
-    string nalejadmin_password = 15;
+    string nalejadmin_email = 15;
+    string nalejadmin_name = 16;
+    string nalejadmin_last_name = 17;
+    string nalejadmin_title = 18;
+    string nalejadmin_password = 19;
 }
 
 message SignupOrganizationResponse{
