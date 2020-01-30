@@ -125,7 +125,7 @@ service Clusters {
     }
 
     // List all the clusters in an organization.
-    rpc List(organization.OrganizationId) returns(ClusterList){
+    rpc List(ListRequest) returns(ClusterList){
         option (google.api.http) = {
             get: "/v1/clusters/{organization_id}/list"
         };
