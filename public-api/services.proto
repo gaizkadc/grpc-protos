@@ -678,12 +678,6 @@ service Monitoring {
             get: "/v1/monitoring/{organization_id}/certificate/list"
         };
     }
-    // ValidateMonitoringCertificate checks if the given certificate is still valid.
-    rpc ValidateMonitoringCertificate (authx.ValidateMonitoringClientCertificateRequest) returns (common.Success) {
-        option (google.api.http) = {
-            get: "/v1/monitoring/{organization_id}/certificate/{certificate_id}/validate"
-        };
-    }
     // RevokeMonitoringCertificate revokes the given certificate.
     rpc RevokeMonitoringCertificate (authx.RevokeMonitoringClientCertificateRequest) returns (common.Success) {
         option (google.api.http) = {
