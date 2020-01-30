@@ -341,11 +341,11 @@ message CreateMonitoringClientCertificateResponse{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // MonitoringClientCertificateInfo with the created certificate information.
-    string monitoring_client_certificate_info = 2;
+    string client_certificate_info = 2;
     // MonitoringClientCertificate with the created certificate info.
-    PEMCertificate monitoring_client_certificate = 3;
+    PEMCertificate client_certificate = 3;
     // MonitoringCaCertificate with the info of the Nalej CA.
-    PEMCertificate monitoring_ca_certificate = 4;
+    PEMCertificate ca_certificate = 4;
 }
 
 message ListMonitoringClientCertificateRequest{
@@ -357,19 +357,19 @@ message ListMonitoringClientCertificateResponse{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // MonitoringClientCertificates with a list of the monitoring certificates of the organization.
-    repeated MonitoringClientCertificate monitoring_client_certificates = 2;
+    repeated MonitoringClientCertificate certificates = 2;
 }
 
 message ValidateMonitoringClientCertificateRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // MonitoringClientCertificateId with the ID of the certificate to be deleted.
-    string monitoring_client_certificate_id = 2;
+    string certificate_id = 2;
 }
 
 message RevokeMonitoringClientCertificateRequest{
     // OrganizationId with the organization identifier.
     string organization_id = 1;
     // MonitoringClientCertificateId with the ID of the certificate to be deleted.
-    string monitoring_client_certificate_id = 2;
+    string certificate_id = 2;
 }
