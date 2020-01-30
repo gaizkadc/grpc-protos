@@ -112,8 +112,6 @@ message ChangePasswordRequest {
     string organization_id = 1;
     // Email address of the user
     string email = 2;
-    // Password contains the old password
-    string password = 3;
     // NewPassword contains the new password
-    string new_password = 4;
+    string new_password = 3;
 }
