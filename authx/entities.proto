@@ -326,10 +326,12 @@ message UserAuthxInfo{
 message MonitoringClientCertificate{
     // CreationTime with the creation timestamp of the certificate.
     int64 creation_time = 1;
-    // ExpirationTime with the expiration timestamp of the certificate.
+    // ExpirationTime with the expiration timestamp of the certificate, if any.
     int64 expiration_time = 2;
+    // RevocationTime with the revocation timestamp of the certificate, if any.
+    int64 revocation_time = 3;
     // MonitoringClientCertificateId with the ID of the created certificate.
-    string monitoring_client_certificate_id = 3;
+    string monitoring_client_certificate_id = 4;
 }
 
 message CreateMonitoringClientCertificateRequest{
