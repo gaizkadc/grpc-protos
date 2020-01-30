@@ -322,3 +322,54 @@ message UserAuthxInfo{
     // LastLogin with the timestamp of the last login of the user
     int64 last_login = 5;
 }
+
+message MonitoringClientCertificate{
+    // CreationTime with the creation timestamp of the certificate.
+    int64 creation_time = 1;
+    // ExpirationTime with the expiration timestamp of the certificate.
+    int64 expiration_time = 2;
+    // MonitoringClientCertificateId with the ID of the created certificate.
+    string monitoring_client_certificate_id = 3;
+}
+
+message CreateMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+message CreateMonitoringClientCertificateResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // MonitoringClientCertificateInfo with the created certificate information.
+    string monitoring_client_certificate_info = 2;
+    // MonitoringClientCertificate with the created certificate info.
+    PEMCertificate monitoring_client_certificate = 3;
+    // MonitoringCaCertificate with the info of the Nalej CA.
+    PEMCertificate monitoring_ca_certificate = 4;
+}
+
+message ListMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+message ListMonitoringClientCertificateResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // MonitoringClientCertificates with a list of the monitoring certificates of the organization.
+    repeated MonitoringClientCertificate monitoring_client_certificates = 2;
+}
+
+message ValidateMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // MonitoringClientCertificateId with the ID of the certificate to be deleted.
+    string monitoring_client_certificate_id = 2;
+}
+
+message RevokeMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // MonitoringClientCertificateId with the ID of the certificate to be deleted.
+    string monitoring_client_certificate_id = 2;
+}

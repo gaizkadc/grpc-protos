@@ -662,4 +662,31 @@ service Monitoring {
             get: "/v1/monitoring/{organization_id}/stats"
         };
     }
+
+
+
+    // CreateMonitoringClientCertificate creates a new certificate for the monitoring endpoint for the given organization.
+    rpc CreateMonitoringClientCertificate (authx.CreateMonitoringClientCertificateRequest) returns (authx.CreateMonitoringClientCertificateResponse) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/create"
+        };
+    }
+    // ListMonitoringClientCertificates lists all the monitoring certificates of the given organization.
+    rpc ListMonitoringClientCertificates (authx.ListMonitoringClientCertificateRequest) returns (authx.ListMonitoringClientCertificateResponse) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/list"
+        };
+    }
+    // ValidateMonitoringCertificate checks if the given certificate is still valid.
+    rpc ValidateMonitoringCertificate (authx.ValidateMonitoringClientCertificateRequest) returns (common.Success) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/{certificate_id}/validate"
+        };
+    }
+    // RevokeMonitoringCertificate revokes the given certificate.
+    rpc RevokeMonitoringCertificate (authx.RevokeMonitoringClientCertificateRequest) returns (common.Success) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/{certificate_id}/revoke"
+        };
+    }
 }
