@@ -135,10 +135,8 @@ message EditUserRoleRequest {
 message ChangePasswordRequest {
     // UserName
     string username = 1;
-    // Password old password
-    string password = 2;
     // newPassword
-    string newPassword = 3;
+    string newPassword = 2;
 }
 
 // DeleteCredentialsRequest message to delete the credentials of a user
