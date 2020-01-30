@@ -25,6 +25,7 @@ import "organization/entities.proto";
 import "user/entities.proto";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
+import "authx/entities.proto";
 import "application/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
