@@ -345,7 +345,7 @@ message CreateMonitoringClientCertificateResponse{
     // MonitoringClientCertificate with the created certificate info.
     PEMCertificate client_certificate = 3;
     // MonitoringCaCertificate with the info of the Nalej CA.
-    PEMCertificate ca_certificate = 4;
+    string ca_certificate = 4;
 }
 
 message ListMonitoringClientCertificateRequest{
