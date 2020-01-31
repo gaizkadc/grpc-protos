@@ -25,6 +25,7 @@ import "organization/entities.proto";
 import "user/entities.proto";
 import "common/entities.proto";
 import "infrastructure/entities.proto";
+import "authx/entities.proto";
 import "application/entities.proto";
 import "application-manager/entities.proto";
 import "application-network/entities.proto";
@@ -660,6 +661,27 @@ service Monitoring {
     rpc GetOrganizationApplicationStats(monitoring.OrganizationApplicationStatsRequest) returns (monitoring.OrganizationApplicationStatsResponse) {
         option (google.api.http) = {
             get: "/v1/monitoring/{organization_id}/stats"
+        };
+    }
+
+
+
+    // CreateMonitoringClientCertificate creates a new certificate for the monitoring endpoint for the given organization.
+    rpc CreateMonitoringClientCertificate (authx.CreateMonitoringClientCertificateRequest) returns (authx.CreateMonitoringClientCertificateResponse) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/create"
+        };
+    }
+    // ListMonitoringClientCertificates lists all the monitoring certificates of the given organization.
+    rpc ListMonitoringClientCertificates (authx.ListMonitoringClientCertificateRequest) returns (authx.ListMonitoringClientCertificateResponse) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/list"
+        };
+    }
+    // RevokeMonitoringCertificate revokes the given certificate.
+    rpc RevokeMonitoringCertificate (authx.RevokeMonitoringClientCertificateRequest) returns (common.Success) {
+        option (google.api.http) = {
+            get: "/v1/monitoring/{organization_id}/certificate/{certificate_id}/revoke"
         };
     }
 }

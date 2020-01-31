@@ -117,4 +117,13 @@ service Inventory{
 service Certificates{
     // CreateControllerCert creates a certificate for an edge controller.
     rpc CreateControllerCert(EdgeControllerCertRequest) returns (PEMCertificate){}
+
+    // CreateMonitoringClientCertificate creates a new certificate for the monitoring endpoint for the given organization.
+    rpc CreateMonitoringClientCertificate (CreateMonitoringClientCertificateRequest) returns (CreateMonitoringClientCertificateResponse) {}
+    // ListMonitoringClientCertificates lists all the monitoring certificates of the given organization.
+    rpc ListMonitoringClientCertificates (ListMonitoringClientCertificateRequest) returns (ListMonitoringClientCertificateResponse) {}
+    // ValidateMonitoringCertificate checks if the given certificate is still valid.
+    rpc ValidateMonitoringCertificate (ValidateMonitoringClientCertificateRequest) returns (common.Success) {}
+    // RevokeMonitoringCertificate revokes the given certificate.
+    rpc RevokeMonitoringCertificate (RevokeMonitoringClientCertificateRequest) returns (common.Success) {}
 }

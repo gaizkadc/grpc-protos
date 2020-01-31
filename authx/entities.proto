@@ -322,3 +322,65 @@ message UserAuthxInfo{
     // LastLogin with the timestamp of the last login of the user
     int64 last_login = 5;
 }
+
+// MonitoringClientCertificate Entity with all the information of the monitoring client certificate.
+message MonitoringClientCertificate{
+    // CreationTime with the creation timestamp of the certificate.
+    int64 creation_time = 1;
+    // ExpirationTime with the expiration timestamp of the certificate, if any.
+    int64 expiration_time = 2;
+    // RevocationTime with the revocation timestamp of the certificate, if any.
+    int64 revocation_time = 3;
+    // CertificateId with the ID of the created certificate.
+    string certificate_id = 4;
+}
+
+// CreateMonitoringClientCertificateRequest with the organization ID
+message CreateMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+// CreateMonitoringClientCertificateResponse received after creating the certificate.
+message CreateMonitoringClientCertificateResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // CertificateId with the ID of the created certificate.
+    string certificate_id = 2;
+    // ExpirationTime with the expiration timestamp of the certificate, if any.
+    int64 expiration_time = 3;
+    // ClientCertificate with the created certificate info.
+    PEMCertificate client_certificate = 4;
+    // CaCertificate with the info of the Nalej CA.
+    string ca_certificate = 5;
+}
+
+// ListMonitoringClientCertificateRequest to list all the monitoring client certificates of the given organization.
+message ListMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+}
+
+// ListMonitoringClientCertificateResponse with the list of the monitoring client certificates of an organization.
+message ListMonitoringClientCertificateResponse{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // Certificates with a list of the monitoring certificates of the organization.
+    repeated MonitoringClientCertificate certificates = 2;
+}
+
+// ValidateMonitoringClientCertificateRequest to check if the monitoring client certificate is still valid.
+message ValidateMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // CertificateId with the ID of the certificate to be deleted.
+    string certificate_id = 2;
+}
+
+// RevokeMonitoringClientCertificateRequest to revoke the monitoring client certificate of the given organization.
+message RevokeMonitoringClientCertificateRequest{
+    // OrganizationId with the organization identifier.
+    string organization_id = 1;
+    // CertificateId with the ID of the certificate to be deleted.
+    string certificate_id = 2;
+}
