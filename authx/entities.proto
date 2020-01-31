@@ -331,7 +331,7 @@ message MonitoringClientCertificate{
     int64 expiration_time = 2;
     // RevocationTime with the revocation timestamp of the certificate, if any.
     int64 revocation_time = 3;
-    // MonitoringClientCertificateId with the ID of the created certificate.
+    // CertificateId with the ID of the created certificate.
     string certificate_id = 4;
 }
 
